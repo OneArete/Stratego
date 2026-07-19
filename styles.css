@@ -438,3 +438,289 @@ header{
 
 /* v0.12.0 final — follow-through integrity */
 .follow-through-summary{padding:15px 16px;border:1px solid var(--line);border-radius:18px;background:var(--surface)}
+
+
+/* v0.13.0 Phase 1 — structured reflection integrity */
+.structured-reflection,.reflection-history{display:grid;gap:12px}
+.structured-reflection label{display:grid;gap:7px;font-size:.8rem;letter-spacing:.04em}
+.structured-reflection select,.structured-reflection textarea{width:100%;padding:12px;border:1px solid var(--line);border-radius:14px;background:var(--surface);color:inherit;font:inherit}
+.reflection-item{padding:14px 16px;border:1px solid var(--line);border-radius:18px;background:var(--surface)}
+.reflection-item>div:first-child{display:flex;justify-content:space-between;gap:12px}
+.reflection-item>div:first-child span{font-size:.72rem;letter-spacing:.07em}
+.reflection-item small{display:block;margin-top:7px}
+
+
+/* v0.13.0 Phase 2 — Quiet Scale II and living membrane
+   Smaller, calmer, closer to the elegance of v0.8. */
+:root{
+  --content-max:456px;
+  --space-card:15px;
+  --radius-card:17px;
+}
+
+.screen{
+  max-width:var(--content-max);
+  padding-left:18px;
+  padding-right:18px;
+}
+
+header{
+  height:46px;
+  font-size:10px;
+}
+
+header .delta.small{
+  width:27px;
+  height:27px;
+}
+
+.splash .delta.large{
+  width:106px;
+  height:106px;
+}
+
+.splash .brand{
+  margin-top:17px;
+}
+
+.splash .eyebrow{
+  font-size:8px;
+}
+
+.splash .brand h1{
+  font-size:22px;
+  margin:8px 0 12px;
+}
+
+.splash .brand p{
+  font-size:16px;
+  line-height:1.43;
+}
+
+.splash .tap{
+  font-size:8px;
+  bottom:calc(30px + env(safe-area-inset-bottom));
+}
+
+.stack{
+  gap:16px;
+  padding-top:25px;
+}
+
+.observe-stack{
+  padding-top:21px;
+  gap:16px;
+}
+
+.stack h2,
+.thinking-copy h2{
+  font-size:30px;
+  line-height:1.09;
+}
+
+.observe-stack>div:first-child .eyebrow{
+  font-size:9px;
+}
+
+.observe-stack>div:first-child .muted{
+  font-size:13px;
+}
+
+.choice,
+.pill{
+  padding:13px 12px;
+  font-size:13px;
+}
+
+.pill{
+  padding:9px 11px;
+  font-size:11px;
+}
+
+.question{
+  padding:15px 0;
+}
+
+.action{
+  padding:14px;
+  font-size:10px;
+}
+
+.mission-hero{
+  padding:36px 0 24px;
+}
+
+.mission-hero h2{
+  font-size:45px;
+}
+
+.delta-score strong{
+  font-size:30px;
+}
+
+.reasoning,
+.understanding-card,
+.judgement-card,
+.practice-proposal,
+.agora-panel,
+.unknowns,
+.insight,
+.journey-item{
+  padding:15px;
+}
+
+.living-graph{
+  padding:14px 13px 11px;
+  border-radius:19px;
+}
+
+.graph-heading h3{
+  font-size:17px;
+  margin-top:5px;
+}
+
+.graph-state{
+  font-size:8px;
+  padding:6px 8px;
+}
+
+.living-graph svg{
+  max-width:246px;
+}
+
+.living-graph.compact svg{
+  max-width:190px;
+}
+
+.graph-note{
+  max-width:250px;
+  font-size:10px;
+  margin-top:-1px;
+}
+
+.graph-note strong{
+  color:#d8ba83;
+  font-weight:600;
+}
+
+.graph-membrane{
+  fill:rgba(184,148,88,.025);
+  stroke:#b89458;
+  stroke-width:.8;
+  opacity:.28;
+  stroke-linejoin:round;
+  filter:drop-shadow(0 0 4px rgba(184,148,88,.12));
+  animation:membraneCurrent 8.8s linear infinite;
+}
+
+.graph-link{
+  stroke-dasharray:2 5;
+  animation:linkCurrent 8.5s linear infinite;
+}
+
+.graph-link.dominant-link{
+  stroke-width:1.35;
+  filter:drop-shadow(0 0 4px rgba(184,148,88,.34));
+}
+
+.dominant-node .node-core{
+  animation:dominantCore 3.6s ease-in-out infinite;
+}
+
+.dominant-node .node-halo{
+  animation:dominantHalo 4.2s ease-in-out infinite;
+}
+
+.node-label{
+  font-size:7.3px;
+}
+
+.dominant-node .node-label{
+  fill:#dfc18b;
+  font-weight:600;
+}
+
+.execution h2{
+  font-size:36px;
+}
+
+.clock{
+  font-size:59px;
+}
+
+.tabbar{
+  min-height:60px;
+}
+
+.tabbar button{
+  font-size:8px;
+}
+
+@keyframes membraneCurrent{
+  to{stroke-dashoffset:-28}
+}
+
+@keyframes linkCurrent{
+  to{stroke-dashoffset:-24}
+}
+
+@keyframes dominantCore{
+  0%,100%{filter:drop-shadow(0 0 5px rgba(184,148,88,.46));transform:scale(1)}
+  50%{filter:drop-shadow(0 0 13px rgba(218,181,112,.88));transform:scale(1.16)}
+}
+
+@keyframes dominantHalo{
+  0%,100%{transform:scale(.92);opacity:.09}
+  50%{transform:scale(1.32);opacity:.22}
+}
+
+@media(max-width:390px){
+  .screen{
+    padding-left:16px;
+    padding-right:16px;
+  }
+  .splash .delta.large{
+    width:100px;
+    height:100px;
+  }
+  .splash .brand h1{
+    font-size:21px;
+  }
+  .splash .brand p{
+    font-size:15px;
+  }
+  .stack h2,
+  .thinking-copy h2{
+    font-size:28px;
+  }
+  .living-graph.compact svg{
+    max-width:182px;
+  }
+}
+
+@media(max-height:720px){
+  .splash .delta.large{
+    width:92px;
+    height:92px;
+  }
+  .splash .brand p{
+    font-size:14px;
+  }
+  .observe-stack{
+    padding-top:17px;
+  }
+}
+
+@media(prefers-reduced-motion:reduce){
+  .graph-membrane,
+  .graph-link,
+  .dominant-node .node-core,
+  .dominant-node .node-halo{
+    animation:none;
+  }
+  .graph-membrane animate,
+  .graph-link animate,
+  .graph-node animateTransform{
+    display:none;
+  }
+}

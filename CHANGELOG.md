@@ -1,5 +1,22 @@
 # Changelog
 
+## v0.13.0 Phase 2 — Quiet Scale II and Living Human Graph
+
+- Reduced the visual scale closer to v0.8.
+- Reduced splash, headings, cards, graph and navigation.
+- Added an animated membrane between graph dimensions.
+- Added dominant-dimension emphasis.
+- Added reduced-motion protection.
+- Added eight visual and behavioural tests.
+
+## v0.13.0 Phase 1 — Structured Reflection Integrity
+
+- Replaced one-word reflection with structured reflection.
+- Separated effect, goal fit, burden, surprise and confidence.
+- Added calibrated learning signals.
+- Added contradiction and completeness checks.
+- Added schema v20 migration and eight behavioural tests.
+
 ## v0.12.0 — Deliberate Follow-Through
 
 Official product baseline.
