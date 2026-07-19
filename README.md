@@ -3,10 +3,8 @@
 Official baseline:
 
 ```text
-Strategos v0.9.0 — Evidence, Learning and Judgement Integrity
+Strategos v0.12.0 — Deliberate Follow-Through
 ```
-
-Strategos is the first OneArete product and the reference implementation of its person-centred Decision Architecture.
 
 ## Run locally
 
@@ -14,42 +12,28 @@ Strategos is the first OneArete product and the reference implementation of its 
 npm run dev
 ```
 
-Open `http://localhost:8080`.
-
 ## Test
 
 ```bash
 npm test
 ```
 
-## v0.9.0
+## Release focus
 
-This release strengthens:
+- voluntary commitment windows;
+- friction-aware follow-through;
+- adaptive fallback integrity;
+- cross-system reconciliation;
+- bounded learning from actual execution.
 
-- evidence diversity;
-- contradiction preservation;
-- accountable Advisor memory;
-- learning confirmation and correction;
-- judgement validity and re-evaluation;
-- resistance to decision churn;
-- longitudinal consistency across Current Judgement, Memory, Journey and Monthly Council.
+## Core principle
 
-## Data
+> Strategos advises. The person decides. The system preserves what actually happened.
 
-Strategos remains local-first.
+## Visual principle
 
-It provides export, validated import, automatic local backup, protected reset and state reconciliation.
-
-Browser storage is not described as encrypted or suitable for unrestricted clinical records.
-
-## Arete Chime
-
-No provisional sonic logo is included.
-
-The original future signature will subtly evoke Sparta and Ancient Greece through discipline, restraint, bronze-like presence and luminous resolution.
+> Strategos should feel confident through restraint, not visual volume.
 
 ## Product boundary
 
-Strategos supports reflection and general decision practice.
-
-It is not a clinical product, emergency service, diagnosis system or replacement for an accountable professional.
+Strategos supports reflection and general decision practice. It is not a clinical product, emergency service, diagnosis system or replacement for an accountable professional.

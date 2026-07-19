@@ -1,5 +1,118 @@
 # Changelog
 
+## v0.12.0 — Deliberate Follow-Through
+
+Official product baseline.
+
+- Added voluntary commitment windows.
+- Added friction-aware follow-through.
+- Added adaptive fallback integrity.
+- Added follow-through reconciliation.
+- Finalised schema version 19.
+- Finalised PWA cache identity as `strategos-shell-v0.12.0`.
+- Confirmed 148 passing tests.
+
+## v0.12.0 Phase 3 — Adaptive Fallback Integrity
+
+- Added explicit fallback plans.
+- Kept fallback practice distinct from the original.
+- Added acceptance, start, completion, abandonment and decline states.
+- Added bounded fallback learning eligibility.
+- Added fallback outcome records and history.
+- Added schema v18 migration and eight behavioural tests.
+
+## v0.12.0 Phase 2 — Friction-Aware Follow-Through
+
+- Added explicit friction planning.
+- Added concrete response and fallback preparation.
+- Added readiness gate for identified but unresolved friction.
+- Added friction outcome records.
+- Added friction history and schema v17 migration.
+- Added eight behavioural tests.
+
+## v0.12.0 Phase 1 — Voluntary Commitment Windows
+
+- Added temporary start windows after active person choice.
+- Added now and later commitment modes.
+- Added expiry and fresh-consent requirements.
+- Added cancellation without compliance penalty.
+- Added commitment history.
+- Added schema v16 migration and eight behavioural tests.
+
+## v0.11.0 — Agency and Outcome Integrity
+
+Official product baseline.
+
+- Added explicit person choice before action.
+- Added contextual preference governance.
+- Added choice-to-outcome lifecycle.
+- Added learning eligibility gates.
+- Added cross-system agency reconciliation.
+- Finalised schema version 15.
+- Finalised PWA cache identity as `strategos-shell-v0.11.0`.
+- Confirmed 116 passing tests.
+
+## v0.11.0 Phase 3 — Choice-to-Outcome Integrity
+
+- Separated choice, start, completion, abandonment and reflection.
+- Added actual-practice and completion-ratio records.
+- Added learning eligibility gates.
+- Delayed preference learning until execution and reflection.
+- Added schema v14 migration and eight behavioural tests.
+
+## v0.11.0 Phase 2 — Contextual Preference Governance
+
+- Added contextual preference candidates.
+- Added repeated-evidence confirmation.
+- Added bounded preference influence.
+- Added context similarity gate.
+- Added person confirmation, rejection and reopening.
+- Added expiry and schema v13 migration.
+- Added eight behavioural tests.
+
+## v0.11.0 Phase 1 — Choice Sovereignty
+
+- Added explicit accept, override, defer and decline actions.
+- Added person-choice records and choice history.
+- Added bounded learning semantics for choice.
+- Required an explicit active choice before practice.
+- Added schema v12 migration and eight behavioural tests.
+
+## v0.10.0 — Transparent Deliberation
+
+Official product baseline.
+
+- Added decision boundaries and evidence provenance.
+- Added preserved minority reports and deliberation traces.
+- Added correction propagation and decision audit.
+- Restored a quieter visual scale inspired by v0.8.
+- Finalised the PWA cache as `strategos-shell-v0.10.0`.
+- Confirmed 84 passing tests.
+
+## v0.10.0 Phase 3 — Correction Propagation and Decision Audit
+
+- Added structured correction events and deterministic impact analysis.
+- Added propagation to active judgements and Advisor learning.
+- Added person-visible correction audit.
+- Added schema v11 migration and eight behavioural tests.
+
+## v0.10.0 Phase 2 — Minority Reports and Deliberation Trace
+
+- Added preserved minority reports.
+- Added preferred-alternative and severity records.
+- Added ordered, inspectable deliberation traces.
+- Added trace integrity verification.
+- Added schema v10 migration and eight behavioural tests.
+
+## v0.10.0 Phase 1 — Decision Boundaries and Provenance
+
+- Added explicit judgement boundaries.
+- Added nearest-alternative and score-margin analysis.
+- Added counterfactual change conditions.
+- Added unknown-signal disclosure.
+- Added evidence-family and independence provenance.
+- Added schema v9 migration and eight behavioural tests.
+
 ## v0.9.0 — Evidence, Learning and Judgement Integrity
 
 Official product baseline.

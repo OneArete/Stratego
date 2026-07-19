@@ -65,3 +65,376 @@ button:focus-visible,input:focus-visible,textarea:focus-visible,summary:focus-vi
 .judgement-review-notice p:last-child{margin-bottom:0}
 .stability-note,.validity-note{margin-top:12px;font-size:.9rem}
 .validity-note{opacity:.72}
+
+
+/* v0.10.0 Phase 1 — decision boundaries and provenance */
+.decision-boundaries{display:grid;gap:14px}
+.boundary-summary{display:flex;flex-wrap:wrap;gap:8px}
+.boundary-summary span,.provenance-tags span{padding:7px 10px;border:1px solid var(--line);border-radius:999px;font-size:.78rem}
+.boundary-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:12px}
+.boundary-grid article,.alternative-card,.provenance-panel{padding:16px;border:1px solid var(--line);border-radius:18px;background:var(--surface)}
+.boundary-grid h3,.alternative-card h3{margin-top:0}
+.provenance-tags{display:flex;flex-wrap:wrap;gap:8px;margin-top:12px}
+@media(max-width:680px){.boundary-grid{grid-template-columns:1fr}}
+
+
+/* v0.10.0 Phase 2 — minority reports and deliberation trace */
+.minority-reports{display:grid;gap:12px}
+.minority-summary{margin-top:-4px}
+.minority-report{padding:16px;border:1px solid var(--line);border-radius:18px;background:var(--surface)}
+.minority-report>div{display:flex;justify-content:space-between;gap:12px;align-items:center}
+.minority-report>div span{text-transform:uppercase;font-size:.72rem;letter-spacing:.07em}
+.minority-report.high,.minority-report.critical{border-color:color-mix(in srgb,#a53c2f 55%,var(--line))}
+.minority-preference{font-size:.85rem;font-weight:600}
+.deliberation-trace{border:1px solid var(--line);border-radius:18px;padding:14px 16px;background:var(--surface)}
+.trace-event{padding:12px 0;border-bottom:1px solid var(--line)}
+.trace-event:last-child{border-bottom:0}
+.trace-event>div{display:flex;gap:10px;align-items:center;flex-wrap:wrap}
+.trace-event>div>span:last-child{font-size:.78rem;opacity:.7}
+.trace-order{display:grid;place-items:center;width:24px;height:24px;border-radius:50%;border:1px solid var(--line);font-size:.75rem}
+
+
+/* v0.10.0 Phase 3 — correction propagation and decision audit */
+.correction-audit{display:grid;gap:12px}
+.audit-event{padding:14px 16px;border:1px solid var(--line);border-radius:18px;background:var(--surface)}
+.audit-event h4{margin-bottom:6px}
+.audit-event ul{margin-top:6px}
+
+
+/* v0.10.0 — Quiet Scale visual refinement
+   Strategos should feel confident through restraint, not visual volume. */
+:root{
+  --content-max:500px;
+  --radius-card:18px;
+  --space-card:17px;
+}
+
+.screen{
+  max-width:var(--content-max);
+  padding-left:20px;
+  padding-right:20px;
+}
+
+header{
+  height:50px;
+  font-size:11px;
+  letter-spacing:.16em;
+}
+
+.delta.large{
+  width:126px;
+  height:126px;
+}
+
+.splash .delta.large{
+  width:124px;
+  height:124px;
+}
+
+.splash .brand{
+  margin-top:20px;
+}
+
+.splash .eyebrow{
+  font-size:9px;
+  letter-spacing:.26em;
+}
+
+.splash .brand h1{
+  font-size:25px;
+  letter-spacing:.26em;
+  margin:9px 0 15px;
+}
+
+.splash .brand p{
+  font-size:18px;
+  line-height:1.42;
+}
+
+.splash .tap{
+  bottom:calc(34px + env(safe-area-inset-bottom));
+  font-size:9px;
+  letter-spacing:.15em;
+  opacity:.72;
+}
+
+.stack{
+  gap:19px;
+  padding-top:31px;
+}
+
+.stack h2,
+.thinking-copy h2{
+  font-size:34px;
+  line-height:1.12;
+}
+
+.choice,
+.pill{
+  padding:15px 13px;
+  font-size:14px;
+}
+
+.pill{
+  padding:10px 12px;
+  font-size:12px;
+}
+
+.action{
+  padding:15px;
+  font-size:11px;
+}
+
+.onboarding .delta.large{
+  width:112px;
+  height:112px;
+}
+
+.onboarding .stack h2{
+  font-size:32px;
+}
+
+.name-input{
+  font-size:30px;
+}
+
+.thinking-copy{
+  margin-top:25px;
+}
+
+.thinking-copy h2{
+  font-size:27px;
+}
+
+.advisor-lights{
+  margin:20px 0;
+  gap:8px;
+}
+
+.advisor-lights span{
+  padding:9px 11px;
+  font-size:11px;
+}
+
+.mission-hero{
+  padding:44px 0 29px;
+}
+
+.mission-hero h2{
+  font-size:52px;
+  margin:11px 0 16px;
+}
+
+.mission-meta span{
+  padding:7px 10px;
+  font-size:11px;
+}
+
+.delta-score{
+  margin-top:28px;
+  padding:17px 0;
+}
+
+.delta-score strong{
+  font-size:34px;
+}
+
+.reasoning,
+.understanding-card,
+.judgement-card,
+.practice-proposal,
+.agora-panel,
+.unknowns,
+.insight,
+.journey-item,
+.decision-boundaries,
+.minority-report,
+.audit-event,
+.learning-item{
+  border-radius:var(--radius-card);
+}
+
+.reasoning,
+.understanding-card,
+.judgement-card,
+.practice-proposal,
+.agora-panel,
+.unknowns,
+.insight,
+.journey-item{
+  padding:var(--space-card);
+}
+
+.understanding-card h2,
+.judgement-card h2,
+.practice-proposal h2{
+  font-size:24px;
+}
+
+.living-graph{
+  border-radius:21px;
+  padding:16px 14px 12px;
+}
+
+.graph-heading h3{
+  font-size:19px;
+}
+
+.living-graph svg{
+  max-width:286px;
+}
+
+.living-graph.compact svg{
+  max-width:220px;
+}
+
+.execution h2{
+  font-size:40px;
+}
+
+.clock{
+  font-size:66px;
+}
+
+.total-delta strong{
+  font-size:32px;
+}
+
+.insight strong{
+  font-size:18px;
+}
+
+.tabbar button{
+  font-size:9px;
+}
+
+@media(max-width:390px){
+  .screen{
+    padding-left:18px;
+    padding-right:18px;
+  }
+  .splash .delta.large{
+    width:116px;
+    height:116px;
+  }
+  .splash .brand h1{
+    font-size:23px;
+  }
+  .splash .brand p{
+    font-size:17px;
+  }
+  .mission-hero h2{
+    font-size:48px;
+  }
+}
+
+@media(max-height:720px){
+  .splash .delta.large{
+    width:104px;
+    height:104px;
+  }
+  .splash .brand{
+    margin-top:16px;
+  }
+  .splash .brand h1{
+    margin-bottom:12px;
+  }
+  .splash .brand p{
+    font-size:16px;
+  }
+  .splash .tap{
+    bottom:calc(24px + env(safe-area-inset-bottom));
+  }
+}
+
+@media(min-width:700px){
+  .stack{
+    padding-top:46px;
+  }
+}
+
+
+/* v0.11.0 Phase 1 — choice sovereignty */
+.person-choice,.choice-audit{display:grid;gap:12px}
+.person-choice{padding:17px;border:1px solid var(--line);border-radius:var(--radius-card);background:var(--surface)}
+.person-choice h3{margin:0}
+.choice-actions{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:9px}
+.choice-actions button{padding:12px;border:1px solid var(--line);border-radius:14px;background:transparent;color:inherit}
+.choice-actions button:first-child{background:var(--ink);color:var(--paper);border-color:var(--ink)}
+.choice-record{font-size:.88rem;margin:0}
+.choice-event{padding:14px 16px;border:1px solid var(--line);border-radius:18px;background:var(--surface)}
+.choice-event>div{display:flex;justify-content:space-between;gap:12px}
+.choice-event span{text-transform:uppercase;font-size:.72rem;letter-spacing:.07em}
+@media(max-width:420px){.choice-actions{grid-template-columns:1fr}}
+
+
+/* v0.11.0 Phase 2 — contextual preference governance */
+.preference-governance{display:grid;gap:12px}
+.preference-item{padding:14px 16px;border:1px solid var(--line);border-radius:18px;background:var(--surface)}
+.preference-item>div:first-child{display:flex;justify-content:space-between;gap:12px}
+.preference-item>div:first-child span{text-transform:uppercase;font-size:.72rem;letter-spacing:.07em}
+.preference-item.confirmed{border-color:color-mix(in srgb,var(--accent) 45%,var(--line))}
+.preference-item.rejected,.preference-item.expired{opacity:.66}
+.preference-summary{margin:0}
+
+
+/* v0.11.0 Phase 3 — choice-to-outcome integrity */
+.outcome-integrity{display:grid;gap:12px}
+.outcome-item{padding:14px 16px;border:1px solid var(--line);border-radius:18px;background:var(--surface)}
+.outcome-item>div:first-child{display:flex;justify-content:space-between;gap:12px}
+.outcome-item>div:first-child span{text-transform:uppercase;font-size:.72rem;letter-spacing:.07em}
+.outcome-item.abandoned{opacity:.72}
+.outcome-item.reflected{border-color:color-mix(in srgb,var(--accent) 45%,var(--line))}
+.outcome-item small{display:block;margin-top:7px}
+
+
+/* v0.11.0 final — cross-system agency integrity */
+.agency-integrity-summary{padding:15px 16px;border:1px solid var(--line);border-radius:18px;background:var(--surface)}
+.integrity-stats{display:flex;flex-wrap:wrap;gap:8px;margin:10px 0}
+.integrity-stats span{padding:7px 10px;border:1px solid var(--line);border-radius:999px;font-size:.78rem}
+.integrity-warning{font-weight:600}
+
+
+/* v0.12.0 Phase 1 — voluntary commitment windows */
+.commitment-panel,.commitment-history{display:grid;gap:12px}
+.commitment-panel{padding:17px;border:1px solid var(--line);border-radius:var(--radius-card);background:var(--surface)}
+.commitment-panel h3{margin:0}
+.commitment-actions{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:9px}
+.commitment-actions button{padding:12px;border:1px solid var(--line);border-radius:14px;background:transparent;color:inherit}
+.commitment-actions button:first-child{background:var(--ink);color:var(--paper);border-color:var(--ink)}
+.commitment-status{margin:0;font-weight:600}
+.commitment-item{padding:14px 16px;border:1px solid var(--line);border-radius:18px;background:var(--surface)}
+.commitment-item>div:first-child{display:flex;justify-content:space-between;gap:12px}
+.commitment-item>div:first-child span{text-transform:uppercase;font-size:.72rem;letter-spacing:.07em}
+.commitment-item.cancelled,.commitment-item.expired{opacity:.68}
+.commitment-item small{display:block;margin-top:7px}
+@media(max-width:420px){.commitment-actions{grid-template-columns:1fr}}
+
+
+/* v0.12.0 Phase 2 — friction-aware follow-through */
+.friction-prep,.friction-history{display:grid;gap:10px}
+.friction-prep{padding:13px;border:1px dashed var(--line);border-radius:15px}
+.friction-prep h4{margin:0}
+.friction-actions{display:flex;flex-wrap:wrap;gap:7px}
+.friction-actions button{padding:8px 10px;border:1px solid var(--line);border-radius:999px;background:transparent;color:inherit;font-size:.76rem}
+.friction-item{padding:14px 16px;border:1px solid var(--line);border-radius:18px;background:var(--surface)}
+.friction-item>div:first-child{display:flex;justify-content:space-between;gap:12px}
+.friction-item>div:first-child span{text-transform:uppercase;font-size:.72rem;letter-spacing:.07em}
+.friction-item small{display:block;margin-top:7px}
+.friction-item.closed{opacity:.78}
+
+
+/* v0.12.0 Phase 3 — adaptive fallback integrity */
+.fallback-card,.fallback-history{display:grid;gap:10px}
+.fallback-card{padding:12px;border:1px solid var(--line);border-radius:14px;background:color-mix(in srgb,var(--surface) 85%,var(--paper))}
+.fallback-actions{display:flex;gap:8px;flex-wrap:wrap}
+.fallback-actions button{padding:9px 11px;border:1px solid var(--line);border-radius:12px;background:transparent;color:inherit}
+.fallback-item{padding:14px 16px;border:1px solid var(--line);border-radius:18px;background:var(--surface)}
+.fallback-item>div:first-child{display:flex;justify-content:space-between;gap:12px}
+.fallback-item>div:first-child span{text-transform:uppercase;font-size:.72rem;letter-spacing:.07em}
+.fallback-item.completed{border-color:color-mix(in srgb,var(--accent) 45%,var(--line))}
+.fallback-item.abandoned,.fallback-item.declined{opacity:.7}
+
+
+/* v0.12.0 final — follow-through integrity */
+.follow-through-summary{padding:15px 16px;border:1px solid var(--line);border-radius:18px;background:var(--surface)}

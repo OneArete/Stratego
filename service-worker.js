@@ -1,4 +1,4 @@
-const CACHE_NAME = 'strategos-shell-v0.9.0';
+const CACHE_NAME = 'strategos-shell-v0.12.0';
 const CORE_ASSETS = [
   './',
   './index.html',
