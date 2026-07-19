@@ -1,6 +1,7 @@
 import { applyAdvisorMemory } from './advisor-memory.js';
 import { CODEX } from '../data/codex.js';
 import { evidenceItem, assessEvidenceDiversity, detectContradictions } from './evidence-integrity.js';
+import { buildDeliberationTrace,buildMinorityReports,summarizeMinorityReports } from './deliberation-trace.js';
 const clamp=(n,min=0,max=1)=>Math.min(max,Math.max(min,n));
 
 export function conveneAgora(context, understanding, history=[], advisorMemories={}){
@@ -38,12 +39,16 @@ export function conveneAgora(context, understanding, history=[], advisorMemories
     evidenceDiversity,
     synthesisReadiness:criticalConcern && !blocked.length?'not-safe-to-proceed':contradictions.some(x=>x.severity==='high')?'ready-with-constraints':'ready-with-constraints'
   };
-  return {
+  const result={
     id:makeId('judgement'),createdAt:new Date().toISOString(),understanding,advisors,agora,
     practice:winner,mission:winner,duration,confidence,confidenceLevel:confidenceLabel(confidence),unknowns:understanding.unknowns,contradictions,evidenceDiversity,
     judgement:judgementText(winner.id,duration,context),explanation:supporting.slice(0,3).map(a=>a.reason),reasons:supporting.slice(0,3).map(a=>a.reason),
     alternatives:ranked.slice(1,3).map(([id])=>CODEX.find(x=>x.id===id).name),delta,scores:totals,intention:intention(winner.id),status:'current'
   };
+  result.minorityReports=buildMinorityReports(advisors,winner.id,agora);
+  result.agora.minoritySummary=summarizeMinorityReports(result.minorityReports);
+  result.deliberationTrace=buildDeliberationTrace({context,understanding,advisors,agora,decision:result});
+  return result;
 }
 
 function opinion(name,position,confidence,reason,scores,weight=1,unknowns=[],riskFlags=[],evidence=[]){return {advisor:name,position,confidence,reason,scores,weight,unknowns,riskFlags,evidence};}

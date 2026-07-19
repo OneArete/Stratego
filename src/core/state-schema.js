@@ -1,4 +1,4 @@
-export const STATE_SCHEMA_VERSION = 8;
+export const STATE_SCHEMA_VERSION = 19;
 export const PRODUCT_VERSION = '0.9.0';
 
 export function createInitialState(){
@@ -27,6 +27,17 @@ export function migrateState(input={}){
   if(Number(state.schemaVersion||5) < 6) state = migrateV090Phase1ToPhase2(state);
   if(Number(state.schemaVersion||6) < 7) state = migrateV090Phase2ToPhase3(state);
   if(Number(state.schemaVersion||7) < 8) state = migrateV090Phase3ToFinal(state);
+  if(Number(state.schemaVersion||8) < 9) state = migrateV090ToV0100Phase1(state);
+  if(Number(state.schemaVersion||9) < 10) state = migrateV0100Phase1ToPhase2(state);
+  if(Number(state.schemaVersion||10) < 11) state = migrateV0100Phase2ToPhase3(state);
+  if(Number(state.schemaVersion||11) < 12) state = migrateV0100ToV0110Phase1(state);
+  if(Number(state.schemaVersion||12) < 13) state = migrateV0110Phase1ToPhase2(state);
+  if(Number(state.schemaVersion||13) < 14) state = migrateV0110Phase2ToPhase3(state);
+  if(Number(state.schemaVersion||14) < 15) state = migrateV0110Phase3ToFinal(state);
+  if(Number(state.schemaVersion||15) < 16) state = migrateV0110ToV0120Phase1(state);
+  if(Number(state.schemaVersion||16) < 17) state = migrateV0120Phase1ToPhase2(state);
+  if(Number(state.schemaVersion||17) < 18) state = migrateV0120Phase2ToPhase3(state);
+  if(Number(state.schemaVersion||18) < 19) state = migrateV0120Phase3ToFinal(state);
   const base = createInitialState();
   const migratedSettings={...(state.settings||{})};
   delete migratedSettings.voiceName;
@@ -53,6 +64,127 @@ export function migrateState(input={}){
 
 
 
+
+
+
+export function migrateV0120Phase3ToFinal(state={}){
+  const next=structuredCloneSafe(state);
+  next.followThroughIntegrity=next.followThroughIntegrity||{
+    lastReconciledAt:null,
+    lastReport:null
+  };
+  next.schemaVersion=19;
+  next.productVersion='0.12.0';
+  return next;
+}
+
+export function migrateV0120Phase2ToPhase3(state={}){
+  const next=structuredCloneSafe(state);
+  next.fallbackPlans=[...(next.fallbackPlans||[])];
+  next.schemaVersion=18;
+  next.productVersion='0.12.0';
+  return next;
+}
+
+export function migrateV0120Phase1ToPhase2(state={}){
+  const next=structuredCloneSafe(state);
+  next.frictionPlans=[...(next.frictionPlans||[])];
+  next.schemaVersion=17;
+  next.productVersion='0.12.0';
+  return next;
+}
+
+export function migrateV0110ToV0120Phase1(state={}){
+  const next=structuredCloneSafe(state);
+  next.commitments=[...(next.commitments||[])];
+  next.schemaVersion=16;
+  next.productVersion='0.12.0';
+  return next;
+}
+
+export function migrateV0110Phase3ToFinal(state={}){
+  const next=structuredCloneSafe(state);
+  next.agencyIntegrity=next.agencyIntegrity||{
+    lastReconciledAt:null,
+    lastReport:null
+  };
+  next.schemaVersion=15;
+  next.productVersion='0.11.0';
+  return next;
+}
+
+export function migrateV0110Phase2ToPhase3(state={}){
+  const next=structuredCloneSafe(state);
+  next.outcomeRecords=[...(next.outcomeRecords||[])];
+  next.schemaVersion=14;
+  next.productVersion='0.11.0';
+  return next;
+}
+
+export function migrateV0110Phase1ToPhase2(state={}){
+  const next=structuredCloneSafe(state);
+  next.preferenceModel=[...(next.preferenceModel||[])];
+  next.schemaVersion=13;
+  next.productVersion='0.11.0';
+  return next;
+}
+
+export function migrateV0100ToV0110Phase1(state={}){
+  const next=structuredCloneSafe(state);
+  next.choiceLog=[...(next.choiceLog||[])];
+  const mark=judgement=>judgement&&typeof judgement==='object'
+    ?{...judgement,personChoice:judgement.personChoice||null}
+    :judgement;
+  next.judgements=(next.judgements||[]).map(mark);
+  next.history=(next.history||[]).map(entry=>({...entry,decision:mark(entry.decision)}));
+  if(next.current?.decision)next.current={...next.current,decision:mark(next.current.decision)};
+  next.schemaVersion=12;
+  next.productVersion='0.11.0';
+  return next;
+}
+
+export function migrateV0100Phase2ToPhase3(state={}){
+  const next=structuredCloneSafe(state);
+  next.correctionAudit=[...(next.correctionAudit||[])];
+  next.schemaVersion=11;
+  next.productVersion='0.10.0';
+  return next;
+}
+
+export function migrateV0100Phase1ToPhase2(state={}){
+  const next=structuredCloneSafe(state);
+  const mark=judgement=>{
+    if(!judgement||typeof judgement!=='object')return judgement;
+    return {
+      ...judgement,
+      minorityReports:[...(judgement.minorityReports||[])],
+      deliberationTrace:judgement.deliberationTrace||null
+    };
+  };
+  next.judgements=(next.judgements||[]).map(mark);
+  next.history=(next.history||[]).map(entry=>({...entry,decision:mark(entry.decision)}));
+  if(next.current?.decision)next.current={...next.current,decision:mark(next.current.decision)};
+  next.schemaVersion=10;
+  next.productVersion='0.10.0';
+  return next;
+}
+
+export function migrateV090ToV0100Phase1(state={}){
+  const next=structuredCloneSafe(state);
+  const mark=judgement=>{
+    if(!judgement||typeof judgement!=='object')return judgement;
+    return {
+      ...judgement,
+      boundaries:judgement.boundaries||null
+    };
+  };
+  next.judgements=(next.judgements||[]).map(mark);
+  next.history=(next.history||[]).map(entry=>({...entry,decision:mark(entry.decision)}));
+  if(next.current?.decision)next.current={...next.current,decision:mark(next.current.decision)};
+  next.schemaVersion=9;
+  next.productVersion='0.10.0';
+  return next;
+}
 
 export function migrateV090Phase3ToFinal(state={}){
   const next=structuredCloneSafe(state);
