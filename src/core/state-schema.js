@@ -1,5 +1,5 @@
 export const STATE_SCHEMA_VERSION = 28;
-export const PRODUCT_VERSION = '0.16.5';
+export const PRODUCT_VERSION = '0.16.6';
 
 export function createInitialState(){
   return {
