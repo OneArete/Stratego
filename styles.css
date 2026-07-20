@@ -1408,3 +1408,150 @@ main.screen{
     font-size:8px !important;
   }
 }
+
+
+/* v0.16.2 — focused judgement and Agora motion */
+.agora-orbit{
+  position:relative;
+  width:150px;
+  height:150px;
+  display:grid;
+  place-items:center;
+  margin:0 auto 20px;
+}
+
+.agora-orbit .delta{
+  position:relative;
+  z-index:2;
+}
+
+.agora-orbit::before{
+  content:"";
+  position:absolute;
+  inset:2px;
+  border-radius:50%;
+  border:2px solid transparent;
+  border-top-color:rgba(214,173,104,.9);
+  border-right-color:rgba(214,173,104,.34);
+  box-shadow:0 0 28px rgba(184,148,88,.12);
+  animation:agora-orbit-turn 2.8s linear infinite;
+}
+
+.agora-orbit::after{
+  content:"";
+  position:absolute;
+  inset:16px;
+  border-radius:50%;
+  border:1px solid rgba(184,148,88,.12);
+}
+
+@keyframes agora-orbit-turn{
+  to{transform:rotate(360deg)}
+}
+
+.judgement-focus{
+  display:grid;
+  gap:14px;
+}
+
+.judgement-focus-head{
+  padding:4px 2px 2px;
+}
+
+.judgement-focus-head h2{
+  margin:5px 0 12px;
+  font-size:clamp(28px,7vw,40px);
+  line-height:1.08;
+}
+
+.focused-practice{
+  display:grid;
+  gap:18px;
+}
+
+.judgement-rationale{
+  padding:16px;
+  border:1px solid var(--line);
+  border-radius:18px;
+  background:var(--surface);
+}
+
+.judgement-rationale>p{
+  margin:5px 0 0;
+  line-height:1.55;
+}
+
+.judgement-rationale ul{
+  margin:12px 0 0;
+  padding-left:18px;
+}
+
+.judgement-rationale li{
+  margin:7px 0;
+  color:var(--muted);
+  line-height:1.45;
+}
+
+.nearest-alternative{
+  padding-top:11px;
+  border-top:1px solid var(--line);
+}
+
+.reasoning-link{
+  width:100%;
+  padding:13px 15px;
+  border:1px solid rgba(184,148,88,.24);
+  border-radius:16px;
+  background:transparent;
+  color:#d9b778;
+  font:inherit;
+}
+
+.compact-caution,.compact-forecast{
+  display:flex;
+  justify-content:space-between;
+  gap:14px;
+  padding:12px 14px;
+  border:1px solid var(--line);
+  border-radius:15px;
+  background:rgba(255,255,255,.015);
+  font-size:11px;
+}
+
+.compact-caution{
+  border-color:rgba(190,125,86,.42);
+}
+
+.compact-caution span,.compact-forecast span{
+  color:var(--muted);
+}
+
+.focused-choice{
+  margin-top:2px;
+}
+
+.latest-deliberation{
+  padding:15px;
+  border:1px solid rgba(184,148,88,.2);
+  border-radius:18px;
+  background:rgba(184,148,88,.035);
+}
+
+.understanding-deliberation{
+  margin-top:12px;
+  border-top:1px solid var(--line);
+  padding-top:12px;
+}
+
+.understanding-deliberation>summary{
+  cursor:pointer;
+  color:#d9b778;
+}
+
+.understanding-deliberation .explain-section{
+  margin-top:16px;
+}
+
+@media(prefers-reduced-motion:reduce){
+  .agora-orbit::before{animation:none}
+}
