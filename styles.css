@@ -1860,3 +1860,48 @@ main.screen{
     display:none;
   }
 }
+
+
+/* v0.17.2 — runtime control integrity */
+.setting-status{display:block;margin-top:6px;color:rgba(184,148,88,.78);font-size:9px;line-height:1.35}
+.setting-disabled{opacity:.62}
+.setting-disabled .switch{cursor:not-allowed}
+
+
+/* v0.18.0 Phase 1 — governed adaptation pattern candidates */
+.adaptation-pattern-item{
+  display:grid;
+  gap:7px;
+  padding:13px 14px;
+  border:1px solid var(--line);
+  border-radius:15px;
+  background:rgba(255,255,255,.012);
+}
+.adaptation-pattern-item+ .adaptation-pattern-item{
+  margin-top:9px;
+}
+.adaptation-pattern-item>div{
+  display:flex;
+  justify-content:space-between;
+  gap:12px;
+}
+.adaptation-pattern-item strong{
+  color:#ddd4c7;
+  font-size:12px;
+}
+.adaptation-pattern-item span{
+  color:#b89458;
+  font-size:9px;
+  letter-spacing:.12em;
+  text-transform:uppercase;
+}
+.adaptation-pattern-item p{
+  margin:0;
+  color:#cbc2b5;
+  font-size:11px;
+  line-height:1.45;
+}
+.adaptation-pattern-item small{
+  color:var(--muted);
+  font-size:9px;
+}
