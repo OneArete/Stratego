@@ -1,5 +1,5 @@
-export const STATE_SCHEMA_VERSION = 28;
-export const PRODUCT_VERSION = '0.17.1';
+export const STATE_SCHEMA_VERSION = 29;
+export const PRODUCT_VERSION = '0.18.1';
 
 export function createInitialState(){
   return {
@@ -28,6 +28,7 @@ export function createInitialState(){
     patternTransfers:[],
     judgementForecasts:[],
     calibrationAccountability:[],
+    adaptationPatternReviews:[],
     reflectionDraft:null,
     integrity:{lastReconciledAt:null,lastReport:null},
     agencyIntegrity:{lastReconciledAt:null,lastReport:null},
@@ -66,6 +67,7 @@ export function migrateState(input={}){
   if(Number(state.schemaVersion||25) < 26) state = migrateV0150Phase1ToPhase3(state);
   if(Number(state.schemaVersion||26) < 27) state = migrateV0150Phase3ToPhase4(state);
   if(Number(state.schemaVersion||27) < 28) state = migrateV0150ToV0160Phase1(state);
+  if(Number(state.schemaVersion||28) < 29) state = migrateV0180Phase1ToPhase2(state);
   const base = createInitialState();
   const migratedSettings={...(state.settings||{})};
   delete migratedSettings.voiceName;
@@ -99,6 +101,7 @@ export function migrateState(input={}){
     patternTransfers:[...(state.patternTransfers||[])],
     judgementForecasts:[...(state.judgementForecasts||[])],
     calibrationAccountability:[...(state.calibrationAccountability||[])],
+    adaptationPatternReviews:[...(state.adaptationPatternReviews||[])],
     reflectionDraft:state.reflectionDraft||null,
     integrity:{...base.integrity,...(state.integrity||{})},
     agencyIntegrity:{...base.agencyIntegrity,...(state.agencyIntegrity||{})},
@@ -112,6 +115,16 @@ export function migrateState(input={}){
 
 
 
+
+
+
+export function migrateV0180Phase1ToPhase2(state={}){
+  const next=structuredCloneSafe(state);
+  next.adaptationPatternReviews=[...(next.adaptationPatternReviews||[])];
+  next.schemaVersion=29;
+  next.productVersion='0.18.0';
+  return next;
+}
 
 
 export function migrateV0150ToV0160Phase1(state={}){
