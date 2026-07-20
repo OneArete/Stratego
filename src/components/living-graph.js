@@ -5,17 +5,10 @@ const polar = (cx, cy, radius, angle) => {
 
 const clamp = (value, min = 0, max = 1) => Math.min(max, Math.max(min, value));
 
-const motion = (index, compact, emphasis = 0) => {
-  const scale = compact ? 0.62 : 0.82;
-  const vectors = [[1.8,-2.4],[-2.1,-1.4],[2.4,1.5],[-1.7,2.2],[1.5,2.5],[-2.5,.8]];
-  const [x,y] = vectors[index % vectors.length];
-  const boost = 1 + emphasis * .7;
-  return {
-    x:(x*scale*boost).toFixed(1),
-    y:(y*scale*boost).toFixed(1),
-    duration:(8.4 + index * .71 - emphasis * 1.35).toFixed(2)
-  };
-};
+const pulseTiming = (index, emphasis = 0) => ({
+  begin:`${(index * .72).toFixed(2)}s`,
+  duration:(5.2 - emphasis * .55).toFixed(2)
+});
 
 const dominantScore = node =>
   Number(node.energy || 0) * .62 +
@@ -63,8 +56,9 @@ export function renderLivingGraph(graph, { compact = false } = {}) {
     const angle = index * 60;
     const point = polar(center, center, radius, angle);
     const emphasis = clamp((scores[index]-minScore)/scoreRange);
-    const core = (compact ? 3.7 : 4.3) + node.energy * (compact ? 4.8 : 5.7) + emphasis * 1.35;
-    const halo = core + 4 + node.volatility * 6 + emphasis * 2.6;
+    const rawCore = (compact ? 3.4 : 4.1) + node.energy * (compact ? 3.9 : 5.1) + emphasis * 1.05;
+    const core = Math.min(compact ? 8.8 : 11.2, rawCore);
+    const halo = Math.min(compact ? 13.8 : 17.5, core + 3.2 + node.volatility * 4.2 + emphasis * 1.8);
     return {
       ...node,
       ...point,
@@ -73,33 +67,43 @@ export function renderLivingGraph(graph, { compact = false } = {}) {
       halo,
       emphasis,
       dominant:index===dominantIndex,
-      motion:motion(index, compact, emphasis)
+      pulse:pulseTiming(index, emphasis)
     };
   });
 
   const connections = nodes.map((node, index) => {
     const next = nodes[(index + 1) % nodes.length];
     const edgeEmphasis = Math.max(node.emphasis,next.emphasis);
-    const opacity = 0.11 + ((node.energy + next.energy) / 2) * 0.28 + edgeEmphasis * .12;
-    const bend = (index % 2 ? -1 : 1) * (compact ? 4 : 6);
+    const opacity = 0.13 + ((node.energy + next.energy) / 2) * 0.22 + edgeEmphasis * .1;
+    const bend = (index % 2 ? -1 : 1) * (compact ? 3.2 : 4.8);
     const d1 = `M ${node.x.toFixed(1)} ${node.y.toFixed(1)} Q ${center} ${center} ${next.x.toFixed(1)} ${next.y.toFixed(1)}`;
-    const d2 = `M ${node.x.toFixed(1)} ${node.y.toFixed(1)} Q ${(center+bend).toFixed(1)} ${(center-bend*.65).toFixed(1)} ${next.x.toFixed(1)} ${next.y.toFixed(1)}`;
+    const d2 = `M ${node.x.toFixed(1)} ${node.y.toFixed(1)} Q ${(center+bend).toFixed(1)} ${(center-bend*.55).toFixed(1)} ${next.x.toFixed(1)} ${next.y.toFixed(1)}`;
+    const begin=(index*.72).toFixed(2);
     return `<path class="graph-link ${edgeEmphasis>.82?'dominant-link':''}" style="opacity:${opacity.toFixed(2)};--edge:${edgeEmphasis.toFixed(2)}" d="${d1}">
-      <animate attributeName="d" values="${d1};${d2};${d1}" dur="${(9.6 + index*.71 - edgeEmphasis*.9).toFixed(2)}s" repeatCount="indefinite" />
+      <animate attributeName="d" values="${d1};${d2};${d1}" dur="6.4s" begin="${begin}s" repeatCount="indefinite" />
+      <animate attributeName="opacity" values="${opacity.toFixed(2)};${Math.min(.72,opacity+.32).toFixed(2)};${opacity.toFixed(2)}" dur="4.32s" begin="${begin}s" repeatCount="indefinite" />
+      <animate attributeName="stroke-width" values="1;2.1;1" dur="4.32s" begin="${begin}s" repeatCount="indefinite" />
     </path>`;
   }).join('');
 
   const membraneBase = closedPath(nodes);
-  const membraneA = displacedPath(nodes,center,dominantIndex,1);
-  const membraneB = displacedPath(nodes,center,dominantIndex,2);
+  const membraneA = displacedPath(nodes,center,dominantIndex,.55);
+  const membraneB = displacedPath(nodes,center,dominantIndex,1.25);
+  const membraneC = displacedPath(nodes,center,dominantIndex,2.05);
+  const membraneD = displacedPath(nodes,center,dominantIndex,2.85);
 
   const nodeMarkup = nodes.map(node => {
     const labelPoint = polar(center, center, radius + (compact ? 25 : 34), node.angle);
     const trend = node.momentum > 0.04 ? '↑' : node.momentum < -0.04 ? '↓' : '•';
+    const haloOpacity=(0.05 + node.confidence * 0.09 + node.emphasis*.04).toFixed(2);
     return `<g class="graph-node ${node.dominant?'dominant-node':''}" data-dimension="${node.id}" style="--emphasis:${node.emphasis.toFixed(2)}">
-      <animateTransform attributeName="transform" type="translate" values="0 0;${node.motion.x} ${node.motion.y};0 0;${-Number(node.motion.x)} ${-Number(node.motion.y)};0 0" dur="${node.motion.duration}s" repeatCount="indefinite" />
-      <circle class="node-halo" cx="${node.x}" cy="${node.y}" r="${node.halo.toFixed(1)}" style="opacity:${(0.05 + node.confidence * 0.11 + node.emphasis*.05).toFixed(2)}"/>
-      <circle class="node-core" cx="${node.x}" cy="${node.y}" r="${node.core.toFixed(1)}"/>
+      <circle class="node-halo" cx="${node.x}" cy="${node.y}" r="${node.halo.toFixed(1)}" style="opacity:${haloOpacity}">
+        <animate attributeName="r" values="${node.halo.toFixed(1)};${(node.halo+1.8).toFixed(1)};${node.halo.toFixed(1)}" dur="${node.pulse.duration}s" begin="${node.pulse.begin}" repeatCount="indefinite"/>
+        <animate attributeName="opacity" values="${haloOpacity};${Math.min(.3,Number(haloOpacity)+.12).toFixed(2)};${haloOpacity}" dur="${node.pulse.duration}s" begin="${node.pulse.begin}" repeatCount="indefinite"/>
+      </circle>
+      <circle class="node-core" cx="${node.x}" cy="${node.y}" r="${node.core.toFixed(1)}">
+        <animate attributeName="r" values="${node.core.toFixed(1)};${(node.core+1.05).toFixed(1)};${node.core.toFixed(1)}" dur="${node.pulse.duration}s" begin="${node.pulse.begin}" repeatCount="indefinite"/>
+      </circle>
       <text class="node-label" x="${labelPoint.x.toFixed(1)}" y="${labelPoint.y.toFixed(1)}">${node.label}</text>
       <text class="node-trend" x="${node.x.toFixed(1)}" y="${(node.y + 2.6).toFixed(1)}">${trend}</text>
     </g>`;
@@ -112,7 +116,7 @@ export function renderLivingGraph(graph, { compact = false } = {}) {
     <svg viewBox="0 0 ${size} ${size}" role="img" aria-label="Six dimensions of human flourishing. ${dominant.label} currently has the strongest emphasis.">
       <circle class="graph-orbit" cx="${center}" cy="${center}" r="${radius}"/>
       <path class="graph-membrane" d="${membraneBase}">
-        <animate attributeName="d" values="${membraneBase};${membraneA};${membraneB};${membraneBase}" dur="10.8s" repeatCount="indefinite"/>
+        <animate attributeName="d" values="${membraneBase};${membraneA};${membraneB};${membraneC};${membraneD};${membraneBase}" keyTimes="0;0.18;0.38;0.58;0.78;1" calcMode="spline" keySplines=".42 0 .58 1;.42 0 .58 1;.42 0 .58 1;.42 0 .58 1;.42 0 .58 1" dur="8.8s" repeatCount="indefinite"/>
       </path>
       <g class="graph-web">${connections}</g>
       <circle class="graph-pulse" cx="${center}" cy="${center}" r="${compact ? 15 : 20}"/>
