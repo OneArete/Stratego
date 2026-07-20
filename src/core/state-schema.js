@@ -1,4 +1,4 @@
-export const STATE_SCHEMA_VERSION = 19;
+export const STATE_SCHEMA_VERSION = 21;
 export const PRODUCT_VERSION = '0.9.0';
 
 export function createInitialState(){
@@ -38,6 +38,8 @@ export function migrateState(input={}){
   if(Number(state.schemaVersion||16) < 17) state = migrateV0120Phase1ToPhase2(state);
   if(Number(state.schemaVersion||17) < 18) state = migrateV0120Phase2ToPhase3(state);
   if(Number(state.schemaVersion||18) < 19) state = migrateV0120Phase3ToFinal(state);
+  if(Number(state.schemaVersion||19) < 20) state = migrateV0120ToV0130Phase1(state);
+  if(Number(state.schemaVersion||20) < 21) state = migrateV0130Phase1ToFinal(state);
   const base = createInitialState();
   const migratedSettings={...(state.settings||{})};
   delete migratedSettings.voiceName;
@@ -66,6 +68,22 @@ export function migrateState(input={}){
 
 
 
+
+export function migrateV0130Phase1ToFinal(state={}){
+  const next=structuredCloneSafe(state);
+  next.outcomeAttributions=[...(next.outcomeAttributions||[])];
+  next.schemaVersion=21;
+  next.productVersion='0.13.0';
+  return next;
+}
+
+export function migrateV0120ToV0130Phase1(state={}){
+  const next=structuredCloneSafe(state);
+  next.structuredReflections=[...(next.structuredReflections||[])];
+  next.schemaVersion=20;
+  next.productVersion='0.13.0';
+  return next;
+}
 
 export function migrateV0120Phase3ToFinal(state={}){
   const next=structuredCloneSafe(state);
