@@ -2,15 +2,19 @@ import { applyAdvisorMemory } from './advisor-memory.js';
 import { CODEX } from '../data/codex.js';
 import { evidenceItem, assessEvidenceDiversity, detectContradictions } from './evidence-integrity.js';
 import { buildDeliberationTrace,buildMinorityReports,summarizeMinorityReports } from './deliberation-trace.js';
+import { applyLongitudinalAdjustments,longitudinalConfidenceAdjustment,verifyLongitudinalEvidence } from './longitudinal-evidence.js';
+import { applyCalibrationToConfidence,verifyCalibrationEvidence } from './calibration-governance.js';
 const clamp=(n,min=0,max=1)=>Math.min(max,Math.max(min,n));
 
-export function conveneAgora(context, understanding, history=[], advisorMemories={}){
+export function conveneAgora(context, understanding, history=[], advisorMemories={}, longitudinalEvidence=null, calibrationEvidence=null){
   const raw=[bodyAdvisor(context,understanding,history),recoveryAdvisor(context,understanding),mindAdvisor(context,understanding),agencyAdvisor(context,understanding),purposeAdvisor(context),relationshipsAdvisor(context)];
   const advisors=raw.map(a=>applyAdvisorMemory(a,advisorMemories[a.advisor]));
-  const totals=Object.fromEntries(CODEX.map(practice=>[practice.id,0]));
+  let totals=Object.fromEntries(CODEX.map(practice=>[practice.id,0]));
   for(const advisor of advisors){
     for(const [id,value] of Object.entries(advisor.scores)) totals[id]=(totals[id]||0)+value*advisor.weight;
   }
+  const longitudinalVerification=verifyLongitudinalEvidence(longitudinalEvidence);
+  if(longitudinalVerification.valid)totals=applyLongitudinalAdjustments(totals,longitudinalEvidence);
   const blocked=[];
   if(context.soreness==='significant') blocked.push({practiceId:'strength',reason:'Significant soreness makes strength loading inappropriate until reassessment.'});
   const ranked=Object.entries(totals)
@@ -24,7 +28,11 @@ export function conveneAgora(context, understanding, history=[], advisorMemories
   const criticalConcern=advisors.find(a=>a.riskFlags?.some(r=>r.severity==='critical'));
   const diversityPenalty=evidenceDiversity.level==='Narrow'?.08:evidenceDiversity.level==='Mixed'?.03:0;
   const contradictionPenalty=Math.min(.12,contradictions.reduce((sum,x)=>sum+(x.severity==='high'?.06:.03),0));
-  const confidence=Math.round(clamp(.56+margin*.10+understanding.confidence/520-(criticalConcern?.12:0)-diversityPenalty-contradictionPenalty,.45,.90)*100);
+  const longitudinalConfidence=longitudinalVerification.valid?longitudinalConfidenceAdjustment(longitudinalEvidence):0;
+  const baseConfidence=Math.round(clamp(.56+margin*.10+understanding.confidence/520-(criticalConcern?.12:0)-diversityPenalty-contradictionPenalty+longitudinalConfidence,.45,.90)*100);
+  const calibrationVerification=verifyCalibrationEvidence(calibrationEvidence);
+  const calibratedConfidence=applyCalibrationToConfidence(baseConfidence,calibrationEvidence);
+  const confidence=calibratedConfidence.confidence;
   const delta=scaleDelta(winner.baseDelta,duration/15);
   const supporting=advisors.filter(a=>(a.scores[winner.id]||0)>.45).sort((a,b)=>(b.scores[winner.id]||0)-(a.scores[winner.id]||0));
   const cautioning=advisors.filter(a=>['Caution','Oppose'].includes(a.position));
@@ -41,7 +49,7 @@ export function conveneAgora(context, understanding, history=[], advisorMemories
   };
   const result={
     id:makeId('judgement'),createdAt:new Date().toISOString(),understanding,advisors,agora,
-    practice:winner,mission:winner,duration,confidence,confidenceLevel:confidenceLabel(confidence),unknowns:understanding.unknowns,contradictions,evidenceDiversity,
+    practice:winner,mission:winner,duration,confidence,confidenceLevel:confidenceLabel(confidence),unknowns:understanding.unknowns,contradictions,evidenceDiversity,longitudinalEvidence:longitudinalVerification.valid?longitudinalEvidence:null,longitudinalVerification,calibrationEvidence:calibrationVerification.valid?calibrationEvidence:null,calibrationVerification,baseConfidence,confidenceCalibration:calibratedConfidence,
     judgement:judgementText(winner.id,duration,context),explanation:supporting.slice(0,3).map(a=>a.reason),reasons:supporting.slice(0,3).map(a=>a.reason),
     alternatives:ranked.slice(1,3).map(([id])=>CODEX.find(x=>x.id===id).name),delta,scores:totals,intention:intention(winner.id),status:'current'
   };

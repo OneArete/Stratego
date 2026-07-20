@@ -1,4 +1,4 @@
-export const STATE_SCHEMA_VERSION = 21;
+export const STATE_SCHEMA_VERSION = 28;
 export const PRODUCT_VERSION = '0.9.0';
 
 export function createInitialState(){
@@ -40,6 +40,13 @@ export function migrateState(input={}){
   if(Number(state.schemaVersion||18) < 19) state = migrateV0120Phase3ToFinal(state);
   if(Number(state.schemaVersion||19) < 20) state = migrateV0120ToV0130Phase1(state);
   if(Number(state.schemaVersion||20) < 21) state = migrateV0130Phase1ToFinal(state);
+  if(Number(state.schemaVersion||21) < 22) state = migrateV0131ToV0140Phase1(state);
+  if(Number(state.schemaVersion||22) < 23) state = migrateV0140Phase1ToPhase2(state);
+  if(Number(state.schemaVersion||23) < 24) state = migrateV0143ToV0144(state);
+  if(Number(state.schemaVersion||24) < 25) state = migrateV0144ToV0150Phase1(state);
+  if(Number(state.schemaVersion||25) < 26) state = migrateV0150Phase1ToPhase3(state);
+  if(Number(state.schemaVersion||26) < 27) state = migrateV0150Phase3ToPhase4(state);
+  if(Number(state.schemaVersion||27) < 28) state = migrateV0150ToV0160Phase1(state);
   const base = createInitialState();
   const migratedSettings={...(state.settings||{})};
   delete migratedSettings.voiceName;
@@ -68,6 +75,70 @@ export function migrateState(input={}){
 
 
 
+
+export function migrateV0150ToV0160Phase1(state={}){
+  const next=structuredCloneSafe(state);
+  next.reflectionDraft=next.reflectionDraft||null;
+  next.schemaVersion=28;
+  next.productVersion='0.16.0';
+  return next;
+}
+
+export function migrateV0150Phase3ToPhase4(state={}){
+  const next=structuredCloneSafe(state);
+  next.calibrationAccountability=[...(next.calibrationAccountability||[])];
+  next.schemaVersion=27;
+  next.productVersion='0.15.0';
+  return next;
+}
+
+export function migrateV0150Phase1ToPhase3(state={}){
+  const next=structuredCloneSafe(state);
+  next.judgementForecasts=(next.judgementForecasts||[]).map(item=>({
+    ...item,
+    domain:item.domain||'unknown',
+    challenge:item.challenge||item.contextKey?.split('|')?.[0]||'unknown'
+  }));
+  next.schemaVersion=26;
+  next.productVersion='0.15.0';
+  return next;
+}
+
+export function migrateV0144ToV0150Phase1(state={}){
+  const next=structuredCloneSafe(state);
+  next.judgementForecasts=[...(next.judgementForecasts||[])];
+  next.schemaVersion=25;
+  next.productVersion='0.15.0';
+  return next;
+}
+
+export function migrateV0143ToV0144(state={}){
+  const next=structuredCloneSafe(state);
+  next.longitudinalAccountability=next.longitudinalAccountability||{
+    lastReconciledAt:null,
+    lastReport:null
+  };
+  next.schemaVersion=24;
+  next.productVersion='0.14.4';
+  return next;
+}
+
+export function migrateV0140Phase1ToPhase2(state={}){
+  const next=structuredCloneSafe(state);
+  next.patternTransfers=[...(next.patternTransfers||[])];
+  next.schemaVersion=23;
+  next.productVersion='0.14.0';
+  return next;
+}
+
+export function migrateV0131ToV0140Phase1(state={}){
+  const next=structuredCloneSafe(state);
+  next.outcomeEpisodes=[...(next.outcomeEpisodes||[])];
+  next.outcomePatterns=[...(next.outcomePatterns||[])];
+  next.schemaVersion=22;
+  next.productVersion='0.14.0';
+  return next;
+}
 
 export function migrateV0130Phase1ToFinal(state={}){
   const next=structuredCloneSafe(state);
