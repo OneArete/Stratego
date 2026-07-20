@@ -1600,3 +1600,73 @@ main.screen{
 .focused-practice h2{font-size:clamp(26px,6vw,34px)}
 .focused-practice .delta-score{margin-top:12px;padding:13px 0}
 .judgement-rationale{padding:14px 15px}
+
+
+/* v0.16.6 — in-app usage guide */
+.guide-entry h3{margin:3px 0 7px}
+.context-help{
+  width:100%;
+  margin:-4px 0 10px;
+  padding:9px 4px;
+  border:0;
+  background:transparent;
+  color:rgba(218,184,125,.82);
+  font:inherit;
+  font-size:10px;
+  text-align:center;
+}
+.context-help.inline{
+  width:auto;
+  margin:9px 0 0;
+  padding:0;
+  text-align:left;
+}
+.usage-guide{gap:14px}
+.guide-principle{
+  display:flex;
+  justify-content:space-between;
+  gap:12px;
+  padding:14px 15px;
+  border:1px solid rgba(184,148,88,.22);
+  border-radius:17px;
+  background:rgba(184,148,88,.045);
+}
+.guide-principle span{color:var(--muted)}
+.guide-section{
+  border:1px solid var(--line);
+  border-radius:17px;
+  padding:0 15px;
+  background:var(--surface);
+}
+.guide-section[open]{border-color:rgba(184,148,88,.28)}
+.guide-section summary{
+  cursor:pointer;
+  padding:15px 0;
+  color:#e4ddd2;
+  font-size:14px;
+  font-weight:600;
+}
+.guide-section>div{
+  padding:0 0 15px;
+  color:var(--muted);
+  line-height:1.6;
+}
+.guide-section p{margin:0 0 10px}
+.guide-flow{
+  display:flex;
+  flex-wrap:wrap;
+  align-items:center;
+  gap:7px;
+  margin-top:14px;
+}
+.guide-flow span{
+  padding:6px 9px;
+  border:1px solid var(--line);
+  border-radius:999px;
+  color:#ddd4c7;
+  font-size:10px;
+}
+.guide-flow i{
+  color:#b89458;
+  font-style:normal;
+}
