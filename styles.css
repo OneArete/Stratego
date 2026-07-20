@@ -724,3 +724,239 @@ header .delta.small{
     display:none;
   }
 }
+
+
+/* v0.13.0 Phase 3 — Footer Fix, Scale Restraint and Graph Warmth */
+:root{
+  --content-max:432px;
+  --footer-height:56px;
+}
+
+body{
+  padding-bottom:calc(var(--footer-height) + env(safe-area-inset-bottom));
+}
+
+.screen{
+  max-width:var(--content-max);
+  padding-left:15px;
+  padding-right:15px;
+}
+
+.stack{
+  gap:14px;
+  padding-top:20px;
+}
+
+.observe-stack{
+  padding-top:18px;
+  gap:14px;
+}
+
+.stack h2,
+.thinking-copy h2{
+  font-size:27px;
+  line-height:1.07;
+}
+
+.observe-stack>div:first-child .muted{
+  font-size:12px;
+}
+
+.eyebrow{
+  font-size:8px;
+  letter-spacing:.22em;
+}
+
+.choice,
+.pill{
+  padding:11px 10px;
+  font-size:12px;
+}
+
+.question{
+  padding:13px 0;
+}
+
+.question h3{
+  font-size:15px;
+}
+
+.action{
+  padding:13px;
+  font-size:9px;
+}
+
+header{
+  height:42px;
+  font-size:9px;
+}
+
+header .delta.small{
+  width:24px;
+  height:24px;
+}
+
+.living-graph{
+  padding:12px 11px 10px;
+  border-radius:17px;
+  background:
+    radial-gradient(circle at 50% 42%, rgba(184,148,88,.085), transparent 48%),
+    rgba(17,15,12,.92);
+}
+
+.graph-heading h3{
+  font-size:16px;
+}
+
+.graph-state{
+  font-size:7px;
+  padding:5px 7px;
+}
+
+.living-graph svg{
+  max-width:228px;
+}
+
+.living-graph.compact svg{
+  max-width:176px;
+}
+
+.graph-orbit{
+  stroke:rgba(184,148,88,.14);
+}
+
+.graph-membrane{
+  fill:rgba(184,148,88,.07);
+  stroke:rgba(208,171,103,.56);
+  stroke-width:.9;
+  opacity:.72;
+  filter:drop-shadow(0 0 6px rgba(184,148,88,.18));
+}
+
+.graph-web .graph-link{
+  stroke:rgba(202,166,99,.66);
+  stroke-width:1;
+}
+
+.graph-link.dominant-link{
+  stroke:rgba(232,198,132,.9);
+  stroke-width:1.3;
+  filter:drop-shadow(0 0 5px rgba(212,176,108,.34));
+}
+
+.graph-center{
+  fill:#c39a58;
+  stroke:rgba(238,210,153,.45);
+}
+
+.graph-pulse{
+  fill:rgba(184,148,88,.045);
+  stroke:rgba(184,148,88,.2);
+}
+
+.node-core{
+  fill:#d1a85f;
+  stroke:#e3c386;
+}
+
+.node-halo{
+  fill:rgba(184,148,88,.28);
+}
+
+.node-label{
+  fill:#d0c7b9;
+  font-size:6.9px;
+}
+
+.graph-note{
+  font-size:9px;
+  max-width:225px;
+  color:rgba(222,215,203,.74);
+}
+
+/* Fixed footer: stable, smaller and detached from document flow. */
+.tabbar{
+  position:fixed;
+  left:0;
+  right:0;
+  bottom:0;
+  z-index:80;
+  height:calc(var(--footer-height) + env(safe-area-inset-bottom));
+  min-height:0;
+  padding:0 18px env(safe-area-inset-bottom);
+  display:grid;
+  grid-template-columns:repeat(4,1fr);
+  align-items:center;
+  background:rgba(5,5,5,.96);
+  border-top:1px solid rgba(184,148,88,.12);
+  backdrop-filter:blur(18px);
+  -webkit-backdrop-filter:blur(18px);
+}
+
+.tabbar button{
+  height:var(--footer-height);
+  min-height:0;
+  padding:0;
+  font-size:7.5px;
+  letter-spacing:.02em;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  color:rgba(222,215,203,.5);
+}
+
+.tabbar button.active{
+  color:#d6ad68;
+}
+
+.tabbar button::before{
+  display:none;
+}
+
+/* Prevent content from being hidden behind the fixed footer. */
+main,
+#app{
+  padding-bottom:calc(var(--footer-height) + 18px + env(safe-area-inset-bottom));
+}
+
+.splash{
+  padding-bottom:0;
+}
+
+@media(max-width:390px){
+  :root{
+    --content-max:408px;
+    --footer-height:54px;
+  }
+  .screen{
+    padding-left:14px;
+    padding-right:14px;
+  }
+  .stack h2,
+  .thinking-copy h2{
+    font-size:25px;
+  }
+  .living-graph.compact svg{
+    max-width:168px;
+  }
+  .question h3{
+    font-size:14px;
+  }
+}
+
+@media(max-height:720px){
+  .stack{
+    padding-top:16px;
+  }
+  .living-graph.compact svg{
+    max-width:158px;
+  }
+}
+
+
+/* v0.13.0 final — outcome attribution */
+.attribution-history{display:grid;gap:12px}
+.attribution-item{padding:14px 16px;border:1px solid var(--line);border-radius:18px;background:var(--surface)}
+.attribution-item>div:first-child{display:flex;justify-content:space-between;gap:12px}
+.attribution-item>div:first-child span{text-transform:uppercase;font-size:.72rem;letter-spacing:.07em}
+.attribution-item small{display:block;margin-top:7px}

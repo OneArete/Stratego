@@ -1,5 +1,26 @@
 # Changelog
 
+## v0.13.0 — Reflection and Outcome Integrity
+
+Official product baseline.
+
+- Added structured reflection integrity.
+- Added calibrated reflection-led learning.
+- Added outcome attribution and causal confidence.
+- Added explicit external factors.
+- Finalised fixed footer and restrained visual scale.
+- Finalised schema version 21.
+- Finalised PWA cache identity as `strategos-shell-v0.13.0`.
+- Confirmed 180 passing tests.
+
+## v0.13.0 Phase 3 — Footer Stability and Graph Warmth
+
+- Fixed footer positioning.
+- Reduced footer and global interface scale.
+- Restored graph warmth and translucency.
+- Reduced compact graph size.
+- Added eight regression tests.
+
 ## v0.13.0 Phase 2 — Quiet Scale II and Living Human Graph
 
 - Reduced the visual scale closer to v0.8.
