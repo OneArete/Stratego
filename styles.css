@@ -1670,3 +1670,193 @@ main.screen{
   color:#b89458;
   font-style:normal;
 }
+
+.practice-session-strip{display:flex;justify-content:space-between;gap:12px;align-items:center;margin-bottom:12px;color:var(--muted);font-size:10px}
+.practice-session-strip strong{color:#d9cfbf;font-weight:500}
+.next-phase-card{display:grid;grid-template-columns:1fr auto;gap:4px 12px;margin-top:16px;padding:12px 14px;border:1px solid rgba(184,148,88,.18);border-radius:15px;background:rgba(184,148,88,.035)}
+.next-phase-card span{grid-column:1/-1;color:#b89458;font-size:9px;letter-spacing:.16em}
+.next-phase-card strong{font-size:13px;font-weight:500}.next-phase-card small{color:var(--muted)}.next-phase-card.final{grid-template-columns:1fr}
+.practice-total-progress{height:3px;margin-top:9px;border-radius:999px;background:rgba(255,255,255,.06);overflow:hidden}
+.practice-total-progress span{display:block;height:100%;border-radius:inherit;background:rgba(214,173,104,.7);transition:width .45s linear}
+.practice-controls button:disabled{opacity:.25;pointer-events:none}
+.resume-session-summary{display:flex;justify-content:space-between;gap:12px;width:100%;padding:12px 14px;border:1px solid var(--line);border-radius:15px;font-size:10px}
+.resume-session-summary span{color:var(--muted)}
+.resume-next{display:flex;justify-content:space-between;gap:12px;width:100%;color:var(--muted);font-size:10px}.resume-next strong{color:#ddd4c7}
+
+
+/* v0.17.0 Phase 2 — in-app Practice closure */
+.practice-exit-screen{gap:18px}
+.practice-exit-progress{
+  display:grid;
+  gap:5px;
+  padding:15px;
+  border:1px solid rgba(184,148,88,.22);
+  border-radius:17px;
+  background:rgba(184,148,88,.045);
+}
+.practice-exit-progress strong{
+  font-size:18px;
+  font-weight:500;
+}
+.practice-exit-progress span{
+  color:var(--muted);
+  font-size:10px;
+}
+.practice-exit-actions{
+  display:grid;
+  gap:9px;
+}
+.practice-exit-actions .action{
+  margin:0;
+}
+.practice-exit-actions p{
+  margin:0 4px 8px;
+  color:var(--muted);
+  font-size:9px;
+  line-height:1.45;
+}
+.danger-btn.subtle{
+  margin-top:5px;
+  border-color:rgba(181,92,92,.28);
+  color:rgba(224,164,164,.84);
+  background:transparent;
+}
+
+
+/* v0.17.0 Phase 3 — technique, adaptation and safety */
+.practice-guidance-card{
+  display:grid;
+  gap:8px;
+  margin-top:16px;
+}
+.guidance-recommendation{
+  display:grid;
+  gap:5px;
+  padding:12px 14px;
+  border:1px solid rgba(184,148,88,.2);
+  border-radius:15px;
+  background:rgba(184,148,88,.04);
+}
+.guidance-recommendation span{
+  color:#b89458;
+  font-size:9px;
+  letter-spacing:.14em;
+}
+.guidance-recommendation strong{
+  color:#e2d9cc;
+  font-size:12px;
+  font-weight:500;
+  line-height:1.45;
+}
+.practice-guidance-card .exercise-guide{
+  margin:0;
+}
+.safety-guide{
+  border-color:rgba(181,92,92,.26) !important;
+}
+.safety-guide summary{
+  color:rgba(224,164,164,.88);
+}
+
+
+/* v0.17.0 Phase 4 — transparent context adaptation */
+.guidance-recommendation small{
+  color:var(--muted);
+  font-size:9px;
+  line-height:1.45;
+}
+
+
+/* v0.17.0 Phase 5 — person-directed Practice adaptation */
+.adaptation-choice{
+  display:grid;
+  grid-template-columns:repeat(3,1fr);
+  gap:7px;
+}
+.adaptation-choice button{
+  min-height:34px;
+  border:1px solid var(--line);
+  border-radius:12px;
+  background:transparent;
+  color:var(--muted);
+  font:inherit;
+  font-size:10px;
+}
+.adaptation-choice button.selected{
+  border-color:rgba(184,148,88,.42);
+  background:rgba(184,148,88,.09);
+  color:#e1c896;
+}
+.guidance-recommendation[data-active-adaptation="regression"]{
+  border-color:rgba(112,154,151,.28);
+}
+.guidance-recommendation[data-active-adaptation="progression"]{
+  border-color:rgba(184,148,88,.34);
+}
+
+
+/* v0.17.0 Phase 6 — adaptation accountability */
+.field-note{
+  display:block;
+  margin-top:6px;
+  color:var(--muted);
+  font-size:9px;
+  font-weight:400;
+  line-height:1.4;
+}
+.adaptation-accountability-note{
+  width:100%;
+  padding:13px 14px;
+  border:1px solid rgba(184,148,88,.2);
+  border-radius:15px;
+  background:rgba(184,148,88,.04);
+  text-align:left;
+}
+.adaptation-accountability-note span{
+  color:#b89458;
+  font-size:9px;
+  letter-spacing:.14em;
+}
+.adaptation-accountability-note p{
+  margin:7px 0 5px;
+  color:#ddd4c7;
+  font-size:11px;
+  line-height:1.45;
+}
+.adaptation-accountability-note small{
+  color:var(--muted);
+  font-size:9px;
+}
+
+
+/* v0.17.1 — Living Human Graph wave and judgement scroll continuity */
+.living-graph svg{
+  overflow:hidden !important;
+}
+.living-graph .graph-node{
+  transform:none !important;
+}
+.living-graph .node-core,
+.living-graph .node-halo{
+  transform-box:fill-box;
+  transform-origin:center;
+}
+.living-graph .graph-link{
+  stroke-linecap:round;
+  stroke-linejoin:round;
+}
+#commitment-panel{
+  scroll-margin-top:calc(env(safe-area-inset-top) + 26px);
+  scroll-margin-bottom:calc(112px + env(safe-area-inset-bottom));
+}
+#commitment-start,
+#commitment-options{
+  scroll-margin-top:calc(env(safe-area-inset-top) + 32px);
+  scroll-margin-bottom:calc(120px + env(safe-area-inset-bottom));
+}
+@media(prefers-reduced-motion:reduce){
+  .living-graph animate,
+  .living-graph animateTransform{
+    display:none;
+  }
+}
