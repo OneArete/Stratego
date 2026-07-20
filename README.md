@@ -3,7 +3,7 @@
 Official baseline:
 
 ```text
-Strategos v0.15.0 — Forecast Calibration and Epistemic Accountability
+Strategos v0.16.0 — Phase 1: Reflection Continuity
 ```
 
 ## Run locally
@@ -32,3 +32,8 @@ npm test
 ## Core principle
 
 > Strategos must remember not only what it recommended, but what it expected — and recalibrate when reality repeatedly disagrees.
+
+
+## v0.16.0 Phase 1
+
+Reflection is now lighter by default, richer by choice, and resilient to interruption.

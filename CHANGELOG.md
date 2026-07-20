@@ -1,5 +1,15 @@
 # Changelog
 
+## v0.16.0 Phase 1 — Reflection Continuity
+
+- Reduced the default reflection to three essential answers.
+- Moved advanced causal detail behind progressive disclosure.
+- Removed the browser friction prompt.
+- Added inline friction outcome capture.
+- Added autosaved reflection drafts.
+- Added safe draft restoration and reconciliation.
+- Added twelve behavioural and UI tests.
+
 ## v0.15.0 — Forecast Calibration and Epistemic Accountability
 
 Official product baseline.
