@@ -1,0 +1,14 @@
+import test from 'node:test';
+import assert from 'node:assert/strict';
+import {buildLongitudinalEvidence,applyLongitudinalAdjustments,longitudinalConfidenceAdjustment,verifyLongitudinalEvidence,longitudinalEvidenceSummary} from '../src/core/longitudinal-evidence.js';
+const context={challenge:'body',soreness:'mild',emotionalLoad:'usual'};
+const pattern={id:'p1',practiceId:'walk',contextKey:'body|mild|usual',status:'stable',observations:5,positive:5,negative:0,causalStrength:.8};
+const transfer={patternId:'p1',targetContextKey:'body|mild|usual',status:'supported',similarity:1,weight:.12};
+test('positive pattern supports',()=>{const e=buildLongitudinalEvidence({patterns:[pattern],transfers:[transfer],context});assert.equal(e.scoreAdjustments.walk,.12)});
+test('negative pattern cautions',()=>{const e=buildLongitudinalEvidence({patterns:[{...pattern,positive:0,negative:5}],transfers:[transfer],context});assert.equal(e.scoreAdjustments.walk,-.12)});
+test('rejected transfer excluded',()=>{assert.equal(buildLongitudinalEvidence({patterns:[pattern],transfers:[{...transfer,status:'rejected'}],context}).items.length,0)});
+test('context mismatch excluded',()=>{assert.equal(buildLongitudinalEvidence({patterns:[pattern],transfers:[{...transfer,targetContextKey:'x|y|z'}],context}).items.length,0)});
+test('adjustment capped',()=>{const e=buildLongitudinalEvidence({patterns:[pattern],transfers:[{...transfer,weight:.9}],context});assert.equal(applyLongitudinalAdjustments({walk:1},e).walk,1.14)});
+test('confidence bounded',()=>{const e=buildLongitudinalEvidence({patterns:[pattern],transfers:[transfer],context});assert.ok(longitudinalConfidenceAdjustment(e)<=.03)});
+test('invalid influence rejected',()=>{assert.equal(verifyLongitudinalEvidence({items:[{patternId:'p',direction:'support',adjustment:.2,sourceContextKey:'a',targetContextKey:'a'}]}).valid,false)});
+test('summary readable',()=>{const e=buildLongitudinalEvidence({patterns:[pattern],transfers:[transfer],context});assert.match(longitudinalEvidenceSummary(e),/bounded longitudinal signals/)});

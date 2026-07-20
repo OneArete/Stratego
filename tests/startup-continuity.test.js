@@ -1,0 +1,12 @@
+import test from 'node:test';
+import assert from 'node:assert/strict';
+import {resolveStartupDestination,buildContinuityNotice,shouldShowContinuityCard} from '../src/core/startup-continuity.js';
+const base={profile:{name:'Pedro'},onboardingVersion:1};
+test('new person routes to onboarding',()=>assert.equal(resolveStartupDestination({}).route,'onboarding'));
+test('returning person without flow goes Today',()=>assert.equal(resolveStartupDestination(base).route,'today'));
+test('paused Practice routes to resume',()=>assert.equal(resolveStartupDestination({...base,current:{decision:{id:'j1'},execution:{status:'paused'}}}).route,'resumePrompt'));
+test('active recovered Practice routes to resume',()=>assert.equal(resolveStartupDestination({...base,current:{decision:{id:'j1'},execution:{status:'active'}}}).reason,'practice-recovered-after-reload'));
+test('completed Practice routes to reflection',()=>assert.equal(resolveStartupDestination({...base,current:{decision:{id:'j1'},execution:{status:'completed'},completed:false}}).route,'reflect'));
+test('unstarted judgement routes to judgement',()=>assert.equal(resolveStartupDestination({...base,current:{decision:{id:'j1'},startedAt:null}}).route,'judgement'));
+test('notice is readable',()=>assert.match(buildContinuityNotice({...base,current:{decision:{id:'j1'},execution:{status:'paused'}}}).message,/preserved/));
+test('card only for resumable flows',()=>{assert.equal(shouldShowContinuityCard({...base,current:{decision:{id:'j1'},execution:{status:'paused'}}}),true);assert.equal(shouldShowContinuityCard(base),false)});
