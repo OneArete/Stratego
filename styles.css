@@ -960,3 +960,322 @@ main,
 .attribution-item>div:first-child{display:flex;justify-content:space-between;gap:12px}
 .attribution-item>div:first-child span{text-transform:uppercase;font-size:.72rem;letter-spacing:.07em}
 .attribution-item small{display:block;margin-top:7px}
+
+
+/* v0.14.0 Phase 1 — longitudinal outcome synthesis */
+.outcome-patterns{display:grid;gap:12px}
+.outcome-pattern-item{padding:14px 16px;border:1px solid var(--line);border-radius:18px;background:var(--surface)}
+.outcome-pattern-item>div:first-child{display:flex;justify-content:space-between;gap:12px}
+.outcome-pattern-item>div:first-child span{text-transform:uppercase;font-size:.72rem;letter-spacing:.07em}
+.outcome-pattern-item small{display:block;margin-top:7px}
+.outcome-pattern-item.stable{border-color:color-mix(in srgb,var(--accent) 45%,var(--line))}
+.outcome-pattern-item.rejected{opacity:.66}
+.outcome-pattern-item button{margin-top:10px;padding:9px 11px;border:1px solid var(--line);border-radius:12px;background:transparent;color:inherit}
+
+/* v0.14.0 Phase 2 — pattern transfer boundaries */
+.pattern-transfers{display:grid;gap:12px}.pattern-transfer-item{padding:14px 16px;border:1px solid var(--line);border-radius:18px;background:var(--surface)}.pattern-transfer-item>div:first-child{display:flex;justify-content:space-between;gap:12px}.pattern-transfer-item>div:first-child span{text-transform:uppercase;font-size:.72rem;letter-spacing:.07em}.pattern-transfer-item small{display:block;margin-top:7px}.pattern-transfer-item.supported{border-color:color-mix(in srgb,var(--accent) 45%,var(--line))}.pattern-transfer-item.blocked,.pattern-transfer-item.rejected{opacity:.66}.pattern-transfer-item button{margin-top:10px;padding:9px 11px;border:1px solid var(--line);border-radius:12px;background:transparent;color:inherit}
+
+
+/* v0.14.0 Phase 3 — navigation clarity and progressive disclosure */
+:root{
+  --footer-height:58px;
+  --footer-offset:8px;
+}
+
+body{
+  padding-bottom:calc(var(--footer-height) + var(--footer-offset) * 2 + env(safe-area-inset-bottom));
+}
+
+#app,
+main{
+  padding-bottom:calc(var(--footer-height) + var(--footer-offset) * 2 + 24px + env(safe-area-inset-bottom));
+}
+
+.tabbar{
+  position:fixed;
+  left:50%;
+  right:auto;
+  bottom:calc(var(--footer-offset) + env(safe-area-inset-bottom));
+  transform:translateX(-50%);
+  z-index:120;
+  width:min(410px,calc(100% - 20px));
+  height:var(--footer-height);
+  padding:5px;
+  border:1px solid rgba(184,148,88,.18);
+  border-radius:20px;
+  background:rgba(8,8,7,.94);
+  box-shadow:0 10px 32px rgba(0,0,0,.38);
+  backdrop-filter:blur(20px);
+  -webkit-backdrop-filter:blur(20px);
+  grid-template-columns:repeat(4,1fr);
+}
+
+.tabbar button{
+  height:48px;
+  padding:3px 2px;
+  border-radius:15px;
+  display:flex;
+  flex-direction:column;
+  align-items:center;
+  justify-content:center;
+  gap:2px;
+  font-size:7.5px;
+  line-height:1;
+  letter-spacing:.01em;
+  color:rgba(222,215,203,.58);
+}
+
+.tabbar button.active{
+  background:rgba(184,148,88,.11);
+  color:#ddb974;
+}
+
+.tab-icon{
+  font-size:12px;
+  line-height:1;
+  opacity:.82;
+}
+
+.tabbar button.active .tab-icon{
+  opacity:1;
+}
+
+.understanding-switcher{
+  display:flex;
+  gap:7px;
+  overflow-x:auto;
+  padding:2px 0 8px;
+  scrollbar-width:none;
+}
+
+.understanding-switcher::-webkit-scrollbar{
+  display:none;
+}
+
+.understanding-switcher button{
+  flex:0 0 auto;
+  padding:8px 11px;
+  border:1px solid var(--line);
+  border-radius:999px;
+  background:transparent;
+  color:var(--muted);
+  font-size:9px;
+  letter-spacing:.04em;
+}
+
+.understanding-switcher button.active{
+  border-color:rgba(214,173,104,.7);
+  background:rgba(184,148,88,.1);
+  color:#e1c28b;
+}
+
+.understanding-group.is-hidden{
+  display:none;
+}
+
+.understanding-screen{
+  gap:16px;
+}
+
+@media(max-width:390px){
+  .tabbar{
+    width:calc(100% - 16px);
+    bottom:calc(6px + env(safe-area-inset-bottom));
+  }
+  .tabbar button{
+    font-size:7px;
+  }
+}
+
+
+/* v0.14.1 — Primary navigation viewport hotfix
+   Never centre the footer with transforms: mobile in-app browsers may use a
+   transformed containing block and clip the first destinations. */
+.tabbar{
+  position:fixed;
+  left:max(8px,env(safe-area-inset-left));
+  right:max(8px,env(safe-area-inset-right));
+  bottom:calc(6px + env(safe-area-inset-bottom));
+  transform:none;
+  width:auto;
+  max-width:410px;
+  margin-inline:auto;
+  box-sizing:border-box;
+  overflow:visible;
+  grid-template-columns:repeat(4,minmax(0,1fr));
+}
+
+.tabbar button{
+  min-width:0;
+  width:100%;
+  overflow:visible;
+}
+
+.tabbar button span:last-child{
+  display:block;
+  max-width:100%;
+  white-space:nowrap;
+  overflow:visible;
+}
+
+@media(max-width:390px){
+  .tabbar{
+    left:max(6px,env(safe-area-inset-left));
+    right:max(6px,env(safe-area-inset-right));
+    width:auto;
+    max-width:none;
+    transform:none;
+  }
+}
+
+
+/* v0.14.2 — Primary navigation structural repair
+   Full-width viewport footer. No centring, max-width, transforms or floating
+   geometry that can move the first destinations outside an iOS viewport. */
+:root{
+  --footer-height:58px;
+  --footer-offset:0px;
+}
+
+body{
+  padding-bottom:calc(var(--footer-height) + env(safe-area-inset-bottom));
+}
+
+#app,
+main{
+  padding-bottom:calc(var(--footer-height) + 24px + env(safe-area-inset-bottom));
+}
+
+.tabbar{
+  position:fixed !important;
+  left:0 !important;
+  right:0 !important;
+  bottom:0 !important;
+  transform:none !important;
+  margin:0 !important;
+  width:100% !important;
+  max-width:none !important;
+  height:calc(var(--footer-height) + env(safe-area-inset-bottom));
+  padding:
+    4px
+    max(8px,env(safe-area-inset-right))
+    env(safe-area-inset-bottom)
+    max(8px,env(safe-area-inset-left));
+  box-sizing:border-box;
+  display:grid !important;
+  grid-template-columns:repeat(4,minmax(0,1fr)) !important;
+  align-items:stretch;
+  overflow:hidden !important;
+  border:0;
+  border-top:1px solid rgba(184,148,88,.15);
+  border-radius:0;
+  background:rgba(5,5,5,.97);
+  box-shadow:0 -8px 24px rgba(0,0,0,.24);
+  z-index:2147483000;
+}
+
+.tabbar button{
+  display:flex !important;
+  visibility:visible !important;
+  opacity:1 !important;
+  position:relative;
+  min-width:0 !important;
+  width:auto !important;
+  height:54px;
+  padding:4px 1px;
+  margin:0;
+  overflow:hidden !important;
+  border:0;
+  border-radius:12px;
+  flex-direction:column;
+  align-items:center;
+  justify-content:center;
+  gap:3px;
+  font-size:7.5px;
+  line-height:1;
+}
+
+.tabbar button:nth-child(1),
+.tabbar button:nth-child(2),
+.tabbar button:nth-child(3),
+.tabbar button:nth-child(4){
+  display:flex !important;
+}
+
+.tabbar button span:last-child{
+  display:block !important;
+  width:100%;
+  max-width:100%;
+  overflow:hidden !important;
+  text-overflow:ellipsis;
+  white-space:nowrap;
+  text-align:center;
+}
+
+.tabbar button.active{
+  background:rgba(184,148,88,.09);
+}
+
+@media(max-width:390px){
+  .tabbar{
+    left:0 !important;
+    right:0 !important;
+    bottom:0 !important;
+    width:100% !important;
+    max-width:none !important;
+    margin:0 !important;
+    padding-left:max(5px,env(safe-area-inset-left));
+    padding-right:max(5px,env(safe-area-inset-right));
+  }
+
+  .tabbar button{
+    font-size:7px;
+  }
+}
+
+.longitudinal-evidence-panel{padding:15px;border:1px solid var(--line);border-radius:17px;background:var(--surface)}
+.longitudinal-evidence-panel h3{font-size:15px;font-weight:500}
+.longitudinal-evidence-panel article{display:grid;grid-template-columns:1fr auto;gap:5px 12px;padding:11px 0;border-top:1px solid var(--line)}
+.longitudinal-evidence-panel article p,.longitudinal-evidence-panel article small{grid-column:1/-1;margin:0}
+.longitudinal-evidence-panel article span{color:var(--bronze);font-size:12px}
+.longitudinal-evidence-panel article p{font-size:12px;line-height:1.45}
+.longitudinal-evidence-panel article small{color:var(--muted);font-size:9px}
+
+
+/* v0.14.4 — longitudinal judgement accountability */
+.longitudinal-accountability{display:grid;gap:12px}
+.longitudinal-audit-item{padding:14px 16px;border:1px solid var(--line);border-radius:18px;background:var(--surface)}
+.longitudinal-audit-item>div:first-child{display:flex;justify-content:space-between;gap:12px}
+.longitudinal-audit-item>div:first-child span{text-transform:uppercase;font-size:.72rem;letter-spacing:.07em}
+.longitudinal-audit-item small{display:block;margin-top:7px}
+.longitudinal-audit-item.review-required{border-color:rgba(190,125,86,.55)}
+.audit-warning{color:#d5a27c}
+
+
+/* v0.15.0 Phase 1 — prediction calibration */
+.forecast-panel,.prediction-calibration{display:grid;gap:12px}
+.forecast-panel{padding:15px;border:1px solid var(--line);border-radius:17px;background:var(--surface)}
+.forecast-panel h3{font-size:15px;font-weight:500}
+.forecast-audit-item{padding:14px 16px;border:1px solid var(--line);border-radius:18px;background:var(--surface)}
+.forecast-audit-item>div:first-child{display:flex;justify-content:space-between;gap:12px}
+.forecast-audit-item>div:first-child span{text-transform:uppercase;font-size:.72rem;letter-spacing:.07em}
+.forecast-audit-item small{display:block;margin-top:7px}
+.forecast-audit-item.overestimated{border-color:rgba(190,125,86,.45)}
+.forecast-audit-item.underestimated{border-color:rgba(129,157,113,.45)}
+
+
+/* v0.15.0 Phase 2 — governed confidence calibration */
+.calibration-governance-panel{padding:15px;border:1px solid var(--line);border-radius:17px;background:var(--surface)}
+.calibration-governance-panel h3{font-size:15px;font-weight:500}
+.calibration-governance-panel small{display:block;margin-top:8px;color:var(--muted);font-size:9px;line-height:1.45}
+
+
+/* v0.15.0 Phase 4 — calibration drift and accountability */
+.calibration-drift-panel{padding:15px;border:1px solid rgba(190,125,86,.5);border-radius:17px;background:var(--surface)}
+.calibration-drift-panel h3{font-size:15px;font-weight:500}
+.calibration-drift-panel small{display:block;margin-top:8px;color:#d5a27c;font-size:9px}
+.calibration-accountability{display:grid;gap:12px}
+.calibration-accountability-item{padding:14px 16px;border:1px solid var(--line);border-radius:18px;background:var(--surface)}
+.calibration-accountability-item>div:first-child{display:flex;justify-content:space-between;gap:12px}
+.calibration-accountability-item>div:first-child span{color:var(--bronze);font-size:12px}
+.calibration-accountability-item small{display:block;margin-top:7px;color:var(--muted)}

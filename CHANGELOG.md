@@ -1,5 +1,107 @@
 # Changelog
 
+## v0.15.0 — Forecast Calibration and Epistemic Accountability
+
+Official product baseline.
+
+- Added forecast creation before outcomes are known.
+- Added matched, overestimated and underestimated resolution.
+- Added context-scoped calibration cohorts.
+- Added recency-weighted forecast evidence.
+- Added bounded confidence correction.
+- Added calibration drift detection.
+- Added calibration accountability records.
+- Finalised schema version 27.
+- Confirmed 273 passing tests.
+
+## v0.15.0 Phase 3 — Context-Scoped Calibration
+
+- Added domain, practice and challenge provenance to forecasts.
+- Added exact and domain calibration cohorts.
+- Prevented calibration transfer across unrelated domains.
+- Added 180-day evidence window and recency weighting.
+- Exposed calibration scope and cohort size.
+- Added schema v26 migration and eight behavioural tests.
+
+## v0.15.0 Phase 2 — Governed Confidence Calibration
+
+- Converted forecast history into bounded confidence evidence.
+- Added constitutional adjustment limits.
+- Applied correction after base confidence is calculated.
+- Added base-versus-calibrated confidence disclosure.
+- Rejected invalid or insufficient calibration evidence.
+- Added ten behavioural and integration tests.
+
+## v0.15.0 Phase 1 — Prediction Calibration
+
+- Added pre-outcome judgement forecasts.
+- Added forecast resolution after reflection.
+- Added matched, overestimated and underestimated outcomes.
+- Added causal calibration scoring.
+- Added bounded confidence correction.
+- Added prediction audit and schema v25 migration.
+- Added eight behavioural tests.
+
+## v0.14.4 — Longitudinal Judgement Accountability
+
+Official product baseline.
+
+- Added post-judgement verification of longitudinal evidence sources.
+- Marked affected active judgements as review-required.
+- Preserved closed judgement lifecycle while exposing source invalidity.
+- Added longitudinal accountability audit.
+- Finalised schema version 24.
+- Finalised PWA cache identity as `strategos-shell-v0.14.4`.
+- Confirmed 239 passing tests.
+
+## v0.14.2 — Primary Navigation Structural Repair
+
+- Replaced floating centred footer geometry with a full-width viewport footer.
+- Removed transforms, max-width and auto margin from primary navigation.
+- Forced four equal visible navigation columns.
+- Moved safe-area handling inside the footer.
+- Added eight structural regression tests.
+
+## v0.14.1 — Primary Navigation Viewport Hotfix
+
+- Fixed Today and Understanding being clipped from the footer on some iOS browser contexts.
+- Removed transform-based footer centring.
+- Anchored navigation to both safe viewport edges.
+- Prevented grid columns and labels from collapsing.
+- Added five viewport regression tests.
+
+## v0.14.0 Phase 3 — Navigation Clarity and Progressive Disclosure
+
+- Restored unmistakable persistent primary tabs.
+- Added floating footer safe-area separation.
+- Added icons and labels for all four destinations.
+- Split Understanding into five focused views.
+- Prevented Understanding from becoming one heavy continuous page.
+- Added eight navigation and disclosure tests.
+
+## v0.14.0 Phase 2 — Pattern Transfer Boundaries
+
+- Added bounded context transfer, decay, counter-evidence and person rejection.
+- Added schema v23 and eight tests.
+
+## v0.14.0 Phase 1 — Longitudinal Outcome Synthesis
+
+- Added outcome episodes.
+- Added context-bound longitudinal outcome patterns.
+- Added repeated-evidence stability thresholds.
+- Added contradiction and causal-strength gates.
+- Added bounded pattern influence.
+- Added person rejection of misleading patterns.
+- Added schema v22 migration and eight behavioural tests.
+
+## v0.13.1 — Today Interaction Stability
+
+- Fixed Today signal buttons jumping the viewport to the top.
+- Replaced full route re-render with local selection updates.
+- Preserved focus and scroll position.
+- Added `aria-pressed` and labelled choice groups.
+- Added four interaction regression tests.
+
 ## v0.13.0 — Reflection and Outcome Integrity
 
 Official product baseline.

@@ -3,7 +3,7 @@
 Official baseline:
 
 ```text
-Strategos v0.13.0 — Reflection and Outcome Integrity
+Strategos v0.15.0 — Forecast Calibration and Epistemic Accountability
 ```
 
 ## Run locally
@@ -20,15 +20,15 @@ npm test
 
 ## Release focus
 
-- structured reflection;
-- calibrated learning;
-- outcome attribution;
-- causal confidence;
-- explicit external factors;
-- stable fixed footer;
-- restrained visual scale;
-- living graph with warm animated membrane.
+- explicit pre-outcome forecasts;
+- forecast resolution after reflection;
+- context-scoped calibration;
+- recency-weighted evidence;
+- bounded confidence correction;
+- calibration drift detection;
+- calibration accountability;
+- stable four-destination navigation.
 
 ## Core principle
 
-> Strategos advises. The person decides. The system preserves what actually happened and remains humble about why it happened.
+> Strategos must remember not only what it recommended, but what it expected — and recalibrate when reality repeatedly disagrees.
