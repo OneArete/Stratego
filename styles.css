@@ -1905,3 +1905,15 @@ main.screen{
   color:var(--muted);
   font-size:9px;
 }
+
+
+/* v0.18.0 Phase 2 — adaptation pattern review */
+.adaptation-pattern-item.confirmed{
+  border-color:rgba(112,154,151,.28);
+}
+.adaptation-pattern-item.rejected{
+  opacity:.72;
+}
+.adaptation-pattern-item.rejected span{
+  color:rgba(224,164,164,.82);
+}

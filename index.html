@@ -9,7 +9,7 @@
   <meta name="apple-mobile-web-app-title" content="Strategos" />
   <link rel="apple-touch-icon" href="./icons/delta-180.png" />
   <link rel="manifest" href="./manifest.webmanifest" />
-  <link rel="stylesheet" href="./styles.css?v=0180p1" />
+  <link rel="stylesheet" href="./styles.css?v=0181" />
   <title>Strategos — OneArete</title>
 </head>
 <body>
@@ -47,6 +47,12 @@
       }, 5000);
     }());
   </script>
-  <script type="module" src="./src/app.js?v=0180p1"></script>
+  <script type="module">
+    import('./src/app.js?v=0181').catch(function (error) {
+      var detail = error && error.message ? error.message : 'application module could not be loaded';
+      window.__strategosBootError(detail);
+      console.error('Strategos startup failed:', error);
+    });
+  </script>
 </body>
 </html>
