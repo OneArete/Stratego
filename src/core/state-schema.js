@@ -1,5 +1,5 @@
 export const STATE_SCHEMA_VERSION = 28;
-export const PRODUCT_VERSION = '0.9.0';
+export const PRODUCT_VERSION = '0.16.5';
 
 export function createInitialState(){
   return {
@@ -14,6 +14,25 @@ export function createInitialState(){
     understandingModel:{feedback:{},changes:[]},
     advisorMemories:{},
     councilReports:[],
+    correctionAudit:[],
+    choiceLog:[],
+    preferenceModel:[],
+    outcomeRecords:[],
+    commitments:[],
+    frictionPlans:[],
+    fallbackPlans:[],
+    structuredReflections:[],
+    outcomeAttributions:[],
+    outcomeEpisodes:[],
+    outcomePatterns:[],
+    patternTransfers:[],
+    judgementForecasts:[],
+    calibrationAccountability:[],
+    reflectionDraft:null,
+    integrity:{lastReconciledAt:null,lastReport:null},
+    agencyIntegrity:{lastReconciledAt:null,lastReport:null},
+    followThroughIntegrity:{lastReconciledAt:null,lastReport:null},
+    longitudinalAccountability:{lastReconciledAt:null,lastReport:null},
     settings:{sound:true,voice:'minimal',haptics:true,keepAwake:true}
   };
 }
@@ -66,6 +85,25 @@ export function migrateState(input={}){
     },
     advisorMemories:{...(state.advisorMemories||{})},
     councilReports:[...(state.councilReports||[])],
+    correctionAudit:[...(state.correctionAudit||[])],
+    choiceLog:[...(state.choiceLog||[])],
+    preferenceModel:[...(state.preferenceModel||[])],
+    outcomeRecords:[...(state.outcomeRecords||[])],
+    commitments:[...(state.commitments||[])],
+    frictionPlans:[...(state.frictionPlans||[])],
+    fallbackPlans:[...(state.fallbackPlans||[])],
+    structuredReflections:[...(state.structuredReflections||[])],
+    outcomeAttributions:[...(state.outcomeAttributions||[])],
+    outcomeEpisodes:[...(state.outcomeEpisodes||[])],
+    outcomePatterns:[...(state.outcomePatterns||[])],
+    patternTransfers:[...(state.patternTransfers||[])],
+    judgementForecasts:[...(state.judgementForecasts||[])],
+    calibrationAccountability:[...(state.calibrationAccountability||[])],
+    reflectionDraft:state.reflectionDraft||null,
+    integrity:{...base.integrity,...(state.integrity||{})},
+    agencyIntegrity:{...base.agencyIntegrity,...(state.agencyIntegrity||{})},
+    followThroughIntegrity:{...base.followThroughIntegrity,...(state.followThroughIntegrity||{})},
+    longitudinalAccountability:{...base.longitudinalAccountability,...(state.longitudinalAccountability||{})},
     settings:{...base.settings,...migratedSettings}
   };
 }
