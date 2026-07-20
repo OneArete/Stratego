@@ -1555,3 +1555,48 @@ main.screen{
 @media(prefers-reduced-motion:reduce){
   .agora-orbit::before{animation:none}
 }
+
+
+/* v0.16.4 — Agora ring repair
+   Animate the existing SVG ring only. No additional circles. */
+.agora-orbit::before,
+.agora-orbit::after{
+  content:none !important;
+  display:none !important;
+}
+
+.agora-orbit .delta{
+  animation:none !important;
+}
+
+.agora-orbit .delta .glyph{
+  animation:none !important;
+  transform:none !important;
+}
+
+.agora-orbit .delta .ring{
+  animation:agora-existing-ring-turn 3.2s linear infinite !important;
+  transform-origin:70px 70px !important;
+  transform-box:view-box !important;
+}
+
+@keyframes agora-existing-ring-turn{
+  from{transform:rotate(-40deg)}
+  to{transform:rotate(320deg)}
+}
+
+@media(prefers-reduced-motion:reduce){
+  .agora-orbit .delta .ring{
+    animation:none !important;
+    transform:rotate(-40deg) !important;
+  }
+}
+
+
+/* v0.16.5 — audited judgement density */
+.judgement-focus-head h2{font-size:clamp(24px,6.2vw,34px);line-height:1.06;margin-bottom:10px}
+.judgement-meta{gap:8px}
+.focused-practice{padding:16px}
+.focused-practice h2{font-size:clamp(26px,6vw,34px)}
+.focused-practice .delta-score{margin-top:12px;padding:13px 0}
+.judgement-rationale{padding:14px 15px}

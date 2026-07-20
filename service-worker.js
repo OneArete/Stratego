@@ -1,13 +1,13 @@
-const CACHE_NAME = 'strategos-shell-v0.16.2';
+const CACHE_NAME = 'strategos-shell-v0.16.5';
 const CORE_ASSETS = [
   './',
   './index.html',
-  './styles.css?v=081p4',
+  './styles.css?v=0165',
   './manifest.webmanifest',
   './icons/delta-180.png',
   './icons/delta-192.png',
   './icons/delta-512.png',
-  './src/app.js?v=081p4'
+  './src/app.js?v=0165'
 ];
 
 self.addEventListener('install', event => {

@@ -1,5 +1,17 @@
 # Changelog
 
+## v0.16.5 — Pre-Deploy Audit Stabilization
+
+- Corrected the persisted product version from 0.9.0 to 0.16.5.
+- Completed current-schema state defaults and normalization.
+- Prevented forecast calibration from being applied twice.
+- Made Agora deliberation cancellable and browser-history safe.
+- Reused complete state reconciliation after imports.
+- Bound Understanding reasoning to the active judgement.
+- Refreshed CSS and application asset query versions.
+- Tightened Current Judgement density.
+- Added eight audit regression tests.
+
 ## v0.16.0 Phase 1 — Reflection Continuity
 
 - Reduced the default reflection to three essential answers.

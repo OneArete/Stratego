@@ -1,9 +1,9 @@
 # Strategos
 
-Official baseline:
+Audited pre-deploy candidate:
 
 ```text
-Strategos v0.16.0 — Phase 1: Reflection Continuity
+Strategos v0.16.5 — Pre-Deploy Audit Stabilization
 ```
 
 ## Run locally
@@ -12,28 +12,18 @@ Strategos v0.16.0 — Phase 1: Reflection Continuity
 npm run dev
 ```
 
-## Test
+## Verify
 
 ```bash
 npm test
 ```
 
-## Release focus
+## Product route
 
-- explicit pre-outcome forecasts;
-- forecast resolution after reflection;
-- context-scoped calibration;
-- recency-weighted evidence;
-- bounded confidence correction;
-- calibration drift detection;
-- calibration accountability;
-- stable four-destination navigation.
+```text
+Splash → Today → Agora → Current Judgement → Practice → Reflection
+```
 
-## Core principle
+A pending recommendation, Practice or reflection never takes over startup. It remains available through an explicit continuity card in Today.
 
-> Strategos must remember not only what it recommended, but what it expected — and recalibrate when reality repeatedly disagrees.
-
-
-## v0.16.0 Phase 1
-
-Reflection is now lighter by default, richer by choice, and resilient to interruption.
+The complete audit is recorded in `release/AUDIT-REPORT-v0.16.5.md`.
