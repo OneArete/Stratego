@@ -10,7 +10,7 @@ const manifest = JSON.parse(readFileSync(new URL('../manifest.webmanifest', impo
 
 test('registers a versioned service worker and offline shell', () => {
   assert.match(app, /serviceWorker\.register\('\.\/service-worker\.js'/);
-  assert.match(sw, /strategos-shell-v0\.16\.1/);
+  assert.match(sw, /strategos-shell-v0\.16\.5/);
   assert.match(sw, /request\.mode === 'navigate'/);
 });
 
