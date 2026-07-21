@@ -1,13 +1,13 @@
-const CACHE_NAME = 'strategos-shell-v0.22.1';
+const CACHE_NAME = 'strategos-shell-v0.22.1-hotfix-1';
 const CORE_ASSETS = [
   './',
   './index.html',
-  './styles.css?v=0221',
+  './styles.css?v=0221h1',
   './manifest.webmanifest',
   './icons/delta-180.png',
   './icons/delta-192.png',
   './icons/delta-512.png',
-  './src/app.js?v=0221'
+  './src/app.js?v=0221h1'
 ];
 
 self.addEventListener('install', event => {
@@ -38,6 +38,22 @@ self.addEventListener('fetch', event => {
           return response;
         })
         .catch(() => caches.match('./index.html'))
+    );
+    return;
+  }
+
+  const isMutableModule = url.pathname.endsWith('.js') || url.pathname.endsWith('.css');
+  if (isMutableModule) {
+    event.respondWith(
+      fetch(request, { cache: 'no-store' })
+        .then(response => {
+          if (response && response.ok) {
+            const copy = response.clone();
+            caches.open(CACHE_NAME).then(cache => cache.put(request, copy));
+          }
+          return response;
+        })
+        .catch(() => caches.match(request))
     );
     return;
   }
