@@ -1,6 +1,6 @@
 {
   "name": "strategos",
-  "version": "0.18.1",
+  "version": "0.22.1",
   "private": true,
   "scripts": {
     "dev": "python3 -m http.server 8080",

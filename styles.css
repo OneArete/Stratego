@@ -1917,3 +1917,779 @@ main.screen{
 .adaptation-pattern-item.rejected span{
   color:rgba(224,164,164,.82);
 }
+
+
+/* v0.18.2 — clear optional reflection guidance */
+.reflection-detail summary{
+  display:grid;
+  gap:5px;
+  align-items:start;
+}
+.reflection-detail summary span{
+  color:#ddd4c7;
+  font-size:13px;
+}
+.reflection-detail summary small{
+  max-width:34rem;
+  color:var(--muted);
+  font-size:9px;
+  font-weight:400;
+  line-height:1.45;
+}
+.reflection-detail-intro{
+  padding:13px 14px;
+  border:1px solid rgba(184,148,88,.18);
+  border-radius:15px;
+  background:rgba(184,148,88,.035);
+}
+.reflection-detail-intro strong{
+  display:block;
+  color:#ddd4c7;
+  font-size:11px;
+  line-height:1.5;
+}
+.reflection-detail-intro p{
+  margin:6px 0 0;
+  color:var(--muted);
+  font-size:9px;
+  line-height:1.45;
+}
+.structured-reflection label{
+  display:grid;
+  gap:7px;
+}
+.structured-reflection .field-note{
+  margin:0;
+}
+
+
+/* v0.18.3 — confirmed adaptation defaults remain subordinate to person choice */
+.guidance-recommendation small{
+  display:block;
+}
+
+
+/* v0.18.5 — inline alternative-choice continuation */
+.choice-reason-panel{
+  display:grid;
+  gap:12px;
+  margin-top:14px;
+  padding:14px;
+  border:1px solid rgba(184,148,88,.22);
+  border-radius:16px;
+  background:rgba(184,148,88,.04);
+  scroll-margin-top:calc(env(safe-area-inset-top) + 24px);
+  scroll-margin-bottom:calc(120px + env(safe-area-inset-bottom));
+}
+.choice-reason-panel label{
+  display:grid;
+  gap:6px;
+}
+.choice-reason-panel label span{
+  color:#ddd4c7;
+  font-size:12px;
+}
+.choice-reason-panel label small{
+  color:var(--muted);
+  font-size:9px;
+  line-height:1.45;
+}
+.choice-reason-panel textarea{
+  width:100%;
+  box-sizing:border-box;
+}
+.choice-reason-panel>div{
+  display:grid;
+  gap:8px;
+}
+.choice-reason-panel .action{
+  margin:0;
+}
+
+
+/* v0.18.6 — suspended confirmed-default review */
+.adaptation-pattern-item.review-required{
+  border-color:rgba(181,92,92,.34);
+}
+.adaptation-pattern-item.review-required>div>span{
+  color:rgba(224,164,164,.9);
+}
+.confirmed-default-health{
+  display:grid;
+  gap:6px;
+  padding:11px 12px;
+  border:1px solid rgba(184,148,88,.16);
+  border-radius:13px;
+  background:rgba(184,148,88,.025);
+}
+.review-required .confirmed-default-health{
+  border-color:rgba(181,92,92,.22);
+  background:rgba(181,92,92,.035);
+}
+.confirmed-default-health strong{
+  color:#ddd4c7;
+  font-size:10px;
+}
+.confirmed-default-health p{
+  margin:0;
+  color:var(--muted);
+  font-size:9px;
+  line-height:1.45;
+}
+.confirmed-default-health details{
+  margin-top:3px;
+}
+.confirmed-default-health summary{
+  color:#cbbca7;
+  font-size:9px;
+}
+.confirmed-default-health ul{
+  display:grid;
+  gap:5px;
+  margin:8px 0 0;
+  padding:0;
+  list-style:none;
+}
+.confirmed-default-health li{
+  display:flex;
+  justify-content:space-between;
+  gap:10px;
+  color:var(--muted);
+  font-size:9px;
+}
+.confirmed-default-health li strong{
+  font-weight:500;
+}
+
+
+/* v0.18.7 — Journey adaptation provenance */
+.journey-adaptation{
+  margin-top:10px;
+  padding-top:9px;
+  border-top:1px solid rgba(255,255,255,.06);
+}
+.journey-adaptation summary{
+  color:#cbbca7;
+  font-size:10px;
+}
+.journey-adaptation>div{
+  display:grid;
+  gap:7px;
+  padding-top:8px;
+}
+.journey-adaptation p{
+  margin:0;
+  color:#cbc2b5;
+  font-size:10px;
+  line-height:1.45;
+}
+.journey-adaptation small,
+.journey-choice{
+  color:var(--muted);
+  font-size:9px;
+  line-height:1.45;
+}
+.journey-adaptation ul{
+  display:grid;
+  gap:6px;
+  margin:2px 0 0;
+  padding:0;
+  list-style:none;
+}
+.journey-adaptation li{
+  display:grid;
+  grid-template-columns:1fr auto;
+  gap:2px 10px;
+  padding:8px 9px;
+  border:1px solid rgba(255,255,255,.05);
+  border-radius:10px;
+}
+.journey-adaptation li span{
+  color:#d8cfc2;
+  font-size:10px;
+}
+.journey-adaptation li strong{
+  color:#d4b06f;
+  font-size:10px;
+  font-weight:500;
+}
+.journey-adaptation li small{
+  grid-column:1/-1;
+}
+.journey-choice{
+  display:block;
+  margin-top:9px;
+}
+
+
+/* v0.18.8 — adaptation accountability audit trace */
+.adaptation-audit-item{
+  border:1px solid var(--line);
+  border-radius:14px;
+  background:rgba(255,255,255,.012);
+}
+.adaptation-audit-item+ .adaptation-audit-item{
+  margin-top:8px;
+}
+.adaptation-audit-item.review-required{
+  border-color:rgba(181,92,92,.28);
+}
+.adaptation-audit-item summary{
+  display:flex;
+  justify-content:space-between;
+  gap:12px;
+  padding:12px 13px;
+  color:#d8cfc2;
+  font-size:10px;
+}
+.adaptation-audit-item summary strong{
+  color:#b89458;
+  font-size:9px;
+  font-weight:500;
+  text-transform:uppercase;
+}
+.adaptation-audit-item>div{
+  display:grid;
+  gap:7px;
+  padding:0 13px 13px;
+}
+.adaptation-audit-item p,
+.adaptation-audit-item small{
+  margin:0;
+  color:var(--muted);
+  font-size:9px;
+}
+.adaptation-audit-item ol{
+  display:grid;
+  gap:8px;
+  margin:4px 0 0;
+  padding:0;
+  list-style:none;
+}
+.adaptation-audit-item li{
+  display:grid;
+  grid-template-columns:44px 1fr;
+  gap:8px;
+}
+.adaptation-audit-item time{
+  color:#8d857a;
+  font-size:8px;
+}
+.adaptation-audit-item li div{
+  display:grid;
+  gap:2px;
+}
+.adaptation-audit-item li strong{
+  color:#d8cfc2;
+  font-size:9px;
+  font-weight:500;
+}
+.adaptation-audit-item li span{
+  color:var(--muted);
+  font-size:8px;
+  line-height:1.4;
+}
+
+
+/* v0.18.9 — reconfirmation integrity */
+.reconfirmation-gate{
+  display:block;
+  grid-column:1/-1;
+  color:var(--muted);
+  font-size:9px;
+  line-height:1.45;
+}
+.adaptation-pattern-item .insight-actions button:disabled{
+  opacity:.42;
+  cursor:not-allowed;
+}
+
+/* v0.19.0 Phase 1 — Practice contract */
+.practice-contract{margin:14px 0;border:1px solid rgba(184,148,88,.18);border-radius:15px;background:rgba(184,148,88,.028)}
+.practice-contract>summary{padding:12px 13px;color:#d8cfc2;font-size:10px}
+.practice-contract>div{display:grid;gap:11px;padding:0 13px 13px}
+.contract-intention{margin:0;color:#ddd4c7;font-size:11px;line-height:1.5}
+.practice-contract dl{display:grid;gap:9px;margin:0}
+.practice-contract dl>div{display:grid;gap:3px}
+.practice-contract dt{color:#a99a87;font-size:8px;letter-spacing:.08em;text-transform:uppercase}
+.practice-contract dd{margin:0;color:#cbc2b5;font-size:10px;line-height:1.45}
+.practice-contract small{color:var(--muted);font-size:9px;line-height:1.45}
+.practice-contract details details{padding-top:4px;border-top:1px solid rgba(255,255,255,.05)}
+.practice-contract details details summary{color:#bfb2a1;font-size:9px}
+.practice-contract ul{display:grid;gap:6px;margin:8px 0 0;padding-left:16px}
+.practice-contract li{color:var(--muted);font-size:9px;line-height:1.45}
+.resume-contract{display:block;color:var(--muted);font-size:9px;line-height:1.45}
+
+
+/* v0.19.0 Phase 2 — Practice contract resolution */
+.reflection-contract{
+  display:grid;
+  gap:5px;
+  padding:12px 13px;
+  border:1px solid rgba(184,148,88,.16);
+  border-radius:14px;
+  background:rgba(184,148,88,.025);
+}
+.reflection-contract strong{
+  color:#ddd4c7;
+  font-size:11px;
+  line-height:1.45;
+}
+.reflection-contract small{
+  color:var(--muted);
+  font-size:9px;
+  line-height:1.45;
+}
+.journey-contract-outcome{
+  margin-top:9px;
+  padding-top:8px;
+  border-top:1px solid rgba(255,255,255,.05);
+}
+.journey-contract-outcome summary{
+  color:#cbbca7;
+  font-size:10px;
+}
+.journey-contract-outcome>div{
+  display:grid;
+  gap:4px;
+  padding-top:7px;
+}
+.journey-contract-outcome strong{
+  color:#d4b06f;
+  font-size:9px;
+  text-transform:uppercase;
+}
+.journey-contract-outcome p,
+.journey-contract-outcome small{
+  margin:0;
+  color:var(--muted);
+  font-size:9px;
+  line-height:1.45;
+}
+
+
+/* v0.19.0 Phase 3 — Practice contract calibration candidates */
+.contract-calibration-item{
+  display:grid;
+  gap:7px;
+  padding:12px 13px;
+  border:1px solid var(--line);
+  border-radius:14px;
+  background:rgba(255,255,255,.012);
+}
+.contract-calibration-item+ .contract-calibration-item{
+  margin-top:8px;
+}
+.contract-calibration-item>div{
+  display:flex;
+  justify-content:space-between;
+  gap:12px;
+}
+.contract-calibration-item strong{
+  color:#d8cfc2;
+  font-size:10px;
+}
+.contract-calibration-item>div span{
+  color:#b89458;
+  font-size:8px;
+  text-transform:uppercase;
+}
+.contract-calibration-item p,
+.contract-calibration-item small{
+  margin:0;
+  color:var(--muted);
+  font-size:9px;
+  line-height:1.45;
+}
+.contract-calibration-item details{
+  padding-top:4px;
+  border-top:1px solid rgba(255,255,255,.05);
+}
+.contract-calibration-item summary{
+  color:#cbbca7;
+  font-size:9px;
+}
+.contract-calibration-audit-item{
+  border:1px solid var(--line);
+  border-radius:13px;
+}
+.contract-calibration-audit-item+ .contract-calibration-audit-item{
+  margin-top:8px;
+}
+.contract-calibration-audit-item summary{
+  display:flex;
+  justify-content:space-between;
+  gap:12px;
+  padding:11px 12px;
+  color:#d8cfc2;
+  font-size:9px;
+}
+.contract-calibration-audit-item summary strong{
+  color:#b89458;
+  font-size:8px;
+  text-transform:uppercase;
+}
+.contract-calibration-audit-item>div{
+  display:grid;
+  gap:5px;
+  padding:0 12px 12px;
+}
+.contract-calibration-audit-item p,
+.contract-calibration-audit-item small{
+  margin:0;
+  color:var(--muted);
+  font-size:8px;
+  line-height:1.45;
+}
+
+
+/* v0.19.0 Phase 5 — person-authorised contract revision */
+.contract-revision-item{
+  display:grid;
+  gap:7px;
+  padding:12px 13px;
+  border:1px solid var(--line);
+  border-radius:14px;
+  background:rgba(255,255,255,.012);
+}
+.contract-revision-item+ .contract-revision-item{margin-top:8px}
+.contract-revision-item.accepted{border-color:rgba(184,148,88,.28)}
+.contract-revision-item>div:first-child{
+  display:flex;
+  justify-content:space-between;
+  gap:12px;
+}
+.contract-revision-item strong{color:#d8cfc2;font-size:10px}
+.contract-revision-item>div:first-child span{
+  color:#b89458;
+  font-size:8px;
+  text-transform:uppercase;
+}
+.contract-revision-item p{
+  margin:0;
+  color:#cbc2b5;
+  font-size:9px;
+  line-height:1.45;
+}
+.contract-revision-item small{
+  color:var(--muted);
+  font-size:8px;
+  line-height:1.45;
+}
+
+
+/* v0.20.0 Phase 1 — Practice dose evidence */
+.practice-dose-item{
+  display:grid;
+  gap:7px;
+  padding:12px 13px;
+  border:1px solid var(--line);
+  border-radius:14px;
+  background:rgba(255,255,255,.012);
+}
+.practice-dose-item+ .practice-dose-item{margin-top:8px}
+.practice-dose-item>div{
+  display:flex;
+  justify-content:space-between;
+  gap:12px;
+}
+.practice-dose-item strong{color:#d8cfc2;font-size:10px}
+.practice-dose-item>div span{
+  color:#b89458;
+  font-size:8px;
+  text-transform:uppercase;
+}
+.practice-dose-item p,
+.practice-dose-item small{
+  margin:0;
+  color:var(--muted);
+  font-size:9px;
+  line-height:1.45;
+}
+.practice-dose-item details{
+  padding-top:4px;
+  border-top:1px solid rgba(255,255,255,.05);
+}
+.practice-dose-item summary{color:#cbbca7;font-size:9px}
+.practice-dose-audit-item{
+  border:1px solid var(--line);
+  border-radius:13px;
+}
+.practice-dose-audit-item+ .practice-dose-audit-item{margin-top:8px}
+.practice-dose-audit-item summary{
+  display:flex;
+  justify-content:space-between;
+  gap:12px;
+  padding:11px 12px;
+  color:#d8cfc2;
+  font-size:9px;
+}
+.practice-dose-audit-item summary strong{
+  color:#b89458;
+  font-size:8px;
+  text-transform:uppercase;
+}
+.practice-dose-audit-item>div{
+  display:grid;
+  gap:5px;
+  padding:0 12px 12px;
+}
+.practice-dose-audit-item p,
+.practice-dose-audit-item small{
+  margin:0;
+  color:var(--muted);
+  font-size:8px;
+  line-height:1.45;
+}
+
+
+/* v0.20.0 Phase 3 — person-authorised duration proposal */
+.practice-dose-revision-item{
+  display:grid;
+  gap:7px;
+  padding:12px 13px;
+  border:1px solid var(--line);
+  border-radius:14px;
+  background:rgba(255,255,255,.012);
+}
+.practice-dose-revision-item+ .practice-dose-revision-item{margin-top:8px}
+.practice-dose-revision-item.accepted{border-color:rgba(184,148,88,.28)}
+.practice-dose-revision-item>div:first-child{
+  display:flex;
+  justify-content:space-between;
+  gap:12px;
+}
+.practice-dose-revision-item strong{color:#d8cfc2;font-size:10px}
+.practice-dose-revision-item>div:first-child span{
+  color:#b89458;
+  font-size:8px;
+  text-transform:uppercase;
+}
+.practice-dose-revision-item p{
+  margin:0;
+  color:#cbc2b5;
+  font-size:10px;
+  line-height:1.45;
+}
+.practice-dose-revision-item small{
+  color:var(--muted);
+  font-size:8px;
+  line-height:1.45;
+}
+
+
+/* v0.20.0 Phase 4 — accepted duration outcome accountability */
+.practice-dose-revision-item.review-required{
+  border-color:rgba(184,148,88,.34);
+  background:rgba(184,148,88,.025);
+}
+.journey-dose-revision{
+  margin-top:9px;
+  padding-top:8px;
+  border-top:1px solid rgba(255,255,255,.05);
+}
+.journey-dose-revision summary{
+  color:#cbbca7;
+  font-size:10px;
+}
+.journey-dose-revision>div{
+  display:grid;
+  gap:4px;
+  padding-top:7px;
+}
+.journey-dose-revision strong{
+  color:#d4b06f;
+  font-size:9px;
+}
+.journey-dose-revision p,
+.journey-dose-revision small{
+  margin:0;
+  color:var(--muted);
+  font-size:9px;
+  line-height:1.45;
+}
+
+
+/* v0.21.0 Phase 1 — Practice Library foundation */
+.practice-library>p{margin:0;color:var(--muted);font-size:10px;line-height:1.5}
+.practice-library-item{
+  border:1px solid var(--line);
+  border-radius:13px;
+}
+.practice-library-item+ .practice-library-item{margin-top:8px}
+.practice-library-item summary{
+  display:flex;
+  justify-content:space-between;
+  gap:12px;
+  padding:11px 12px;
+  color:#d8cfc2;
+  font-size:10px;
+}
+.practice-library-item summary strong{
+  color:#b89458;
+  font-size:8px;
+  text-transform:uppercase;
+}
+.practice-library-item>div{
+  display:grid;
+  gap:5px;
+  padding:0 12px 12px;
+}
+.practice-library-item p,
+.practice-library-item small{
+  margin:0;
+  color:var(--muted);
+  font-size:8px;
+  line-height:1.45;
+}
+.practice-library-audit-item{
+  display:grid;
+  gap:5px;
+  padding:10px 12px;
+  border:1px solid var(--line);
+  border-radius:12px;
+}
+.practice-library-audit-item+ .practice-library-audit-item{margin-top:7px}
+.practice-library-audit-item>div{display:flex;justify-content:space-between;gap:12px}
+.practice-library-audit-item strong{color:#d8cfc2;font-size:9px}
+.practice-library-audit-item span{color:#b89458;font-size:8px;text-transform:uppercase}
+.practice-library-audit-item small{color:var(--muted);font-size:8px;line-height:1.45}
+
+
+/* v0.21.0 Phase 2 — contextual Practice eligibility */
+.practice-eligibility{
+  display:grid;
+  gap:4px;
+  padding:10px 12px;
+  border:1px solid rgba(184,148,88,.22);
+  border-radius:13px;
+  background:rgba(184,148,88,.02);
+}
+.practice-eligibility strong{color:#d4b06f;font-size:9px;text-transform:uppercase}
+.practice-eligibility span,.practice-eligibility small{color:var(--muted);font-size:8px;line-height:1.45}
+.practice-eligibility-item{
+  display:grid;
+  gap:6px;
+  padding:11px 12px;
+  border:1px solid var(--line);
+  border-radius:13px;
+}
+.practice-eligibility-item+ .practice-eligibility-item{margin-top:8px}
+.practice-eligibility-item.blocked{border-color:rgba(184,148,88,.32)}
+.practice-eligibility-item>div{display:flex;justify-content:space-between;gap:12px}
+.practice-eligibility-item strong{color:#d8cfc2;font-size:9px}
+.practice-eligibility-item span{color:#b89458;font-size:8px;text-transform:uppercase}
+.practice-eligibility-item p,.practice-eligibility-item li,.practice-eligibility-item small{color:var(--muted);font-size:8px;line-height:1.45}
+.practice-eligibility-item p{margin:0}
+.practice-eligibility-item ul{margin:0;padding-left:16px}
+.practice-eligibility-audit-item{border:1px solid var(--line);border-radius:12px}
+.practice-eligibility-audit-item+ .practice-eligibility-audit-item{margin-top:7px}
+.practice-eligibility-audit-item summary{display:flex;justify-content:space-between;gap:12px;padding:10px 11px;color:#d8cfc2;font-size:9px}
+.practice-eligibility-audit-item summary strong{color:#b89458;font-size:8px;text-transform:uppercase}
+.practice-eligibility-audit-item>div{display:grid;gap:5px;padding:0 11px 11px}
+.practice-eligibility-audit-item p,.practice-eligibility-audit-item small{margin:0;color:var(--muted);font-size:8px;line-height:1.45}
+
+
+/* v0.21.0 Phase 3 — governed eligibility exclusion */
+.eligibility-exclusions{
+  margin-top:9px;
+  padding-top:8px;
+  border-top:1px solid rgba(255,255,255,.05);
+}
+.eligibility-exclusions summary{color:#cbbca7;font-size:9px}
+.eligibility-exclusions p,.eligibility-exclusions small{
+  margin:6px 0 0;color:var(--muted);font-size:8px;line-height:1.45
+}
+
+
+/* v0.21.0 Phase 4 — Practice content provenance */
+.journey-practice-content{
+  margin-top:9px;
+  padding-top:8px;
+  border-top:1px solid rgba(255,255,255,.05);
+}
+.journey-practice-content summary{color:#cbbca7;font-size:10px}
+.journey-practice-content>div{display:grid;gap:4px;padding-top:7px}
+.journey-practice-content strong{color:#d4b06f;font-size:9px}
+.journey-practice-content p,.journey-practice-content small{
+  margin:0;color:var(--muted);font-size:8px;line-height:1.45
+}
+.practice-content-audit-item{border:1px solid var(--line);border-radius:12px}
+.practice-content-audit-item+ .practice-content-audit-item{margin-top:7px}
+.practice-content-audit-item summary{
+  display:flex;justify-content:space-between;gap:12px;padding:10px 11px;color:#d8cfc2;font-size:9px
+}
+.practice-content-audit-item summary strong{color:#b89458;font-size:8px;text-transform:uppercase}
+.practice-content-audit-item>div{display:grid;gap:5px;padding:0 11px 11px}
+.practice-content-audit-item p,.practice-content-audit-item small{
+  margin:0;color:var(--muted);font-size:8px;line-height:1.45
+}
+
+
+/* v0.22.0 Phase 1 — progressive Human Model foundation */
+.human-model-foundation>p{margin:0;color:var(--muted);font-size:10px;line-height:1.5}
+.human-model-foundation>small{color:var(--muted);font-size:8px;line-height:1.45}
+.human-model-dimensions{display:grid;grid-template-columns:1fr 1fr;gap:7px}
+.human-model-dimensions article{display:grid;gap:5px;padding:9px 10px;border:1px solid var(--line);border-radius:12px}
+.human-model-dimensions article>div{display:flex;justify-content:space-between;gap:8px}
+.human-model-dimensions strong{color:#d8cfc2;font-size:8px;text-transform:uppercase}
+.human-model-dimensions span{color:#b89458;font-size:8px}
+.human-model-dimensions small{color:var(--muted);font-size:7px;line-height:1.4}
+.human-model-dimensions article.unknown{opacity:.72}
+.human-model-evidence{border:1px solid var(--line);border-radius:12px}
+.human-model-evidence summary{padding:10px 11px;color:#cbbca7;font-size:9px}
+.human-model-evidence>div{display:grid;gap:5px;padding:0 11px 11px}
+.human-model-evidence p{margin:0;color:var(--muted);font-size:8px;line-height:1.45}
+.human-model-evidence p.eyebrow{margin-top:5px;color:#b89458}
+.human-model-audit-grid{display:grid;grid-template-columns:1fr 1fr;gap:7px}
+.human-model-audit-grid article{display:grid;gap:3px;padding:10px;border:1px solid var(--line);border-radius:12px}
+.human-model-audit-grid strong{color:#d4b06f;font-size:14px}
+.human-model-audit-grid span{color:var(--muted);font-size:8px}
+
+
+/* v0.22.0 Phase 2 — person review of Human Model evidence */
+.human-model-evidence-item{
+  display:grid;gap:6px;padding:9px 10px;border:1px solid var(--line);border-radius:11px
+}
+.human-model-evidence-item+ .human-model-evidence-item{margin-top:6px}
+.human-model-evidence-item.rejected{opacity:.72}
+.human-model-evidence-item>div:first-child{display:flex;justify-content:space-between;gap:10px}
+.human-model-evidence-item strong{color:#d8cfc2;font-size:8px}
+.human-model-evidence-item span{color:#b89458;font-size:7px;text-transform:uppercase}
+.human-model-evidence-item p,.human-model-evidence-item small{margin:0;color:var(--muted);font-size:8px;line-height:1.4}
+.human-model-correction-target{
+  display:grid;gap:4px;padding:11px 12px;border:1px solid var(--line);border-radius:12px
+}
+.human-model-correction-target strong{color:#d8cfc2;font-size:11px}
+.human-model-correction-target small{color:var(--muted);font-size:8px}
+
+
+/* v0.22.0 Phase 3 — Human Model deliberation evidence boundary */
+.judgement-human-model,
+.journey-human-model-snapshot{
+  margin-top:9px;padding-top:8px;border-top:1px solid rgba(255,255,255,.05)
+}
+.judgement-human-model summary,
+.journey-human-model-snapshot summary{color:#cbbca7;font-size:9px}
+.judgement-human-model>div,
+.journey-human-model-snapshot>div{display:grid;gap:5px;padding-top:7px}
+.judgement-human-model strong,
+.journey-human-model-snapshot strong{color:#d4b06f;font-size:9px}
+.judgement-human-model p,.judgement-human-model small,
+.journey-human-model-snapshot p,.journey-human-model-snapshot small{
+  margin:0;color:var(--muted);font-size:8px;line-height:1.45
+}
+.human-model-snapshot-audit>p,.human-model-snapshot-audit>small{
+  margin:0;color:var(--muted);font-size:8px;line-height:1.45
+}
+
+
+/* v0.22.0 Phase 4 — person-authorised stable fact promotion */
+.human-model-promotion{display:grid;gap:6px;padding:10px 11px;border:1px solid var(--line);border-radius:12px}
+.human-model-promotion+ .human-model-promotion{margin-top:7px}
+.human-model-promotion.promoted{border-color:rgba(184,148,88,.28)}
+.human-model-promotion.rejected{opacity:.72}
+.human-model-promotion>div:first-child{display:flex;justify-content:space-between;gap:10px}
+.human-model-promotion strong{color:#d8cfc2;font-size:8px}
+.human-model-promotion span{color:#b89458;font-size:7px;text-transform:uppercase}
+.human-model-promotion p,.human-model-promotion small{margin:0;color:var(--muted);font-size:8px;line-height:1.45}
