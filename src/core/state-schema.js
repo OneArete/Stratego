@@ -1,11 +1,12 @@
-export const STATE_SCHEMA_VERSION = 29;
-export const PRODUCT_VERSION = '0.18.1';
+export const STATE_SCHEMA_VERSION = 35;
+export const PRODUCT_VERSION = '0.22.1';
 
 export function createInitialState(){
   return {
     schemaVersion: STATE_SCHEMA_VERSION,
     productVersion: PRODUCT_VERSION,
     profile:null,
+    humanModel:null,
     history:[],
     judgements:[],
     current:null,
@@ -29,6 +30,10 @@ export function createInitialState(){
     judgementForecasts:[],
     calibrationAccountability:[],
     adaptationPatternReviews:[],
+    practiceContractCalibrationReviews:[],
+    practiceContractRevisionDecisions:[],
+    practiceDoseEvidenceReviews:[],
+    practiceDoseRevisionDecisions:[],
     reflectionDraft:null,
     integrity:{lastReconciledAt:null,lastReport:null},
     agencyIntegrity:{lastReconciledAt:null,lastReport:null},
@@ -68,6 +73,12 @@ export function migrateState(input={}){
   if(Number(state.schemaVersion||26) < 27) state = migrateV0150Phase3ToPhase4(state);
   if(Number(state.schemaVersion||27) < 28) state = migrateV0150ToV0160Phase1(state);
   if(Number(state.schemaVersion||28) < 29) state = migrateV0180Phase1ToPhase2(state);
+  if(Number(state.schemaVersion||29) < 30) state = migrateV0190Phase3ToPhase4(state);
+  if(Number(state.schemaVersion||30) < 31) state = migrateV0190Phase4ToPhase5(state);
+  if(Number(state.schemaVersion||31) < 32) state = migrateV0200Phase1ToPhase2(state);
+  if(Number(state.schemaVersion||32) < 33) state = migrateV0200Phase2ToPhase3(state);
+  if(Number(state.schemaVersion||33) < 34) state = migrateV0211ToV0220Phase1(state);
+  if(Number(state.schemaVersion||34) < 35) state = migrateV0220Phase3ToPhase4(state);
   const base = createInitialState();
   const migratedSettings={...(state.settings||{})};
   delete migratedSettings.voiceName;
@@ -102,6 +113,10 @@ export function migrateState(input={}){
     judgementForecasts:[...(state.judgementForecasts||[])],
     calibrationAccountability:[...(state.calibrationAccountability||[])],
     adaptationPatternReviews:[...(state.adaptationPatternReviews||[])],
+    practiceContractCalibrationReviews:[...(state.practiceContractCalibrationReviews||[])],
+    practiceContractRevisionDecisions:[...(state.practiceContractRevisionDecisions||[])],
+    practiceDoseEvidenceReviews:[...(state.practiceDoseEvidenceReviews||[])],
+    practiceDoseRevisionDecisions:[...(state.practiceDoseRevisionDecisions||[])],
     reflectionDraft:state.reflectionDraft||null,
     integrity:{...base.integrity,...(state.integrity||{})},
     agencyIntegrity:{...base.agencyIntegrity,...(state.agencyIntegrity||{})},
@@ -112,6 +127,59 @@ export function migrateState(input={}){
 }
 
 
+
+
+export function migrateV0220Phase3ToPhase4(state={}){
+  const next=structuredCloneSafe(state);
+  if(next.humanModel&&typeof next.humanModel==='object'&&!Array.isArray(next.humanModel.promotions))next.humanModel.promotions=[];
+  next.schemaVersion=35;
+  next.productVersion='0.22.0';
+  return next;
+}
+
+export function migrateV0211ToV0220Phase1(state={}){
+  const next=structuredCloneSafe(state);
+  next.humanModel=next.humanModel||null;
+  next.schemaVersion=34;
+  next.productVersion='0.22.0';
+  return next;
+}
+
+
+export function migrateV0200Phase2ToPhase3(state={}){
+  const next=structuredCloneSafe(state);
+  next.practiceDoseRevisionDecisions=[...(next.practiceDoseRevisionDecisions||[])];
+  next.schemaVersion=33;
+  next.productVersion='0.20.0';
+  return next;
+}
+
+
+export function migrateV0200Phase1ToPhase2(state={}){
+  const next=structuredCloneSafe(state);
+  next.practiceDoseEvidenceReviews=[...(next.practiceDoseEvidenceReviews||[])];
+  next.schemaVersion=32;
+  next.productVersion='0.20.0';
+  return next;
+}
+
+
+export function migrateV0190Phase4ToPhase5(state={}){
+  const next=structuredCloneSafe(state);
+  next.practiceContractRevisionDecisions=[...(next.practiceContractRevisionDecisions||[])];
+  next.schemaVersion=31;
+  next.productVersion='0.19.0';
+  return next;
+}
+
+
+export function migrateV0190Phase3ToPhase4(state={}){
+  const next=structuredCloneSafe(state);
+  next.practiceContractCalibrationReviews=[...(next.practiceContractCalibrationReviews||[])];
+  next.schemaVersion=30;
+  next.productVersion='0.19.0';
+  return next;
+}
 
 
 

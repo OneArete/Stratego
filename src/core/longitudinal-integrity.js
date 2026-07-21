@@ -132,7 +132,12 @@ export function journeyRecords(state){
         ...judgement,
         reflection:history?.reflection||judgement.reflection||null,
         completedAt:history?.completedAt||judgement.validity?.closedAt||judgement.createdAt,
-        historyLinked:Boolean(history)
+        historyLinked:Boolean(history),
+        adaptationAccountability:history?.adaptationAccountability||null,
+        practiceContract:history?.practiceContract||null,
+        practiceContractOutcome:history?.practiceContractOutcome||null,
+        completionRatio:Number.isFinite(Number(history?.completionRatio))?Number(history.completionRatio):history?.completed?1:null,
+        personChoice:history?.decision?.personChoice||judgement.personChoice||null
       };
     })
     .sort((a,b)=>new Date(b.completedAt)-new Date(a.completedAt));

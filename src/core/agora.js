@@ -1,5 +1,5 @@
 import { applyAdvisorMemory } from './advisor-memory.js';
-import { CODEX } from '../data/codex.js';
+import { CODEX,assessPracticeEligibility } from '../data/codex.js';
 import { evidenceItem, assessEvidenceDiversity, detectContradictions } from './evidence-integrity.js';
 import { buildDeliberationTrace,buildMinorityReports,summarizeMinorityReports } from './deliberation-trace.js';
 import { applyLongitudinalAdjustments,longitudinalConfidenceAdjustment,verifyLongitudinalEvidence } from './longitudinal-evidence.js';
@@ -15,8 +15,18 @@ export function conveneAgora(context, understanding, history=[], advisorMemories
   }
   const longitudinalVerification=verifyLongitudinalEvidence(longitudinalEvidence);
   if(longitudinalVerification.valid)totals=applyLongitudinalAdjustments(totals,longitudinalEvidence);
-  const blocked=[];
-  if(context.soreness==='significant') blocked.push({practiceId:'strength',reason:'Significant soreness makes strength loading inappropriate until reassessment.'});
+  const eligibilityAssessments=CODEX.map(practice=>({
+    practice,
+    assessment:assessPracticeEligibility(practice,context)
+  }));
+  const blocked=eligibilityAssessments
+    .filter(item=>item.assessment.status==='blocked')
+    .map(item=>({
+      practiceId:item.practice.id,
+      reason:item.assessment.reasons[0],
+      source:'canonical-practice-eligibility',
+      matchedContraindications:item.assessment.matchedContraindications
+    }));
   const ranked=Object.entries(totals)
     .filter(([id])=>!blocked.some(item=>item.practiceId===id))
     .sort((a,b)=>b[1]-a[1]);
@@ -42,6 +52,14 @@ export function conveneAgora(context, understanding, history=[], advisorMemories
     cautions:cautioning.map(a=>({advisor:a.advisor,position:a.position,reason:a.reason,riskFlags:a.riskFlags||[]})),
     strongestCaution:strongestCaution?{advisor:strongestCaution.advisor,reason:strongestCaution.reason,riskFlags:strongestCaution.riskFlags||[]}:null,
     blockedPractices:blocked,
+    eligibilityTrace:eligibilityAssessments.map(item=>({
+      practiceId:item.practice.id,
+      status:item.assessment.status,
+      reasons:item.assessment.reasons,
+      matchedContraindications:item.assessment.matchedContraindications,
+      selectionEffect:item.assessment.status==='blocked'?'excluded':'none'
+    })),
+    eligibilityGovernance:'Only explicit blocked status excludes a Practice. Caution does not change ranking.',
     riskAsymmetries:advisors.flatMap(a=>(a.riskFlags||[]).filter(r=>r.severity==='critical'||r.reversibility==='difficult')),
     contradictions,
     evidenceDiversity,
