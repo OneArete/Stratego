@@ -1,5 +1,7 @@
 import { applyAdvisorMemory } from './advisor-memory.js';
-import { CODEX,assessPracticeEligibility } from '../data/codex.js';
+import * as PracticeLibrary from '../data/codex.js?v=0221h1';
+const CODEX=PracticeLibrary.CODEX||[];
+const assessPracticeEligibility=PracticeLibrary.assessPracticeEligibility||((practice,context={})=>{const blocked=practice?.id==='strength'&&context.soreness==='significant';return {practiceId:practice?.id||'unknown',status:blocked?'blocked':'eligible',reasons:[blocked?'Significant soreness makes strength loading inappropriate until reassessment.':'No declared contextual conflict is visible.'],matchedContraindications:blocked?['significant-soreness']:[],selectionInfluence:0};});
 import { evidenceItem, assessEvidenceDiversity, detectContradictions } from './evidence-integrity.js';
 import { buildDeliberationTrace,buildMinorityReports,summarizeMinorityReports } from './deliberation-trace.js';
 import { applyLongitudinalAdjustments,longitudinalConfidenceAdjustment,verifyLongitudinalEvidence } from './longitudinal-evidence.js';
