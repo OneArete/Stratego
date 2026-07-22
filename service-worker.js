@@ -1,17 +1,13 @@
-const CACHE_NAME = 'strategos-shell-v0.22.1-hotfix-1';
-const CORE_ASSETS = [
-  './',
-  './index.html',
-  './styles.css?v=0221h1',
+const CACHE_NAME = 'strategos-shell-v0.29.0-progressive-profile-foundation';
+const STATIC_ASSETS = [
   './manifest.webmanifest',
   './icons/delta-180.png',
   './icons/delta-192.png',
-  './icons/delta-512.png',
-  './src/app.js?v=0221h1'
+  './icons/delta-512.png'
 ];
 
 self.addEventListener('install', event => {
-  event.waitUntil(caches.open(CACHE_NAME).then(cache => cache.addAll(CORE_ASSETS)));
+  event.waitUntil(caches.open(CACHE_NAME).then(cache => cache.addAll(STATIC_ASSETS)));
   self.skipWaiting();
 });
 
@@ -30,41 +26,14 @@ self.addEventListener('fetch', event => {
   if (url.origin !== self.location.origin) return;
 
   if (request.mode === 'navigate') {
-    event.respondWith(
-      fetch(request)
-        .then(response => {
-          const copy = response.clone();
-          caches.open(CACHE_NAME).then(cache => cache.put('./index.html', copy));
-          return response;
-        })
-        .catch(() => caches.match('./index.html'))
-    );
+    event.respondWith(fetch(request, {cache:'no-store'}).catch(() => caches.match('./index.html')));
     return;
   }
 
-  const isMutableModule = url.pathname.endsWith('.js') || url.pathname.endsWith('.css');
-  if (isMutableModule) {
-    event.respondWith(
-      fetch(request, { cache: 'no-store' })
-        .then(response => {
-          if (response && response.ok) {
-            const copy = response.clone();
-            caches.open(CACHE_NAME).then(cache => cache.put(request, copy));
-          }
-          return response;
-        })
-        .catch(() => caches.match(request))
-    );
+  if (url.pathname.endsWith('.js') || url.pathname.endsWith('.css') || url.pathname.endsWith('.html')) {
+    event.respondWith(fetch(request, {cache:'no-store'}));
     return;
   }
 
-  event.respondWith(
-    caches.match(request).then(cached => cached || fetch(request).then(response => {
-      if (response && response.ok) {
-        const copy = response.clone();
-        caches.open(CACHE_NAME).then(cache => cache.put(request, copy));
-      }
-      return response;
-    }))
-  );
+  event.respondWith(caches.match(request).then(cached => cached || fetch(request)));
 });

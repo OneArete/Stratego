@@ -1,3 +1,9 @@
+# v0.29.0
+
+- Added progressive optional profile onboarding.
+- Added editable My Profile in Settings.
+- Added conservative profile normalisation and schema 40 migration.
+
 # Changelog
 
 ## v0.16.5 — Pre-Deploy Audit Stabilization
@@ -399,3 +405,14 @@ Official stabilization baseline.
 - Added bounded screen-reader announcements for phase changes, pause, resume, final countdown and completion.
 - Expanded PWA manifest metadata and install scope.
 - Preserved the decision not to introduce a provisional Arete Chime.
+
+## 0.27.0 Phase 1
+- Added the Outcome Ledger with frozen judgement context.
+- Integrated Dynamics of Human Development as the research architecture for adaptive learning.
+- Added schema 37, runtime token 0260p1 and governance preventing silent model influence.
+
+## 0.28.0 — Belief System Foundation
+- Converts repeated Personal Evidence into explicit belief candidates.
+- Adds person-controlled confirm, reject and reopen review actions.
+- Preserves zero automatic influence over Human Model, judgement, Practice selection and safety.
+- Adds schema 39, runtime token 0280p1 and belief governance.
