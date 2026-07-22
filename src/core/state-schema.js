@@ -1,5 +1,5 @@
-export const STATE_SCHEMA_VERSION = 35;
-export const PRODUCT_VERSION = '0.22.1';
+export const STATE_SCHEMA_VERSION = 40;
+export const PRODUCT_VERSION = '0.29.0';
 
 export function createInitialState(){
   return {
@@ -35,6 +35,9 @@ export function createInitialState(){
     practiceDoseEvidenceReviews:[],
     practiceDoseRevisionDecisions:[],
     reflectionDraft:null,
+    emotionalJournalEntries:[],
+    outcomeLedger:[],
+    beliefs:[],
     integrity:{lastReconciledAt:null,lastReport:null},
     agencyIntegrity:{lastReconciledAt:null,lastReport:null},
     followThroughIntegrity:{lastReconciledAt:null,lastReport:null},
@@ -79,6 +82,11 @@ export function migrateState(input={}){
   if(Number(state.schemaVersion||32) < 33) state = migrateV0200Phase2ToPhase3(state);
   if(Number(state.schemaVersion||33) < 34) state = migrateV0211ToV0220Phase1(state);
   if(Number(state.schemaVersion||34) < 35) state = migrateV0220Phase3ToPhase4(state);
+  if(Number(state.schemaVersion||35) < 36) state = migrateV0241ToV0250Phase1(state);
+  if(Number(state.schemaVersion||36) < 37) state = migrateV0250ToV0260Phase1(state);
+  if(Number(state.schemaVersion||37) < 38) state = migrateV0260ToV0270Phase1(state);
+  if(Number(state.schemaVersion||38) < 39) state = migrateV0270ToV0280Phase1(state);
+  if(Number(state.schemaVersion||39) < 40) state = migrateV0280ToV0290Phase1(state);
   const base = createInitialState();
   const migratedSettings={...(state.settings||{})};
   delete migratedSettings.voiceName;
@@ -90,6 +98,9 @@ export function migrateState(input={}){
     productVersion:PRODUCT_VERSION,
     history:[...(state.history||[])],
     judgements:[...(state.judgements||[])],
+    emotionalJournalEntries:[...(state.emotionalJournalEntries||[])],
+    outcomeLedger:[...(state.outcomeLedger||[])],
+    beliefs:[...(state.beliefs||[])],
     understandingModel:{
       ...base.understandingModel,
       ...(state.understandingModel||{}),
@@ -128,6 +139,48 @@ export function migrateState(input={}){
 
 
 
+
+export function migrateV0280ToV0290Phase1(state={}){
+  const next=structuredCloneSafe(state);
+  next.profile=next.profile&&typeof next.profile==='object'?{...next.profile}:next.profile;
+  next.schemaVersion=40;
+  next.productVersion='0.29.0';
+  return next;
+}
+
+export function migrateV0270ToV0280Phase1(state={}){
+  const next=structuredCloneSafe(state);
+  next.beliefs=[...(next.beliefs||[])];
+  next.schemaVersion=39;
+  next.productVersion='0.28.0';
+  return next;
+}
+
+
+
+export function migrateV0260ToV0270Phase1(state={}){
+  const next=structuredCloneSafe(state);
+  next.outcomeLedger=[...(next.outcomeLedger||[])];
+  next.schemaVersion=38;
+  next.productVersion='0.27.0';
+  return next;
+}
+
+export function migrateV0250ToV0260Phase1(state={}){
+  const next=structuredCloneSafe(state);
+  next.outcomeLedger=[...(next.outcomeLedger||[])];
+  next.schemaVersion=37;
+  next.productVersion='0.26.0';
+  return next;
+}
+
+export function migrateV0241ToV0250Phase1(state={}){
+  const next=structuredCloneSafe(state);
+  next.emotionalJournalEntries=[...(next.emotionalJournalEntries||[])];
+  next.schemaVersion=36;
+  next.productVersion='0.25.0';
+  return next;
+}
 
 export function migrateV0220Phase3ToPhase4(state={}){
   const next=structuredCloneSafe(state);

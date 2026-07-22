@@ -1,4 +1,4 @@
-import { detectContradictions } from './evidence-integrity.js';
+import { detectContradictions } from './evidence-integrity.js?v=0290p1';
 const clamp=(n,min=0,max=1)=>Math.min(max,Math.max(min,n));
 const avg=a=>a.length?a.reduce((s,v)=>s+v,0)/a.length:0;
 
