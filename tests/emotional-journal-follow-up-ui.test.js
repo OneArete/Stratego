@@ -1,0 +1,10 @@
+import test from 'node:test';
+import assert from 'node:assert/strict';
+import {readFileSync} from 'node:fs';
+const app=readFileSync(new URL('../src/app.js',import.meta.url),'utf8');
+test('editor follow-up',()=>{assert.ok(app.includes('HOW HAS THIS EVOLVED?'));assert.ok(app.includes('Still present'));assert.ok(app.includes('Resolved'));assert.ok(app.includes('Uncertain'))});
+test('optional note no prompt',()=>{assert.ok(app.includes('id="emotional-follow-up-note"'));const s=app.slice(app.indexOf('if(t.dataset.emotionalJournalAction)'),app.indexOf('if(t.dataset.explainReviewAction)'));assert.match(s,/applyEmotionalJournalFollowUp/);assert.doesNotMatch(s,/prompt\(/)});
+test('reopen',()=>{assert.ok(app.includes('Review again'));assert.match(app,/reopenEmotionalJournalFollowUp/)});
+test('Journey and Understanding outcomes',()=>{assert.ok(app.includes('REFLECTION FOLLOW-UP'));assert.ok(app.includes('REFLECTION OUTCOMES'));assert.ok(app.includes('Only your explicit follow-up is counted'))});
+test('footer unchanged',()=>{const n=app.slice(app.indexOf('const nav='),app.indexOf('const ROUTES='));for(const l of ['Today','Understanding','Journey','Settings'])assert.ok(n.includes(l));assert.doesNotMatch(n,/Reflection Outcomes/)});
+test('token',()=>{for(const x of [...app.matchAll(/from ['"]([^'"]+\.js(?:\?v=[^'"]+)?)['"]/g)].map(m=>m[1]))assert.match(x,/\?v=0390p1$/)});

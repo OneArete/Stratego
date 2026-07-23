@@ -1,0 +1,10 @@
+import test from 'node:test';
+import assert from 'node:assert/strict';
+import {readFileSync} from 'node:fs';
+const app=readFileSync(new URL('../src/app.js',import.meta.url),'utf8');
+test('Understanding exposes review',()=>{assert.ok(app.includes('YOUR REVIEW'));assert.ok(app.includes('This explains it fairly'));assert.ok(app.includes('This is misleading'))});
+test('correction uses in-app textarea',()=>{assert.ok(app.includes('id="explain-review-note"'));const s=app.slice(app.indexOf('if(t.dataset.explainReviewAction)'),app.indexOf('if(t.dataset.runtimeSafetyAction)'));assert.match(s,/explain-review-note/);assert.doesNotMatch(s,/prompt\(/)});
+test('review updates canonical records',()=>{const s=app.slice(app.indexOf('if(t.dataset.explainReviewAction)'),app.indexOf('if(t.dataset.runtimeSafetyAction)'));assert.match(s,/state\.judgements=/);assert.match(s,/state\.current=/);assert.match(s,/state\.history=/)});
+test('review can reopen',()=>assert.ok(app.includes('Review again')));
+test('review zero influence visible',()=>assert.ok(app.includes('Judgement influence: 0 · Ranking influence: 0 · Confidence influence: 0 · Safety influence: 0')));
+test('all imports use token',()=>{for(const x of [...app.matchAll(/from ['"]([^'"]+\.js(?:\?v=[^'"]+)?)['"]/g)].map(m=>m[1]))assert.match(x,/\?v=0390p1$/)});
