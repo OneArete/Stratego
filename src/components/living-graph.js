@@ -41,10 +41,10 @@ const displacedPath = (nodes, center, dominantIndex, phase = 1) => {
   return closedPath(displaced);
 };
 
-export function renderLivingGraph(graph, { compact = false } = {}) {
-  const size = compact ? 214 : 276;
+export function renderLivingGraph(graph, { compact = false, ambient = false } = {}) {
+  const size = ambient ? 320 : compact ? 214 : 276;
   const center = size / 2;
-  const radius = compact ? 67 : 88;
+  const radius = ambient ? 105 : compact ? 67 : 88;
 
   const scores = graph.nodes.map(dominantScore);
   const maxScore = Math.max(...scores);
@@ -111,18 +111,18 @@ export function renderLivingGraph(graph, { compact = false } = {}) {
 
   const dominant = nodes[dominantIndex];
 
-  return `<section class="living-graph ${compact ? 'compact' : ''}" aria-label="Living Human Graph">
-    <div class="graph-heading"><div><p class="eyebrow">LIVING HUMAN GRAPH</p><h3>Your current pattern</h3></div><span class="graph-state">${graph.state}</span></div>
+  return `<section class="living-graph ${compact ? 'compact' : ''} ${ambient ? 'ambient' : ''}" aria-label="Living Human Graph">
+    ${ambient ? '' : `<div class="graph-heading"><div><p class="eyebrow">LIVING HUMAN GRAPH</p><h3>Your current pattern</h3></div><span class="graph-state">${graph.state}</span></div>`}
     <svg viewBox="0 0 ${size} ${size}" role="img" aria-label="Six dimensions of human flourishing. ${dominant.label} currently has the strongest emphasis.">
-      <circle class="graph-orbit" cx="${center}" cy="${center}" r="${radius}"/>
+      ${ambient ? '' : `<circle class="graph-orbit" cx="${center}" cy="${center}" r="${radius}"/>`}
       <path class="graph-membrane" d="${membraneBase}">
-        <animate attributeName="d" values="${membraneBase};${membraneA};${membraneB};${membraneC};${membraneD};${membraneBase}" keyTimes="0;0.18;0.38;0.58;0.78;1" calcMode="spline" keySplines=".42 0 .58 1;.42 0 .58 1;.42 0 .58 1;.42 0 .58 1;.42 0 .58 1" dur="8.8s" repeatCount="indefinite"/>
+        <animate attributeName="d" values="${membraneBase};${membraneA};${membraneB};${membraneC};${membraneD};${membraneBase}" keyTimes="0;0.18;0.39.0.58;0.78;1" calcMode="spline" keySplines=".42 0 .58 1;.42 0 .58 1;.42 0 .58 1;.42 0 .58 1;.42 0 .58 1" dur="8.8s" repeatCount="indefinite"/>
       </path>
       <g class="graph-web">${connections}</g>
       <circle class="graph-pulse" cx="${center}" cy="${center}" r="${compact ? 15 : 20}"/>
       <circle class="graph-center" cx="${center}" cy="${center}" r="${compact ? 5.8 : 7.5}"/>
       ${nodeMarkup}
     </svg>
-    <p class="graph-note">A living pattern. <strong>${dominant.label}</strong> currently carries the strongest emphasis.</p>
+    ${ambient ? '' : `<p class="graph-note">A living pattern. <strong>${dominant.label}</strong> currently carries the strongest emphasis.</p>`}
   </section>`;
 }
