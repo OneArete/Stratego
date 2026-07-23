@@ -1,4 +1,4 @@
-const CACHE_NAME = 'strategos-shell-v0.38.0-living-companion';
+const CACHE_NAME = 'strategos-shell-v0.39.0-living-human-graph';
 const STATIC_ASSETS = [
   './manifest.webmanifest',
   './icons/delta-180.png',

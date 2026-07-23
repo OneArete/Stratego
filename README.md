@@ -35,7 +35,7 @@ Repeated person-reported outcomes can now become explicit, reviewable belief can
 
 ## Current release
 
-Strategos v0.38.0 introduces the Living Companion experience: one presence, one current judgement and one next action, with complexity progressively disclosed.
+Strategos v0.39.0 introduces the Living Companion experience: one presence, one current judgement and one next action, with complexity progressively disclosed.
 
 
 ## v0.30 — Daily Check-in Foundation
@@ -54,5 +54,5 @@ Each Daily Story can now close with one optional private sentence. The person ma
 Journey now forms a descriptive seven-day review after at least three recorded days. The person may preserve the review explicitly; no score, diagnosis, character inference, or automatic behavioural influence is created.
 
 
-## v0.38.0 — Living Companion
+## v0.39.0 — Living Companion
 Today now begins with continuity rather than a dashboard. The Living Human Graph remains quietly present across the application, and silence is treated as a valid product state.

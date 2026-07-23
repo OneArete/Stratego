@@ -1,4 +1,14 @@
-# v0.38.0 — Living Companion
+# Strategos Changelog
+
+## 0.39.0 — Living Human Graph
+
+- Replaced the Today placeholder with the real six-domain living organism.
+- Established Living Architecture and Visual Philosophy governance.
+- Added slow independent domain breathing, living filaments and stable Self centre.
+- Removed duplicate analytical graph chrome from the Today surface.
+- Preserved reduced-motion accessibility and all frozen engines.
+
+# v0.39.0 — Living Companion
 
 - Today now opens as a calm presence with one judgement and one next action.
 - The Living Human Graph is quietly persistent across routes.
@@ -9,7 +19,7 @@
 
 - Added a descriptive seven-day review to Journey.
 - Added explicit preservation of immutable weekly snapshots.
-- Added state schema 45 and runtime token 0380p1.
+- Added state schema 45 and runtime token 0390p1.
 - Preserved zero automatic behavioural influence.
 
 # v0.35.0 — Evening Experience Foundation
@@ -471,4 +481,4 @@ Official stabilization baseline.
 - Added a quiet weekly direction surface in Today.
 - Added change and clear controls in Journey.
 - Preserved zero automatic influence over the Human Model, judgement and Practice selection.
-- Added schema 46 and runtime token 0380p1.
+- Added schema 46 and runtime token 0390p1.

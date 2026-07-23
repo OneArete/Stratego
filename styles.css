@@ -2935,7 +2935,7 @@ body #app .tabbar button{
 .weekly-intention-actions{display:flex;gap:12px}
 
 
-/* v0.38.0 — Living Companion */
+/* v0.39.0 — Living Companion */
 .companion-presence{position:fixed;top:max(12px,env(safe-area-inset-top));left:calc(50% - 17px);z-index:35;width:34px;height:34px;pointer-events:none;opacity:.72}
 .companion-presence span,.living-companion-graph span{position:absolute;border:1px solid rgba(181,202,206,.32);border-radius:50%;inset:7px;animation:companion-breathe 5.8s ease-in-out infinite}
 .companion-presence span:nth-child(2),.living-companion-graph span:nth-child(2){inset:11px;animation-delay:-1.4s}.companion-presence span:nth-child(3),.living-companion-graph span:nth-child(3){inset:15px;animation-delay:-2.8s}
@@ -2950,3 +2950,75 @@ body #app .tabbar button{
 .route-today>header,.route-today>.continuity-card,.route-today>.observe-stack>div:first-child,.route-today .morning-focus,.route-today .daily-story-hero,.route-today .weekly-direction-today,.route-today .personal-evidence-today,.route-today .daily-orientation,.route-today .observe-stack>button[data-action="consult"]{display:none}
 .route-today .observe-stack{padding-top:0}.route-today .living-graph{opacity:.28;transform:scale(.78);margin-block:-28px}.route-today .context-help{opacity:.55}
 @media (prefers-reduced-motion:reduce){.companion-presence span,.living-companion-graph span{animation:none}}
+
+/* v0.39.0 — Living Architecture: the Human Model becomes visible life */
+.living-companion-hero{
+  position:relative;
+  min-height:calc(100svh - 122px);
+  padding:54px 22px 32px;
+  overflow:hidden;
+  isolation:isolate;
+}
+.living-companion-hero::before{
+  content:"";
+  position:absolute;
+  z-index:-2;
+  inset:2% -34% 32%;
+  background:
+    radial-gradient(ellipse at 50% 42%,rgba(184,148,88,.105),transparent 39%),
+    radial-gradient(ellipse at 64% 28%,rgba(119,153,157,.055),transparent 33%);
+  filter:blur(12px);
+  pointer-events:none;
+}
+.living-companion-organism{
+  position:relative;
+  width:min(88vw,390px);
+  height:min(88vw,390px);
+  max-height:42svh;
+  display:grid;
+  place-items:center;
+  margin:-14px auto -42px;
+  pointer-events:none;
+}
+.living-graph.ambient{
+  width:100%;
+  padding:0;
+  border:0;
+  border-radius:0;
+  background:transparent;
+  overflow:visible;
+  opacity:.96;
+  filter:drop-shadow(0 16px 38px rgba(0,0,0,.32));
+}
+.living-graph.ambient svg{width:100%;max-width:none;margin:0;overflow:visible}
+.living-graph.ambient .graph-membrane{
+  fill:rgba(184,148,88,.018);
+  stroke:rgba(209,185,137,.42);
+  stroke-width:.72;
+  filter:drop-shadow(0 0 9px rgba(184,148,88,.16));
+}
+.living-graph.ambient .graph-link{
+  stroke:rgba(197,175,134,.64);
+  stroke-width:.85;
+  stroke-dasharray:1 7;
+  opacity:.34!important;
+  filter:drop-shadow(0 0 5px rgba(184,148,88,.17));
+}
+.living-graph.ambient .graph-link.dominant-link{stroke-width:1.2;opacity:.58!important}
+.living-graph.ambient .graph-center{fill:#e2c58f;filter:drop-shadow(0 0 14px rgba(214,181,119,.72))}
+.living-graph.ambient .graph-pulse{stroke:rgba(218,191,141,.55);opacity:.3}
+.living-graph.ambient .node-core{fill:#d8b97f;stroke:#f2ddb2;stroke-width:.55;filter:drop-shadow(0 0 9px rgba(205,171,106,.52))}
+.living-graph.ambient .node-halo{fill:#d5ba87}
+.living-graph.ambient .node-label{fill:rgba(213,207,196,.68);font-size:7px;letter-spacing:.065em;text-transform:uppercase}
+.living-graph.ambient .node-trend{display:none}
+.living-companion-hero .companion-eyebrow{margin-top:6px}
+.living-companion-hero h1{font-family:Georgia,serif;font-weight:400}
+.route-today .observe-stack>.living-graph{display:none}
+.route-today .context-help{display:none}
+@media(max-height:700px){
+  .living-companion-organism{width:min(72vw,300px);height:min(72vw,300px);margin:-25px auto -48px}
+  .living-companion-hero{padding-top:35px;gap:13px}
+}
+@media(prefers-reduced-motion:reduce){
+  .living-graph.ambient svg,.living-graph.ambient .graph-web,.living-graph.ambient .graph-center,.living-graph.ambient .node-core{animation:none}
+}
