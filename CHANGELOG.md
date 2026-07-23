@@ -1,4 +1,48 @@
-# v0.29.0
+# v0.38.0 — Living Companion
+
+- Today now opens as a calm presence with one judgement and one next action.
+- The Living Human Graph is quietly persistent across routes.
+- Silence is now an explicit product state; no artificial urgency is created.
+- All decision, safety, Practice and audit engines remain unchanged.
+
+# v0.37.0 — Weekly Review Foundation
+
+- Added a descriptive seven-day review to Journey.
+- Added explicit preservation of immutable weekly snapshots.
+- Added state schema 45 and runtime token 0380p1.
+- Preserved zero automatic behavioural influence.
+
+# v0.35.0 — Evening Experience Foundation
+
+- Added a one-minute end-of-day surface.
+- Added optional close-without-writing flow.
+- Closed Daily Stories now remain complete without requiring journal text.
+- Added explicit governance and migration to schema 44.
+
+# v0.35.0 — Focused Practice Experience
+
+- Introduces one primary cue per Practice phase.
+- Moves technique and variations behind progressive disclosure.
+- Preserves the frozen Practice Engine, safety, voice, sound, haptics and Wake Lock.
+
+# v0.33.0 — Morning Experience Foundation
+
+- Added a focused Morning Experience to Today.
+- Added progressive disclosure for daily signals.
+- Preserved Agora as the only source of recommendations.
+
+# v0.32.0 — Daily Story Foundation
+
+- The day becomes the primary experiential unit.
+- Added Daily Story lifecycle and Living Timeline.
+- State schema 43 and runtime token 0320p1.
+
+# v0.32.0
+- Added deterministic Daily Orientation to Today.
+- Added descriptive Recent Daily Rhythm to Journey.
+- Preserved zero automatic decision influence.
+
+# v0.30.0
 
 - Added progressive optional profile onboarding.
 - Added editable My Profile in Settings.
@@ -416,3 +460,15 @@ Official stabilization baseline.
 - Adds person-controlled confirm, reject and reopen review actions.
 - Preserves zero automatic influence over Human Model, judgement, Practice selection and safety.
 - Adds schema 39, runtime token 0280p1 and belief governance.
+
+
+## 0.30.0
+- Added persistent daily signals with one editable check-in per local day.
+- Added current-day reset and saved-state summary in Today.
+
+## 0.37.0 — Weekly Intention Foundation
+- Added one person-selected direction per seven-day review window.
+- Added a quiet weekly direction surface in Today.
+- Added change and clear controls in Journey.
+- Preserved zero automatic influence over the Human Model, judgement and Practice selection.
+- Added schema 46 and runtime token 0380p1.

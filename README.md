@@ -35,4 +35,24 @@ Repeated person-reported outcomes can now become explicit, reviewable belief can
 
 ## Current release
 
-Strategos v0.29.0 adds progressive onboarding and an editable local profile.
+Strategos v0.38.0 introduces the Living Companion experience: one presence, one current judgement and one next action, with complexity progressively disclosed.
+
+
+## v0.30 — Daily Check-in Foundation
+Today now preserves one editable, local check-in per calendar day so daily use survives navigation and app restarts.
+
+
+## v0.31 — Daily Orientation Foundation
+Today explains the meaning of the current check-in before convening the Agora, while Journey shows a descriptive seven-day rhythm.
+
+
+## v0.35.0 — Evening Experience
+Each Daily Story can now close with one optional private sentence. The person may also close the day without writing; no score or automatic interpretation is created.
+
+
+## v0.37.0 — Weekly Review Foundation
+Journey now forms a descriptive seven-day review after at least three recorded days. The person may preserve the review explicitly; no score, diagnosis, character inference, or automatic behavioural influence is created.
+
+
+## v0.38.0 — Living Companion
+Today now begins with continuity rather than a dashboard. The Living Human Graph remains quietly present across the application, and silence is treated as a valid product state.

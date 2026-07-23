@@ -2878,3 +2878,75 @@ body #app .tabbar button{
 
 /* v0.29.0 progressive profile */
 .profile-form{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:12px;margin:16px 0}.profile-form label{display:flex;flex-direction:column;gap:7px}.profile-form label span{font-size:.76rem;letter-spacing:.08em;text-transform:uppercase;color:var(--muted)}.profile-form input,.profile-form select,.profile-form textarea{width:100%;border:1px solid var(--line);border-radius:14px;background:var(--surface);color:var(--text);padding:13px;font:inherit}.profile-form textarea{resize:vertical}.profile-form .profile-wide{grid-column:1/-1}.profile-settings h3{line-height:1.35}@media(max-width:560px){.profile-form{grid-template-columns:1fr}.profile-form .profile-wide{grid-column:auto}}
+
+.signal-panel-head{display:flex;align-items:flex-start;justify-content:space-between;gap:1rem;margin-bottom:.35rem}.signal-panel-head small{display:block;max-width:28rem;color:var(--muted);line-height:1.45}.signal-panel-head .text-btn{margin:0;padding:.25rem 0;white-space:nowrap}
+
+
+.daily-orientation,.checkin-trajectory{border:1px solid rgba(255,255,255,.11);border-radius:24px;padding:20px;background:rgba(255,255,255,.035);display:grid;gap:9px}
+.daily-orientation h3,.checkin-trajectory h3{margin:0;font-size:1.18rem}
+.daily-orientation p,.checkin-trajectory p{margin:0;line-height:1.55}
+.daily-orientation.protect{border-color:rgba(255,255,255,.18)}
+.daily-orientation.advance{background:rgba(255,255,255,.055)}
+.orientation-evidence{display:grid;gap:4px;padding:12px 14px;border-radius:16px;background:rgba(255,255,255,.045)}
+.orientation-evidence span{font-size:.9rem;line-height:1.45}
+
+/* v0.32 Daily Story */
+.daily-story-hero{display:flex;align-items:center;justify-content:space-between;gap:16px;padding:14px 16px;border:1px solid rgba(255,255,255,.1);border-radius:22px;background:rgba(255,255,255,.025)}
+.daily-story-hero h3{margin:2px 0 0;font-size:1rem;font-weight:540}.daily-story-hero>span{font-size:.68rem;text-transform:uppercase;letter-spacing:.12em;color:var(--muted)}
+.daily-story-timeline{display:grid;gap:12px;margin:18px 0;padding:18px;border:1px solid rgba(255,255,255,.1);border-radius:24px;background:rgba(255,255,255,.025)}
+.daily-story-day{display:grid;grid-template-columns:52px 1fr auto;gap:12px;align-items:center;padding:11px 0;border-top:1px solid rgba(255,255,255,.07)}.daily-story-day:first-of-type{border-top:0}.daily-story-day time,.daily-story-day small,.daily-story-day>span{font-size:.7rem;color:var(--muted)}.daily-story-day div{display:grid;gap:3px}.daily-story-day>span{text-transform:uppercase;letter-spacing:.08em}.daily-story-day.complete>span{color:var(--text)}
+
+/* v0.33 Morning Experience */
+.morning-focus{display:grid;gap:16px;padding:24px 20px;border:1px solid rgba(212,176,111,.22);border-radius:28px;background:radial-gradient(circle at 50% 0,rgba(184,148,88,.13),transparent 48%),rgba(255,255,255,.018)}
+.morning-focus-copy{display:grid;gap:7px}.morning-focus h1{margin:0;max-width:19ch;font-family:Georgia,serif;font-size:clamp(1.65rem,7vw,2.35rem);font-weight:400;line-height:1.08}.morning-salutation{order:-1;margin:0;color:var(--muted);font-size:.78rem}.morning-progress{display:grid;grid-template-columns:1fr auto;align-items:center;gap:10px}.morning-progress>span{height:2px;background:linear-gradient(90deg,#c8a568 var(--morning-progress),rgba(255,255,255,.1) var(--morning-progress));border-radius:99px}.morning-progress small{color:var(--muted);font-size:.66rem}.morning-primary{min-height:52px}.morning-why{border-top:1px solid var(--line);padding-top:12px}.morning-why summary{cursor:pointer;color:#d9c6a3;font-size:.78rem}.morning-why ul{display:grid;gap:8px;margin:12px 0 0;padding-left:18px;color:var(--muted);font-size:.76rem;line-height:1.45}.signal-panel-disclosure{padding-top:0;border-top:0}.signal-panel-disclosure>summary{display:flex;align-items:center;justify-content:space-between;gap:16px;list-style:none;padding:16px;border:1px solid var(--line);border-radius:18px;cursor:pointer}.signal-panel-disclosure>summary::-webkit-details-marker{display:none}.signal-panel-disclosure>summary>span:first-child{display:grid;gap:4px}.signal-panel-disclosure>summary strong{font-size:.9rem}.signal-panel-disclosure>summary>span:last-child{color:#d4b06f;font-size:.72rem}.signal-panel-body{padding-top:18px}.signal-panel-disclosure[open]>summary{border-color:rgba(212,176,111,.28)}
+
+/* v0.34 — Focused Practice Experience */
+.practice-session-strip.focused{opacity:.78}
+.practice-focus{display:grid;justify-items:center;text-align:center;gap:.7rem;padding:1.1rem 0 .4rem}
+.practice-focus h2{font-size:clamp(2rem,8vw,3.6rem);margin:0;letter-spacing:-.035em}
+.practice-focus .clock{margin:.15rem 0;font-variant-numeric:tabular-nums}
+.practice-primary-cue{max-width:31rem;font-size:1.08rem;line-height:1.5;margin:.15rem auto 0;font-weight:650}
+.practice-focus small{max-width:28rem;color:var(--muted);line-height:1.45}
+.next-phase-card.quiet{opacity:.72;border-style:solid;background:transparent}
+.practice-guidance-card{margin-top:.8rem}
+.practice-guidance-card>.exercise-guide{margin-top:.45rem}
+@media (max-width:560px){.practice-focus{padding-top:.65rem}.practice-focus h2{font-size:2.25rem}.practice-primary-cue{font-size:1rem}.practice-guidance-card{padding:.8rem}}
+
+
+/* v0.35 — Evening Experience */
+.evening-invitation{display:grid;gap:14px;padding:18px;border:1px solid rgba(212,176,111,.2);border-radius:24px;background:linear-gradient(180deg,rgba(184,148,88,.07),rgba(255,255,255,.018))}
+.evening-invitation h3,.evening-invitation p{margin:0}.evening-invitation p:not(.eyebrow){margin-top:6px;color:var(--muted);font-size:.78rem;line-height:1.5}.evening-invitation.complete{opacity:.76}
+.evening-reflection-screen{min-height:72vh;align-content:center;gap:22px}.evening-reflection-heading{display:grid;gap:8px;text-align:center}.evening-reflection-heading h1{margin:0;font-family:Georgia,serif;font-size:clamp(2rem,9vw,3.2rem);font-weight:400;line-height:1.05}.evening-reflection-screen label{display:grid;gap:8px}.evening-reflection-screen label>span{color:#cbbca7;font-size:.72rem;text-transform:uppercase;letter-spacing:.08em}.evening-reflection-screen textarea{width:100%;min-height:150px;box-sizing:border-box;padding:16px;border:1px solid var(--line);border-radius:20px;background:rgba(255,255,255,.025);color:var(--text);font:inherit;line-height:1.6;resize:vertical}.evening-reflection-actions{display:grid;gap:10px}.evening-reflection-screen>small{text-align:center;color:var(--muted);font-size:.68rem;line-height:1.45}
+
+.weekly-review-card{display:grid;gap:14px;margin:18px 0;padding:20px;border:1px solid rgba(255,255,255,.11);border-radius:24px;background:linear-gradient(180deg,rgba(255,255,255,.04),rgba(255,255,255,.018))}
+.weekly-review-card>p{margin:0;line-height:1.55}
+.weekly-review-metrics{display:grid;grid-template-columns:repeat(3,1fr);gap:8px}
+.weekly-review-metrics article{display:grid;gap:4px;padding:12px;border-radius:16px;background:rgba(255,255,255,.04)}
+.weekly-review-metrics strong{font-size:1.35rem;font-weight:540}
+.weekly-review-metrics span{font-size:.72rem;color:var(--muted)}
+.weekly-review-preserved{display:flex;justify-content:space-between;align-items:center;padding-top:10px;border-top:1px solid rgba(255,255,255,.08);font-size:.78rem;color:var(--muted)}
+@media(max-width:430px){.weekly-review-metrics{grid-template-columns:1fr}.weekly-review-metrics article{grid-template-columns:auto 1fr;align-items:baseline}}
+
+.weekly-direction-today{display:grid;gap:7px;margin:2px 0 14px;padding:17px 18px;border:1px solid rgba(255,255,255,.1);border-radius:21px;background:rgba(255,255,255,.025)}
+.weekly-direction-today h3,.weekly-direction-today p{margin:0}.weekly-direction-today small{color:var(--muted)}
+.weekly-intention{display:grid;gap:11px;padding-top:15px;border-top:1px solid rgba(255,255,255,.08)}
+.weekly-intention h3,.weekly-intention p{margin:0}.weekly-intention label{display:grid;gap:7px;font-size:.76rem;color:var(--muted)}
+.weekly-intention select,.weekly-intention input{width:100%;box-sizing:border-box;border:1px solid rgba(255,255,255,.12);border-radius:14px;background:rgba(0,0,0,.18);color:inherit;padding:12px 13px;font:inherit}
+.weekly-intention-actions{display:flex;gap:12px}
+
+
+/* v0.38.0 — Living Companion */
+.companion-presence{position:fixed;top:max(12px,env(safe-area-inset-top));left:calc(50% - 17px);z-index:35;width:34px;height:34px;pointer-events:none;opacity:.72}
+.companion-presence span,.living-companion-graph span{position:absolute;border:1px solid rgba(181,202,206,.32);border-radius:50%;inset:7px;animation:companion-breathe 5.8s ease-in-out infinite}
+.companion-presence span:nth-child(2),.living-companion-graph span:nth-child(2){inset:11px;animation-delay:-1.4s}.companion-presence span:nth-child(3),.living-companion-graph span:nth-child(3){inset:15px;animation-delay:-2.8s}
+.companion-presence i,.living-companion-graph i{position:absolute;left:50%;top:50%;width:4px;height:4px;border-radius:50%;background:currentColor;transform:translate(-50%,-50%);box-shadow:0 0 16px currentColor}
+@keyframes companion-breathe{0%,100%{transform:scale(.94);opacity:.38}50%{transform:scale(1.12);opacity:.9}}
+.living-companion-hero{min-height:calc(100svh - 150px);display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;padding:72px 24px 36px;gap:18px}
+.living-companion-graph{position:relative;width:156px;height:156px;margin-bottom:6px;color:rgba(209,224,225,.9)}
+.living-companion-graph span{border-color:rgba(180,205,208,.22);inset:18px}.living-companion-graph span:nth-child(2){inset:38px}.living-companion-graph span:nth-child(3){inset:58px}
+.living-companion-hero h1{font-size:clamp(2rem,8vw,3.5rem);font-weight:430;letter-spacing:-.045em;margin:0}.companion-judgement{display:flex;flex-direction:column;gap:8px;max-width:620px}.companion-judgement small{opacity:.58;text-transform:uppercase;letter-spacing:.16em}.companion-judgement strong{font-size:clamp(1.35rem,5.5vw,2.15rem);font-weight:520;line-height:1.2}
+.living-companion-hero details{max-width:520px;width:100%;border:0;background:transparent}.living-companion-hero summary{cursor:pointer;list-style:none;opacity:.62;padding:8px}.living-companion-hero details div{padding:10px 18px 2px;border-top:1px solid rgba(255,255,255,.08)}.living-companion-hero details p{margin:.55rem 0;opacity:.75}.living-companion-hero details small{display:block;margin-top:12px;opacity:.5}
+.companion-primary{max-width:420px}.companion-continuity{font-size:.86rem;opacity:.5;margin:0}
+.route-today>header,.route-today>.continuity-card,.route-today>.observe-stack>div:first-child,.route-today .morning-focus,.route-today .daily-story-hero,.route-today .weekly-direction-today,.route-today .personal-evidence-today,.route-today .daily-orientation,.route-today .observe-stack>button[data-action="consult"]{display:none}
+.route-today .observe-stack{padding-top:0}.route-today .living-graph{opacity:.28;transform:scale(.78);margin-block:-28px}.route-today .context-help{opacity:.55}
+@media (prefers-reduced-motion:reduce){.companion-presence span,.living-companion-graph span{animation:none}}
