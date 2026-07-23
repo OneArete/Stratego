@@ -1,0 +1,10 @@
+import test from 'node:test';
+import assert from 'node:assert/strict';
+import {readFileSync} from 'node:fs';
+const app=readFileSync(new URL('../src/app.js',import.meta.url),'utf8');
+test('Practice exposes safety concern control',()=>{assert.ok(app.includes('Safety concern'));assert.ok(app.includes('SAFETY PAUSE'));});
+test('raising concern pauses execution and records event',()=>{const s=app.indexOf("if(t.dataset.runtimeSafetyAction)");const e=app.indexOf("if(t.dataset.settingToggle)",s);const h=app.slice(s,e);assert.match(h,/createSafetyInterruption/);assert.match(h,/pauseExecution/);});
+test('resume requires explicit safety resolution',()=>{assert.ok(app.includes('I reassessed and can resume'));assert.match(app,/resolveSafetyInterruption\(item,\{action:'resume'\}\)/);});
+test('normal pause cannot bypass active safety interruption',()=>{const t=app.slice(app.indexOf('function togglePause'),app.indexOf('function updateJudgementStatus'));assert.match(t,/safetyRuntimeGate/);assert.match(t,/!runtimeGate\.canRun/);});
+test('Journey and Audit preserve runtime events',()=>{assert.ok(app.includes('Runtime safety interruptions'));assert.ok(app.includes('RUNTIME SAFETY INTERRUPTIONS'));});
+test('all runtime imports use Phase 3 token',()=>{for(const s of [...app.matchAll(/from ['"]([^'"]+\.js(?:\?v=[^'"]+)?)['"]/g)].map(m=>m[1]))assert.match(s,/\?v=0390p1$/);});

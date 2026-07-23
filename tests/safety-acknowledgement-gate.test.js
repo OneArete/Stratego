@@ -1,0 +1,8 @@
+import test from 'node:test';
+import assert from 'node:assert/strict';
+import {buildSafetyEnvelope,safetyAcknowledgementRequirement,createSafetyAcknowledgement,safetyAcknowledgementValid,safetyStartGate} from '../src/core/safety-architecture.js?v=0390p1';
+const constrained=()=>buildSafetyEnvelope({decision:{advisors:[],agora:{blockedPractices:[{practiceId:'strength',reason:'Significant soreness'}],cautions:[]}}});
+test('clear and caution need no acknowledgement',()=>{const clear=buildSafetyEnvelope({decision:{advisors:[],agora:{blockedPractices:[],cautions:[]}}});const caution=buildSafetyEnvelope({decision:{advisors:[],agora:{blockedPractices:[],cautions:[{advisor:'Recovery',position:'Caution',reason:'Low energy'}]}}});assert.equal(safetyAcknowledgementRequirement(clear).required,false);assert.equal(safetyAcknowledgementRequirement(caution).required,false)});
+test('constrained requires acknowledgement',()=>assert.equal(safetyAcknowledgementRequirement(constrained()).required,true));
+test('acknowledgement binds to judgement and envelope',()=>{const envelope=constrained();const ack=createSafetyAcknowledgement({envelope,judgementId:'j1',at:'2026-07-22T10:00:00Z'});assert.equal(safetyAcknowledgementValid(ack,{envelope,judgementId:'j1'}),true);assert.equal(safetyAcknowledgementValid(ack,{envelope,judgementId:'j2'}),false)});
+test('start gate blocks until acknowledged',()=>{const envelope=constrained();assert.equal(safetyStartGate({envelope,judgementId:'j1'}).canStart,false);const ack=createSafetyAcknowledgement({envelope,judgementId:'j1'});assert.equal(safetyStartGate({envelope,acknowledgement:ack,judgementId:'j1'}).canStart,true)});

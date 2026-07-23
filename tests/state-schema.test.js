@@ -5,7 +5,7 @@ import { createInitialState, migrateState, migrateDelta, STATE_SCHEMA_VERSION } 
 test('initial state has the current schema',()=>{
   const state=createInitialState();
   assert.equal(state.schemaVersion,STATE_SCHEMA_VERSION);
-  assert.equal(state.productVersion,'0.16.5');
+  assert.equal(state.productVersion,'0.37.0');
 });
 
 test('v0.8.0 legacy deltas migrate to Recovery',()=>{
