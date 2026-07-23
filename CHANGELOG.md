@@ -19,7 +19,7 @@
 
 - Added a descriptive seven-day review to Journey.
 - Added explicit preservation of immutable weekly snapshots.
-- Added state schema 45 and runtime token 0390p1.
+- Added state schema 45 and runtime token 0410p1.
 - Preserved zero automatic behavioural influence.
 
 # v0.35.0 — Evening Experience Foundation
@@ -481,4 +481,12 @@ Official stabilization baseline.
 - Added a quiet weekly direction surface in Today.
 - Added change and clear controls in Journey.
 - Preserved zero automatic influence over the Human Model, judgement and Practice selection.
-- Added schema 46 and runtime token 0390p1.
+- Added schema 46 and runtime token 0410p1.
+
+## 0.41.0 — Living Organism
+
+- Replaced rigid polygon behaviour with bounded organic curvature and deterministic micro-asymmetry.
+- Introduced a shared Life Clock for whole-organism breathing.
+- Added visual depth through field, membrane, filaments and nuclei.
+- Preserved a stable Self and prohibited performance semantics.
+- Added complete reduced-motion behaviour.

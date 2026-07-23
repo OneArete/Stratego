@@ -3022,3 +3022,121 @@ body #app .tabbar button{
 @media(prefers-reduced-motion:reduce){
   .living-graph.ambient svg,.living-graph.ambient .graph-web,.living-graph.ambient .graph-center,.living-graph.ambient .node-core{animation:none}
 }
+
+/* v0.41.0 — Living Organism: one life clock, organic tension and depth */
+.living-graph{
+  --life-clock:16s;
+  position:relative;
+}
+.living-graph .organism-depth{
+  position:absolute;
+  left:50%;
+  top:50%;
+  width:72%;
+  aspect-ratio:1;
+  border-radius:50%;
+  transform:translate(-50%,-50%);
+  background:radial-gradient(circle,rgba(213,184,128,.07),rgba(112,139,142,.025) 42%,transparent 72%);
+  filter:blur(18px);
+  opacity:.72;
+  pointer-events:none;
+}
+.living-graph svg{
+  position:relative;
+  z-index:1;
+  animation:none;
+}
+.organism-body{
+  transform-origin:center;
+  animation:organism-breath var(--life-clock) cubic-bezier(.45,0,.55,1) infinite;
+}
+.graph-membrane{
+  fill:rgba(184,148,88,.014);
+  stroke-linecap:round;
+  stroke-linejoin:round;
+}
+.graph-membrane-shadow{
+  fill:none;
+  stroke:rgba(184,148,88,.055);
+  stroke-width:7;
+  filter:blur(7px);
+  animation:membrane-shadow var(--life-clock) ease-in-out infinite;
+}
+.graph-web{animation:none}
+.graph-link{
+  stroke-dasharray:none;
+  stroke-linecap:round;
+  opacity:var(--filament-opacity,.28)!important;
+  animation:filament-life var(--life-clock) ease-in-out infinite;
+  vector-effect:non-scaling-stroke;
+}
+.graph-link.dominant-link{
+  opacity:calc(var(--filament-opacity,.28) + .18)!important;
+}
+.graph-node{
+  transform-box:fill-box;
+  transform-origin:center;
+  animation:domain-breath var(--node-duration,14s) ease-in-out var(--node-delay,0s) infinite;
+}
+.node-halo{animation:halo-breath var(--node-duration,14s) ease-in-out var(--node-delay,0s) infinite}
+.node-core{animation:core-temperature var(--life-clock) ease-in-out infinite}
+.graph-center{
+  transform-box:fill-box;
+  transform-origin:center;
+  animation:self-breath 12s cubic-bezier(.45,0,.55,1) infinite;
+}
+.graph-pulse{
+  transform-box:fill-box;
+  transform-origin:center;
+  animation:none;
+}
+.graph-pulse-outer{opacity:.12;animation:self-field 12s ease-out infinite}
+.graph-pulse-inner{opacity:.2;animation:self-field 12s ease-out -6s infinite}
+.living-graph.ambient .graph-membrane{
+  stroke:rgba(209,185,137,.38);
+  stroke-width:.8;
+}
+.living-graph.ambient .graph-membrane-shadow{stroke:rgba(206,177,121,.08);stroke-width:9}
+.living-graph.ambient .graph-link{stroke:rgba(202,180,139,.58);stroke-width:.78}
+.living-graph.ambient .dominant-link{stroke-width:1.12}
+.living-graph.ambient .node-label{opacity:.74}
+
+@keyframes organism-breath{
+  0%,100%{transform:scale(.992) translateY(.6px)}
+  50%{transform:scale(1.008) translateY(-.6px)}
+}
+@keyframes membrane-shadow{
+  0%,100%{opacity:.28}
+  50%{opacity:.52}
+}
+@keyframes filament-life{
+  0%,100%{filter:drop-shadow(0 0 2px rgba(184,148,88,.08))}
+  50%{filter:drop-shadow(0 0 5px rgba(184,148,88,.19))}
+}
+@keyframes domain-breath{
+  0%,100%{transform:scale(.985)}
+  50%{transform:scale(1.025)}
+}
+@keyframes halo-breath{
+  0%,100%{opacity:.07}
+  50%{opacity:.18}
+}
+@keyframes core-temperature{
+  0%,100%{filter:drop-shadow(0 0 5px rgba(164,124,71,.32))}
+  50%{filter:drop-shadow(0 0 10px rgba(232,207,159,.62))}
+}
+@keyframes self-breath{
+  0%,100%{transform:scale(.96);opacity:.78;filter:drop-shadow(0 0 7px rgba(184,148,88,.34))}
+  50%{transform:scale(1.04);opacity:1;filter:drop-shadow(0 0 15px rgba(224,195,137,.72))}
+}
+@keyframes self-field{
+  0%{transform:scale(.72);opacity:.24}
+  75%,100%{transform:scale(1.55);opacity:0}
+}
+@media(prefers-reduced-motion:reduce){
+  .organism-body,.graph-membrane-shadow,.graph-link,.graph-node,.node-halo,.node-core,.graph-center,.graph-pulse{animation:none!important}
+  .graph-membrane animate,.graph-link animate{display:none!important}
+}
+
+/* v0.41 Daily Context Flow */
+.checkin-flow{padding:28px 16px 120px;gap:24px}.checkin-intro{display:grid;gap:12px}.checkin-intro h1{margin:0;font-family:Georgia,serif;font-weight:400;font-size:clamp(2rem,9vw,3rem);line-height:1.04}.checkin-intro>p{margin:0;color:var(--muted);line-height:1.55}.checkin-progress{display:grid;grid-template-columns:1fr auto;align-items:center;gap:12px}.checkin-progress>span{height:2px;border-radius:99px;background:linear-gradient(90deg,#c8a568 var(--checkin-progress),rgba(255,255,255,.1) var(--checkin-progress))}.checkin-progress small{color:var(--muted)}.checkin-questions{display:grid;gap:0}.checkin-questions .question{padding:24px 0;border-top:1px solid var(--line)}.checkin-questions .question:first-child{border-top:0}.checkin-completion{position:sticky;bottom:86px;z-index:4;display:grid;gap:10px;padding:16px;border:1px solid rgba(200,165,104,.28);border-radius:22px;background:rgba(10,10,9,.94);backdrop-filter:blur(16px)}.checkin-completion p{margin:0;color:var(--muted);text-align:center}.checkin-completion .action:disabled{opacity:.42;cursor:not-allowed}.route-checkin .bottom-nav button[data-action="today"]{color:#d4b06f}
