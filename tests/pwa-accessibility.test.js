@@ -9,15 +9,15 @@ const sw = readFileSync(new URL('../service-worker.js', import.meta.url), 'utf8'
 const manifest = JSON.parse(readFileSync(new URL('../manifest.webmanifest', import.meta.url), 'utf8'));
 
 test('registers a versioned service worker and offline shell', () => {
-  assert.match(app, /serviceWorker\.register\('\.\/service-worker\.js'/);
-  assert.match(sw, /strategos-shell-v0\.16\.5/);
+  assert.match(app, /serviceWorker\.register\('\.\/service-worker\.js\?v=0390p1'/);
+  assert.match(sw, /strategos-shell-v0\.39\.0-living-human-graph/);
   assert.match(sw, /request\.mode === 'navigate'/);
 });
 
 test('provides a persistent polite live region and bounded timer announcements', () => {
   assert.match(index, /id="a11y-status"/);
   assert.match(index, /aria-live="polite"/);
-  assert.match(app, /Three seconds remaining in this phase/);
+  assert.match(app, /Five seconds remaining in this phase/);
   assert.doesNotMatch(app, /aria-live="assertive"/);
 });
 

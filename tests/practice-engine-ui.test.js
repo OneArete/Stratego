@@ -1,0 +1,10 @@
+import test from 'node:test';
+import assert from 'node:assert/strict';
+import {readFileSync} from 'node:fs';
+const app=readFileSync(new URL('../src/app.js',import.meta.url),'utf8');const css=readFileSync(new URL('../styles.css',import.meta.url),'utf8');
+test('Practice shows next phase',()=>{assert.ok(app.includes('class="next-phase-card quiet"'));assert.ok(app.includes('snapshot.next.name'))});
+test('Practice shows total progress',()=>{assert.ok(app.includes('id="practice-progress"'));assert.match(css,/\.practice-total-progress/)});
+test('phase navigation disables impossible directions',()=>{assert.match(app,/canMovePhase\(phases,execution,-1\)/);assert.match(app,/canMovePhase\(phases,execution,1\)/)});
+test('resume shows precise state',()=>{assert.ok(app.includes('practiceSessionSummary(snapshot)'));assert.ok(app.includes('describePracticeResume(snapshot)'))});
+test('abandon stores actual completion ratio',()=>assert.match(app,/completionRatio=sessionCompletionRatio/));
+test('Practice UI remains restrained',()=>assert.match(css,/background:rgba\(184,148,88,.035\)/));

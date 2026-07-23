@@ -1,0 +1,12 @@
+import test from 'node:test';
+import assert from 'node:assert/strict';
+import {buildPracticeSessionSnapshot,sessionCompletionRatio,canMovePhase,describePracticeResume,practiceSessionSummary,formatDuration} from '../src/core/practice-session.js';
+const phases=[['Warm up',60,'Prepare',[]],['Main',120,'Work',[]],['Close',60,'Finish',[]]];
+test('snapshot exposes current next and previous phases',()=>{const s=buildPracticeSessionSnapshot({phases,execution:{phaseIndex:1,phaseStartedAt:'2026-07-20T10:00:00.000Z',phaseDuration:120,status:'active',totalPausedDuration:0},now:new Date('2026-07-20T10:00:30.000Z').getTime()});assert.equal(s.current.name,'Main');assert.equal(s.previous.name,'Warm up');assert.equal(s.next.name,'Close')});
+test('practice progress combines completed and current time',()=>assert.equal(sessionCompletionRatio(phases,{phaseIndex:1,phaseStartedAt:'2026-07-20T10:00:00.000Z',phaseDuration:120,status:'active',totalPausedDuration:0},new Date('2026-07-20T10:01:00.000Z').getTime()),.5));
+test('paused session uses paused timestamp',()=>{const s=buildPracticeSessionSnapshot({phases,execution:{phaseIndex:0,phaseStartedAt:'2026-07-20T10:00:00.000Z',phaseDuration:60,status:'paused',pausedAt:'2026-07-20T10:00:20.000Z',totalPausedDuration:0},now:new Date('2026-07-20T12:00:00.000Z').getTime()});assert.equal(s.current.remainingSeconds,40)});
+test('phase movement is bounded',()=>{assert.equal(canMovePhase(phases,{phaseIndex:0},-1),false);assert.equal(canMovePhase(phases,{phaseIndex:0},1),true);assert.equal(canMovePhase(phases,{phaseIndex:2},1),false)});
+test('resume description names current and next phase',()=>{const s=buildPracticeSessionSnapshot({phases,execution:{phaseIndex:1,phaseStartedAt:'invalid',phaseDuration:120,status:'paused'}});assert.match(describePracticeResume(s),/Main/);assert.match(describePracticeResume(s),/Next: Close/)});
+test('session summary includes phase and remaining duration',()=>{const s=buildPracticeSessionSnapshot({phases,execution:{phaseIndex:0,phaseStartedAt:'invalid',phaseDuration:60,status:'paused'}});assert.match(practiceSessionSummary(s),/1 of 3 phases/);assert.match(practiceSessionSummary(s),/4 min remaining/)});
+test('duration formatter remains compact',()=>{assert.equal(formatDuration(45),'45s');assert.equal(formatDuration(120),'2 min');assert.equal(formatDuration(125),'2m 5s')});
+test('empty phases are safe',()=>assert.equal(buildPracticeSessionSnapshot({phases:[]}).phaseCount,0));
