@@ -1,4 +1,4 @@
-import { normaliseDailySignals } from './daily-signals.js?v=0380p1';
+import { normaliseDailySignals } from './daily-signals.js?v=0390p1';
 
 const CLAIM_LABELS={body:'physical capacity',mind:'mental clarity',focus:'protected attention',recovery:'recovery',family:'relationships',work:'meaningful work'};
 
