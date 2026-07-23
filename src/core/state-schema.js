@@ -1,5 +1,5 @@
-export const STATE_SCHEMA_VERSION = 40;
-export const PRODUCT_VERSION = '0.29.0';
+export const STATE_SCHEMA_VERSION = 46;
+export const PRODUCT_VERSION = '0.37.0';
 
 export function createInitialState(){
   return {
@@ -38,6 +38,10 @@ export function createInitialState(){
     emotionalJournalEntries:[],
     outcomeLedger:[],
     beliefs:[],
+    dailyCheckIns:[],
+    dailyStories:[],
+    weeklyReviews:[],
+    weeklyIntentions:[],
     integrity:{lastReconciledAt:null,lastReport:null},
     agencyIntegrity:{lastReconciledAt:null,lastReport:null},
     followThroughIntegrity:{lastReconciledAt:null,lastReport:null},
@@ -87,6 +91,12 @@ export function migrateState(input={}){
   if(Number(state.schemaVersion||37) < 38) state = migrateV0260ToV0270Phase1(state);
   if(Number(state.schemaVersion||38) < 39) state = migrateV0270ToV0280Phase1(state);
   if(Number(state.schemaVersion||39) < 40) state = migrateV0280ToV0290Phase1(state);
+  if(Number(state.schemaVersion||40) < 41) state = migrateV0290ToV0300Phase1(state);
+  if(Number(state.schemaVersion||41) < 42) state = migrateV0300ToV0310Phase1(state);
+  if(Number(state.schemaVersion||42) < 43) state = migrateV0310ToV0320Phase1(state);
+  if(Number(state.schemaVersion||43) < 44) state = migrateV0340ToV0350Phase1(state);
+  if(Number(state.schemaVersion||44) < 45) state = migrateV0350ToV0360Phase1(state);
+  if(Number(state.schemaVersion||45) < 46) state = migrateV0360ToV0370Phase1(state);
   const base = createInitialState();
   const migratedSettings={...(state.settings||{})};
   delete migratedSettings.voiceName;
@@ -101,6 +111,10 @@ export function migrateState(input={}){
     emotionalJournalEntries:[...(state.emotionalJournalEntries||[])],
     outcomeLedger:[...(state.outcomeLedger||[])],
     beliefs:[...(state.beliefs||[])],
+    dailyCheckIns:[...(state.dailyCheckIns||[])],
+    dailyStories:[...(state.dailyStories||[])],
+    weeklyReviews:[...(state.weeklyReviews||[])],
+    weeklyIntentions:[...(state.weeklyIntentions||[])],
     understandingModel:{
       ...base.understandingModel,
       ...(state.understandingModel||{}),
@@ -139,12 +153,51 @@ export function migrateState(input={}){
 
 
 
+export function migrateV0360ToV0370Phase1(state={}){
+  const next=structuredCloneSafe(state);
+  next.weeklyIntentions=[...(next.weeklyIntentions||[])];
+  next.schemaVersion=46;
+  next.productVersion='0.37.0';
+  return next;
+}
+
+export function migrateV0340ToV0350Phase1(state={}){
+  const next=structuredCloneSafe(state);
+  next.dailyStories=[...(next.dailyStories||[])];
+  next.schemaVersion=44;
+  next.productVersion='0.35.0';
+  return next;
+}
+
+export function migrateV0310ToV0320Phase1(state={}){
+  const next=structuredCloneSafe(state);
+  next.dailyStories=[...(next.dailyStories||[])];
+  next.schemaVersion=43;
+  next.productVersion='0.32.0';
+  return next;
+}
+
+export function migrateV0300ToV0310Phase1(state={}){
+  const next=structuredCloneSafe(state);
+  next.dailyCheckIns=[...(next.dailyCheckIns||[])];
+  next.schemaVersion=42;
+  next.productVersion='0.32.0';
+  return next;
+}
+
+export function migrateV0290ToV0300Phase1(state={}){
+  const next=structuredCloneSafe(state);
+  next.dailyCheckIns=[...(next.dailyCheckIns||[])];
+  next.schemaVersion=41;
+  next.productVersion='0.30.0';
+  return next;
+}
 
 export function migrateV0280ToV0290Phase1(state={}){
   const next=structuredCloneSafe(state);
   next.profile=next.profile&&typeof next.profile==='object'?{...next.profile}:next.profile;
   next.schemaVersion=40;
-  next.productVersion='0.29.0';
+  next.productVersion='0.30.0';
   return next;
 }
 
@@ -492,6 +545,14 @@ export function migrateV090Phase2ToPhase3(state={}){
   if(next.current?.decision)next.current={...next.current,decision:addValidity(next.current.decision)};
   next.schemaVersion=7;
   next.productVersion='0.9.0';
+  return next;
+}
+
+export function migrateV0350ToV0360Phase1(state={}){
+  const next=structuredCloneSafe(state);
+  next.weeklyReviews=[...(next.weeklyReviews||[])];
+  next.schemaVersion=45;
+  next.productVersion='0.36.0';
   return next;
 }
 
