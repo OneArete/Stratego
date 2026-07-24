@@ -9,7 +9,7 @@
   <meta name="apple-mobile-web-app-title" content="Strategos" />
   <link rel="apple-touch-icon" href="./icons/delta-180.png" />
   <link rel="manifest" href="./manifest.webmanifest" />
-  <link rel="stylesheet" href="./styles.css?v=0473p1" />
+  <link rel="stylesheet" href="./styles.css?v=0462p1" />
   <title>Strategos — OneArete</title>
 </head>
 <body>
@@ -58,7 +58,7 @@
           var names = await caches.keys();
           await Promise.all(names.map(function (name) { return caches.delete(name); }));
         }
-        await import('./src/app.js?v=0473p1');
+        await import('./src/app.js?v=0462p1');
       } catch (error) {
         var detail = error && error.message ? error.message : 'application module could not be loaded';
         window.__strategosBootError(detail);

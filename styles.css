@@ -3391,31 +3391,9 @@ body #app .tabbar button{
 }
 
 
-/* v0.47.0 — invisible organism and check-in repair */
+/* v0.46.2 — interaction hardening */
 .moment-action{position:relative;z-index:20;pointer-events:auto;touch-action:manipulation;-webkit-tap-highlight-color:transparent}
 .current-moment.listen .organism-field .graph-node{opacity:.88}
 .current-moment.listen .organism-field .graph-membrane{animation:none}
 .current-moment.listen .organism-field .graph-link animate,
 .current-moment.listen .organism-field .graph-membrane animate{display:none}
-
-
-/* v0.47.0 — symmetric living organism */
-.moment-action{display:flex;align-items:center;justify-content:center;text-decoration:none;cursor:pointer;-webkit-user-select:none;user-select:none}
-.organism-field,.organism-field *{pointer-events:none}
-.living-organism .organism-boundary{fill:none;stroke:rgba(211,181,125,.20);stroke-width:.8;transform-origin:center;animation:organismBoundaryBreath 10s ease-in-out infinite}
-.living-organism .organism-boundary-inner{stroke:rgba(211,181,125,.11);animation-delay:-2.5s}
-.living-organism .organism-petal{fill:rgba(188,147,78,.022);stroke:rgba(214,184,128,.30);stroke-width:.7;transform-origin:center;animation:organismPetalBreath 12s ease-in-out infinite}
-.living-organism .organism-filament{fill:none;stroke:rgba(205,174,118,.20);stroke-width:.65}
-.living-organism .organism-heart-aura{fill:rgba(203,166,101,.09);transform-origin:center;animation:organismHeartBreath 7s ease-in-out infinite}
-.living-organism .organism-heart{fill:#d7b879;filter:drop-shadow(0 0 13px rgba(210,173,104,.68))}
-.living-organism .organism-nucleus circle:first-child{fill:rgba(202,166,101,.075);stroke:rgba(220,190,135,.34);stroke-width:.7;transform-origin:center;animation:organismNucleusBreath 9s ease-in-out infinite;animation-delay:calc(var(--nucleus-index) * -1.1s)}
-.living-organism .organism-nucleus-core{fill:#c9a76c;filter:drop-shadow(0 0 7px rgba(202,166,101,.55))}
-@keyframes organismBoundaryBreath{0%,100%{transform:scale(.985);opacity:.62}50%{transform:scale(1.015);opacity:1}}
-@keyframes organismPetalBreath{0%,100%{transform:scale(.985) rotate(0deg);opacity:.58}50%{transform:scale(1.018) rotate(.35deg);opacity:.95}}
-@keyframes organismHeartBreath{0%,100%{transform:scale(.82);opacity:.35}50%{transform:scale(1.18);opacity:.92}}
-@keyframes organismNucleusBreath{0%,100%{transform:scale(.88);opacity:.55}50%{transform:scale(1.12);opacity:1}}
-@media(prefers-reduced-motion:reduce){.living-organism *{animation:none!important}}
-
-/* v0.47.3 — native check-in bridge */
-.moment-action-form{width:min(100%,330px);margin:8px 0 0;position:relative;z-index:9999;pointer-events:auto}
-.moment-action-form .moment-action{width:100%;margin:0;pointer-events:auto;position:relative;z-index:10000}
