@@ -1,6 +1,6 @@
 # Changelog
 
-## 0.47.1 — Invisible Organism and Check-in Repair
+## 0.47.2 — Invisible Organism and Check-in Repair
 
 - Replaced the neutral radar-like Today visual with a symmetric living organism.
 - Repaired check-in entry through native hash navigation, delegated routing and pointer-safe organism layers.
@@ -520,16 +520,21 @@ Official stabilization baseline.
 - Added a living visual manifestation of explicitly provided daily evidence.
 - Added ADR-010 and runtime token 0450p1.
 
-## 0.47.1 — Invisible Organism, Phase 1
+## 0.47.2 — Invisible Organism, Phase 1
 
 - Replaced Today dashboard presentation with the Current Moment experience.
 - Reframed the Living Human Graph as a breathing organism and ambient presence.
 - Rebuilt check-in around six explicit context seeds and one question at a time.
 - Preserved Evidence Gate and all current-day truth constraints.
-- Added ADR-011 and runtime token 0471p1.
+- Added ADR-011 and runtime token 0472p1.
 
-## 0.47.1 — Organism Harmony & Check-in Repair
+## 0.47.2 — Organism Harmony & Check-in Repair
 
 - Repaired the inert Today check-in action.
 - Made the evidence-free organism harmonious and symmetric.
 - Preserved evidence-driven organic variation after explicit context exists.
+
+## 0.47.2
+- Made Today check-in entry a genuine native link with a full-page route fallback.
+- Startup now honours `?route=checkin` and `#checkin`.
+- Native navigation is cancelled only after successful in-app routing.
