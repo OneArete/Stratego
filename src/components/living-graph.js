@@ -72,31 +72,39 @@ export function renderLivingGraph(graph, { compact = false, ambient = false } = 
   const center = size / 2;
   const radius = ambient ? 105 : compact ? 67 : 88;
   const scores = graph.nodes.map(dominantScore);
+  const neutral = graph.nodes.length > 0 && graph.nodes.every((node,index,array) =>
+    Math.abs(Number(node.energy||0)-Number(array[0].energy||0)) < .0001 &&
+    Math.abs(Number(node.momentum||0)) < .0001 &&
+    Math.abs(Number(node.confidence||0)-Number(array[0].confidence||0)) < .0001
+  );
   const maxScore = Math.max(...scores);
   const minScore = Math.min(...scores);
   const dominantIndex = scores.indexOf(maxScore);
   const scoreRange = Math.max(.001,maxScore-minScore);
 
   const nodes = graph.nodes.map((node,index)=>{
-    const emphasis=clamp((scores[index]-minScore)/scoreRange);
-    const irregularity=(stableNoise(node.id)-.5)*(ambient?7:4);
-    const angle=index*60+(stableNoise(`${node.id}:angle`)-.5)*(ambient?4.2:2.2);
-    const localRadius=radius+irregularity+emphasis*(ambient?2.6:1.6);
+    const emphasis=neutral ? 0 : clamp((scores[index]-minScore)/scoreRange);
+    const irregularity=neutral ? 0 : (stableNoise(node.id)-.5)*(ambient?4.2:2.8);
+    const angle=index*60+(neutral ? 0 : (stableNoise(`${node.id}:angle`)-.5)*(ambient?2.4:1.4));
+    const localRadius=radius+irregularity+emphasis*(ambient?2.0:1.2);
     const point=polar(center,center,localRadius,angle);
     const core=Math.min(compact?8.4:ambient?10.8:10.6,(compact?3.4:4.1)+node.energy*(compact?3.8:5)+emphasis*.9);
     const halo=Math.min(compact?13.4:ambient?19:17,core+3+node.volatility*4+emphasis*1.5);
     return {...node,...point,angle,core,halo,emphasis,dominant:index===dominantIndex};
   });
 
-  const membraneFrames=[0,.65,1.35,2.1,2.85].map(phase=>closedCurve(displacedNodes(nodes,center,dominantIndex,phase)));
+  const membranePhases=[0,.65,1.35,2.1,2.85];
+  const membraneFrames=neutral
+    ? membranePhases.map(()=>closedCurve(nodes))
+    : membranePhases.map(phase=>closedCurve(displacedNodes(nodes,center,dominantIndex,phase)));
 
   const connections=nodes.map((node,index)=>{
     const next=nodes[(index+1)%nodes.length];
     const edgeEmphasis=Math.max(node.emphasis,next.emphasis);
     const energy=(Number(node.energy||0)+Number(next.energy||0))/2;
     const opacity=.12+energy*.2+edgeEmphasis*.13;
-    const base=filamentPath(node,next,center,index,0);
-    const drift=filamentPath(node,next,center,index,.72);
+    const base=neutral ? `M ${round(node.x)} ${round(node.y)} Q ${round(center)} ${round(center)} ${round(next.x)} ${round(next.y)}` : filamentPath(node,next,center,index,0);
+    const drift=neutral ? base : filamentPath(node,next,center,index,.72);
     const begin=(index*-.93).toFixed(2);
     return `<path class="graph-link ${edgeEmphasis>.78?'dominant-link':''}" style="--edge:${edgeEmphasis.toFixed(2)};--filament-opacity:${opacity.toFixed(2)}" d="${base}">
       <animate attributeName="d" values="${base};${drift};${base}" dur="14s" begin="${begin}s" repeatCount="indefinite" />
