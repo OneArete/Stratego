@@ -1,6 +1,14 @@
 export const CODEX = [
   {
     id: 'strength',
+    domain: 'body',
+    goals: ['strength','movement-quality','physical-capacity'],
+    intensity: 'moderate',
+    levels: ['foundation','standard'],
+    equipment: ['bodyweight','stable-support','optional-load'],
+    contraindications: ['significant-soreness','sharp-pain','loss-of-control'],
+    evidenceStatus: 'foundational',
+    contentVersion: 1,
     name: 'Strength',
     durationOptions: [15, 30],
     virtue: 'Discipline',
@@ -16,6 +24,14 @@ export const CODEX = [
   },
   {
     id: 'recovery',
+    domain: 'recovery',
+    goals: ['downshift','mobility','restoration'],
+    intensity: 'low',
+    levels: ['foundation','standard'],
+    equipment: ['none'],
+    contraindications: ['dizziness','clear-distress-worsening'],
+    evidenceStatus: 'foundational',
+    contentVersion: 1,
     name: 'Recovery',
     durationOptions: [5, 15, 30],
     virtue: 'Temperance',
@@ -29,6 +45,14 @@ export const CODEX = [
   },
   {
     id: 'focus',
+    domain: 'mind',
+    goals: ['attention','task-completion','agency'],
+    intensity: 'cognitive-moderate',
+    levels: ['foundation','standard'],
+    equipment: ['writing-surface','task-material'],
+    contraindications: ['clear-distress-worsening'],
+    evidenceStatus: 'foundational',
+    contentVersion: 1,
     name: 'Focus',
     durationOptions: [15, 30, 60],
     virtue: 'Wisdom',
@@ -41,6 +65,14 @@ export const CODEX = [
   },
   {
     id: 'walk',
+    domain: 'body',
+    goals: ['light-movement','clarity','recovery'],
+    intensity: 'low',
+    levels: ['foundation','standard'],
+    equipment: ['safe-walking-route'],
+    contraindications: ['unsafe-environment','dizziness','sharp-pain'],
+    evidenceStatus: 'foundational',
+    contentVersion: 1,
     name: 'Walk',
     durationOptions: [5, 15, 30, 60],
     virtue: 'Balance',
@@ -53,6 +85,14 @@ export const CODEX = [
   },
   {
     id: 'connection',
+    domain: 'relationships',
+    goals: ['presence','support','understanding'],
+    intensity: 'low',
+    levels: ['foundation','standard'],
+    equipment: ['none'],
+    contraindications: ['unsafe-contact','clear-distress-worsening'],
+    evidenceStatus: 'foundational',
+    contentVersion: 1,
     name: 'Connection',
     durationOptions: [5, 15, 30],
     virtue: 'Justice',
@@ -64,3 +104,224 @@ export const CODEX = [
     ]
   }
 ];
+
+
+export const PRACTICE_LIBRARY_VERSION = 1;
+
+export function validatePracticeLibrary(practices=CODEX){
+  const required=['id','name','domain','goals','intensity','levels','equipment','contraindications','evidenceStatus','contentVersion','durationOptions','baseDelta','phases'];
+  const ids=new Set();
+  const records=(practices||[]).map(practice=>{
+    const missing=required.filter(field=>{
+      const value=practice?.[field];
+      return value===undefined||value===null||(Array.isArray(value)&&value.length===0);
+    });
+    const duplicate=ids.has(practice?.id);
+    if(practice?.id)ids.add(practice.id);
+    const invalidDurations=!(practice?.durationOptions||[]).every(value=>Number.isFinite(Number(value))&&Number(value)>0);
+    const invalidPhases=!(practice?.phases||[]).every(phase=>Array.isArray(phase)&&phase.length>=3&&Number(phase[1])>0);
+    return {
+      practiceId:practice?.id||'unknown',
+      valid:!missing.length&&!duplicate&&!invalidDurations&&!invalidPhases,
+      missing,
+      duplicate,
+      invalidDurations,
+      invalidPhases
+    };
+  });
+  return {
+    version:PRACTICE_LIBRARY_VERSION,
+    total:records.length,
+    valid:records.filter(record=>record.valid).length,
+    invalid:records.filter(record=>!record.valid).length,
+    records,
+    statement:records.every(record=>record.valid)
+      ?'Every current Practice has the minimum canonical library contract.'
+      :'One or more Practices are missing required canonical library metadata.'
+  };
+}
+
+export function practiceLibraryCatalog(practices=CODEX){
+  return (practices||[]).map(practice=>({
+    id:practice.id,
+    name:practice.name,
+    domain:practice.domain,
+    goals:[...(practice.goals||[])],
+    intensity:practice.intensity,
+    levels:[...(practice.levels||[])],
+    equipment:[...(practice.equipment||[])],
+    contraindications:[...(practice.contraindications||[])],
+    evidenceStatus:practice.evidenceStatus,
+    contentVersion:practice.contentVersion,
+    durationOptions:[...(practice.durationOptions||[])],
+    phaseCount:(practice.phases||[]).length
+  }));
+}
+
+export function practiceLibrarySummary(catalog=practiceLibraryCatalog()){
+  const domains=new Set((catalog||[]).map(item=>item.domain));
+  const durations=new Set((catalog||[]).flatMap(item=>item.durationOptions));
+  return {
+    practices:(catalog||[]).length,
+    domains:domains.size,
+    durationOptions:durations.size,
+    foundational:(catalog||[]).filter(item=>item.evidenceStatus==='foundational').length,
+    statement:`${(catalog||[]).length} Practices across ${domains.size} domains with ${durations.size} distinct duration options.`
+  };
+}
+
+
+/* v0.21.0 Phase 2 — contextual Practice eligibility, transparency only */
+export function assessPracticeEligibility(practice,context={}){
+  if(!practice)return {
+    practiceId:'unknown',
+    status:'unknown',
+    reasons:['Practice metadata is unavailable.'],
+    matchedContraindications:[],
+    selectionInfluence:0
+  };
+
+  const reasons=[];
+  const matchedContraindications=[];
+  const soreness=String(context.soreness||'none').toLowerCase();
+  const energy=Number(context.energy);
+  const emotionalLoad=String(context.emotionalLoad||'usual').toLowerCase();
+  const time=Number(context.time);
+
+  if(practice.contraindications?.includes('significant-soreness')&&soreness==='significant'){
+    matchedContraindications.push('significant-soreness');
+    reasons.push('Significant soreness conflicts with the declared loading conditions for this Practice.');
+  }
+  if(['moderate','high'].includes(String(practice.intensity))&&energy===1){
+    reasons.push('Low energy makes the standard intensity less suitable without adaptation.');
+  }
+  if(String(practice.intensity)==='cognitive-moderate'&&emotionalLoad==='heavy'){
+    reasons.push('Heavy emotional load may reduce tolerance for sustained cognitive demand.');
+  }
+  if(Number.isFinite(time)&&time>0&&!practice.durationOptions?.some(duration=>Number(duration)<=time)){
+    reasons.push('The available time is shorter than the minimum declared duration.');
+  }
+
+  const status=matchedContraindications.length
+    ?'blocked'
+    :reasons.length
+      ?'caution'
+      :'eligible';
+
+  return {
+    practiceId:practice.id,
+    status,
+    reasons:reasons.length?reasons:['No declared contextual conflict is visible from the current signals.'],
+    matchedContraindications,
+    selectionInfluence:0,
+    assessedFrom:['soreness','energy','emotionalLoad','time'],
+    statement:status==='blocked'
+      ?'A declared contextual conflict is present.'
+      :status==='caution'
+        ?'The Practice remains available, but the current context calls for caution or adaptation.'
+        :'No declared contextual conflict is visible.'
+  };
+}
+
+export function assessPracticeLibraryEligibility(practices=CODEX,context={}){
+  const items=(practices||[]).map(practice=>assessPracticeEligibility(practice,context));
+  return {
+    items,
+    eligible:items.filter(item=>item.status==='eligible').length,
+    caution:items.filter(item=>item.status==='caution').length,
+    blocked:items.filter(item=>item.status==='blocked').length,
+    selectionInfluence:0,
+    statement:'Contextual eligibility is visible for accountability. Agora selection remains unchanged in Phase 2.'
+  };
+}
+
+export function practiceEligibilitySummary(assessment){
+  if(!assessment)return 'Eligibility assessment unavailable.';
+  return `${assessment.status}: ${assessment.statement}`;
+}
+
+
+/* v0.21.0 Phase 4 — Practice content provenance */
+export function snapshotPracticeContent(practice,{durationMinutes=null,phases=null,at=new Date().toISOString()}={}){
+  if(!practice)return null;
+  const executablePhases=(phases||practice.phases||[]).map(phase=>[
+    phase[0],
+    Number(phase[1]),
+    phase[2],
+    [...(phase[3]||[])]
+  ]);
+  return {
+    practiceId:practice.id,
+    practiceName:practice.name,
+    domain:practice.domain,
+    contentVersion:Number(practice.contentVersion)||1,
+    libraryVersion:PRACTICE_LIBRARY_VERSION,
+    evidenceStatus:practice.evidenceStatus,
+    durationMinutes:Number(durationMinutes)||null,
+    goals:[...(practice.goals||[])],
+    intensity:practice.intensity,
+    equipment:[...(practice.equipment||[])],
+    contraindications:[...(practice.contraindications||[])],
+    phases:executablePhases,
+    phaseCount:executablePhases.length,
+    snapshottedAt:at,
+    source:'canonical-practice-library'
+  };
+}
+
+export function assessPracticeContentProvenance(snapshot,practices=CODEX){
+  if(!snapshot)return {
+    status:'missing',
+    currentVersion:null,
+    historicalVersion:null,
+    statement:'No Practice content snapshot was preserved for this session.'
+  };
+  const current=(practices||[]).find(practice=>practice.id===snapshot.practiceId);
+  if(!current)return {
+    status:'retired',
+    currentVersion:null,
+    historicalVersion:snapshot.contentVersion,
+    statement:'This Practice no longer exists in the current library, but the historical content remains preserved.'
+  };
+  const currentVersion=Number(current.contentVersion)||1;
+  const parsedHistoricalVersion=Number(snapshot.contentVersion);
+  const historicalVersion=Number.isFinite(parsedHistoricalVersion)?parsedHistoricalVersion:1;
+  const status=currentVersion===historicalVersion?'current':'historical';
+  return {
+    status,
+    currentVersion,
+    historicalVersion,
+    libraryVersion:snapshot.libraryVersion,
+    statement:status==='current'
+      ?'This session used the current content version.'
+      :`This session used content v${historicalVersion}; the current library now uses v${currentVersion}.`
+  };
+}
+
+export function practiceContentSnapshotSummary(snapshot,assessment=assessPracticeContentProvenance(snapshot)){
+  if(!snapshot)return 'Practice content provenance unavailable.';
+  return `${snapshot.practiceName} · content v${snapshot.contentVersion} · library v${snapshot.libraryVersion} · ${assessment.status}`;
+}
+
+export function practiceContentProvenanceAudit(history=[],practices=CODEX){
+  const records=(history||[])
+    .filter(entry=>entry?.practiceContentSnapshot)
+    .map(entry=>({
+      historyId:entry.id||entry.judgementId||entry.completedAt||entry.abandonedAt,
+      practiceId:entry.practiceContentSnapshot.practiceId,
+      completedAt:entry.completedAt||entry.abandonedAt||entry.practiceContentSnapshot.snapshottedAt,
+      snapshot:entry.practiceContentSnapshot,
+      assessment:assessPracticeContentProvenance(entry.practiceContentSnapshot,practices)
+    }));
+  return {
+    records,
+    total:records.length,
+    current:records.filter(record=>record.assessment.status==='current').length,
+    historical:records.filter(record=>record.assessment.status==='historical').length,
+    retired:records.filter(record=>record.assessment.status==='retired').length,
+    missing:(history||[]).filter(entry=>!entry?.practiceContentSnapshot).length,
+    statement:records.length
+      ?'Historical Practice content remains distinguishable from the current library.'
+      :'No completed or abandoned session has a Practice content snapshot yet.'
+  };
+}
