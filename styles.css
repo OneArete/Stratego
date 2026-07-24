@@ -3363,9 +3363,16 @@ body #app .tabbar button{
 .seed-checkin.complete .seed-question p{font-size:14px;letter-spacing:0;color:#827a70}
 
 .quiet-deliberation{min-height:100dvh;display:grid;place-content:center;justify-items:center;text-align:center;padding:24px;background:radial-gradient(circle,rgba(171,132,71,.07),transparent 34%),#090908}
-.quiet-deliberation .quiet-organism{width:min(86vw,390px);animation:deliberate-organism 2.35s ease-in-out both}
-.quiet-deliberation h2{font-family:Georgia,serif;font-weight:400;font-size:30px;margin:12px 0 7px;color:#e9e2d6}
-.quiet-deliberation p{font-size:12px;color:#716a61}
+.quiet-deliberation .quiet-organism{width:min(92vw,430px);animation:deliberate-organism 2.35s ease-in-out both}
+.quiet-deliberation h2{font-family:Georgia,serif;font-weight:400;font-size:28px;margin:10px 0 6px;color:#e9e2d6}
+.quiet-deliberation p{font-size:11px;color:#716a61;letter-spacing:.02em}
+
+/* v0.50.0 — deliberating organism */
+.living-graph.deliberating .graph-center{filter:drop-shadow(0 0 20px rgba(214,181,119,.88))!important;animation-duration:1.6s!important}
+.living-graph.deliberating .graph-pulse-outer{animation-duration:5.5s!important}
+.living-graph.deliberating .graph-pulse-inner{animation-duration:5.5s!important;animation-delay:-2.75s!important}
+.living-graph.deliberating .node-halo{animation-duration:3.8s!important}
+.convergence-ring{fill:none;stroke:rgba(206,172,112,.28);stroke-width:1.4;pointer-events:none}
 
 @keyframes organism-float{0%,100%{transform:translateY(0) scale(1)}50%{transform:translateY(-5px) scale(1.008)}}
 @keyframes aura-breathe{0%,100%{transform:scale(.92);opacity:.45}50%{transform:scale(1.08);opacity:.9}}
