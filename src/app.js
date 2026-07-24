@@ -112,7 +112,7 @@ const livingCompanionToday=()=>{
   const gate=evidenceGate({checkIns:state.dailyCheckIns,judgements:state.judgements});
   const story=deriveDailyStory({stories:state.dailyStories,checkIns:state.dailyCheckIns,judgements:state.judgements,history:state.history,journalEntries:state.emotionalJournalEntries});
   const model=buildLivingCompanion({name:state.profile?.name||'',context:gate.context.signals,contextEvidence:gate.context,judgement:gate.judgement,story,hasContinuity:gate.context.sufficient&&shouldShowContinuityCard(state)});
-  const graph=buildHumanGraph(state.history,gate.context.sufficient?gate.context.signals:{});
+  const graph=gate.context.sufficient?buildHumanGraph(state.history,gate.context.signals):buildHumanGraph([],null);
   const action=model.action?`<button class="moment-action" data-action="${esc(model.action)}">${esc(model.actionLabel)}</button>`:'';
   const why=gate.judgement&&model.reasons?.length?`<details class="moment-why"><summary>Why</summary><div>${model.reasons.map(reason=>`<p>${esc(reason)}</p>`).join('')}<small>${esc(model.confidence||'')}</small></div></details>`:'';
   return `<section class="current-moment ${esc(model.mode)}" aria-label="Current moment">
@@ -201,7 +201,17 @@ function onboarding(){
 }
 
 function today(){
-  shell(`${nav('today')}`)
+  shell(`${nav('today')}`);
+  const startButton=app.querySelector('.moment-action[data-action="focus-signals"],.moment-action[data-action="checkin"]');
+  if(startButton){
+    const openCheckIn=event=>{
+      event.preventDefault();
+      event.stopPropagation();
+      route('checkin');
+    };
+    startButton.addEventListener('click',openCheckIn,{once:true});
+    startButton.addEventListener('touchend',openCheckIn,{once:true,passive:false});
+  }
 }
 function checkin(){
   const completed=dailyContextCompletedCount();
