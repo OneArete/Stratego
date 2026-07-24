@@ -192,9 +192,9 @@ function splash(){shell(`${deltaMark()}<div class="brand"><div class="eyebrow">O
 function onboarding(){
   const neutralGraph=buildHumanGraph([],null);
   const steps=[
-    `${header('STRATEGOS')}<section class="stack onboarding"><p class="eyebrow">ONE PRINCIPLE</p><h2>Understand first.</h2><p class="muted">Not a tracker. Not a coach. Strategos examines your state each day, deliberates across six dimensions, and offers its best current judgement.</p><p class="muted">You decide what to do with it.</p><div class="onboarding-mark">${deltaMark()}</div>${button('CONTINUE','onboarding-next')}</section>`,
-    `${header('THE ORGANISM')}<section class="stack onboarding"><p class="eyebrow">SIX DIMENSIONS</p><h2>A living model of a person.</h2><div class="living-graph compact" aria-hidden="true">${renderLivingGraph(neutralGraph,{})}</div><p class="graph-note">Body · Recovery · Mind · Agency · Purpose · Relationships</p><p class="muted">The organism reflects what Strategos understands. It grows more accurate as context accumulates.</p>${button('CONTINUE','onboarding-next')}</section>`,
-    `${header('BEFORE WE BEGIN')}<section class="stack onboarding"><p class="eyebrow">YOUR NAME</p><h2>What should I call you?</h2><input class="name-input" id="onboarding-name" autocomplete="given-name" value="${esc(onboardingDraft.name||state.profile?.name||'')}" placeholder="Your name"/><p class="muted">Your name is enough to begin. Additional context can be added from Settings.</p>${button('BEGIN','onboarding-complete')}</section>`
+    `${header('STRATEGOS')}<section class="stack onboarding"><p class="eyebrow">ONE QUESTION</p><h2>What does your body actually need today?</h2><p class="muted">Not what you planned. Not what worked last week. What your specific state right now calls for.</p><p class="muted">Strategos examines six dimensions, deliberates, and offers its best current judgement. Then you decide.</p><div class="onboarding-mark">${deltaMark()}</div>${button('CONTINUE','onboarding-next')}</section>`,
+    `${header('STRATEGOS')}<section class="stack onboarding"><p class="eyebrow">SIX DIMENSIONS</p><h2>A living model that learns from experience.</h2><div class="living-graph compact" aria-hidden="true">${renderLivingGraph(neutralGraph,{})}</div><p class="graph-note">Body · Recovery · Mind · Agency · Purpose · Relationships</p><p class="muted">Each dimension reflects what is currently visible. The organism becomes more accurate as context accumulates. Nothing is inferred from silence.</p>${button('CONTINUE','onboarding-next')}</section>`,
+    `${header('STRATEGOS')}<section class="stack onboarding"><p class="eyebrow">READY</p><h2>What should I call you?</h2><input class="name-input" id="onboarding-name" autocomplete="given-name" value="${esc(onboardingDraft.name||state.profile?.name||'')}" placeholder="Your name"/><p class="muted">Your name is enough to begin. Strategos will ask only what it needs — when it needs it.</p>${button('BEGIN','onboarding-complete')}</section>`
   ];
   shell(steps[onboardingStep]||steps[0]);
 }
@@ -308,13 +308,12 @@ function completePersonChoice({action,selectedPracticeId=null,reason=''}={}){
 function judgement(){
   decision ||= state.current?.decision;
   if(!decision)return route('today');
-
   const acceptedDoseRevision=effectivePracticeDoseRevisionWithHealth(state.practiceDoseRevisionDecisions,state.history,decision?.practice?.id);
   decision=applyPracticeDoseRevisionToJudgement(decision,acceptedDoseRevision);
   state.current.decision=decision;
-  const d=decision;
-  const p=d.practice;
-  const acceptedContractRevision=effectivePracticeContractRevision(state.practiceContractRevisionDecisions,d.practice?.id);const practiceContract=buildPracticeContract({judgement:d,context:d.context||context,phases:d.practice?.phases||[],revision:acceptedContractRevision});
+  const d=decision;const p=d.practice;
+  const acceptedContractRevision=effectivePracticeContractRevision(state.practiceContractRevisionDecisions,d.practice?.id);
+  const practiceContract=buildPracticeContract({judgement:d,context:d.context||context,phases:d.practice?.phases||[],revision:acceptedContractRevision});
   const ex=d.explain||buildExplanation(d,context);
   const boundaries=d.boundaries||buildDecisionBoundaries(d,context);
   const decisive=(ex.decisiveFactors||[]).slice(0,2);
@@ -326,54 +325,69 @@ function judgement(){
   const currentSafetyRequirement=safetyAcknowledgementRequirement(currentSafetyEnvelope);
   const currentSafetyGate=safetyStartGate({envelope:currentSafetyEnvelope,acknowledgement:state.current?.safetyAcknowledgement,judgementId:d.id});
   const currentExplainRecord=d.explainRecord||buildExplainRecord(d,{context:d.context||context});
-  const currentExplainAudit=explainRecordAudit(currentExplainRecord);
-
-  shell(`${header('CURRENT JUDGEMENT','<button class="icon-btn" aria-label="Close and return to Today" data-action="today">×</button>')}
-    <section class="judgement-focus">
-      <div class="judgement-focus-head">
-        <p class="eyebrow">MY CURRENT JUDGEMENT</p>
-        <h2>${esc(d.judgement)}</h2>
-        <div class="judgement-meta"><span>${esc(d.confidenceLevel||confidenceLabel(d.confidence))} confidence</span><span>${d.duration} min</span></div>
+  shell(`${header('STRATEGOS','<button class="icon-btn" aria-label="Return to Today" data-action="today">\xd7</button>')}
+    <section class="judgement-screen">
+      <div class="judgement-hero">
+        <p class="eyebrow">TODAY\'S JUDGEMENT</p>
+        <h1 class="judgement-sentence">${esc(d.judgement)}</h1>
       </div>
-
-      <section class="practice-proposal focused-practice">
-        <div><p class="eyebrow">PRACTICE</p><h2>${esc(p.name)}</h2><p>${esc(d.intention)}</p></div>
-        <div class="delta-score"><span>EXPECTED HUMAN RETURN</span><strong>+${d.delta.overall.toFixed(2)}</strong></div>
-      </section>
-
-      <section class="judgement-rationale">
-        <p class="eyebrow">WHY THIS, TODAY</p>
-        <p>${esc(ex.confidenceStatement)}</p>
-        ${decisive.length?`<ul>${decisive.map(item=>`<li><strong>${esc(item.advisor)}</strong> — ${esc(item.reason)}</li>`).join('')}</ul>`:''}
-        ${boundaries.runnerUp?`<p class="nearest-alternative">Nearest alternative: <strong>${esc(boundaries.runnerUp.name)}</strong></p>`:''}
-        ${d.agora?.blockedPractices?.length?`<details class="eligibility-exclusions"><summary>Excluded by declared conditions</summary>${d.agora.blockedPractices.map(item=>`<p><strong>${esc(item.practiceId)}</strong> — ${esc(item.reason)}</p>`).join('')}<small>Caution states do not alter ranking.</small></details>`:''}
-      </section>
-
-      <details class="judgement-explain-record"><summary>How this judgement was formed</summary><div><strong>${esc(explainRecordSummary(currentExplainRecord))}</strong><p>${esc(currentExplainRecord.statement)}</p><small>${esc(currentExplainRecord.recommendation.confidenceStatement)}</small><small>Explanation influence: 0. This record describes the judgement; it does not create it.</small>${currentExplainRecord.review?`<small>${esc(explainRecordReviewSummary(currentExplainRecord))}</small>`:''}</div></details>
-      <details class="judgement-safety-envelope" ${currentSafetyEnvelope.status!=='clear'?'open':''}><summary>Safety envelope</summary><div><strong>${esc(safetyEnvelopeSummary(currentSafetyEnvelope))}</strong><p>${esc(currentSafetyAudit.statement)}</p>${currentSafetyEnvelope.blockedPractices.length?`<ul>${currentSafetyEnvelope.blockedPractices.map(item=>`<li><strong>${esc(item.practiceId)}</strong> — ${esc(item.reason)}</li>`).join('')}</ul>`:''}${currentSafetyEnvelope.criticalRisks.length?`<ul>${currentSafetyEnvelope.criticalRisks.map(item=>`<li><strong>${esc(item.advisor)}</strong> — ${esc(item.description)}</li>`).join('')}</ul>`:''}<small>Phase 2 requires explicit acknowledgement before Practice begins when the envelope is constrained.</small>${currentSafetyRequirement.required?`<div class="safety-acknowledgement ${currentSafetyGate.canStart?'complete':'pending'}"><strong>${currentSafetyGate.canStart?'Safety boundary acknowledged':'Acknowledgement required'}</strong><p>${esc(currentSafetyGate.reason)}</p>${currentSafetyGate.canStart?'':`<button data-safety-action="acknowledge">I understand this safety boundary</button>`}</div>`:''}</div></details>
-      ${d.humanModelSnapshot?`<details class="judgement-human-model"><summary>Human Model evidence boundary</summary><div><strong>${esc(humanModelDeliberationSnapshotSummary(d.humanModelSnapshot))}</strong><p>${esc(d.humanModelSnapshot.statement)}</p><small>Judgement influence: ${humanModelDecisionAudit.judgementInfluence} · Selection influence: ${humanModelDecisionAudit.practiceSelectionInfluence} · Safety influence: ${humanModelDecisionAudit.safetyInfluence}</small></div></details>`:''}
-      ${practiceEligibility.status!=='eligible'?`<section class="practice-eligibility ${esc(practiceEligibility.status)}"><strong>${esc(practiceEligibility.status==='blocked'?'Context conflict':'Context caution')}</strong><span>${esc(practiceEligibility.reasons[0])}</span><small>Canonical eligibility assessment. Blocked status excludes; caution does not alter ranking.</small></section>`:''}
-      ${d.calibrationDrift?.drift?`<section class="compact-caution"><strong>Confidence reduced.</strong><span>Recent forecast calibration has deteriorated.</span></section>`:''}
-      ${currentForecast?`<section class="compact-forecast"><span>Forecast</span><strong>${esc(forecastSummary(currentForecast))}</strong></section>`:''}
-
-      <button class="reasoning-link" data-action="understanding">See the full reasoning in Understanding</button><button class="context-help" data-guide-section="judgement">How do I use this judgement?</button>
-
-      <section class="person-choice focused-choice">
-        <p class="eyebrow">YOUR CHOICE</p>
-        <h3>Strategos advises. You decide.</h3>
-        <div class="choice-actions">
-          <button data-choice-action="accept">Accept judgement</button>
-          ${boundaries.runnerUp?`<button data-choice-action="choose-alternative" data-choice-practice="${esc(boundaries.runnerUp.id)}">Choose ${esc(boundaries.runnerUp.name)}</button>`:''}
-          <button data-choice-action="defer">Decide later</button>
-          <button data-choice-action="decline">Decline</button>
+      <section class="practice-card">
+        <div class="practice-card-head">
+          <div class="practice-card-identity">
+            <h2>${esc(p.name)}</h2>
+            <p>${esc(d.intention)}</p>
+          </div>
+          <span class="practice-duration">${d.duration} min</span>
         </div>
-        ${pendingChoice?`<div class="choice-reason-panel" id="choice-reason-panel"><label><span>Optional: what is behind this choice?</span><small>This helps Strategos understand your decision. You may leave it blank.</small><textarea id="choice-reason" rows="3" placeholder="Optional reason"></textarea></label><div><button class="action primary" data-choice-reason-action="continue">Continue</button><button class="action secondary" data-choice-reason-action="cancel">Cancel</button></div></div>`:''}
+        ${decisive.length?`<div class="practice-voices">${decisive.map(item=>`<span><strong>${esc(item.advisor)}</strong> — ${esc(item.reason)}</span>`).join('')}</div>`:''}
+        ${boundaries.runnerUp?`<p class="runner-up">Runner-up: <strong>${esc(boundaries.runnerUp.name)}</strong></p>`:''}
+      </section>
+      ${practiceEligibility.status==='blocked'?`<section class="eligibility-warning"><strong>Canonical eligibility assessment</strong><p>Excluded by declared conditions: ${esc(practiceEligibility.reasons[0])}</p><small>Caution states do not alter ranking</small></section>`:''}
+      ${currentSafetyEnvelope.status!=='clear'?`<section class="safety-notice ${currentSafetyGate.canStart?'acknowledged':'pending'}"><strong>${currentSafetyGate.canStart?'Safety noted':'Acknowledgement required'}</strong><p>${esc(currentSafetyAudit.statement)}</p>${currentSafetyRequirement.required&&!currentSafetyGate.canStart?`<button data-safety-action="acknowledge">I understand this safety boundary</button>`:''}</section>`:''}
+      <section class="judgement-choice ${pendingChoice?'has-pending':''}">
+        <div class="choice-buttons">
+          <button class="choice-accept" data-choice-action="accept">Accept</button>
+          ${boundaries.runnerUp?`<button class="choice-alt" data-choice-action="choose-alternative" data-choice-practice="${esc(boundaries.runnerUp.id)}">Choose ${esc(boundaries.runnerUp.name)}</button>`:''}
+          <div class="choice-minor-row">
+            <button class="choice-minor" data-choice-action="defer">Decide later</button>
+            <button class="choice-minor" data-choice-action="decline">Not today</button>
+          </div>
+        </div>
+        ${pendingChoice?`<div class="choice-reason-panel" id="choice-reason-panel"><label><span>What is behind this choice?</span><small>Optional — helps Strategos understand your decision.</small><textarea id="choice-reason" rows="3" placeholder="Optional reason"></textarea></label><div><button class="action primary" data-choice-reason-action="continue">Continue</button><button class="action secondary" data-choice-reason-action="cancel">Cancel</button></div></div>`:''}
         ${d.personChoice?`<p class="choice-record">${esc(summarizeChoice(d.personChoice))}</p>`:''}
       </section>
-
-      ${(d.status==='accepted'||d.status==='overridden')?`<section class="commitment-panel" id="commitment-panel"><p class="eyebrow">VOLUNTARY COMMITMENT</p><h3>When do you intend to begin?</h3><p class="muted">A temporary start window, never an obligation.</p><details class="practice-contract" open><summary>Practice contract</summary><div><p class="contract-intention">${esc(practiceContract.intention)}</p><dl><div><dt>Expected effect</dt><dd>${esc(practiceContract.expectedEffect)}</dd></div><div><dt>Enough for today</dt><dd>${esc(practiceContract.enough)}</dd></div><div><dt>Reflection question</dt><dd>${esc(practiceContract.review)}</dd></div></dl><small>${esc(practiceContract.certainty)}</small><details><summary>When to stop</summary><ul>${practiceContract.stopConditions.map(item=>`<li>${esc(item)}</li>`).join('')}</ul></details></div></details>${state.current?.commitmentId?(()=>{const c=state.commitments.find(item=>item.id===state.current.commitmentId),f=state.frictionPlans.find(item=>item.id===state.current?.frictionPlanId);return c?`<p class="commitment-status">${esc(commitmentSummary(c))}</p><div class="friction-prep"><h4>What could get in the way?</h4>${f?`<p>${esc(frictionSummary(f))}</p><small>${esc(f.response||suggestedResponse(f.frictionType))}</small>${f.fallback?`<small>Fallback: ${esc(f.fallback)}</small>`:''}${state.current?.fallbackPlanId?(()=>{const fp=state.fallbackPlans.find(item=>item.id===state.current.fallbackPlanId);return fp?`<div class="fallback-card"><p>${esc(fallbackSummary(fp))}</p><small>${esc(fp.scope)} · ${Math.round(fp.reductionRatio*100)}% scale</small><div class="fallback-actions">${fp.status==='proposed'?`<button data-fallback-action="accept">Use fallback</button><button data-fallback-action="decline">Keep original</button>`:''}</div></div>`:''})():`<button data-fallback-action="create">Create adaptive fallback</button>`}`:`<div class="friction-actions">${['time','environment','energy','emotion','social','uncertainty','other'].map(type=>`<button data-friction-type="${type}">${type}</button>`).join('')}</div>`}</div><div class="commitment-actions" id="commitment-start">${commitmentAvailability(c).canStart&&canBeginWithFriction(c,f).canBegin&&currentSafetyGate.canStart?button('BEGIN PRACTICE','commit'):''}${commitmentAvailability(c).canStart&&canBeginWithFriction(c,f).canBegin&&!currentSafetyGate.canStart?`<p class="safety-start-gate">${esc(currentSafetyGate.reason)}</p>`:''}<button data-commitment-action="cancel">Cancel commitment</button></div>`:''})():`<div class="commitment-actions" id="commitment-options"><button data-commitment-action="now">Begin within 30 minutes</button><button data-commitment-action="later">Schedule for later</button></div>`}</section>`:''}
-
-      <div class="bottom-actions"><button class="text-btn" data-action="speak-judgement">Hear this judgement</button><button class="text-btn" data-action="today">Reassess today</button></div>
+      ${(d.status==='accepted'||d.status==='overridden')?`<section class="commitment-panel" id="commitment-panel">
+        <p class="eyebrow">WHEN WILL YOU BEGIN?</p>
+        <p class="contract-intention">${esc(practiceContract.intention)}</p>
+        <p class="contract-label">Enough for today</p><p class="contract-enough">${esc(practiceContract.enough)}</p>
+        <p class="contract-label">Reflection question</p><p class="contract-review">${esc(practiceContract.review||'What did you notice?')}</p>
+        ${state.current?.commitmentId?(()=>{const c=state.commitments.find(item=>item.id===state.current.commitmentId),f=state.frictionPlans.find(item=>item.id===state.current?.frictionPlanId);if(!c)return '';return `<p class="commitment-status">${esc(commitmentSummary(c))}</p>${f?`<div class="friction-summary"><strong>Obstacle noted:</strong> ${esc(frictionSummary(f))}</div>${state.current?.fallbackPlanId?(()=>{const fp=state.fallbackPlans.find(item=>item.id===state.current.fallbackPlanId);return fp?`<div class="fallback-card"><p>${esc(fallbackSummary(fp))}</p><small>${esc(fp.scope)} · ${Math.round(fp.reductionRatio*100)}% scale</small><div class="fallback-actions">${fp.status==='proposed'?`<button data-fallback-action="accept">Use fallback</button><button data-fallback-action="decline">Keep original</button>`:''}</div></div>`:''})():`<button class="text-btn" data-fallback-action="create">Add a fallback plan</button>`}`:`<div class="friction-minimal"><p class="muted">What could get in the way?</p><div class="friction-actions">${['time','environment','energy','emotion','social','uncertainty','other'].map(type=>`<button data-friction-type="${type}">${type}</button>`).join('')}</div></div>`}<div class="commitment-actions" id="commitment-start">${commitmentAvailability(c).canStart&&canBeginWithFriction(c,f).canBegin&&currentSafetyGate.canStart?button('BEGIN PRACTICE','commit'):''}${commitmentAvailability(c).canStart&&canBeginWithFriction(c,f).canBegin&&!currentSafetyGate.canStart?`<p class="safety-start-gate">${esc(currentSafetyGate.reason)}</p>`:''}<button data-commitment-action="cancel">Cancel commitment</button></div>`;})():`<div class="commitment-actions" id="commitment-options"><button data-commitment-action="now">Begin within 30 minutes</button><button data-commitment-action="later">Schedule for later</button></div>`}
+      </section>`:''}
+      <details class="deliberation-detail">
+        <summary>How this judgement was formed</summary>
+        <div class="deliberation-detail-body">
+          <div class="deliberation-section">
+            <p class="eyebrow">ADVISORS</p>
+            ${(d.advisors||[]).map(a=>`<article><div><strong>${esc(a.advisor)}</strong><span>${esc(a.position)}</span></div><p>${esc(a.reason)}</p></article>`).join('')}
+            ${(d.minorityReports||[]).length?`<div class="deliberation-minority"><p class="eyebrow">MINORITY</p>${d.minorityReports.map(r=>`<article><strong>${esc(r.advisor)}</strong><p>${esc(r.reason)}</p></article>`).join('')}</div>`:''}
+          </div>
+          <div class="deliberation-section">
+            <p class="eyebrow">CONFIDENCE</p>
+            <p>${esc(ex.confidenceStatement)}</p>
+            <p class="deliberation-meta">${esc(d.confidenceLevel||confidenceLabel(d.confidence))} confidence · ${d.duration} min</p>
+          </div>
+          ${boundaries.changeConditions?.length?`<div class="deliberation-section"><p class="eyebrow">WHAT WOULD CHANGE THIS</p><ul>${boundaries.changeConditions.map(x=>`<li>${esc(x)}</li>`).join('')}</ul></div>`:''}
+          <div class="deliberation-section"><p class="eyebrow">EXPLANATION RECORD</p><small>Explanation influence: 0 · Canonical explanation record · Descriptive and audit-only in Phase 1.</small></div>
+          ${d.humanModelSnapshot?`<div class="deliberation-section"><p class="eyebrow">HUMAN MODEL EVIDENCE</p><p>${esc(humanModelDeliberationSnapshotSummary(d.humanModelSnapshot))}</p><small>Human Model evidence boundary: ${humanModelDecisionAudit.rejectedCount||0} excluded · Judgement influence: ${humanModelDecisionAudit.judgementInfluence}</small></div>`:''}
+          ${currentSafetyEnvelope?`<div class="deliberation-section"><p class="eyebrow">SAFETY ENVELOPE</p><p>Safety envelope: ${esc(safetyEnvelopeSummary(currentSafetyEnvelope))}</p><small>Phase 2 requires explicit acknowledgement before Practice begins</small>${currentSafetyEnvelope.blockedPractices?.length?`<ul>${currentSafetyEnvelope.blockedPractices.map(item=>`<li><strong>${esc(item.practiceId)}</strong> — ${esc(item.reason)}</li>`).join('')}</ul>`:''}</div>`:''}
+          ${d.agora?.blockedPractices?.length?`<div class="deliberation-section"><p class="eyebrow">EXCLUDED BY CONTEXT</p>${d.agora.blockedPractices.map(item=>`<p><strong>${esc(item.practiceId)}</strong> — ${esc(item.reason)}</p>`).join('')}</div>`:''}
+          <div class="deliberation-section"><p class="eyebrow">FULL REASONING</p><button class="text-btn deliberation-understanding-link" data-action="understanding" data-guide-section="judgement">See the full reasoning in Understanding</button></div>
+        </div>
+      </details>
+      <div class="judgement-footer-actions">
+        <button class="text-btn" data-action="speak-judgement">Hear this</button>
+        <button class="text-btn" data-action="today">Reassess today</button>
+      </div>
     </section>
     ${nav('today')}`)
 }
