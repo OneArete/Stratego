@@ -1,4 +1,4 @@
-import { localDayKey, normaliseDailySignals } from './daily-signals.js?v=0420p1';
+import { localDayKey, normaliseDailySignals } from './daily-signals.js?v=0460p1';
 
 export const DAILY_STORY_STAGES=['opened','check-in','judgement','practice','reflection','complete'];
 

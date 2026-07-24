@@ -22,7 +22,7 @@ export function normaliseDailySignals(input={}){
 export function todaySignals(checkIns=[],now=new Date()){
   const day=localDayKey(now);
   const record=(checkIns||[]).find(item=>item?.day===day);
-  return record?normaliseDailySignals(record.signals):{...DAILY_SIGNAL_DEFAULTS};
+  return record?normaliseDailySignals(record.signals):{};
 }
 
 export function upsertDailyCheckIn(checkIns=[],signals,{now=new Date(),source='today'}={}){
