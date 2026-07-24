@@ -3148,3 +3148,244 @@ body #app .tabbar button{
 .living-companion-hero.complete .companion-primary{display:none}
 .living-companion-hero .companion-judgement strong{max-width:640px}
 @media(max-width:600px){.living-companion-hero{min-height:calc(100svh - 96px);padding-bottom:132px}.living-companion-organism{margin-bottom:2px}}
+
+/* v0.44.0 — Current Moment Foundation */
+.progressive-checkin{min-height:calc(100dvh - 132px);justify-content:center;padding-bottom:96px}
+.progressive-checkin .checkin-progress{position:absolute;top:70px;left:20px;right:20px}
+.checkin-single{display:grid;gap:24px;align-content:center;min-height:54dvh}
+.checkin-step{margin:0;color:var(--muted);font-size:11px;letter-spacing:.14em;text-transform:uppercase}
+.checkin-single .question{border:0;padding:0;background:transparent}
+.checkin-single .question h3{font-family:Georgia,serif;font-size:34px;line-height:1.16;font-weight:400;margin:0 0 24px}
+.checkin-single .choice-row{display:grid;grid-template-columns:1fr 1fr;gap:10px}
+.checkin-single .pill{min-height:54px}
+.checkin-trust{font-size:12px;line-height:1.5;margin:0}
+.checkin-ready{display:grid;gap:18px;align-content:center;min-height:54dvh}
+.checkin-ready h1{font-family:Georgia,serif;font-size:36px;line-height:1.14;font-weight:400;margin:0}
+.checkin-ready p{color:var(--muted);line-height:1.55;margin:0}
+.living-companion-hero.listen details,.living-companion-hero.ready details,.living-companion-hero.continuity details,.living-companion-hero.reflection details,.living-companion-hero.complete details{display:none}
+
+/* v0.45.0 — Experience Rewrite: the architecture recedes; the current moment remains. */
+.context-organism{position:relative;width:190px;height:190px;margin:0 auto 8px;display:grid;place-items:center}
+.context-organism .living-graph{width:100%;height:100%}
+.context-seed{--angle:calc(var(--seed-index) * 60deg - 90deg);position:absolute;left:calc(50% + cos(var(--angle))*82px);top:calc(50% + sin(var(--angle))*82px);width:9px;height:9px;border-radius:50%;border:1px solid rgba(200,165,104,.35);background:rgba(9,9,9,.9);transform:translate(-50%,-50%);transition:transform .45s ease,background .45s ease,box-shadow .45s ease}
+.context-seed.alive{background:var(--bronze);box-shadow:0 0 18px rgba(200,165,104,.42);transform:translate(-50%,-50%) scale(1.2)}
+.context-organism.complete{animation:context-settle 1.4s ease-in-out infinite alternate}
+.quiet-deliberation{min-height:100dvh;width:100%;display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;gap:18px;padding:24px}
+.quiet-organism{width:min(70vw,280px);height:min(70vw,280px);animation:quiet-breathe 3.8s ease-in-out infinite}
+.quiet-deliberation h2{font-family:Georgia,serif;font-size:34px;font-weight:400;margin:0}
+.quiet-deliberation p{max-width:290px}
+@keyframes quiet-breathe{50%{transform:scale(1.025);opacity:.88}}
+@keyframes context-settle{to{transform:scale(1.018)}}
+@media(prefers-reduced-motion:reduce){.quiet-organism,.context-organism.complete{animation:none}.context-seed{transition:none}}
+.context-seed:nth-of-type(1){left:50%;top:7%}.context-seed:nth-of-type(2){left:87%;top:28%}.context-seed:nth-of-type(3){left:87%;top:72%}.context-seed:nth-of-type(4){left:50%;top:93%}.context-seed:nth-of-type(5){left:13%;top:72%}.context-seed:nth-of-type(6){left:13%;top:28%}
+
+/* v0.46.0 — Invisible Organism, phase 1
+   The person sees a living presence, one sentence and one next action. */
+.route-today{
+  min-height:100dvh;
+  max-width:none;
+  padding:0;
+  overflow:hidden;
+  background:
+    radial-gradient(circle at 50% 34%,rgba(174,135,78,.07),transparent 31%),
+    linear-gradient(180deg,#090908 0%,#0b0a09 72%,#080807 100%);
+}
+.route-today .tabbar{
+  background:linear-gradient(180deg,transparent,rgba(8,8,7,.92) 34%);
+  border-top:0;
+  padding-top:22px;
+  opacity:.72;
+}
+.current-moment{
+  min-height:calc(100dvh - 70px - env(safe-area-inset-bottom));
+  display:grid;
+  grid-template-rows:minmax(330px,56vh) 1fr;
+  align-items:center;
+  justify-items:center;
+  padding:calc(18px + env(safe-area-inset-top)) 24px 32px;
+  position:relative;
+}
+.organism-field{
+  width:min(92vw,430px);
+  aspect-ratio:1;
+  display:grid;
+  place-items:center;
+  position:relative;
+  isolation:isolate;
+  animation:organism-float 10s ease-in-out infinite;
+}
+.organism-aura{
+  position:absolute;
+  inset:17%;
+  border-radius:50%;
+  background:radial-gradient(circle,rgba(202,161,92,.12),rgba(128,94,45,.04) 42%,transparent 72%);
+  filter:blur(18px);
+  animation:aura-breathe 8.5s ease-in-out infinite;
+  z-index:-1;
+}
+.organism-field .living-graph{width:100%;height:100%;padding:0;border:0;background:transparent;box-shadow:none}
+.organism-field svg{overflow:visible;filter:drop-shadow(0 10px 35px rgba(185,139,66,.08))}
+.current-moment.listen .organism-field{opacity:.72;filter:saturate(.68)}
+.current-moment.ready .organism-field,.current-moment.judgement .organism-field{opacity:1}
+.current-moment.complete .organism-field{opacity:.78;transform:scale(.96)}
+.moment-language{
+  width:min(100%,430px);
+  text-align:center;
+  align-self:start;
+  display:flex;
+  flex-direction:column;
+  align-items:center;
+  gap:15px;
+  margin-top:-12px;
+}
+.moment-greeting{
+  margin:0;
+  font-size:11px;
+  letter-spacing:.13em;
+  text-transform:uppercase;
+  color:#81796f;
+}
+.moment-language h1{
+  max-width:390px;
+  margin:0;
+  font-family:Georgia,serif;
+  font-size:clamp(30px,8vw,42px);
+  line-height:1.12;
+  font-weight:400;
+  letter-spacing:-.025em;
+  color:#eee8dc;
+}
+.moment-action{
+  width:min(100%,330px);
+  min-height:54px;
+  margin-top:8px;
+  border:1px solid rgba(206,171,107,.38);
+  border-radius:999px;
+  background:rgba(176,132,68,.12);
+  color:#ead9b8;
+  font:600 11px/1.2 system-ui,sans-serif;
+  letter-spacing:.1em;
+  text-transform:uppercase;
+  box-shadow:0 12px 38px rgba(0,0,0,.24),inset 0 1px rgba(255,255,255,.04);
+}
+.moment-action:active{transform:scale(.985)}
+.moment-why{width:min(100%,340px);margin-top:0;color:#8f877b;font-size:12px}
+.moment-why summary{cursor:pointer;list-style:none;padding:10px;color:#9b9285}
+.moment-why summary::-webkit-details-marker{display:none}
+.moment-why div{padding:0 18px 12px;line-height:1.55}
+.moment-why p{margin:0 0 8px}
+.moment-why small{color:#716a61}
+.moment-continuity{margin:2px 0 0;color:#8c8377;font-family:Georgia,serif;font-size:17px}
+
+.experience-flow{
+  max-width:none;
+  padding:0;
+  min-height:100dvh;
+  background:radial-gradient(circle at 50% 34%,rgba(174,135,78,.075),transparent 32%),#090908;
+}
+.seed-checkin{
+  min-height:100dvh;
+  display:grid;
+  grid-template-rows:minmax(330px,52vh) 1fr;
+  place-items:center;
+  padding:calc(18px + env(safe-area-inset-top)) 22px calc(30px + env(safe-area-inset-bottom));
+  position:relative;
+}
+.quiet-close{
+  position:absolute;
+  top:calc(14px + env(safe-area-inset-top));
+  right:18px;
+  width:44px;height:44px;
+  border:0;background:transparent;color:#777066;
+  font-size:28px;font-weight:200;z-index:4;
+}
+.seed-organism{
+  width:min(89vw,400px);
+  aspect-ratio:1;
+  position:relative;
+  display:grid;
+  place-items:center;
+}
+.seed-organism .living-graph{width:100%;height:100%;padding:0;border:0;background:transparent;box-shadow:none}
+.context-seed{
+  --angle:calc(var(--seed-index) * 60deg - 90deg);
+  position:absolute;
+  left:50%;top:50%;
+  width:11px;height:11px;
+  margin:-5.5px;
+  border-radius:50%;
+  transform:rotate(var(--angle)) translateX(158px) rotate(calc(-1 * var(--angle)));
+  border:1px solid rgba(181,152,100,.34);
+  background:#13110e;
+  box-shadow:0 0 0 7px rgba(174,135,78,.018);
+  transition:all .7s ease;
+}
+.context-seed.alive{
+  background:#c9a76b;
+  border-color:#e3c995;
+  box-shadow:0 0 15px rgba(214,174,102,.48),0 0 0 8px rgba(174,135,78,.04);
+  animation:seed-pulse 5s ease-in-out infinite;
+}
+.seed-question{
+  width:min(100%,430px);
+  align-self:start;
+  text-align:center;
+}
+.seed-question>p:first-child{
+  margin:0 0 16px;
+  color:#6f685f;
+  font-size:10px;
+  letter-spacing:.16em;
+}
+.seed-question .question h3{
+  margin:0 auto 22px;
+  max-width:390px;
+  font-family:Georgia,serif;
+  font-weight:400;
+  font-size:clamp(27px,7vw,36px);
+  line-height:1.15;
+  color:#eee7da;
+}
+.seed-question .choice-row{display:flex;flex-wrap:wrap;justify-content:center;gap:10px}
+.seed-question .pill{
+  flex:0 1 auto;
+  min-width:96px;
+  border-radius:999px;
+  background:rgba(255,255,255,.025);
+  border-color:#29251f;
+  color:#bcb3a6;
+  padding:14px 17px;
+}
+.seed-question .pill.selected,.seed-question .pill:active{border-color:#b99455;background:rgba(185,148,85,.13);color:#ead8b5}
+.seed-question>small{display:block;margin-top:22px;color:#5f5951;font-size:10px;letter-spacing:.03em}
+.seed-checkin.complete .seed-organism{animation:organism-settle 2.4s ease both}
+.seed-checkin.complete h1{font-family:Georgia,serif;font-weight:400;font-size:38px;margin:0 0 12px}
+.seed-checkin.complete .seed-question p{font-size:14px;letter-spacing:0;color:#827a70}
+
+.quiet-deliberation{min-height:100dvh;display:grid;place-content:center;justify-items:center;text-align:center;padding:24px;background:radial-gradient(circle,rgba(171,132,71,.07),transparent 34%),#090908}
+.quiet-deliberation .quiet-organism{width:min(86vw,390px);animation:deliberate-organism 2.35s ease-in-out both}
+.quiet-deliberation h2{font-family:Georgia,serif;font-weight:400;font-size:30px;margin:12px 0 7px;color:#e9e2d6}
+.quiet-deliberation p{font-size:12px;color:#716a61}
+
+@keyframes organism-float{0%,100%{transform:translateY(0) scale(1)}50%{transform:translateY(-5px) scale(1.008)}}
+@keyframes aura-breathe{0%,100%{transform:scale(.92);opacity:.45}50%{transform:scale(1.08);opacity:.9}}
+@keyframes seed-pulse{0%,100%{transform:rotate(var(--angle)) translateX(158px) rotate(calc(-1 * var(--angle))) scale(.88)}50%{transform:rotate(var(--angle)) translateX(158px) rotate(calc(-1 * var(--angle))) scale(1.12)}}
+@keyframes deliberate-organism{0%{transform:scale(.96);filter:saturate(.65);opacity:.7}45%{transform:scale(1.03) rotate(.7deg);filter:saturate(1.1);opacity:1}100%{transform:scale(1);filter:saturate(1);opacity:.95}}
+@keyframes organism-settle{0%{transform:scale(1.035)}100%{transform:scale(1)}}
+@media(max-width:390px){.current-moment{grid-template-rows:minmax(285px,50vh) 1fr}.context-seed{transform:rotate(var(--angle)) translateX(135px) rotate(calc(-1 * var(--angle)))}@keyframes seed-pulse{0%,100%{transform:rotate(var(--angle)) translateX(135px) rotate(calc(-1 * var(--angle))) scale(.88)}50%{transform:rotate(var(--angle)) translateX(135px) rotate(calc(-1 * var(--angle))) scale(1.12)}}}
+
+/* v0.14.1 — Primary navigation viewport invariant retained in v0.46.0 */
+.tabbar{
+  position:fixed;
+  left:max(8px,env(safe-area-inset-left));
+  right:max(8px,env(safe-area-inset-right));
+  bottom:max(8px,env(safe-area-inset-bottom));
+  width:auto;
+  min-width:0;
+  transform:none;
+  grid-template-columns:repeat(4,minmax(0,1fr));
+}
+.tabbar button{min-width:0}
+@media(max-width:390px){
+  .tabbar{max-width:none}
+}

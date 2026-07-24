@@ -1,10 +1,17 @@
+# Strategos v0.44.0 — Current Moment Foundation
+
+- Replaced the six-question daily form with a one-question-at-a-time flow.
+- Added Current Moment resolution and partial check-in continuity.
+- Hid recommendation explanations until a real current-day judgement exists.
+
 # Changelog
 
-## 0.42.0 — Invisible Flow
-- Rebuilt Today around one visible next action.
-- Removed internal system-state language and duplicate surfaces.
-- Added frozen Flow Above Features ADR.
-- Closed days now show no CTA.
+## 0.43.0 — Truth Before Intelligence
+- Added an Evidence Gate before the Agora.
+- Blocked daily recommendations until explicit current-day context is complete.
+- Prevented historical judgements and default values from masquerading as today’s evidence.
+- Reset now clears persisted and in-memory daily state.
+- Added the frozen Experience Constitution and Truth Before Intelligence ADR.
 
 # Strategos Changelog
 
@@ -27,7 +34,7 @@
 
 - Added a descriptive seven-day review to Journey.
 - Added explicit preservation of immutable weekly snapshots.
-- Added state schema 45 and runtime token 0420p1.
+- Added state schema 45 and runtime token 0430p1.
 - Preserved zero automatic behavioural influence.
 
 # v0.35.0 — Evening Experience Foundation
@@ -489,12 +496,26 @@ Official stabilization baseline.
 - Added a quiet weekly direction surface in Today.
 - Added change and clear controls in Journey.
 - Preserved zero automatic influence over the Human Model, judgement and Practice selection.
-- Added schema 46 and runtime token 0420p1.
+- Added schema 46 and runtime token 0430p1.
 
-## 0.42.0 — Living Organism
+## 0.43.0 — Living Organism
 
 - Replaced rigid polygon behaviour with bounded organic curvature and deterministic micro-asymmetry.
 - Introduced a shared Life Clock for whole-organism breathing.
 - Added visual depth through field, membrane, filaments and nuclei.
 - Preserved a stable Self and prohibited performance semantics.
 - Added complete reduced-motion behaviour.
+
+## 0.45.0 — Experience Rewrite
+- Made daily understanding a continuous one-question flow with automatic completion.
+- Replaced exposed deliberation architecture with a quiet current-moment transition.
+- Added a living visual manifestation of explicitly provided daily evidence.
+- Added ADR-010 and runtime token 0450p1.
+
+## 0.46.0 — Invisible Organism, Phase 1
+
+- Replaced Today dashboard presentation with the Current Moment experience.
+- Reframed the Living Human Graph as a breathing organism and ambient presence.
+- Rebuilt check-in around six explicit context seeds and one question at a time.
+- Preserved Evidence Gate and all current-day truth constraints.
+- Added ADR-011 and runtime token 0460p1.
