@@ -7,10 +7,10 @@ const app=readFileSync(new URL('../src/app.js',import.meta.url),'utf8');
 const index=readFileSync(new URL('../index.html',import.meta.url),'utf8');
 const sw=readFileSync(new URL('../service-worker.js',import.meta.url),'utf8');
 
-test('current product identity is v0.37.0',()=>{
-  assert.equal(PRODUCT_VERSION,'0.37.0');
+test('current product identity is v0.45.0',()=>{
+  assert.equal(PRODUCT_VERSION,'0.45.0');
   assert.equal(STATE_SCHEMA_VERSION,46);
-  assert.equal(createInitialState().productVersion,'0.37.0');
+  assert.equal(createInitialState().productVersion,'0.45.0');
 });
 
 test('fresh state contains every current collection',()=>{
@@ -25,11 +25,11 @@ test('current-schema incomplete state is repaired conservatively',()=>{
   const state=migrateState({schemaVersion:36,profile:{name:'Pedro'},onboardingVersion:3});
   assert.deepEqual(state.patternTransfers,[]);
   assert.deepEqual(state.calibrationAccountability,[]);
-  assert.equal(state.productVersion,'0.37.0');
+  assert.equal(state.productVersion,'0.45.0');
 });
 
 test('deliberation is a browser-history route and replaces itself with judgement',()=>{
-  assert.match(app,/HISTORY_ROUTES=new Set\(\['today','thinking'/);
+  assert.match(app,/HISTORY_ROUTES=new Set\(\['today','checkin','thinking'/);
   assert.match(app,/route\('judgement',\{history:'replace'\}\)/);
 });
 
@@ -50,9 +50,9 @@ test('state import uses the same complete reconciliation as startup',()=>{
 });
 
 test('release-specific asset URLs prevent stale Safari assets',()=>{
-  assert.match(index,/styles\.css\?v=0390p1/);
-  assert.match(index,/src\/app\.js\?v=0390p1/);
-  assert.match(sw,/strategos-shell-v0\.39\.0-living-human-graph/);
+  assert.match(index,/styles\.css\?v=0476p1/);
+  assert.match(index,/src\/app\.js\?v=0476p1/);
+  assert.match(sw,/strategos-shell-v0\.47\.6-checkin-interaction-and-symmetry-repair/);
   assert.doesNotMatch(sw,/styles\.css/);
   assert.match(sw,/url\.pathname\.endsWith\('\.css'\)/);
 });

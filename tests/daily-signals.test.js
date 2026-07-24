@@ -1,9 +1,9 @@
 import test from 'node:test';
 import assert from 'node:assert/strict';
-import {DAILY_SIGNAL_DEFAULTS,localDayKey,normaliseDailySignals,todaySignals,upsertDailyCheckIn,dailyCheckInSummary} from '../src/core/daily-signals.js?v=0390p1';
+import {DAILY_SIGNAL_DEFAULTS,localDayKey,normaliseDailySignals,todaySignals,upsertDailyCheckIn,dailyCheckInSummary} from '../src/core/daily-signals.js?v=0476p1';
 
 test('daily signals use safe defaults and strict values',()=>{
-  assert.deepEqual(todaySignals([],new Date('2026-07-23T08:00:00')),DAILY_SIGNAL_DEFAULTS);
+  assert.deepEqual(todaySignals([],new Date('2026-07-23T08:00:00')),{});
   assert.equal(normaliseDailySignals({sleep:9}).sleep,3);
 });
 

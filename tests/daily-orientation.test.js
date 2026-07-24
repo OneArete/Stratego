@@ -1,6 +1,6 @@
 import test from 'node:test';
 import assert from 'node:assert/strict';
-import {buildDailyOrientation,recentCheckInTrajectory} from '../src/core/daily-orientation.js?v=0390p1';
+import {buildDailyOrientation,recentCheckInTrajectory} from '../src/core/daily-orientation.js?v=0476p1';
 
 test('orientation protects capacity under strong constraints',()=>{
  const o=buildDailyOrientation({sleep:1,energy:1,time:15,challenge:'recovery',soreness:'significant',emotionalLoad:'heavy'});

@@ -17,7 +17,7 @@ const here=dirname(fileURLToPath(import.meta.url));
 const app=readFileSync(resolve(here,'../src/app.js'),'utf8');
 
 test('adaptation governance remains in the existing runtime module',()=>{
-  assert.match(app,/from '\.\/core\/adaptation-patterns\.js\?v=0390p1'/);
+  assert.match(app,/from '\.\/core\/adaptation-patterns\.js\?v=0476p1'/);
   assert.equal(existsSync(resolve(here,'../src/core/adaptation-pattern-review.js')),false);
 });
 
