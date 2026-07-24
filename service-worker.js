@@ -1,4 +1,4 @@
-const CACHE_NAME = 'strategos-shell-v0.46.2-invisible-organism-phase-1';
+const CACHE_NAME = 'strategos-shell-v0.47.0-invisible-organism-checkin-repair';
 const STATIC_ASSETS = [
   './manifest.webmanifest',
   './icons/delta-180.png',
