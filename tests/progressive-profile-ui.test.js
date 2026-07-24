@@ -4,9 +4,9 @@ import fs from 'node:fs';
 const app=fs.readFileSync(new URL('../src/app.js',import.meta.url),'utf8');
 
 test('onboarding captures name and sets expectations without profile form',()=>{
-  // Step 0: philosophy
-  assert.match(app,/ONE PRINCIPLE/);
-  assert.match(app,/Understand first/);
+  // Step 0: central question
+  assert.match(app,/ONE QUESTION/);
+  assert.match(app,/What does your body actually need today/);
   // Step 1: organism
   assert.match(app,/SIX DIMENSIONS/);
   assert.match(app,/living-graph compact/);
