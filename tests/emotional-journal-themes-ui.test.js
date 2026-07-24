@@ -7,4 +7,4 @@ test('theme action persists',()=>{const s=app.slice(app.indexOf('if(t.dataset.em
 test('Personal Evolution visible',()=>{assert.ok(app.includes('PERSONAL EVOLUTION'));assert.ok(app.includes('Only themes you selected yourself are counted'))});
 test('Reflective Continuity visible',()=>{assert.ok(app.includes('REFLECTIVE CONTINUITY'));assert.ok(app.includes('Self-selected themes only'))});
 test('footer unchanged',()=>{const n=app.slice(app.indexOf('const nav='),app.indexOf('const ROUTES='));for(const l of ['Today','Understanding','Journey','Settings'])assert.ok(n.includes(l));assert.doesNotMatch(n,/Personal Evolution/)});
-test('token',()=>{for(const x of [...app.matchAll(/from ['"]([^'"]+\.js(?:\?v=[^'"]+)?)['"]/g)].map(m=>m[1]))assert.match(x,/\?v=0390p1$/)});
+test('token',()=>{for(const x of [...app.matchAll(/from ['"]([^'"]+\.js(?:\?v=[^'"]+)?)['"]/g)].map(m=>m[1]))assert.match(x,/\?v=0476p1$/)});

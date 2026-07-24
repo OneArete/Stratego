@@ -1,6 +1,6 @@
 import test from 'node:test';
 import assert from 'node:assert/strict';
-import { buildEveningExperience,closeDailyStory } from '../src/core/evening-experience.js?v=0390p1';
+import { buildEveningExperience,closeDailyStory } from '../src/core/evening-experience.js?v=0476p1';
 
 test('evening experience opens only after practice reflection',()=>{
   assert.equal(buildEveningExperience({story:{stage:'judgement'}}).ready,false);

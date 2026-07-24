@@ -13,7 +13,7 @@ test('Today uses the actual Living Human Graph as its organism',()=>{
 
 test('ambient graph removes analytical chrome while preserving six-domain structure',()=>{
   assert.match(graph,/ambient = false/);
-  assert.match(graph,/ambient \? '' :/);
+  assert.match(graph,/ambient\?'':/);
   assert.match(css,/\.living-graph\.ambient/);
   assert.match(css,/\.route-today \.observe-stack>\.living-graph\{display:none\}/);
 });

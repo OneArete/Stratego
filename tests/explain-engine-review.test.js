@@ -1,6 +1,6 @@
 import test from 'node:test';
 import assert from 'node:assert/strict';
-import {buildExplainRecord,applyExplainRecordReview,explainRecordReviewAudit,explainRecordReviewSummary} from '../src/core/explain.js?v=0390p1';
+import {buildExplainRecord,applyExplainRecordReview,explainRecordReviewAudit,explainRecordReviewSummary} from '../src/core/explain.js?v=0476p1';
 const decision={id:'j1',judgement:'Recovery.',confidence:74,practice:{id:'recovery',name:'Recovery'},advisors:[{advisor:'Recovery',position:'Support',reason:'Energy is limited.',scores:{recovery:10}}],understanding:{summary:'Recovery demand is elevated.'},unknowns:[]};
 test('confirm explanation',()=>{const r=applyExplainRecordReview(buildExplainRecord(decision,{context:{}}),{action:'confirm'});assert.equal(r.review.status,'confirmed')});
 test('reject with correction',()=>{const r=applyExplainRecordReview(buildExplainRecord(decision,{context:{}}),{action:'reject',note:'Missing context'});assert.equal(r.review.note,'Missing context')});

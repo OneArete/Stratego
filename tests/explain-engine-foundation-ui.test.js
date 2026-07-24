@@ -7,4 +7,4 @@ test('Current Judgement exposes how it was formed',()=>{assert.ok(app.includes('
 test('Understanding exposes Explain Engine',()=>{assert.ok(app.includes('EXPLAIN ENGINE'));assert.ok(app.includes('Canonical explanation record'))});
 test('Audit validates explanation integrity',()=>{assert.ok(app.includes('EXPLAIN ENGINE AUDIT'));assert.match(app,/validateExplainRecord/)});
 test('Journey preserves explanation provenance',()=>{assert.ok(app.includes('Explanation record at judgement'))});
-test('all runtime imports use Phase 1 token',()=>{for(const specifier of [...app.matchAll(/from ['"]([^'"]+\.js(?:\?v=[^'"]+)?)['"]/g)].map(match=>match[1]))assert.match(specifier,/\?v=0390p1$/)});
+test('all runtime imports use Phase 1 token',()=>{for(const specifier of [...app.matchAll(/from ['"]([^'"]+\.js(?:\?v=[^'"]+)?)['"]/g)].map(match=>match[1]))assert.match(specifier,/\?v=0476p1$/)});

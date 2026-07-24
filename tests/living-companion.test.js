@@ -2,24 +2,34 @@ import test from 'node:test';
 import assert from 'node:assert/strict';
 import { buildLivingCompanion,timeGreeting } from '../src/core/living-companion.js';
 
-test('Living Companion preserves silence before enough context exists',()=>{
+test('Living Companion gives one clear check-in action before context exists',()=>{
   const model=buildLivingCompanion({context:{},story:{stage:'opened'}});
   assert.equal(model.mode,'listen');
+  assert.equal(model.judgement,'Let’s understand today.');
   assert.equal(model.action,'focus-signals');
-  assert.match(model.continuity,/Continue your story/);
+  assert.equal(model.actionLabel,'Start today’s check-in');
 });
 
 test('Living Companion exposes one continuation action for active continuity',()=>{
   const model=buildLivingCompanion({hasContinuity:true,judgement:{judgement:'Protect recovery.',confidence:72},story:{stage:'judgement'}});
   assert.equal(model.action,'continue-flow');
-  assert.equal(model.judgement,'Protect recovery.');
-  assert.equal(model.confidence,'72% confidence');
+  assert.equal(model.actionLabel,'Continue');
+  assert.equal(model.judgement,'Continue where you left off.');
 });
 
 test('Living Companion recognises a completed day without inventing urgency',()=>{
   const model=buildLivingCompanion({story:{stage:'complete'}});
-  assert.equal(model.judgement,'Day completed');
-  assert.match(model.reasons.join(' '),/Nothing else needs/);
+  assert.equal(model.judgement,'Day completed.');
+  assert.equal(model.action,null);
+  assert.equal(model.continuity,'There is continuity.');
+});
+
+test('complete context leads directly to recommendation deliberation',()=>{
+  const context={sleep:3,energy:2,time:30,challenge:'recovery',soreness:'mild',emotionalLoad:'usual'};
+  const model=buildLivingCompanion({context,story:{stage:'check-in'}});
+  assert.equal(model.judgement,'I understand today.');
+  assert.equal(model.action,'consult');
+  assert.equal(model.actionLabel,'See today’s recommendation');
 });
 
 test('time greeting remains deterministic when an hour is supplied',()=>{

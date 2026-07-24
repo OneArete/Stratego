@@ -7,4 +7,4 @@ test('correction uses in-app textarea',()=>{assert.ok(app.includes('id="explain-
 test('review updates canonical records',()=>{const s=app.slice(app.indexOf('if(t.dataset.explainReviewAction)'),app.indexOf('if(t.dataset.runtimeSafetyAction)'));assert.match(s,/state\.judgements=/);assert.match(s,/state\.current=/);assert.match(s,/state\.history=/)});
 test('review can reopen',()=>assert.ok(app.includes('Review again')));
 test('review zero influence visible',()=>assert.ok(app.includes('Judgement influence: 0 · Ranking influence: 0 · Confidence influence: 0 · Safety influence: 0')));
-test('all imports use token',()=>{for(const x of [...app.matchAll(/from ['"]([^'"]+\.js(?:\?v=[^'"]+)?)['"]/g)].map(m=>m[1]))assert.match(x,/\?v=0390p1$/)});
+test('all imports use token',()=>{for(const x of [...app.matchAll(/from ['"]([^'"]+\.js(?:\?v=[^'"]+)?)['"]/g)].map(m=>m[1]))assert.match(x,/\?v=0476p1$/)});

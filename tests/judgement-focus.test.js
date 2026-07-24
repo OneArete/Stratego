@@ -33,11 +33,12 @@ test('full reasoning is available in Understanding',()=>{
   assert.ok(app.includes('DECISION BOUNDARIES'));
 });
 
-test('Agora rotates the existing SVG ring around the Delta',()=>{
-  assert.ok(app.includes('class="agora-orbit"'));
-  assert.match(css,/@keyframes agora-existing-ring-turn/);
-  assert.match(css,/\.agora-orbit \.delta \.ring\{/);
-  assert.match(css,/animation:agora-existing-ring-turn 3\.2s linear infinite !important/);
+test('deliberation is visually quiet and hides internal architecture',()=>{
+  const thinking=app.slice(app.indexOf('function thinking()'),app.indexOf('function completePersonChoice'));
+  assert.ok(thinking.includes('quiet-deliberation'));
+  assert.ok(thinking.includes('Deliberating.'));
+  assert.doesNotMatch(thinking,/agora-orbit|advisor-lights|THE AGORA/);
+  assert.match(css,/\.quiet-organism/);
 });
 
 test('Agora creates no additional orbit circles',()=>{

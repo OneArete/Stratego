@@ -30,10 +30,10 @@ test('guide preserves the agency principle',()=>{
   assert.ok(app.includes('Strategos advises. You decide.'));
 });
 
-test('contextual help exists for graph judgement and Understanding',()=>{
-  assert.ok(app.includes('data-guide-section="graph"'));
+test('contextual help remains available without adding a competing Today action',()=>{
   assert.ok(app.includes('data-guide-section="judgement"'));
   assert.ok(app.includes('data-guide-section="understanding"'));
+  assert.doesNotMatch(app,/function today\(\)[\s\S]{0,500}data-guide-section/);
 });
 
 test('contextual help routes without browser prompts',()=>{

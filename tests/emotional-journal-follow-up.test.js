@@ -1,6 +1,6 @@
 import test from 'node:test';
 import assert from 'node:assert/strict';
-import {createEmotionalJournalEntry,applyEmotionalJournalFollowUp,reopenEmotionalJournalFollowUp,emotionalJournalFollowUpAudit,EMOTIONAL_JOURNAL_FOLLOW_UPS} from '../src/core/emotional-journal.js?v=0390p1';
+import {createEmotionalJournalEntry,applyEmotionalJournalFollowUp,reopenEmotionalJournalFollowUp,emotionalJournalFollowUpAudit,EMOTIONAL_JOURNAL_FOLLOW_UPS} from '../src/core/emotional-journal.js?v=0476p1';
 test('still present',()=>{const e=applyEmotionalJournalFollowUp(createEmotionalJournalEntry({text:'x'}),{outcome:'still-present'});assert.equal(e.followUp.outcome,'still-present');assert.equal(e.followUp.source,'person')});
 test('all outcomes',()=>{for(const o of ['changed','resolved','uncertain'])assert.equal(applyEmotionalJournalFollowUp(createEmotionalJournalEntry({text:'x'}),{outcome:o}).followUp.outcome,o)});
 test('invalid ignored',()=>assert.equal(applyEmotionalJournalFollowUp(createEmotionalJournalEntry({text:'x'}),{outcome:'diagnosed'}).followUp,undefined));

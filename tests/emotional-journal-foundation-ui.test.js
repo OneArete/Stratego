@@ -32,5 +32,5 @@ test('journal remains outside footer',()=>{
 });
 
 test('runtime imports use Phase 1 token',()=>{
-  for(const specifier of [...app.matchAll(/from ['"]([^'"]+\.js(?:\?v=[^'"]+)?)['"]/g)].map(match=>match[1]))assert.match(specifier,/\?v=0390p1$/);
+  for(const specifier of [...app.matchAll(/from ['"]([^'"]+\.js(?:\?v=[^'"]+)?)['"]/g)].map(match=>match[1]))assert.match(specifier,/\?v=0476p1$/);
 });

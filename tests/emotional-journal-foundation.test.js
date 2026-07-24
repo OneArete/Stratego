@@ -7,7 +7,7 @@ import {
   upsertEmotionalJournalEntry,
   emotionalJournalToday,
   emotionalJournalAudit
-} from '../src/core/emotional-journal.js?v=0390p1';
+} from '../src/core/emotional-journal.js?v=0476p1';
 
 test('blank reflection is not created',()=>{
   assert.equal(createEmotionalJournalEntry({text:'   '}),null);

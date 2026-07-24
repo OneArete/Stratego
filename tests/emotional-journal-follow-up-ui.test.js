@@ -7,4 +7,4 @@ test('optional note no prompt',()=>{assert.ok(app.includes('id="emotional-follow
 test('reopen',()=>{assert.ok(app.includes('Review again'));assert.match(app,/reopenEmotionalJournalFollowUp/)});
 test('Journey and Understanding outcomes',()=>{assert.ok(app.includes('REFLECTION FOLLOW-UP'));assert.ok(app.includes('REFLECTION OUTCOMES'));assert.ok(app.includes('Only your explicit follow-up is counted'))});
 test('footer unchanged',()=>{const n=app.slice(app.indexOf('const nav='),app.indexOf('const ROUTES='));for(const l of ['Today','Understanding','Journey','Settings'])assert.ok(n.includes(l));assert.doesNotMatch(n,/Reflection Outcomes/)});
-test('token',()=>{for(const x of [...app.matchAll(/from ['"]([^'"]+\.js(?:\?v=[^'"]+)?)['"]/g)].map(m=>m[1]))assert.match(x,/\?v=0390p1$/)});
+test('token',()=>{for(const x of [...app.matchAll(/from ['"]([^'"]+\.js(?:\?v=[^'"]+)?)['"]/g)].map(m=>m[1]))assert.match(x,/\?v=0476p1$/)});

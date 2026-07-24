@@ -1,6 +1,6 @@
 import test from 'node:test';
 import assert from 'node:assert/strict';
-import {buildExplainRecord,explainRecordAudit,explainRecordSummary,validateExplainRecord,EXPLAIN_ENGINE_VERSION} from '../src/core/explain.js?v=0390p1';
+import {buildExplainRecord,explainRecordAudit,explainRecordSummary,validateExplainRecord,EXPLAIN_ENGINE_VERSION} from '../src/core/explain.js?v=0476p1';
 
 const decision={
   id:'j1',
