@@ -22,10 +22,15 @@ test('footer is floating above the browser edge',()=>{
   assert.ok(css.includes('width:min(410px,calc(100% - 20px))'));
 });
 
-test('Understanding exposes five progressive disclosure views',()=>{
-  for(const view of ['overview','patterns','outcomes','agency','audit']){
+test('Understanding exposes three progressive disclosure views',()=>{
+  // v0.51.0: Patterns + Outcomes + Agency consolidated into a single Evidence tab
+  for(const view of ['overview','evidence','audit']){
     assert.ok(app.includes(`data-understanding-view="${view}"`));
   }
+  // Removed views should no longer be present as separate tabs
+  assert.ok(!app.includes('data-understanding-view="patterns"'));
+  assert.ok(!app.includes('data-understanding-view="outcomes"'));
+  assert.ok(!app.includes('data-understanding-view="agency"'));
 });
 
 test('non-overview Understanding sections are hidden by default',()=>{
