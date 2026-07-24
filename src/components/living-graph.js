@@ -67,41 +67,9 @@ const filamentPath = (from,to,center,index,phase=0) => {
   return `M ${round(from.x)} ${round(from.y)} C ${round(c1.x)} ${round(c1.y)} ${round(c2.x)} ${round(c2.y)} ${round(to.x)} ${round(to.y)}`;
 };
 
-
-const renderAmbientOrganism = (graph,size,center) => {
-  const nodes=(graph?.nodes||[]).slice(0,6);
-  const radius=92;
-  const points=nodes.map((node,index)=>({...node,...polar(center,center,radius,index*60)}));
-  const petals=points.map((point,index)=>{
-    const next=points[(index+1)%points.length];
-    const opposite=points[(index+3)%points.length];
-    const path=`M ${round(center)} ${round(center)} C ${round((center+point.x)/2)} ${round((center+point.y)/2)} ${round(point.x)} ${round(point.y)} ${round(next.x)} ${round(next.y)} C ${round((next.x+center)/2)} ${round((next.y+center)/2)} ${round((opposite.x+center)/2)} ${round((opposite.y+center)/2)} ${round(center)} ${round(center)}`;
-    return `<path class="organism-petal" d="${path}" style="--petal-index:${index}"/>`;
-  }).join('');
-  const filaments=points.map((point,index)=>{
-    const opposite=points[(index+3)%points.length];
-    return `<path class="organism-filament" d="M ${round(point.x)} ${round(point.y)} Q ${round(center)} ${round(center)} ${round(opposite.x)} ${round(opposite.y)}"/>`;
-  }).join('');
-  const nuclei=points.map((point,index)=>`<g class="organism-nucleus" style="--nucleus-index:${index}"><circle cx="${round(point.x)}" cy="${round(point.y)}" r="8.5"/><circle class="organism-nucleus-core" cx="${round(point.x)}" cy="${round(point.y)}" r="3.2"/></g>`).join('');
-  return `<section class="living-graph ambient living-organism" aria-label="Living Human Organism">
-    <div class="organism-depth" aria-hidden="true"></div>
-    <svg viewBox="0 0 ${size} ${size}" role="img" aria-label="A calm, balanced living representation awaiting today's evidence.">
-      <g class="organism-body">
-        <circle class="organism-boundary organism-boundary-outer" cx="${center}" cy="${center}" r="116"/>
-        <circle class="organism-boundary organism-boundary-inner" cx="${center}" cy="${center}" r="70"/>
-        <g class="organism-petals">${petals}</g>
-        <g class="organism-filaments">${filaments}</g>
-        <circle class="organism-heart-aura" cx="${center}" cy="${center}" r="24"/>
-        <circle class="organism-heart" cx="${center}" cy="${center}" r="8"/>
-        ${nuclei}
-      </g>
-    </svg>
-  </section>`;
-};
 export function renderLivingGraph(graph, { compact = false, ambient = false } = {}) {
   const size = ambient ? 340 : compact ? 214 : 276;
   const center = size / 2;
-  if (ambient) return renderAmbientOrganism(graph,size,center);
   const radius = ambient ? 105 : compact ? 67 : 88;
   const scores = graph.nodes.map(dominantScore);
   const neutral = graph.nodes.length > 0 && graph.nodes.every((node,index,array) =>
