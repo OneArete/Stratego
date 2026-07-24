@@ -538,3 +538,6 @@ Official stabilization baseline.
 - Made Today check-in entry a genuine native link with a full-page route fallback.
 - Startup now honours `?route=checkin` and `#checkin`.
 - Native navigation is cancelled only after successful in-app routing.
+
+## v0.47.3
+- Replaced the failing routed Today action with a native form submission to a standalone daily check-in.

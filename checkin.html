@@ -1,0 +1,59 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<meta name="theme-color" content="#090909">
+<title>Today’s check-in — Strategos</title>
+<style>
+:root{color-scheme:dark;font-family:Inter,-apple-system,BlinkMacSystemFont,"SF Pro Display",sans-serif;background:#090909;color:#f3efe6}*{box-sizing:border-box}body{margin:0;min-height:100dvh;background:radial-gradient(circle at 50% 28%,rgba(174,135,78,.09),transparent 34%),#090909}.wrap{min-height:100dvh;max-width:520px;margin:auto;padding:calc(28px + env(safe-area-inset-top)) 22px calc(32px + env(safe-area-inset-bottom));display:grid;grid-template-rows:auto 1fr}.close{justify-self:end;color:#8a8175;text-decoration:none;font-size:32px;line-height:1;padding:8px}.stage{align-self:center}.eyebrow{font-size:11px;letter-spacing:.2em;text-transform:uppercase;color:#9b8e7c;margin:0 0 18px}.stage h1{font-family:Georgia,serif;font-size:clamp(34px,9vw,48px);line-height:1.08;font-weight:400;margin:0 0 30px}.choices{display:grid;grid-template-columns:1fr 1fr;gap:12px}.choice{min-height:58px;border:1px solid #3a3329;border-radius:18px;background:#15120e;color:#eee3d0;font-size:15px;padding:14px}.choice:active{transform:scale(.98)}.note{margin:24px 0 0;color:#7d756b;font-size:12px}.done{text-align:center}.done p{color:#91887c;line-height:1.5}.return{display:block;margin-top:28px;border:1px solid #80663d;border-radius:999px;padding:18px;text-decoration:none;color:#ead9b8;letter-spacing:.1em;text-transform:uppercase;font-size:11px;font-weight:700}
+</style>
+</head>
+<body>
+<main class="wrap">
+<a class="close" href="./index.html#today" aria-label="Return to Today">×</a>
+<section class="stage" id="stage"></section>
+</main>
+<script>
+(function(){
+  'use strict';
+  var KEY='onearete.strategos.v090';
+  var steps=[
+    {key:'sleep',title:'How did you sleep?',values:[[4,'Excellent'],[3,'Good'],[2,'Fair'],[1,'Poor']]},
+    {key:'energy',title:'How is your energy?',values:[[3,'High'],[2,'Medium'],[1,'Low']]},
+    {key:'time',title:'How much time is genuinely available?',values:[[5,'5 min'],[15,'15 min'],[30,'30 min'],[60,'60+ min']]},
+    {key:'challenge',title:'What has the strongest claim on today?',values:[['body','Body'],['mind','Mind'],['focus','Focus'],['recovery','Recovery'],['family','Family'],['work','Work']]},
+    {key:'soreness',title:'How does your body feel?',values:[['none','No soreness'],['mild','Some soreness'],['significant','Significant soreness']]},
+    {key:'emotionalLoad',title:'How much emotional load are you carrying?',values:[['light','Light'],['usual','Usual'],['heavy','Heavy']]}
+  ];
+  var answers={}; var index=0; var stage=document.getElementById('stage');
+  function esc(v){return String(v).replace(/[&<>"']/g,function(c){return {'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]})}
+  function dayKey(){var d=new Date();return d.getFullYear()+'-'+String(d.getMonth()+1).padStart(2,'0')+'-'+String(d.getDate()).padStart(2,'0')}
+  function read(){try{return JSON.parse(localStorage.getItem(KEY)||'{}')}catch(e){return {}}}
+  function save(){
+    var state=read(), now=new Date().toISOString(), day=dayKey();
+    var current=Array.isArray(state.dailyCheckIns)?state.dailyCheckIns:[];
+    var previous=current.find(function(x){return x&&x.day===day});
+    var record={id:previous&&previous.id||'checkin-'+day,day:day,signals:answers,createdAt:previous&&previous.createdAt||now,updatedAt:now,source:'person-confirmed'};
+    state.dailyCheckIns=[record].concat(current.filter(function(x){return !x||x.day!==day})).slice(0,400);
+    var stories=Array.isArray(state.dailyStories)?state.dailyStories:[];
+    var prior=stories.find(function(x){return x&&x.day===day});
+    var story=Object.assign({},prior||{}, {id:prior&&prior.id||'story-'+day,day:day,stage:'check-in',signals:answers,updatedAt:now,createdAt:prior&&prior.createdAt||now});
+    state.dailyStories=[story].concat(stories.filter(function(x){return !x||x.day!==day})).slice(0,400);
+    localStorage.setItem(KEY,JSON.stringify(state));
+  }
+  function render(){
+    if(index>=steps.length){
+      try{save();stage.className='stage done';stage.innerHTML='<p class="eyebrow">TODAY</p><h1>I understand today.</h1><p>Your answers were saved on this device.</p><a class="return" href="./index.html#today">Return to Today</a>';setTimeout(function(){location.replace('./index.html#today')},700)}catch(e){stage.innerHTML='<h1>Could not save today.</h1><p class="note">Please return and try again.</p>'}
+      return;
+    }
+    var step=steps[index];
+    stage.className='stage';
+    stage.innerHTML='<p class="eyebrow">'+(index+1)+' / '+steps.length+'</p><h1>'+esc(step.title)+'</h1><div class="choices">'+step.values.map(function(v){return '<button class="choice" type="button" data-value="'+esc(v[0])+'">'+esc(v[1])+'</button>'}).join('')+'</div><p class="note">Nothing is inferred from silence.</p>';
+    Array.prototype.forEach.call(stage.querySelectorAll('.choice'),function(btn){btn.addEventListener('click',function(){var raw=btn.getAttribute('data-value');answers[step.key]=/^\d+$/.test(raw)?Number(raw):raw;index++;render()})});
+  }
+  render();
+}());
+</script>
+</body>
+</html>
