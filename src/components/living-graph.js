@@ -33,19 +33,26 @@ const closedCurve = nodes => {
   return `${path} Z`;
 };
 
-const displacedNodes = (nodes, center, dominantIndex, phase = 1) => nodes.map((node,index) => {
-  const dx = node.x - center;
-  const dy = node.y - center;
-  const distance = Math.hypot(dx,dy) || 1;
-  const neighbourDistance = Math.min(
-    (index - dominantIndex + nodes.length) % nodes.length,
-    (dominantIndex - index + nodes.length) % nodes.length
-  );
-  const dominantInfluence = neighbourDistance === 0 ? 1 : neighbourDistance === 1 ? .44 : neighbourDistance === 2 ? .16 : .05;
-  const wave = Math.sin((index * 1.41) + phase * 1.73) * 1.65;
-  const outward = .9 + dominantInfluence * 4.8 + wave;
-  return {...node,x:node.x+dx/distance*outward,y:node.y+dy/distance*outward};
-});
+const displacedNodes = (nodes, center, dominantIndex, phase = 1) => {
+  // Energy-responsive membrane: each node pushes or pulls relative to the group average.
+  // High-energy domains bulge the membrane outward; dormant domains allow it to contract.
+  // This makes the organism shape a genuine energy contour, not just an ornament.
+  const avgEnergy = nodes.reduce((sum, n) => sum + Number(n.energy || 0.5), 0) / nodes.length;
+  return nodes.map((node,index) => {
+    const dx = node.x - center;
+    const dy = node.y - center;
+    const distance = Math.hypot(dx,dy) || 1;
+    const neighbourDistance = Math.min(
+      (index - dominantIndex + nodes.length) % nodes.length,
+      (dominantIndex - index + nodes.length) % nodes.length
+    );
+    const dominantInfluence = neighbourDistance === 0 ? 1 : neighbourDistance === 1 ? .44 : neighbourDistance === 2 ? .16 : .05;
+    const wave = Math.sin((index * 1.41) + phase * 1.73) * 1.65;
+    const energyPush = (Number(node.energy || 0.5) - avgEnergy) * 3.2;
+    const outward = Math.max(-2, .9 + dominantInfluence * 4.8 + energyPush + wave);
+    return {...node,x:node.x+dx/distance*outward,y:node.y+dy/distance*outward};
+  });
+};
 
 const filamentPath = (from,to,center,index,phase=0) => {
   const mx=(from.x+to.x)/2;
@@ -67,7 +74,7 @@ const filamentPath = (from,to,center,index,phase=0) => {
   return `M ${round(from.x)} ${round(from.y)} C ${round(c1.x)} ${round(c1.y)} ${round(c2.x)} ${round(c2.y)} ${round(to.x)} ${round(to.y)}`;
 };
 
-export function renderLivingGraph(graph, { compact = false, ambient = false } = {}) {
+export function renderLivingGraph(graph, { compact = false, ambient = false, deliberating = false } = {}) {
   const size = ambient ? 340 : compact ? 214 : 276;
   const center = size / 2;
   const radius = ambient ? 105 : compact ? 67 : 88;
@@ -93,7 +100,14 @@ export function renderLivingGraph(graph, { compact = false, ambient = false } = 
     return {...node,...point,angle,core,halo,emphasis,dominant:index===dominantIndex};
   });
 
-  const membranePhases=[0,.65,1.35,2.1,2.85];
+  // Deliberating mode uses wider membrane phases — organism breathes more actively
+  // during Agora processing. Normal mode uses measured, calmer oscillation.
+  const membranePhases = deliberating
+    ? [0, 1.1, 2.25, 3.4, 4.6]
+    : [0, .65, 1.35, 2.1, 2.85];
+  const membraneDur = deliberating ? '10s' : '18s';
+  const filamentDur = deliberating ? '7s' : '14s';
+
   const membraneFrames=neutral
     ? membranePhases.map(()=>closedCurve(nodes))
     : membranePhases.map(phase=>closedCurve(displacedNodes(nodes,center,dominantIndex,phase)));
@@ -107,7 +121,7 @@ export function renderLivingGraph(graph, { compact = false, ambient = false } = 
     const drift=neutral ? base : filamentPath(node,next,center,index,.72);
     const begin=(index*-.93).toFixed(2);
     return `<path class="graph-link ${edgeEmphasis>.78?'dominant-link':''}" style="--edge:${edgeEmphasis.toFixed(2)};--filament-opacity:${opacity.toFixed(2)}" d="${base}">
-      <animate attributeName="d" values="${base};${drift};${base}" dur="14s" begin="${begin}s" repeatCount="indefinite" />
+      <animate attributeName="d" values="${base};${drift};${base}" dur="${filamentDur}" begin="${begin}s" repeatCount="indefinite" />
     </path>`;
   }).join('');
 
@@ -117,25 +131,39 @@ export function renderLivingGraph(graph, { compact = false, ambient = false } = 
     const duration=(12.6+(stableNoise(`${node.id}:breath`)-.5)*3.4).toFixed(2);
     const delay=(-index*1.17).toFixed(2);
     const trend=node.momentum>.04?'↑':node.momentum<-.04?'↓':'•';
+    // In deliberating mode: labels removed — organism speaks without words
+    const labelMarkup = deliberating ? '' : `<text class="node-label" x="${round(labelPoint.x)}" y="${round(labelPoint.y)}">${node.label}</text>`;
     return `<g class="graph-node ${node.dominant?'dominant-node':''}" data-dimension="${node.id}" style="--emphasis:${node.emphasis.toFixed(2)};--node-duration:${duration}s;--node-delay:${delay}s">
       <circle class="node-halo" cx="${round(node.x)}" cy="${round(node.y)}" r="${round(node.halo)}" style="opacity:${haloOpacity}"/>
       <circle class="node-core" cx="${round(node.x)}" cy="${round(node.y)}" r="${round(node.core)}"/>
-      <text class="node-label" x="${round(labelPoint.x)}" y="${round(labelPoint.y)}">${node.label}</text>
+      ${labelMarkup}
       <text class="node-trend" x="${round(node.x)}" y="${round(node.y+2.6)}">${trend}</text>
     </g>`;
   }).join('');
 
+  // Convergence ring: contracts from the outer field toward the center during deliberation.
+  // Visually communicates "the space of possibilities is collapsing to one direction."
+  // Duration matches the Agora deliberation timeout (2350ms).
+  const outerR = (size * 0.58).toFixed(1);
+  const innerR = (ambient ? 24 : compact ? 15 : 19).toFixed(1);
+  const convergenceRing = deliberating ? `<circle class="convergence-ring" cx="${center}" cy="${center}" r="${outerR}">
+      <animate attributeName="r" from="${outerR}" to="${innerR}" dur="2.15s" fill="freeze" calcMode="spline" keySplines="0.6 0 0.4 1"/>
+      <animate attributeName="opacity" values="0.22;0.12;0" keyTimes="0;0.62;1" dur="2.15s" fill="freeze"/>
+    </circle>` : '';
+
   const dominant=nodes[dominantIndex];
-  return `<section class="living-graph ${compact?'compact':''} ${ambient?'ambient':''}" aria-label="Living Human Graph">
+  const modeClass = [compact?'compact':'', ambient?'ambient':'', deliberating?'deliberating':''].filter(Boolean).join(' ');
+  return `<section class="living-graph ${modeClass}" aria-label="Living Human Graph">
     ${ambient?'':`<div class="graph-heading"><div><p class="eyebrow">LIVING HUMAN GRAPH</p><h3>Your current pattern</h3></div><span class="graph-state">${graph.state}</span></div>`}
     <div class="organism-depth" aria-hidden="true"></div>
     <svg viewBox="0 0 ${size} ${size}" role="img" aria-label="Six dimensions of human flourishing. ${dominant.label} currently has the strongest emphasis.">
       <g class="organism-body">
         <path class="graph-membrane graph-membrane-shadow" d="${membraneFrames[0]}"/>
         <path class="graph-membrane" d="${membraneFrames[0]}">
-          <animate attributeName="d" values="${membraneFrames.join(';')};${membraneFrames[0]}" keyTimes="0;.18;.39;.58;.78;1" calcMode="spline" keySplines=".42 0 .58 1;.42 0 .58 1;.42 0 .58 1;.42 0 .58 1;.42 0 .58 1" dur="18s" repeatCount="indefinite"/>
+          <animate attributeName="d" values="${membraneFrames.join(';')};${membraneFrames[0]}" keyTimes="0;.18;.39;.58;.78;1" calcMode="spline" keySplines=".42 0 .58 1;.42 0 .58 1;.42 0 .58 1;.42 0 .58 1;.42 0 .58 1" dur="${membraneDur}" repeatCount="indefinite"/>
         </path>
         <g class="graph-web">${connections}</g>
+        ${convergenceRing}
         <circle class="graph-pulse graph-pulse-outer" cx="${center}" cy="${center}" r="${compact?18:ambient?26:22}"/>
         <circle class="graph-pulse graph-pulse-inner" cx="${center}" cy="${center}" r="${compact?11:ambient?16:14}"/>
         <circle class="graph-center" cx="${center}" cy="${center}" r="${compact?5.8:ambient?7.8:7.5}"/>
