@@ -1,4 +1,4 @@
-import { buildPersonalEvidence, PERSONAL_EVIDENCE_MINIMUM } from './personal-evidence.js?v=0461p1';
+import { buildPersonalEvidence, PERSONAL_EVIDENCE_MINIMUM } from './personal-evidence.js?v=0470p1';
 
 export const BELIEF_STATUSES=['proposed','confirmed','rejected','retired'];
 
