@@ -512,15 +512,15 @@ Official stabilization baseline.
 - Added a living visual manifestation of explicitly provided daily evidence.
 - Added ADR-010 and runtime token 0450p1.
 
-## 0.46.1 — Invisible Organism, Phase 1
+## 0.46.2 — Invisible Organism, Phase 1
 
 - Replaced Today dashboard presentation with the Current Moment experience.
 - Reframed the Living Human Graph as a breathing organism and ambient presence.
 - Rebuilt check-in around six explicit context seeds and one question at a time.
 - Preserved Evidence Gate and all current-day truth constraints.
-- Added ADR-011 and runtime token 0461p1.
+- Added ADR-011 and runtime token 0462p1.
 
-## 0.46.1 — Organism Harmony & Check-in Repair
+## 0.46.2 — Organism Harmony & Check-in Repair
 
 - Repaired the inert Today check-in action.
 - Made the evidence-free organism harmonious and symmetric.
