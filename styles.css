@@ -3397,3 +3397,22 @@ body #app .tabbar button{
 .current-moment.listen .organism-field .graph-membrane{animation:none}
 .current-moment.listen .organism-field .graph-link animate,
 .current-moment.listen .organism-field .graph-membrane animate{display:none}
+
+
+/* v0.47.6 — deterministic check-in interaction and neutral symmetry */
+.seed-organism,.seed-organism *{pointer-events:none!important}
+.seed-question{position:relative;z-index:20;pointer-events:auto}
+.seed-question .choice-row,.seed-question .pill{pointer-events:auto!important}
+.seed-question .pill{position:relative;z-index:21;touch-action:manipulation;-webkit-user-select:none;user-select:none;cursor:pointer;min-height:54px}
+.checkin-organism{width:100%;height:100%;display:grid;place-items:center;pointer-events:none}
+.checkin-organism svg{width:100%;height:100%;overflow:visible;animation:checkin-breathe 8s ease-in-out infinite;transform-origin:center}
+.checkin-aura{fill:none;stroke:rgba(199,168,109,.13);stroke-width:1}
+.checkin-membrane{fill:rgba(183,145,81,.025);stroke:rgba(207,177,121,.38);stroke-width:1.2}
+.checkin-inner{fill:none;stroke:rgba(199,168,109,.10);stroke-width:.8;stroke-dasharray:2 8}
+.checkin-organism-node line{stroke:rgba(199,168,109,.23);stroke-width:.75}
+.checkin-node-halo{fill:rgba(199,168,109,.025);stroke:rgba(199,168,109,.19);stroke-width:1}
+.checkin-node-core{fill:#d3b477;stroke:#ead29e;stroke-width:.65;filter:drop-shadow(0 0 8px rgba(205,169,99,.35))}
+.checkin-center-halo{fill:none;stroke:rgba(199,168,109,.17);stroke-width:1}
+.checkin-center{fill:#d3b477;filter:drop-shadow(0 0 12px rgba(205,169,99,.42))}
+@keyframes checkin-breathe{0%,100%{transform:scale(.988);opacity:.82}50%{transform:scale(1.012);opacity:1}}
+@media(prefers-reduced-motion:reduce){.checkin-organism svg{animation:none}}
