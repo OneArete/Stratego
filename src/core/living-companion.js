@@ -23,12 +23,27 @@ export function buildLivingCompanion({name='',context={},contextEvidence=null,ju
     reasons:['An unfinished action is already present.'],confidence:'Your existing direction is preserved.',
     action:'continue-flow',actionLabel:'Continue',continuity:''
   };
-  if(judgement)return {
-    mode:'judgement',greeting,judgement:judgement.judgement||judgement.practice?.name||'Your recommendation is ready.',
-    reasons:[judgement.explain?.summary||judgement.intention||'This recommendation reflects what is currently known.'].filter(Boolean),
-    confidence:judgement.confidence?`${Math.round(judgement.confidence)}% confidence`:'Uncertainty remains explicit.',
-    action:'judgement',actionLabel:'Open today’s recommendation',continuity:''
-  };
+  if(judgement){
+    const choiceAction=judgement.personChoice?.action;
+    if(choiceAction==='decline')return {
+      mode:'declined',greeting,judgement:'You decided not to practice today.',
+      reasons:['This is your choice. Strategos will offer a fresh perspective whenever you are ready.'],
+      confidence:'No practice is expected.',
+      action:'consult',actionLabel:'Get a new recommendation',continuity:''
+    };
+    if(choiceAction==='defer')return {
+      mode:'deferred',greeting,judgement:judgement.judgement||judgement.practice?.name||'Your recommendation is waiting.',
+      reasons:['You chose to return to this later. It is still here.'],
+      confidence:judgement.confidence?`${Math.round(judgement.confidence)}% confidence`:'Your current judgement is preserved.',
+      action:'currentJudgement',actionLabel:'Return to recommendation',continuity:''
+    };
+    return {
+      mode:'judgement',greeting,judgement:judgement.judgement||judgement.practice?.name||'Your recommendation is ready.',
+      reasons:[judgement.explain?.summary||judgement.intention||'This recommendation reflects what is currently known.'].filter(Boolean),
+      confidence:judgement.confidence?`${Math.round(judgement.confidence)}% confidence`:'Uncertainty remains explicit.',
+      action:'currentJudgement',actionLabel:'Open today\'s recommendation',continuity:''
+    };
+  }
   if(complete)return {
     mode:'ready',greeting,judgement:'I understand today.',
     reasons:['Your check-in is complete. Strategos can now deliberate from the context you provided.'],confidence:'No recommendation exists until deliberation completes.',
