@@ -3023,7 +3023,7 @@ body #app .tabbar button{
   .living-graph.ambient svg,.living-graph.ambient .graph-web,.living-graph.ambient .graph-center,.living-graph.ambient .node-core{animation:none}
 }
 
-/* v0.41.0 — Living Organism: one life clock, organic tension and depth */
+/* v0.42.0 — Living Organism: one life clock, organic tension and depth */
 .living-graph{
   --life-clock:16s;
   position:relative;
@@ -3140,3 +3140,11 @@ body #app .tabbar button{
 
 /* v0.41 Daily Context Flow */
 .checkin-flow{padding:28px 16px 120px;gap:24px}.checkin-intro{display:grid;gap:12px}.checkin-intro h1{margin:0;font-family:Georgia,serif;font-weight:400;font-size:clamp(2rem,9vw,3rem);line-height:1.04}.checkin-intro>p{margin:0;color:var(--muted);line-height:1.55}.checkin-progress{display:grid;grid-template-columns:1fr auto;align-items:center;gap:12px}.checkin-progress>span{height:2px;border-radius:99px;background:linear-gradient(90deg,#c8a568 var(--checkin-progress),rgba(255,255,255,.1) var(--checkin-progress))}.checkin-progress small{color:var(--muted)}.checkin-questions{display:grid;gap:0}.checkin-questions .question{padding:24px 0;border-top:1px solid var(--line)}.checkin-questions .question:first-child{border-top:0}.checkin-completion{position:sticky;bottom:86px;z-index:4;display:grid;gap:10px;padding:16px;border:1px solid rgba(200,165,104,.28);border-radius:22px;background:rgba(10,10,9,.94);backdrop-filter:blur(16px)}.checkin-completion p{margin:0;color:var(--muted);text-align:center}.checkin-completion .action:disabled{opacity:.42;cursor:not-allowed}.route-checkin .bottom-nav button[data-action="today"]{color:#d4b06f}
+
+/* v0.42 Invisible Flow — Today exposes one human next step, never system state. */
+.route-today{padding:0 0 calc(112px + env(safe-area-inset-bottom));min-height:100svh}
+.route-today>.tabbar{position:fixed}
+.companion-date{margin:4px 0 0;color:var(--gold);font-size:.78rem;letter-spacing:.14em;text-transform:uppercase;opacity:.82}
+.living-companion-hero.complete .companion-primary{display:none}
+.living-companion-hero .companion-judgement strong{max-width:640px}
+@media(max-width:600px){.living-companion-hero{min-height:calc(100svh - 96px);padding-bottom:132px}.living-companion-organism{margin-bottom:2px}}

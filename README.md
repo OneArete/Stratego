@@ -57,6 +57,6 @@ Journey now forms a descriptive seven-day review after at least three recorded d
 ## v0.39.0 — Living Companion
 Today now begins with continuity rather than a dashboard. The Living Human Graph remains quietly present across the application, and silence is treated as a valid product state.
 
-## v0.41.0 — Living Organism
+## v0.42.0 — Living Organism
 
 The Living Human Graph now behaves as one quiet organism: a shared Life Clock, curved filaments, bounded asymmetry, depth and a stable Self. No scores, performance colours or unsupported longitudinal morphology were introduced.

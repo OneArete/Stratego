@@ -1,3 +1,11 @@
+# Changelog
+
+## 0.42.0 — Invisible Flow
+- Rebuilt Today around one visible next action.
+- Removed internal system-state language and duplicate surfaces.
+- Added frozen Flow Above Features ADR.
+- Closed days now show no CTA.
+
 # Strategos Changelog
 
 ## 0.39.0 — Living Human Graph
@@ -19,7 +27,7 @@
 
 - Added a descriptive seven-day review to Journey.
 - Added explicit preservation of immutable weekly snapshots.
-- Added state schema 45 and runtime token 0410p1.
+- Added state schema 45 and runtime token 0420p1.
 - Preserved zero automatic behavioural influence.
 
 # v0.35.0 — Evening Experience Foundation
@@ -481,9 +489,9 @@ Official stabilization baseline.
 - Added a quiet weekly direction surface in Today.
 - Added change and clear controls in Journey.
 - Preserved zero automatic influence over the Human Model, judgement and Practice selection.
-- Added schema 46 and runtime token 0410p1.
+- Added schema 46 and runtime token 0420p1.
 
-## 0.41.0 — Living Organism
+## 0.42.0 — Living Organism
 
 - Replaced rigid polygon behaviour with bounded organic curvature and deterministic micro-asymmetry.
 - Introduced a shared Life Clock for whole-organism breathing.
