@@ -32,7 +32,7 @@ import { loadState,saveState,resetState,createLocalBackup,ONBOARDING_VERSION } f
 import { serializeStateExport,validateStateImport,createImportPreview,exportFilename } from './core/state-transfer.js?v=0476p1';
 import { buildUnderstanding } from './core/understanding.js?v=0476p1';
 import { conveneAgora } from './core/agora.js?v=0476p1';
-import { buildHumanGraph,projectHumanReturn } from './core/human-graph.js?v=0476p1';
+import { buildHumanGraph,buildCheckinGraph,projectHumanReturn } from './core/human-graph.js?v=0476p1';
 import { renderLivingGraph } from './components/living-graph.js?v=0476p1';
 import { unlockAudio,playTone,speak,stopVoice,previewVoice } from './core/audio.js?v=0476p1';
 import { buildExplanation,buildExplainRecord,explainRecordAudit,explainRecordSummary,validateExplainRecord,applyExplainRecordReview,explainRecordReviewAudit,explainRecordReviewSummary } from './core/explain.js?v=0476p1';
@@ -115,10 +115,9 @@ const livingCompanionToday=()=>{
   const model=buildLivingCompanion({name:state.profile?.name||'',context:gate.context.signals,contextEvidence:gate.context,judgement:gate.judgement,story,hasContinuity:gate.context.sufficient&&shouldShowContinuityCard(state)});
   const graph=gate.context.sufficient?buildHumanGraph(state.history,gate.context.signals):buildHumanGraph([],null);
   const action=model.action?`<button class="moment-action" data-action="${esc(model.action)}">${esc(model.actionLabel)}</button>`:'';
-  const why=gate.judgement&&model.reasons?.length?`<details class="moment-why"><summary>Why</summary><div>${model.reasons.map(reason=>`<p>${esc(reason)}</p>`).join('')}<small>${esc(model.confidence||'')}</small></div></details>`:'';
   return `<section class="current-moment ${esc(model.mode)}" aria-label="Current moment">
     <div class="organism-field"><div class="organism-aura"></div>${renderLivingGraph(graph,{ambient:true})}</div>
-    <div class="moment-language"><p class="moment-greeting">${esc(model.greeting)}</p><h1>${esc(model.judgement)}</h1>${action}${why}${model.continuity?`<p class="moment-continuity">${esc(model.continuity)}</p>`:''}</div>
+    <div class="moment-language"><h1>${esc(model.judgement)}</h1>${action}</div>
   </section>`;
 };
 const shell=(content,cls='')=>app.innerHTML=`<main class="screen ${cls} route-${currentRoute}" tabindex="-1" role="main">${currentRoute==='today'?'':companionPresence()}${livingCompanionToday()}${content}</main>`;
@@ -259,9 +258,7 @@ window.strategosSelectSignal=(event,target)=>{
 
 function checkin(){
   const completed=['sleep','energy','time','challenge','soreness','emotionalLoad'].filter(key=>context?.[key]!==undefined&&context?.[key]!==null&&context?.[key]!=='').length;
-  const graph=buildHumanGraph(state.history,context);
-  const signalKeys=['sleep','energy','time','challenge','soreness','emotionalLoad'];
-  const seeds=signalKeys.map((key,index)=>`<span class="context-seed ${context[key]!==undefined&&context[key]!==null&&context[key]!==''?'alive':''}" style="--seed-index:${index}" aria-hidden="true"></span>`).join('');
+  const checkinGraph=buildCheckinGraph(context);
   const questions={
     sleep:['How did you sleep?',[[4,'Excellent'],[3,'Good'],[2,'Fair'],[1,'Poor']]],
     energy:['How is your energy?',[[3,'High'],[2,'Medium'],[1,'Low']]],
@@ -273,8 +270,8 @@ function checkin(){
   const nextKey=nextMissingSignal(context);
   const prompt=nextKey?questions[nextKey]:null;
   const body=prompt
-    ?`<section class="seed-checkin"><button class="quiet-close" data-action="today" aria-label="Return to Today">×</button><div class="seed-organism">${renderSymmetricCheckinOrganism()}${seeds}</div><div class="seed-question"><p>${completed+1} / 6</p>${question(prompt[0],nextKey,prompt[1])}<small>Nothing is inferred from silence.</small></div></section>`
-    :`<section class="seed-checkin complete"><div class="seed-organism">${renderSymmetricCheckinOrganism()}${seeds}</div><div class="seed-question"><h1>I understand today.</h1><p>Today is clear.</p></div></section>`;
+    ?`<section class="seed-checkin"><button class="quiet-close" data-action="today" aria-label="Return to Today">×</button><div class="seed-organism">${renderLivingGraph(checkinGraph,{ambient:true})}</div><div class="seed-question"><p>${completed+1} / 6</p>${question(prompt[0],nextKey,prompt[1])}<small>Nothing is inferred from silence.</small></div></section>`
+    :`<section class="seed-checkin complete"><div class="seed-organism">${renderLivingGraph(checkinGraph,{ambient:true})}</div><div class="seed-question"><h1>I understand today.</h1><p>Today is clear.</p></div></section>`;
   shell(body,'experience-flow');
 }
 function question(title,key,opts){return `<div class="question"><h3>${title}</h3><div class="choice-row" role="group" aria-label="${title}">${opts.map(([v,l])=>`<button type="button" class="pill ${context[key]===v?'selected':''}" data-key="${key}" data-value="${v}" aria-pressed="${context[key]===v?'true':'false'}" onclick="return window.strategosSelectSignal(event,this)">${l}${key==='time'?' min':''}</button>`).join('')}</div></div>`}
