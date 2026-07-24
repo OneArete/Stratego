@@ -7,7 +7,7 @@ const governance=fs.readFileSync(new URL('../docs/OUTCOME_LEDGER_GOVERNANCE.md',
 
 test('Journey and Understanding expose the Outcome Ledger',()=>{
   assert.match(app,/OUTCOME LEDGER/);
-  assert.match(app,/Frozen context · learning awaits review/);
+  assert.match(app,/Context is frozen at the time of judgement/);
   assert.match(app,/Automatic Human Model influence: 0/);
 });
 

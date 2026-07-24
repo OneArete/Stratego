@@ -9,12 +9,20 @@ import {
 
 const base={profile:{name:'Pedro'},onboardingVersion:1};
 
+const _d=new Date();const todayKey=_d.getFullYear()+'-'+String(_d.getMonth()+1).padStart(2,'0')+'-'+String(_d.getDate()).padStart(2,'0');
+const baseWithCheckin={...base,dailyCheckIns:[{day:todayKey,signals:{sleep:3,energy:2,time:30,challenge:'strength',soreness:'none',emotionalLoad:'low'},source:'person-confirmed'}]};
+
 test('new person routes to onboarding',()=>{
   assert.equal(resolveStartupDestination({}).route,'onboarding');
 });
 
-test('returning person always starts in Today',()=>{
-  assert.equal(resolveStartupDestination(base).route,'today');
+test('returning person with no check-in today goes directly to check-in',()=>{
+  assert.equal(resolveStartupDestination(base).route,'checkin');
+  assert.equal(resolveStartupDestination(base).reason,'daily-checkin-required');
+});
+
+test('returning person who already checked in today goes to Today',()=>{
+  assert.equal(resolveStartupDestination(baseWithCheckin).route,'today');
 });
 
 test('pending judgement does not hijack startup',()=>{
