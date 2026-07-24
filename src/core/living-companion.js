@@ -1,4 +1,4 @@
-import { resolveCurrentMoment,CURRENT_MOMENTS } from './current-moment.js?v=0460p1';
+import { resolveCurrentMoment,CURRENT_MOMENTS } from './current-moment.js?v=0461p1';
 const completeContext=context=>['sleep','energy','time','challenge','soreness','emotionalLoad'].every(key=>context?.[key]!==undefined&&context?.[key]!==null&&context?.[key]!=='');
 
 export function buildLivingCompanion({name='',context={},contextEvidence=null,judgement=null,story={},hasContinuity=false}={}){

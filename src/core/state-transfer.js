@@ -1,4 +1,4 @@
-import { migrateState, STATE_SCHEMA_VERSION, PRODUCT_VERSION } from './state-schema.js?v=0460p1';
+import { migrateState, STATE_SCHEMA_VERSION, PRODUCT_VERSION } from './state-schema.js?v=0461p1';
 
 export const STATE_EXPORT_FORMAT = 'onearete-strategos-state';
 export const STATE_EXPORT_VERSION = 1;
