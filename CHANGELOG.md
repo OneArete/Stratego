@@ -1,3 +1,9 @@
+# v0.47.5 — Check-in Choice Interaction Repair
+
+- Daily check-in options are processed before audio or haptic initialization.
+- Audio and haptics are now optional, failure-isolated enhancements.
+- Selecting an answer persists it and immediately advances to the next question.
+
 # Strategos v0.44.0 — Current Moment Foundation
 
 - Replaced the six-question daily form with a one-question-at-a-time flow.
