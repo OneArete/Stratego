@@ -1,4 +1,4 @@
-import { outcomeLedgerLearningGate } from './outcome-ledger.js?v=0390p1';
+import { outcomeLedgerLearningGate } from './outcome-ledger.js?v=0420p1';
 
 export const PERSONAL_EVIDENCE_MINIMUM = 3;
 
