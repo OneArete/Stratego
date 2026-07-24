@@ -18,12 +18,15 @@ test('node sizes remain bounded in compact and ambient modes',()=>{
 
 test('filaments carry bounded organic drift without attention-seeking pulses',()=>{
   assert.match(graph,/filamentPath\(node,next,center,index,\.72\)/);
-  assert.match(graph,/dur="14s"/);
+  // v0.50.0: duration is dynamic — 14s normal, 7s deliberating — check both exist as string literals
+  assert.match(graph,/'14s'/,'normal filament duration 14s preserved as default');
+  assert.match(graph,/'7s'/,'deliberating filament duration 7s available');
   assert.doesNotMatch(graph,/attributeName="stroke-width"/);
 });
 
 test('membrane uses a multi-stage fluid spline',()=>{
-  assert.match(graph,/membranePhases=\[0,\.65,1\.35,2\.1,2\.85\]/);
+  // v0.50.0: phases are dynamic — normal [0,.65,1.35,2.1,2.85] and deliberating [0,1.1,2.25,3.4,4.6]
+  assert.match(graph,/0, \.65, 1\.35, 2\.1, 2\.85/,'normal membrane phases preserved in ternary default');
   assert.match(graph,/keyTimes="0;\.18;\.39;\.58;\.78;1"/);
   assert.match(graph,/calcMode="spline"/);
 });
