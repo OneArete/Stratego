@@ -3179,7 +3179,7 @@ body #app .tabbar button{
 @media(prefers-reduced-motion:reduce){.quiet-organism,.context-organism.complete{animation:none}.context-seed{transition:none}}
 .context-seed:nth-of-type(1){left:50%;top:7%}.context-seed:nth-of-type(2){left:87%;top:28%}.context-seed:nth-of-type(3){left:87%;top:72%}.context-seed:nth-of-type(4){left:50%;top:93%}.context-seed:nth-of-type(5){left:13%;top:72%}.context-seed:nth-of-type(6){left:13%;top:28%}
 
-/* v0.46.0 — Invisible Organism, phase 1
+/* v0.46.1 — Invisible Organism, phase 1
    The person sees a living presence, one sentence and one next action. */
 .route-today{
   min-height:100dvh;
@@ -3374,7 +3374,7 @@ body #app .tabbar button{
 @keyframes organism-settle{0%{transform:scale(1.035)}100%{transform:scale(1)}}
 @media(max-width:390px){.current-moment{grid-template-rows:minmax(285px,50vh) 1fr}.context-seed{transform:rotate(var(--angle)) translateX(135px) rotate(calc(-1 * var(--angle)))}@keyframes seed-pulse{0%,100%{transform:rotate(var(--angle)) translateX(135px) rotate(calc(-1 * var(--angle))) scale(.88)}50%{transform:rotate(var(--angle)) translateX(135px) rotate(calc(-1 * var(--angle))) scale(1.12)}}}
 
-/* v0.14.1 — Primary navigation viewport invariant retained in v0.46.0 */
+/* v0.14.1 — Primary navigation viewport invariant retained in v0.46.1 */
 .tabbar{
   position:fixed;
   left:max(8px,env(safe-area-inset-left));

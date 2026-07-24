@@ -3,7 +3,7 @@
 Current company release:
 
 ```text
-Strategos v0.46.0 — Invisible Organism, Phase 1
+Strategos v0.46.1 — Invisible Organism, Phase 1
 ```
 
 Today is now a Current Moment rather than a dashboard: a living organism, one sentence and at most one next action. The daily check-in is a full-screen encounter with six explicit context seeds. The Evidence Gate remains mandatory; silence never creates evidence and no recommendation exists without current-day context.
