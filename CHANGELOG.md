@@ -1,3 +1,9 @@
+## 0.47.6 — Check-in Interaction & Symmetry Repair
+
+- Native inline choice handling independent of delegated audio/haptic listeners.
+- Deterministic six-fold neutral check-in organism.
+- Decorative layers cannot intercept touch.
+
 # v0.47.5 — Check-in Choice Interaction Repair
 
 - Daily check-in options are processed before audio or haptic initialization.
