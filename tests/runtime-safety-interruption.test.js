@@ -1,6 +1,6 @@
 import test from 'node:test';
 import assert from 'node:assert/strict';
-import {createSafetyInterruption,resolveSafetyInterruption,activeSafetyInterruption,safetyRuntimeGate,safetyInterruptionAudit} from '../src/core/safety-architecture.js?v=0390p1';
+import {createSafetyInterruption,resolveSafetyInterruption,activeSafetyInterruption,safetyRuntimeGate,safetyInterruptionAudit} from '../src/core/safety-architecture.js?v=0476p1';
 
 test('raising a concern creates an active interruption',()=>{
   const event=createSafetyInterruption({judgementId:'j1',practiceId:'strength',phaseIndex:1,at:'2026-07-22T10:00:00Z'});

@@ -1,6 +1,6 @@
 import test from 'node:test';
 import assert from 'node:assert/strict';
-import { normaliseProfile, profileCompleteness, profileSummary } from '../src/core/profile.js?v=0390p1';
+import { normaliseProfile, profileCompleteness, profileSummary } from '../src/core/profile.js?v=0476p1';
 
 test('normalises valid person-declared profile fields',()=>{
   const profile=normaliseProfile({name:' Pedro ',age:'48',heightCm:'173',weightKg:'62.6',experience:'intermediate',limitations:' shoulder '});

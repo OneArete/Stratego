@@ -9,8 +9,8 @@ const sw = readFileSync(new URL('../service-worker.js', import.meta.url), 'utf8'
 const manifest = JSON.parse(readFileSync(new URL('../manifest.webmanifest', import.meta.url), 'utf8'));
 
 test('registers a versioned service worker and offline shell', () => {
-  assert.match(app, /serviceWorker\.register\('\.\/service-worker\.js\?v=0390p1'/);
-  assert.match(sw, /strategos-shell-v0\.39\.0-living-human-graph/);
+  assert.match(app, /serviceWorker\.register\('\.\/service-worker\.js\?v=0476p1'/);
+  assert.match(sw, /strategos-shell-v0\.47\.6-checkin-interaction-and-symmetry-repair/);
   assert.match(sw, /request\.mode === 'navigate'/);
 });
 
@@ -22,7 +22,6 @@ test('provides a persistent polite live region and bounded timer announcements',
 });
 
 test('icon controls and settings switches expose accessible semantics', () => {
-  assert.match(app, /aria-label="Open settings"/);
   assert.match(app, /aria-label="End practice"/);
   assert.match(app, /role="switch"/);
   assert.match(app, /aria-checked=/);

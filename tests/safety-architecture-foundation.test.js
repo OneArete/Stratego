@@ -1,6 +1,6 @@
 import test from 'node:test';
 import assert from 'node:assert/strict';
-import {buildSafetyEnvelope,safetyEnvelopeAudit,safetyEnvelopeSummary,SAFETY_ARCHITECTURE_VERSION} from '../src/core/safety-architecture.js?v=0390p1';
+import {buildSafetyEnvelope,safetyEnvelopeAudit,safetyEnvelopeSummary,SAFETY_ARCHITECTURE_VERSION} from '../src/core/safety-architecture.js?v=0476p1';
 
 test('clear envelope is explicit',()=>{
   const envelope=buildSafetyEnvelope({context:{},decision:{advisors:[],agora:{blockedPractices:[],cautions:[]}}});

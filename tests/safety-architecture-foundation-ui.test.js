@@ -28,5 +28,5 @@ test('candidate receives the safety envelope before explanation',()=>{
 test('all runtime imports use one release token',()=>{
   const imports=[...app.matchAll(/from ['"]([^'"]+\.js(?:\?v=[^'"]+)?)['"]/g)].map(match=>match[1]);
   assert.ok(imports.length>0);
-  for(const specifier of imports)assert.match(specifier,/\?v=0390p1$/);
+  for(const specifier of imports)assert.match(specifier,/\?v=0476p1$/);
 });

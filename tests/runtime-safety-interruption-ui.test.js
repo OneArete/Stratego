@@ -7,4 +7,4 @@ test('raising concern pauses execution and records event',()=>{const s=app.index
 test('resume requires explicit safety resolution',()=>{assert.ok(app.includes('I reassessed and can resume'));assert.match(app,/resolveSafetyInterruption\(item,\{action:'resume'\}\)/);});
 test('normal pause cannot bypass active safety interruption',()=>{const t=app.slice(app.indexOf('function togglePause'),app.indexOf('function updateJudgementStatus'));assert.match(t,/safetyRuntimeGate/);assert.match(t,/!runtimeGate\.canRun/);});
 test('Journey and Audit preserve runtime events',()=>{assert.ok(app.includes('Runtime safety interruptions'));assert.ok(app.includes('RUNTIME SAFETY INTERRUPTIONS'));});
-test('all runtime imports use Phase 3 token',()=>{for(const s of [...app.matchAll(/from ['"]([^'"]+\.js(?:\?v=[^'"]+)?)['"]/g)].map(m=>m[1]))assert.match(s,/\?v=0390p1$/);});
+test('all runtime imports use Phase 3 token',()=>{for(const s of [...app.matchAll(/from ['"]([^'"]+\.js(?:\?v=[^'"]+)?)['"]/g)].map(m=>m[1]))assert.match(s,/\?v=0476p1$/);});

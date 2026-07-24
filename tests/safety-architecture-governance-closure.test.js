@@ -12,7 +12,7 @@ import {
   resolveSafetyInterruption,
   safetyRuntimeGate,
   safetyInterruptionAudit
-} from '../src/core/safety-architecture.js?v=0390p1';
+} from '../src/core/safety-architecture.js?v=0476p1';
 
 const here=dirname(fileURLToPath(import.meta.url));
 const app=readFileSync(resolve(here,'../src/app.js'),'utf8');

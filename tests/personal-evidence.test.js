@@ -1,6 +1,6 @@
 import test from 'node:test';
 import assert from 'node:assert/strict';
-import { buildPersonalEvidence,personalEvidenceLevel,personalEvidenceOverview } from '../src/core/personal-evidence.js?v=0390p1';
+import { buildPersonalEvidence,personalEvidenceLevel,personalEvidenceOverview } from '../src/core/personal-evidence.js?v=0476p1';
 
 const entry=(result,i=1,practiceId='strength')=>({id:`e${i}`,result,practiceId,practiceName:'Strength',outcomeRecordId:`o${i}`,immutableContext:{context:{sleep:3}},recordedAt:`2026-07-${String(i).padStart(2,'0')}T10:00:00Z`});
 

@@ -50,7 +50,7 @@ test('every runtime local JavaScript import carries the release token',()=>{
   for(const file of walk(srcRoot)){
     const text=readFileSync(file,'utf8');
     for(const match of text.matchAll(/(?:from\s*|import\(\s*)['"](\.{1,2}\/[^'"]+\.js(?:\?v=[^'"]+)?)['"]/g)){
-      if(!match[1].endsWith('?v=0390p1'))failures.push(`${relative(srcRoot,file)} -> ${match[1]}`);
+      if(!match[1].endsWith('?v=0476p1'))failures.push(`${relative(srcRoot,file)} -> ${match[1]}`);
     }
   }
   assert.deepEqual(failures,[]);

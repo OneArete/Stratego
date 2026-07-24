@@ -1,6 +1,6 @@
 import test from 'node:test';
 import assert from 'node:assert/strict';
-import {buildSafetyEnvelope,safetyAcknowledgementRequirement,createSafetyAcknowledgement,safetyAcknowledgementValid,safetyStartGate} from '../src/core/safety-architecture.js?v=0390p1';
+import {buildSafetyEnvelope,safetyAcknowledgementRequirement,createSafetyAcknowledgement,safetyAcknowledgementValid,safetyStartGate} from '../src/core/safety-architecture.js?v=0476p1';
 const constrained=()=>buildSafetyEnvelope({decision:{advisors:[],agora:{blockedPractices:[{practiceId:'strength',reason:'Significant soreness'}],cautions:[]}}});
 test('clear and caution need no acknowledgement',()=>{const clear=buildSafetyEnvelope({decision:{advisors:[],agora:{blockedPractices:[],cautions:[]}}});const caution=buildSafetyEnvelope({decision:{advisors:[],agora:{blockedPractices:[],cautions:[{advisor:'Recovery',position:'Caution',reason:'Low energy'}]}}});assert.equal(safetyAcknowledgementRequirement(clear).required,false);assert.equal(safetyAcknowledgementRequirement(caution).required,false)});
 test('constrained requires acknowledgement',()=>assert.equal(safetyAcknowledgementRequirement(constrained()).required,true));

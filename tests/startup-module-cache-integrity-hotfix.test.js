@@ -14,19 +14,19 @@ test('Practice Library uses namespace imports rather than fragile named imports'
 });
 
 test('transitive Practice Library import is cache-busted',()=>{
-  assert.match(app,/codex\.js\?v=0390p1/);
-  assert.match(agora,/codex\.js\?v=0390p1/);
+  assert.match(app,/codex\.js\?v=0476p1/);
+  assert.match(agora,/codex\.js\?v=0476p1/);
 });
 
 test('Service Worker uses network-first for mutable modules',()=>{
   assert.match(sw,/url\.pathname\.endsWith\('\.js'\)/);
   assert.match(sw,/fetch\(request, \{cache:'no-store'\}\)/);
-  assert.match(sw,/strategos-shell-v0\.39\.0-living-human-graph/);
+  assert.match(sw,/strategos-shell-v0\.47\.6-checkin-interaction-and-symmetry-repair/);
 });
 
 test('entry assets use hotfix cache tokens',()=>{
-  assert.match(index,/src\/app\.js\?v=0390p1/);
-  assert.match(index,/styles\.css\?v=0390p1/);
+  assert.match(index,/src\/app\.js\?v=0476p1/);
+  assert.match(index,/styles\.css\?v=0476p1/);
 });
 
 test('compatibility fallback preserves the significant-soreness safeguard',()=>{

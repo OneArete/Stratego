@@ -29,5 +29,5 @@ test('footer remains four destinations',()=>{
   for(const label of ['Today','Understanding','Journey','Settings'])assert.ok(nav.includes(label));
 });
 test('runtime imports use repair token',()=>{
-  for(const specifier of [...app.matchAll(/from ['"]([^'"]+\.js(?:\?v=[^'"]+)?)['"]/g)].map(match=>match[1]))assert.match(specifier,/\?v=0390p1$/);
+  for(const specifier of [...app.matchAll(/from ['"]([^'"]+\.js(?:\?v=[^'"]+)?)['"]/g)].map(match=>match[1]))assert.match(specifier,/\?v=0476p1$/);
 });

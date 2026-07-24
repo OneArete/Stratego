@@ -1,6 +1,6 @@
 import test from 'node:test';
 import assert from 'node:assert/strict';
-import {createWeeklyIntention,upsertWeeklyIntention,weeklyIntentionForWeek,clearWeeklyIntention} from '../src/core/weekly-intention.js?v=0390p1';
+import {createWeeklyIntention,upsertWeeklyIntention,weeklyIntentionForWeek,clearWeeklyIntention} from '../src/core/weekly-intention.js?v=0476p1';
 
 test('creates only explicit valid weekly intentions',()=>{
   assert.equal(createWeeklyIntention({weekId:'w',choice:'custom',note:''}),null);
