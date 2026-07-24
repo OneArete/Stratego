@@ -9,6 +9,10 @@ test('daily check-in reveals one question at a time',()=>{
   assert.doesNotMatch(app,/\$\{question\('How did you sleep\?'[\s\S]*\$\{question\('Energy'/);
 });
 
-test('Why is gated by a real current-day judgement',()=>{
-  assert.match(app,/const why=gate\.judgement&&model\.reasons\?\.length/);
+test('Today is organism + one sentence + one action — no Why details, no greeting, no continuity text',()=>{
+  // v0.49.0: Today collapsed to exactly organism + h1(judgement) + action button
+  assert.match(app,/moment-language.*h1.*\$\{esc\(model\.judgement\)\}/s);
+  assert.doesNotMatch(app,/moment-greeting/,'greeting removed — one sentence only');
+  assert.doesNotMatch(app,/moment-why/,'Why details removed — architecture invisible to user');
+  assert.doesNotMatch(app,/moment-continuity/,'continuity text removed — one action only');
 });

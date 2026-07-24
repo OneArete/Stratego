@@ -12,9 +12,11 @@ test('Today renders a current moment with one optional action',()=>{
   assert.doesNotMatch(app,/companion-date/);
 });
 
-test('check-in renders explicit living seeds and no visible progress bar',()=>{
+test('check-in renders Living Graph organism and no visible progress bar',()=>{
+  // v0.49.0: seed dots replaced by the actual Living Graph (organism communicates first)
   assert.match(app,/class="seed-checkin/);
-  assert.match(app,/context-seed/);
+  assert.match(app,/buildCheckinGraph\(context\)/,'Living Graph drives check-in organism');
+  assert.doesNotMatch(app,/context-seed/,'seed dots removed — Living Graph replaces them');
   assert.match(app,/Nothing is inferred from silence/);
 });
 

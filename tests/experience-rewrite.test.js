@@ -17,7 +17,8 @@ test('deliberation does not expose internal council architecture',()=>{
 });
 
 test('context evidence has a living visual manifestation',()=>{
-  assert.match(app,/context-seed/);
-  assert.match(css,/\.context-organism/);
+  // v0.49.0: seed dots replaced by Living Graph — organism communicates, not dots
+  assert.match(app,/buildCheckinGraph\(context\)/,'check-in uses buildCheckinGraph for progressive organism');
+  assert.match(app,/renderLivingGraph\(checkinGraph/,'Living Graph renders in check-in, not static SVG');
   assert.match(css,/\.quiet-deliberation/);
 });
