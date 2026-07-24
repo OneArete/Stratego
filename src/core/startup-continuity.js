@@ -1,3 +1,5 @@
+import { localDayKey,dailyCheckInForDay } from './daily-signals.js?v=0476p1';
+
 export function resolveStartupDestination(state){
   if(!state?.profile||!state?.onboardingVersion){
     return {
@@ -7,11 +9,20 @@ export function resolveStartupDestination(state){
     };
   }
 
-  return {
-    route:'today',
-    reason:'returning-person',
-    resumable:Boolean(resolveContinuityDestination(state).resumable)
-  };
+  const continuity=resolveContinuityDestination(state);
+
+  // Something active to resume — surface through Today
+  if(continuity.resumable){
+    return {route:'today',reason:'returning-person',resumable:true};
+  }
+
+  // Fresh day, no check-in yet — go directly to check-in
+  const checkin=dailyCheckInForDay(state.dailyCheckIns||[],localDayKey());
+  if(!checkin){
+    return {route:'checkin',reason:'daily-checkin-required',resumable:false};
+  }
+
+  return {route:'today',reason:'returning-person',resumable:false};
 }
 
 export function resolveContinuityDestination(state){
