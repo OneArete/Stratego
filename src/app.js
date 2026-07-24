@@ -1,22 +1,22 @@
-import { todaySignals,upsertDailyCheckIn,localDayKey,dailyCheckInForDay,dailyCheckInSummary } from './core/daily-signals.js?v=0470p1';
-import { buildDailyOrientation,recentCheckInTrajectory } from './core/daily-orientation.js?v=0470p1';
-import { upsertDailyStory,deriveDailyStory,dailyStorySummary,dailyStoryTimeline,dayNumber } from './core/daily-story.js?v=0470p1';
-import { buildMorningExperience } from './core/morning-experience.js?v=0470p1';
-import { buildLivingCompanion } from './core/living-companion.js?v=0470p1';
-import { evidenceGate } from './core/evidence-gate.js?v=0470p1';
-import { nextMissingSignal } from './core/current-moment.js?v=0470p1';
-import { buildPracticeExperience } from './core/practice-experience.js?v=0470p1';
-import { buildEveningExperience,closeDailyStory } from './core/evening-experience.js?v=0470p1';
-import { buildWeeklyReview,preserveWeeklyReview,weeklyReviewForWindow } from './core/weekly-review.js?v=0470p1';
-import { WEEKLY_INTENTION_OPTIONS,createWeeklyIntention,upsertWeeklyIntention,weeklyIntentionForWeek,clearWeeklyIntention } from './core/weekly-intention.js?v=0470p1';
-import { normaliseProfile, profileCompleteness, profileSummary } from './core/profile.js?v=0470p1';
-import { createOutcomeLedgerEntry,outcomeLedgerResultFromReflection,upsertOutcomeLedger,outcomeLedgerAudit,outcomeLedgerLabel } from './core/outcome-ledger.js?v=0470p1';
-import { personalEvidenceOverview } from './core/personal-evidence.js?v=0470p1';
-import { reconcileBeliefs,reviewBelief,beliefAudit } from './core/belief-system.js?v=0470p1';
-import { createEmotionalJournalEntry,updateEmotionalJournalEntry,deleteEmotionalJournalEntry,upsertEmotionalJournalEntry,emotionalJournalEntries,emotionalJournalToday,emotionalJournalAudit,emotionalJournalPreview,EMOTIONAL_JOURNAL_THEMES,toggleEmotionalJournalTheme,emotionalJournalEvolution,emotionalJournalThemeLabel,EMOTIONAL_JOURNAL_FOLLOW_UPS,applyEmotionalJournalFollowUp,reopenEmotionalJournalFollowUp,emotionalJournalFollowUpAudit,emotionalJournalFollowUpLabel } from './core/emotional-journal.js?v=0470p1';
-import { buildSafetyEnvelope,safetyEnvelopeAudit,safetyEnvelopeSummary,safetyAcknowledgementRequirement,createSafetyAcknowledgement,safetyStartGate,createSafetyInterruption,resolveSafetyInterruption,activeSafetyInterruption,safetyRuntimeGate,safetyInterruptionAudit } from './core/safety-architecture.js?v=0470p1';
-import { createHumanModel,updateHumanModel,normaliseHumanModel,humanModelSnapshot,humanModelAudit,humanModelSummary,humanModelDimensionSummary,applyHumanModelEvidenceReview,reconcileHumanModelReviews,humanModelReviewAudit,humanModelEvidenceSummary,buildHumanModelDeliberationSnapshot,humanModelDeliberationEvidence,humanModelDeliberationSnapshotAudit,humanModelDeliberationSnapshotSummary,humanModelFactCandidates,applyHumanModelFactPromotion,reconcileHumanModelFactPromotions,humanModelFactPromotionAudit,humanModelFactCandidateSummary } from './core/human-model.js?v=0470p1';
-import * as PracticeLibrary from './data/codex.js?v=0470p1';
+import { todaySignals,upsertDailyCheckIn,localDayKey,dailyCheckInForDay,dailyCheckInSummary } from './core/daily-signals.js?v=0471p1';
+import { buildDailyOrientation,recentCheckInTrajectory } from './core/daily-orientation.js?v=0471p1';
+import { upsertDailyStory,deriveDailyStory,dailyStorySummary,dailyStoryTimeline,dayNumber } from './core/daily-story.js?v=0471p1';
+import { buildMorningExperience } from './core/morning-experience.js?v=0471p1';
+import { buildLivingCompanion } from './core/living-companion.js?v=0471p1';
+import { evidenceGate } from './core/evidence-gate.js?v=0471p1';
+import { nextMissingSignal } from './core/current-moment.js?v=0471p1';
+import { buildPracticeExperience } from './core/practice-experience.js?v=0471p1';
+import { buildEveningExperience,closeDailyStory } from './core/evening-experience.js?v=0471p1';
+import { buildWeeklyReview,preserveWeeklyReview,weeklyReviewForWindow } from './core/weekly-review.js?v=0471p1';
+import { WEEKLY_INTENTION_OPTIONS,createWeeklyIntention,upsertWeeklyIntention,weeklyIntentionForWeek,clearWeeklyIntention } from './core/weekly-intention.js?v=0471p1';
+import { normaliseProfile, profileCompleteness, profileSummary } from './core/profile.js?v=0471p1';
+import { createOutcomeLedgerEntry,outcomeLedgerResultFromReflection,upsertOutcomeLedger,outcomeLedgerAudit,outcomeLedgerLabel } from './core/outcome-ledger.js?v=0471p1';
+import { personalEvidenceOverview } from './core/personal-evidence.js?v=0471p1';
+import { reconcileBeliefs,reviewBelief,beliefAudit } from './core/belief-system.js?v=0471p1';
+import { createEmotionalJournalEntry,updateEmotionalJournalEntry,deleteEmotionalJournalEntry,upsertEmotionalJournalEntry,emotionalJournalEntries,emotionalJournalToday,emotionalJournalAudit,emotionalJournalPreview,EMOTIONAL_JOURNAL_THEMES,toggleEmotionalJournalTheme,emotionalJournalEvolution,emotionalJournalThemeLabel,EMOTIONAL_JOURNAL_FOLLOW_UPS,applyEmotionalJournalFollowUp,reopenEmotionalJournalFollowUp,emotionalJournalFollowUpAudit,emotionalJournalFollowUpLabel } from './core/emotional-journal.js?v=0471p1';
+import { buildSafetyEnvelope,safetyEnvelopeAudit,safetyEnvelopeSummary,safetyAcknowledgementRequirement,createSafetyAcknowledgement,safetyStartGate,createSafetyInterruption,resolveSafetyInterruption,activeSafetyInterruption,safetyRuntimeGate,safetyInterruptionAudit } from './core/safety-architecture.js?v=0471p1';
+import { createHumanModel,updateHumanModel,normaliseHumanModel,humanModelSnapshot,humanModelAudit,humanModelSummary,humanModelDimensionSummary,applyHumanModelEvidenceReview,reconcileHumanModelReviews,humanModelReviewAudit,humanModelEvidenceSummary,buildHumanModelDeliberationSnapshot,humanModelDeliberationEvidence,humanModelDeliberationSnapshotAudit,humanModelDeliberationSnapshotSummary,humanModelFactCandidates,applyHumanModelFactPromotion,reconcileHumanModelFactPromotions,humanModelFactPromotionAudit,humanModelFactCandidateSummary } from './core/human-model.js?v=0471p1';
+import * as PracticeLibrary from './data/codex.js?v=0471p1';
 const CODEX=PracticeLibrary.CODEX||[];
 const validatePracticeLibrary=PracticeLibrary.validatePracticeLibrary||((items=CODEX)=>({valid:items.length,invalid:0,items:[]}));
 const practiceLibraryCatalog=PracticeLibrary.practiceLibraryCatalog||((items=CODEX)=>items);
@@ -28,50 +28,50 @@ const snapshotPracticeContent=PracticeLibrary.snapshotPracticeContent||((practic
 const assessPracticeContentProvenance=PracticeLibrary.assessPracticeContentProvenance||((snapshot)=>snapshot?{status:'current',currentVersion:snapshot.contentVersion,historicalVersion:snapshot.contentVersion,statement:'This session content snapshot is preserved.'}:{status:'missing',statement:'No Practice content snapshot was preserved for this session.'});
 const practiceContentSnapshotSummary=PracticeLibrary.practiceContentSnapshotSummary||((snapshot,assessment=assessPracticeContentProvenance(snapshot))=>snapshot?`${snapshot.practiceName} · content v${snapshot.contentVersion} · ${assessment.status}`:'Practice content provenance unavailable.');
 const practiceContentProvenanceAudit=PracticeLibrary.practiceContentProvenanceAudit||((history=[])=>({records:history.filter(x=>x?.practiceContentSnapshot).map(x=>({snapshot:x.practiceContentSnapshot,assessment:assessPracticeContentProvenance(x.practiceContentSnapshot)})),total:history.filter(x=>x?.practiceContentSnapshot).length,current:history.filter(x=>x?.practiceContentSnapshot).length,historical:0,retired:0,missing:history.filter(x=>!x?.practiceContentSnapshot).length,statement:'Compatibility provenance audit active.'}));
-import { loadState,saveState,resetState,createLocalBackup,ONBOARDING_VERSION } from './core/storage.js?v=0470p1';
-import { serializeStateExport,validateStateImport,createImportPreview,exportFilename } from './core/state-transfer.js?v=0470p1';
-import { buildUnderstanding } from './core/understanding.js?v=0470p1';
-import { conveneAgora } from './core/agora.js?v=0470p1';
-import { buildHumanGraph,projectHumanReturn } from './core/human-graph.js?v=0470p1';
-import { renderLivingGraph } from './components/living-graph.js?v=0470p1';
-import { unlockAudio,playTone,speak,stopVoice,previewVoice } from './core/audio.js?v=0470p1';
-import { buildExplanation,buildExplainRecord,explainRecordAudit,explainRecordSummary,validateExplainRecord,applyExplainRecordReview,explainRecordReviewAudit,explainRecordReviewSummary } from './core/explain.js?v=0470p1';
-import { normalizeAdvisorMemories,learnFromReflection,advisorCoverage,buildMonthlyCouncil,learningReviewItems,updateLearningStatus,expireStaleLearnings } from './core/advisor-memory.js?v=0470p1';
-import { createExecutionState,remainingSeconds,pauseExecution,resumeExecution,startPhase,closeExecution,isResumable,EXECUTION_STATUS } from './core/execution-state.js?v=0470p1';
-import { buildPracticeSessionSnapshot,describePracticeResume,practiceSessionSummary,sessionCompletionRatio,canMovePhase,buildPracticeContract,practiceContractSummary,snapshotPracticeContract,resolvePracticeContract,practiceContractOutcomeStatement,practiceContractCalibrationCandidates,practiceContractCalibrationSummary,practiceContractCalibrationAudit,applyPracticeContractCalibrationReview,mergePracticeContractCalibrationReviews,reconcilePracticeContractCalibrationReviews,practiceContractCalibrationReviewSummary,practiceContractCalibrationReviewAudit,buildPracticeContractRevisionProposals,applyPracticeContractRevisionDecision,reconcilePracticeContractRevisionDecisions,effectivePracticeContractRevision,practiceContractRevisionSummary,practiceDoseEvidenceCandidates,practiceDoseEvidenceSummary,practiceDoseEvidenceAudit,applyPracticeDoseEvidenceReview,mergePracticeDoseEvidenceReviews,reconcilePracticeDoseEvidenceReviews,practiceDoseEvidenceReviewSummary,practiceDoseEvidenceReviewAudit,buildPracticeDoseRevisionProposals,applyPracticeDoseRevisionDecision,reconcilePracticeDoseRevisionDecisions,effectivePracticeDoseRevision,applyPracticeDoseRevisionToJudgement,practiceDoseRevisionSummary,recordPracticeDoseRevisionUse,resolvePracticeDoseRevisionUse,assessPracticeDoseRevisionHealth,effectivePracticeDoseRevisionWithHealth,practiceDoseRevisionHealthSummary } from './core/practice-session.js?v=0470p1';
-import { buildPracticeExitModel,canResumePractice,normalisePracticeExitReason } from './core/practice-exit.js?v=0470p1';
-import { buildPhaseGuidance,buildGuidanceDecision,shouldShowSafetyPanel } from './core/practice-guidance.js?v=0470p1';
-import { availableAdaptationLevels,resolveAdaptationChoice,setPhaseAdaptationChoice,getPhaseAdaptationChoice,adaptationChoiceSummary } from './core/practice-adaptation-choice.js?v=0470p1';
-import { buildAdaptationAccountability,hasAppliedAdaptations,adaptationReflectionPrompt,adaptationAccountabilitySummary } from './core/practice-adaptation-accountability.js?v=0470p1';
-import { adaptationPatternCandidates,adaptationPatternSummary,adaptationPatternAudit,applyAdaptationPatternReview,mergeAdaptationPatternReviews,adaptationPatternReviewAudit,adaptationPatternReviewSummary,reconcileAdaptationPatternReviews,resolveConfirmedAdaptationDefault,confirmedAdaptationDefaultSummary,recordConfirmedAdaptationDefault,attachConfirmedDefaultHealth,confirmedDefaultHealthSummary,confirmedDefaultRecentOutcomes,buildAdaptationAuditTrace,adaptationAuditTraceSummary,attachAdaptationReconfirmation,canConfirmAdaptationPattern } from './core/adaptation-patterns.js?v=0470p1';
-import { attachValidity,assessCandidateStability,assessJudgementValidity,markJudgementsForReview,supersedeJudgement,JUDGEMENT_VALIDITY } from './core/judgement-stability.js?v=0470p1';
-import { reconcileLongitudinalState,upsertMonthlyCouncilReport,journeyRecords } from './core/longitudinal-integrity.js?v=0470p1';
-import { buildDecisionBoundaries } from './core/decision-boundaries.js?v=0470p1';
-import { createCorrectionEvent,determineCorrectionImpact,applyCorrectionImpact,correctionAuditSummary,reconcileCorrectionAudit } from './core/correction-audit.js?v=0470p1';
-import { CHOICE_ACTIONS,createChoiceRecord,applyChoiceToJudgement,summarizeChoice,reconcileChoiceLog } from './core/person-choice.js?v=0470p1';
-import { createPreferenceCandidate,upsertPreferenceCandidate,applyPreferenceCorrection,expirePreferences,preferenceAudit } from './core/preference-governance.js?v=0470p1';
-import { createOutcomeRecord,markOutcomeStarted,markOutcomeCompleted,markOutcomeAbandoned,attachOutcomeReflection,learningEligibility,reconcileOutcomeRecords,outcomeSummary } from './core/choice-outcome.js?v=0470p1';
-import { reconcileAgencyState,agencyConsistencySnapshot,learningSourceSummary } from './core/agency-integrity.js?v=0470p1';
-import { createCommitment,commitmentAvailability,markCommitmentStarted,markCommitmentCompleted,cancelCommitment,reconcileCommitments,commitmentSummary } from './core/commitment-integrity.js?v=0470p1';
-import { createFrictionPlan,markFrictionEncountered,frictionReadiness,suggestedResponse,canBeginWithFriction,reconcileFrictionPlans,frictionSummary } from './core/friction-plan.js?v=0470p1';
-import { createFallbackPlan,acceptFallback,declineFallback,startFallback,completeFallback,abandonFallback,fallbackOutcomeRecord,fallbackLearningEligibility,reconcileFallbackPlans,fallbackSummary } from './core/adaptive-fallback.js?v=0470p1';
-import { reconcileFollowThroughState,followThroughSnapshot,followThroughSummary } from './core/follow-through-integrity.js?v=0470p1';
-import { createStructuredReflection,reflectionLearningSignal,reflectionContradiction,reflectionCompleteness,reconcileStructuredReflections,reflectionSummary } from './core/reflection-integrity.js?v=0470p1';
-import { createOutcomeAttribution,calibrateLearningWithAttribution,attributionContradiction,reconcileOutcomeAttributions,attributionSummary } from './core/outcome-attribution.js?v=0470p1';
-import { createOutcomeEpisode,upsertOutcomePattern,rejectOutcomePattern,reconcileOutcomePatterns,outcomePatternSummary } from './core/outcome-patterns.js?v=0470p1';
-import { assessPatternTransfer,createTransferRecord,rejectTransferRecord,reconcilePatternTransfers,transferSummary } from './core/pattern-transfer.js?v=0470p1';
-import { buildLongitudinalEvidence,longitudinalEvidenceSummary } from './core/longitudinal-evidence.js?v=0470p1';
-import { reconcileJudgementLongitudinalIntegrity,buildLongitudinalAuditEntry,longitudinalAccountabilitySummary } from './core/longitudinal-accountability.js?v=0470p1';
-import { createJudgementForecast,resolveJudgementForecast,predictionCalibrationSummary,confidenceCorrection,reconcileJudgementForecasts,forecastSummary } from './core/prediction-calibration.js?v=0470p1';
-import { buildContextCalibrationEvidence } from './core/calibration-governance.js?v=0470p1';
-import { detectCalibrationDrift,calibrationDriftCorrection,buildCalibrationAccountability,reconcileCalibrationAccountability,calibrationAccountabilitySummary } from './core/calibration-drift.js?v=0470p1';
-import { createReflectionDraft,updateReflectionDraft,restoreReflectionDraft,clearReflectionDraft,reconcileDailyContinuity } from './core/daily-continuity.js?v=0470p1';
-import { resolveStartupDestination,resolveContinuityDestination,buildContinuityNotice,shouldShowContinuityCard } from './core/startup-continuity.js?v=0470p1';
+import { loadState,saveState,resetState,createLocalBackup,ONBOARDING_VERSION } from './core/storage.js?v=0471p1';
+import { serializeStateExport,validateStateImport,createImportPreview,exportFilename } from './core/state-transfer.js?v=0471p1';
+import { buildUnderstanding } from './core/understanding.js?v=0471p1';
+import { conveneAgora } from './core/agora.js?v=0471p1';
+import { buildHumanGraph,projectHumanReturn } from './core/human-graph.js?v=0471p1';
+import { renderLivingGraph } from './components/living-graph.js?v=0471p1';
+import { unlockAudio,playTone,speak,stopVoice,previewVoice } from './core/audio.js?v=0471p1';
+import { buildExplanation,buildExplainRecord,explainRecordAudit,explainRecordSummary,validateExplainRecord,applyExplainRecordReview,explainRecordReviewAudit,explainRecordReviewSummary } from './core/explain.js?v=0471p1';
+import { normalizeAdvisorMemories,learnFromReflection,advisorCoverage,buildMonthlyCouncil,learningReviewItems,updateLearningStatus,expireStaleLearnings } from './core/advisor-memory.js?v=0471p1';
+import { createExecutionState,remainingSeconds,pauseExecution,resumeExecution,startPhase,closeExecution,isResumable,EXECUTION_STATUS } from './core/execution-state.js?v=0471p1';
+import { buildPracticeSessionSnapshot,describePracticeResume,practiceSessionSummary,sessionCompletionRatio,canMovePhase,buildPracticeContract,practiceContractSummary,snapshotPracticeContract,resolvePracticeContract,practiceContractOutcomeStatement,practiceContractCalibrationCandidates,practiceContractCalibrationSummary,practiceContractCalibrationAudit,applyPracticeContractCalibrationReview,mergePracticeContractCalibrationReviews,reconcilePracticeContractCalibrationReviews,practiceContractCalibrationReviewSummary,practiceContractCalibrationReviewAudit,buildPracticeContractRevisionProposals,applyPracticeContractRevisionDecision,reconcilePracticeContractRevisionDecisions,effectivePracticeContractRevision,practiceContractRevisionSummary,practiceDoseEvidenceCandidates,practiceDoseEvidenceSummary,practiceDoseEvidenceAudit,applyPracticeDoseEvidenceReview,mergePracticeDoseEvidenceReviews,reconcilePracticeDoseEvidenceReviews,practiceDoseEvidenceReviewSummary,practiceDoseEvidenceReviewAudit,buildPracticeDoseRevisionProposals,applyPracticeDoseRevisionDecision,reconcilePracticeDoseRevisionDecisions,effectivePracticeDoseRevision,applyPracticeDoseRevisionToJudgement,practiceDoseRevisionSummary,recordPracticeDoseRevisionUse,resolvePracticeDoseRevisionUse,assessPracticeDoseRevisionHealth,effectivePracticeDoseRevisionWithHealth,practiceDoseRevisionHealthSummary } from './core/practice-session.js?v=0471p1';
+import { buildPracticeExitModel,canResumePractice,normalisePracticeExitReason } from './core/practice-exit.js?v=0471p1';
+import { buildPhaseGuidance,buildGuidanceDecision,shouldShowSafetyPanel } from './core/practice-guidance.js?v=0471p1';
+import { availableAdaptationLevels,resolveAdaptationChoice,setPhaseAdaptationChoice,getPhaseAdaptationChoice,adaptationChoiceSummary } from './core/practice-adaptation-choice.js?v=0471p1';
+import { buildAdaptationAccountability,hasAppliedAdaptations,adaptationReflectionPrompt,adaptationAccountabilitySummary } from './core/practice-adaptation-accountability.js?v=0471p1';
+import { adaptationPatternCandidates,adaptationPatternSummary,adaptationPatternAudit,applyAdaptationPatternReview,mergeAdaptationPatternReviews,adaptationPatternReviewAudit,adaptationPatternReviewSummary,reconcileAdaptationPatternReviews,resolveConfirmedAdaptationDefault,confirmedAdaptationDefaultSummary,recordConfirmedAdaptationDefault,attachConfirmedDefaultHealth,confirmedDefaultHealthSummary,confirmedDefaultRecentOutcomes,buildAdaptationAuditTrace,adaptationAuditTraceSummary,attachAdaptationReconfirmation,canConfirmAdaptationPattern } from './core/adaptation-patterns.js?v=0471p1';
+import { attachValidity,assessCandidateStability,assessJudgementValidity,markJudgementsForReview,supersedeJudgement,JUDGEMENT_VALIDITY } from './core/judgement-stability.js?v=0471p1';
+import { reconcileLongitudinalState,upsertMonthlyCouncilReport,journeyRecords } from './core/longitudinal-integrity.js?v=0471p1';
+import { buildDecisionBoundaries } from './core/decision-boundaries.js?v=0471p1';
+import { createCorrectionEvent,determineCorrectionImpact,applyCorrectionImpact,correctionAuditSummary,reconcileCorrectionAudit } from './core/correction-audit.js?v=0471p1';
+import { CHOICE_ACTIONS,createChoiceRecord,applyChoiceToJudgement,summarizeChoice,reconcileChoiceLog } from './core/person-choice.js?v=0471p1';
+import { createPreferenceCandidate,upsertPreferenceCandidate,applyPreferenceCorrection,expirePreferences,preferenceAudit } from './core/preference-governance.js?v=0471p1';
+import { createOutcomeRecord,markOutcomeStarted,markOutcomeCompleted,markOutcomeAbandoned,attachOutcomeReflection,learningEligibility,reconcileOutcomeRecords,outcomeSummary } from './core/choice-outcome.js?v=0471p1';
+import { reconcileAgencyState,agencyConsistencySnapshot,learningSourceSummary } from './core/agency-integrity.js?v=0471p1';
+import { createCommitment,commitmentAvailability,markCommitmentStarted,markCommitmentCompleted,cancelCommitment,reconcileCommitments,commitmentSummary } from './core/commitment-integrity.js?v=0471p1';
+import { createFrictionPlan,markFrictionEncountered,frictionReadiness,suggestedResponse,canBeginWithFriction,reconcileFrictionPlans,frictionSummary } from './core/friction-plan.js?v=0471p1';
+import { createFallbackPlan,acceptFallback,declineFallback,startFallback,completeFallback,abandonFallback,fallbackOutcomeRecord,fallbackLearningEligibility,reconcileFallbackPlans,fallbackSummary } from './core/adaptive-fallback.js?v=0471p1';
+import { reconcileFollowThroughState,followThroughSnapshot,followThroughSummary } from './core/follow-through-integrity.js?v=0471p1';
+import { createStructuredReflection,reflectionLearningSignal,reflectionContradiction,reflectionCompleteness,reconcileStructuredReflections,reflectionSummary } from './core/reflection-integrity.js?v=0471p1';
+import { createOutcomeAttribution,calibrateLearningWithAttribution,attributionContradiction,reconcileOutcomeAttributions,attributionSummary } from './core/outcome-attribution.js?v=0471p1';
+import { createOutcomeEpisode,upsertOutcomePattern,rejectOutcomePattern,reconcileOutcomePatterns,outcomePatternSummary } from './core/outcome-patterns.js?v=0471p1';
+import { assessPatternTransfer,createTransferRecord,rejectTransferRecord,reconcilePatternTransfers,transferSummary } from './core/pattern-transfer.js?v=0471p1';
+import { buildLongitudinalEvidence,longitudinalEvidenceSummary } from './core/longitudinal-evidence.js?v=0471p1';
+import { reconcileJudgementLongitudinalIntegrity,buildLongitudinalAuditEntry,longitudinalAccountabilitySummary } from './core/longitudinal-accountability.js?v=0471p1';
+import { createJudgementForecast,resolveJudgementForecast,predictionCalibrationSummary,confidenceCorrection,reconcileJudgementForecasts,forecastSummary } from './core/prediction-calibration.js?v=0471p1';
+import { buildContextCalibrationEvidence } from './core/calibration-governance.js?v=0471p1';
+import { detectCalibrationDrift,calibrationDriftCorrection,buildCalibrationAccountability,reconcileCalibrationAccountability,calibrationAccountabilitySummary } from './core/calibration-drift.js?v=0471p1';
+import { createReflectionDraft,updateReflectionDraft,restoreReflectionDraft,clearReflectionDraft,reconcileDailyContinuity } from './core/daily-continuity.js?v=0471p1';
+import { resolveStartupDestination,resolveContinuityDestination,buildContinuityNotice,shouldShowContinuityCard } from './core/startup-continuity.js?v=0471p1';
 const app=document.querySelector('#app');window.__strategosStarted=true;
 const a11yStatus=document.querySelector('#a11y-status');
 const announceStatus=message=>{if(!a11yStatus)return;a11yStatus.textContent='';requestAnimationFrame(()=>{a11yStatus.textContent=message||''})};
 const focusCurrentScreen=()=>requestAnimationFrame(()=>{const target=app.querySelector('main.screen');if(target&&!target.matches(':focus'))target.focus({preventScroll:true})});
-async function registerServiceWorker(){if(!('serviceWorker' in navigator)||!/^https?:$/.test(location.protocol))return;try{await navigator.serviceWorker.register('./service-worker.js?v=0470p1',{scope:'./'})}catch(error){console.warn('Strategos offline support unavailable.',error)}}
+async function registerServiceWorker(){if(!('serviceWorker' in navigator)||!/^https?:$/.test(location.protocol))return;try{await navigator.serviceWorker.register('./service-worker.js?v=0471p1',{scope:'./'})}catch(error){console.warn('Strategos offline support unavailable.',error)}}
 registerServiceWorker();
 function reconcileLoadedState(input){
   let next=reconcileDailyContinuity(input);
@@ -113,7 +113,7 @@ const livingCompanionToday=()=>{
   const story=deriveDailyStory({stories:state.dailyStories,checkIns:state.dailyCheckIns,judgements:state.judgements,history:state.history,journalEntries:state.emotionalJournalEntries});
   const model=buildLivingCompanion({name:state.profile?.name||'',context:gate.context.signals,contextEvidence:gate.context,judgement:gate.judgement,story,hasContinuity:gate.context.sufficient&&shouldShowContinuityCard(state)});
   const graph=gate.context.sufficient?buildHumanGraph(state.history,gate.context.signals):buildHumanGraph([],null);
-  const action=model.action?((model.action==='focus-signals'||model.action==='checkin')?`<a class="moment-action" href="#checkin" data-action="checkin" role="button">${esc(model.actionLabel)}</a>`:`<button class="moment-action" type="button" data-action="${esc(model.action)}">${esc(model.actionLabel)}</button>`):'';
+  const action=model.action?((model.action==='focus-signals'||model.action==='checkin')?`<button class="moment-action" type="button" data-action="checkin" id="start-today-checkin">${esc(model.actionLabel)}</button>`:`<button class="moment-action" type="button" data-action="${esc(model.action)}">${esc(model.actionLabel)}</button>`):'';
   const why=gate.judgement&&model.reasons?.length?`<details class="moment-why"><summary>Why</summary><div>${model.reasons.map(reason=>`<p>${esc(reason)}</p>`).join('')}<small>${esc(model.confidence||'')}</small></div></details>`:'';
   return `<section class="current-moment ${esc(model.mode)}" aria-label="Current moment">
     <div class="organism-field"><div class="organism-aura"></div>${renderLivingGraph(graph,{ambient:true})}</div>
@@ -192,6 +192,25 @@ window.addEventListener('hashchange',()=>{
   const next=location.hash.replace('#','')||'today';
   if(ROUTES[next]&&next!==currentRoute)route(next,{history:'none'});
 });
+
+// Critical entry path: capture the Today check-in action before any generic UI handler.
+// This intentionally avoids audio, haptics and delegated-action side effects so the
+// first daily action cannot be blocked by an unrelated browser/API exception.
+const enterTodayCheckin=(event)=>{
+  const target=event.target?.closest?.('[data-action="checkin"], [data-action="focus-signals"]');
+  if(!target)return;
+  event.preventDefault();
+  event.stopImmediatePropagation();
+  try{
+    route('checkin');
+  }catch(error){
+    console.error('Strategos check-in entry failed:',error);
+    location.hash='checkin';
+    try{ROUTES.checkin()}catch(fallbackError){window.__strategosBootError?.(fallbackError?.message||'check-in could not open')}
+  }
+};
+document.addEventListener('pointerup',enterTodayCheckin,true);
+document.addEventListener('click',enterTodayCheckin,true);
 function splash(){shell(`${deltaMark()}<div class="brand"><div class="eyebrow">ONEARETE</div><h1>STRATEGOS</h1><p>Understand first.<br/>Act deliberately.</p></div><button class="tap" data-action="begin">Tap to begin</button>`,'splash')}
 function onboarding(){
   const current=normaliseProfile({...state.profile,...onboardingDraft});
