@@ -40,7 +40,7 @@ test('leaving deliberation cancels its interval and timeout',()=>{
 });
 
 test('Agora receives no preliminary calibration that could be applied twice',()=>{
-  assert.match(app,/conveneAgora\(context,understanding,state\.history,state\.advisorMemories,longitudinalEvidence,null\)/);
+  assert.match(app,/conveneAgora\(context,understanding,state\.history,state\.advisorMemories,longitudinalEvidence,null,state\.beliefs\)/);
   assert.doesNotMatch(app,/practice:\{id:'pending'/);
 });
 

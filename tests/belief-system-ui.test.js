@@ -1,3 +1,5 @@
 import test from 'node:test';import assert from 'node:assert/strict';import fs from 'node:fs';
 const app=fs.readFileSync(new URL('../src/app.js',import.meta.url),'utf8');
-test('Understanding exposes explicit person-controlled beliefs',()=>{assert.match(app,/BELIEF SYSTEM/);assert.match(app,/This fits me/);assert.match(app,/This is misleading/);assert.match(app,/Automatic Human Model, judgement and Practice-selection influence: 0/)});
+test('Understanding exposes explicit person-controlled beliefs',()=>{assert.match(app,/BELIEF SYSTEM/);assert.match(app,/This fits me/);assert.match(app,/This is misleading/);assert.match(app,/Human Model influence: 0/);assert.match(app,/A confirmed belief may adjust its Practice.s ranking by up to/)});
+test('confirmed belief adjustments are bounded and disclosed in the judgement deliberation panel',()=>{assert.match(app,/LEARNED FROM YOU/);assert.match(app,/Bounded to .*% per confirmed belief\. Never overrides safety\./)});
+test('confirmed beliefs are threaded into deliberation, not just displayed',()=>{assert.match(app,/conveneAgora\(context,understanding,state\.history,state\.advisorMemories,longitudinalEvidence,null,state\.beliefs\)/);assert.match(app,/state\.beliefs=reconcileBeliefs\(state\.beliefs,state\.outcomeLedger\)/)});
