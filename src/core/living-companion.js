@@ -9,7 +9,7 @@ export function buildLivingCompanion({name='',context={},contextEvidence=null,ju
   const greeting=`${timeGreeting()}${name?`, ${name}`:''}.`;
 
   if(completed)return {
-    mode:'complete',greeting,judgement:'Day completed.',
+    mode:'complete',greeting,judgement:'Today is closed.',
     reasons:['The day has been deliberately closed.'],confidence:'Continuity preserved.',
     action:null,actionLabel:null,continuity:'There is continuity.'
   };
@@ -26,7 +26,7 @@ export function buildLivingCompanion({name='',context={},contextEvidence=null,ju
   if(judgement){
     const choiceAction=judgement.personChoice?.action;
     if(choiceAction==='decline')return {
-      mode:'declined',greeting,judgement:'You decided not to practice today.',
+      mode:'declined',greeting,judgement:'Rest is a decision.',
       reasons:['This is your choice. Strategos will offer a fresh perspective whenever you are ready.'],
       confidence:'No practice is expected.',
       action:'consult',actionLabel:'Get a new recommendation',continuity:''
@@ -45,16 +45,16 @@ export function buildLivingCompanion({name='',context={},contextEvidence=null,ju
     };
   }
   if(complete)return {
-    mode:'ready',greeting,judgement:'I understand today.',
+    mode:'ready',greeting,judgement:'Strategos has what it needs.',
     reasons:['Your check-in is complete. Strategos can now deliberate from the context you provided.'],confidence:'No recommendation exists until deliberation completes.',
-    action:'consult',actionLabel:'See today’s recommendation',continuity:''
+    action:'consult',actionLabel:'See today\u2019s recommendation',continuity:''
   };
   const moment=resolveCurrentMoment({contextEvidence:contextEvidence||{signals:context,completed:Object.values(context||{}).filter(value=>value!==undefined&&value!==null&&value!=='').length,sufficient:false},story});
   const partial=moment.moment===CURRENT_MOMENTS.UNDERSTANDING;
   return {
-    mode:'listen',greeting,judgement:partial?'Let’s finish understanding today.':'Let’s understand today.',
+    mode:'listen',greeting,judgement:partial?'Almost there.':'What is today asking of you?',
     reasons:['Strategos needs only the minimum context required to reason responsibly.'],confidence:'Nothing is inferred from silence.',
-    action:'focus-signals',actionLabel:partial?'Continue today’s check-in':'Start today’s check-in',continuity:''
+    action:'focus-signals',actionLabel:partial?'Continue today\u2019s check-in':'Start today\u2019s check-in',continuity:''
   };
 }
 
