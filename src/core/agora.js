@@ -5,10 +5,11 @@ const assessPracticeEligibility=PracticeLibrary.assessPracticeEligibility||((pra
 import { evidenceItem, assessEvidenceDiversity, detectContradictions } from './evidence-integrity.js?v=0476p1';
 import { buildDeliberationTrace,buildMinorityReports,summarizeMinorityReports } from './deliberation-trace.js?v=0476p1';
 import { applyLongitudinalAdjustments,longitudinalConfidenceAdjustment,verifyLongitudinalEvidence } from './longitudinal-evidence.js?v=0476p1';
+import { applyConfirmedBeliefAdjustments } from './belief-system.js?v=0476p1';
 import { applyCalibrationToConfidence,verifyCalibrationEvidence } from './calibration-governance.js?v=0476p1';
 const clamp=(n,min=0,max=1)=>Math.min(max,Math.max(min,n));
 
-export function conveneAgora(context, understanding, history=[], advisorMemories={}, longitudinalEvidence=null, calibrationEvidence=null){
+export function conveneAgora(context, understanding, history=[], advisorMemories={}, longitudinalEvidence=null, calibrationEvidence=null, confirmedBeliefs=[]){
   const raw=[bodyAdvisor(context,understanding,history),recoveryAdvisor(context,understanding),mindAdvisor(context,understanding),agencyAdvisor(context,understanding),purposeAdvisor(context),relationshipsAdvisor(context)];
   const advisors=raw.map(a=>applyAdvisorMemory(a,advisorMemories[a.advisor]));
   let totals=Object.fromEntries(CODEX.map(practice=>[practice.id,0]));
@@ -17,6 +18,8 @@ export function conveneAgora(context, understanding, history=[], advisorMemories
   }
   const longitudinalVerification=verifyLongitudinalEvidence(longitudinalEvidence);
   if(longitudinalVerification.valid)totals=applyLongitudinalAdjustments(totals,longitudinalEvidence);
+  const beliefAdjustmentResult=applyConfirmedBeliefAdjustments(totals,confirmedBeliefs);
+  totals=beliefAdjustmentResult.totals;
   const eligibilityAssessments=CODEX.map(practice=>({
     practice,
     assessment:assessPracticeEligibility(practice,context)
@@ -62,6 +65,7 @@ export function conveneAgora(context, understanding, history=[], advisorMemories
       selectionEffect:item.assessment.status==='blocked'?'excluded':'none'
     })),
     eligibilityGovernance:'Only explicit blocked status excludes a Practice. Caution does not change ranking.',
+    beliefAdjustments:beliefAdjustmentResult.applied,
     riskAsymmetries:advisors.flatMap(a=>(a.riskFlags||[]).filter(r=>r.severity==='critical'||r.reversibility==='difficult')),
     contradictions,
     evidenceDiversity,
