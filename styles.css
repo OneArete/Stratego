@@ -2682,6 +2682,15 @@ main.screen{
 .human-model-snapshot-audit>p,.human-model-snapshot-audit>small{
   margin:0;color:var(--muted);font-size:8px;line-height:1.45
 }
+.journey-belief-adjustment{
+  margin-top:9px;padding-top:8px;border-top:1px solid rgba(255,255,255,.05)
+}
+.journey-belief-adjustment summary{color:#cbbca7;font-size:9px}
+.journey-belief-adjustment>div{display:grid;gap:5px;padding-top:7px}
+.journey-belief-adjustment strong{color:#d4b06f;font-size:9px}
+.journey-belief-adjustment p,.journey-belief-adjustment small{
+  margin:0;color:var(--muted);font-size:8px;line-height:1.45
+}
 
 
 /* v0.22.0 Phase 4 — person-authorised stable fact promotion */
