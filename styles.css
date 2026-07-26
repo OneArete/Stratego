@@ -3487,3 +3487,47 @@ body #app .tabbar button{
 .judgement-footer-actions{display:flex;gap:10px;padding-top:4px}
 .judgement-footer-actions button{flex:1;padding:11px 10px;font-size:.75rem;color:var(--muted);background:transparent;border:1px solid var(--line);border-radius:12px;cursor:pointer}
 .judgement-footer-actions button:active{color:var(--text)}
+
+/* v0.57.0 — organism richness restoration (see ADR-023)
+   Root cause: 4 accumulated .living-graph definitions and 3 .graph-membrane
+   definitions across prior versions left the *effective* (cascade-winning)
+   membrane fill at 1.4% opacity and links as sparse 1px/7px dashes — visually
+   a thin technical diagram, not a living organism. Rather than delete the
+   older rules (several are pinned verbatim by existing tests as historical
+   regression guards), this block adds a final, higher-specificity layer that
+   restores real visual weight: a genuinely visible membrane fill and glow,
+   continuous (non-dashed) connective links, and a brighter dominant-domain
+   halo. Nothing here changes layout, motion timing, or accessibility. */
+.graph-membrane:not(.graph-membrane-shadow){
+  fill:rgba(203,171,110,.11);
+}
+.living-graph.ambient .graph-membrane:not(.graph-membrane-shadow){
+  fill:rgba(203,171,110,.085);
+  stroke-width:1;
+  filter:drop-shadow(0 0 15px rgba(184,148,88,.28));
+}
+.living-graph .organism-depth{
+  opacity:.92;
+  background:radial-gradient(circle,rgba(224,196,140,.11),rgba(112,139,142,.03) 42%,transparent 72%);
+}
+.living-graph.ambient .graph-link{
+  stroke-dasharray:none;
+  stroke:rgba(216,190,138,.5);
+  stroke-width:1;
+}
+.living-graph.ambient .graph-link.dominant-link{
+  stroke-width:1.5;
+  opacity:.78!important;
+  filter:drop-shadow(0 0 5px rgba(216,190,138,.4));
+}
+@keyframes halo-breath{
+  0%,100%{opacity:.15}
+  50%{opacity:.36}
+}
+@keyframes dominantHalo{
+  0%,100%{transform:scale(.94);opacity:.18}
+  50%{transform:scale(1.34);opacity:.42}
+}
+@media(prefers-reduced-motion:reduce){
+  .living-graph.ambient .graph-link.dominant-link{filter:none}
+}
