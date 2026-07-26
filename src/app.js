@@ -257,7 +257,6 @@ window.strategosSelectSignal=(event,target)=>{
 };
 
 function checkin(){
-  const completed=['sleep','energy','time','challenge','soreness','emotionalLoad'].filter(key=>context?.[key]!==undefined&&context?.[key]!==null&&context?.[key]!=='').length;
   const checkinGraph=buildCheckinGraph(context);
   const questions={
     sleep:['How did you sleep?',[[4,'Excellent'],[3,'Good'],[2,'Fair'],[1,'Poor']]],
@@ -270,8 +269,8 @@ function checkin(){
   const nextKey=nextMissingSignal(context);
   const prompt=nextKey?questions[nextKey]:null;
   const body=prompt
-    ?`<section class="seed-checkin"><button class="quiet-close" data-action="today" aria-label="Return to Today">×</button><div class="seed-organism">${renderLivingGraph(checkinGraph,{ambient:true})}</div><div class="seed-question"><p>${completed+1} / 6</p>${question(prompt[0],nextKey,prompt[1])}<small>Nothing is inferred from silence.</small></div></section>`
-    :`<section class="seed-checkin complete"><div class="seed-organism">${renderLivingGraph(checkinGraph,{ambient:true})}</div><div class="seed-question"><h1>I understand today.</h1><p>Today is clear.</p></div></section>`;
+    ?`<section class="seed-checkin"><button class="quiet-close" data-action="today" aria-label="Return to Today">×</button><div class="seed-organism">${renderLivingGraph(checkinGraph,{ambient:true})}</div><div class="seed-question">${question(prompt[0],nextKey,prompt[1])}<small>Nothing is inferred from silence.</small></div></section>`
+    :`<section class="seed-checkin complete"><div class="seed-organism">${renderLivingGraph(checkinGraph,{ambient:true})}</div><div class="seed-question"><h1>Strategos has what it needs.</h1><p>Today is clear.</p></div></section>`;
   shell(body,'experience-flow');
 }
 function question(title,key,opts){return `<div class="question"><h3>${title}</h3><div class="choice-row" role="group" aria-label="${title}">${opts.map(([v,l])=>`<button type="button" class="pill ${context[key]===v?'selected':''}" data-key="${key}" data-value="${v}" aria-pressed="${context[key]===v?'true':'false'}" onclick="return window.strategosSelectSignal(event,this)">${l}${key==='time'?' min':''}</button>`).join('')}</div></div>`}
