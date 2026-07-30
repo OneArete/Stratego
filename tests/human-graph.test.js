@@ -1,6 +1,6 @@
 import test from 'node:test';
 import assert from 'node:assert/strict';
-import { HUMAN_DIMENSIONS, buildHumanGraph, buildCheckinGraph } from '../src/core/human-graph.js';
+import { HUMAN_DIMENSIONS, buildHumanGraph, buildCheckinGraph, describeGraphHighlight } from '../src/core/human-graph.js';
 
 test('frozen domains include Recovery and exclude Legacy',()=>{
   const ids=HUMAN_DIMENSIONS.map(x=>x.id);
@@ -128,4 +128,32 @@ test('buildCheckinGraph: null/undefined values treated as absent',()=>{
   const graph=buildCheckinGraph({sleep:null,energy:undefined,time:''});
   const energies=graph.nodes.map(x=>x.energy);
   assert.ok(energies.every(e=>e<0.2),'null/undefined/empty signals should not activate any node');
+});
+
+// --- describeGraphHighlight (v0.60.0 — organism as emotional hook) ---
+
+test('describeGraphHighlight: returns null for a graph with no nodes',()=>{
+  assert.equal(describeGraphHighlight({nodes:[]}),null);
+  assert.equal(describeGraphHighlight(null),null);
+});
+
+test('describeGraphHighlight: returns null for a fully neutral (no-data) graph',()=>{
+  const neutral={nodes:HUMAN_DIMENSIONS.map(({label})=>({label,energy:0.5,momentum:0,confidence:0.2}))};
+  assert.equal(describeGraphHighlight(neutral),null);
+});
+
+test('describeGraphHighlight: names the strongest domain and a rising trend',()=>{
+  const graph=buildHumanGraph([],{sleep:4,energy:1,time:5,challenge:'recovery',soreness:'none',emotionalLoad:'usual'});
+  const highlight=describeGraphHighlight(graph);
+  assert.ok(highlight);
+  assert.equal(highlight.label,'Recovery');
+  assert.match(highlight.statement,/^Recovery is (growing|holding steady) today\.$/);
+});
+
+test('describeGraphHighlight: reports momentum direction from recent history',()=>{
+  const risingHistory=Array.from({length:8},(_,i)=>({completed:true,decision:{delta:{recovery:i<4?-.3:.5}}}));
+  const graph=buildHumanGraph(risingHistory);
+  const highlight=describeGraphHighlight(graph);
+  assert.ok(highlight);
+  assert.match(highlight.statement,/is (growing|holding steady|easing) today\./);
 });
