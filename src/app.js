@@ -36,6 +36,8 @@ import { conveneAgora } from './core/agora.js?v=0476p1';
 import { buildHumanGraph,buildCheckinGraph,projectHumanReturn,describeGraphHighlight } from './core/human-graph.js?v=0476p1';
 import { describeProactiveInsight } from './core/proactive-insight.js?v=0476p1';
 import { computeCheckInStreak,describeStreak } from './core/streak.js?v=0476p1';
+import { pendingWhatsNewEntry } from './core/whats-new.js?v=0476p1';
+import { describeInstallGuidance,detectPlatform } from './core/install-guidance.js?v=0476p1';
 import { renderLivingGraph } from './components/living-graph.js?v=0476p1';
 import { unlockAudio,playTone,speak,stopVoice,previewVoice } from './core/audio.js?v=0476p1';
 import { buildExplanation,buildExplainRecord,explainRecordAudit,explainRecordSummary,validateExplainRecord,applyExplainRecordReview,explainRecordReviewAudit,explainRecordReviewSummary } from './core/explain.js?v=0476p1';
@@ -220,6 +222,40 @@ function today(){
     startButton.addEventListener('click',openCheckIn,{once:true});
     startButton.addEventListener('touchend',openCheckIn,{once:true,passive:false});
   }
+  renderOnceOffOverlays();
+}
+function renderOnceOffOverlays(){
+  const pendingEntry=pendingWhatsNewEntry(state.lastSeenVersion);
+  if(pendingEntry){
+    app.insertAdjacentHTML('beforeend',`<aside class="whats-new-overlay" role="dialog" aria-label="What's new">
+      <div class="whats-new-card">
+        <p class="eyebrow">WHAT’S NEW · v${esc(pendingEntry.version)}</p>
+        <h3>${esc(pendingEntry.headline)}</h3>
+        <ul>${pendingEntry.points.map(point=>`<li>${esc(point)}</li>`).join('')}</ul>
+        <button class="action" data-action="dismiss-whats-new">Got it</button>
+      </div>
+    </aside>`);
+    app.querySelector('[data-action="dismiss-whats-new"]')?.addEventListener('click',()=>{
+      state.lastSeenVersion=pendingEntry.version;
+      persist();
+      app.querySelector('.whats-new-overlay')?.remove();
+    },{once:true});
+    return;
+  }
+  if(state.installGuidanceDismissed)return;
+  const isStandalone=Boolean(window.matchMedia?.('(display-mode: standalone)')?.matches||navigator.standalone===true);
+  const guidance=describeInstallGuidance({isStandalone,platform:detectPlatform(navigator.userAgent||'')});
+  if(!guidance)return;
+  app.insertAdjacentHTML('beforeend',`<aside class="install-guidance-banner" role="note">
+    <p><strong>${esc(guidance.headline)}</strong></p>
+    <p>${esc(guidance.body)}</p>
+    <button class="text-btn" data-action="dismiss-install-guidance">Got it</button>
+  </aside>`);
+  app.querySelector('[data-action="dismiss-install-guidance"]')?.addEventListener('click',()=>{
+    state.installGuidanceDismissed=true;
+    persist();
+    app.querySelector('.install-guidance-banner')?.remove();
+  },{once:true});
 }
 function renderSymmetricCheckinOrganism(){
   const nodes=Array.from({length:6},(_,index)=>{
