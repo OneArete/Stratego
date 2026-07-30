@@ -1,3 +1,19 @@
+## 0.60.0 — User-Lens Retention Improvements
+
+- The closed-day organism now names something real: the practice completed, its reflection, and which domain stood out — instead of rendering as a silent shape with no caption.
+- Today proactively surfaces a specific belief or advisor-memory insight when one genuinely exists, instead of only being visible inside a collapsed judgement detail panel.
+- Check-in offers a one-tap "Same as yesterday" option on the first question when a previous complete day exists, cutting six taps to one.
+- A visible streak badge ("N-day streak") now appears on Today itself once two or more consecutive recorded days exist.
+- See ADR-026. Notifications were assessed but not built this release — flagged as a structural PWA limitation requiring a product decision, not silently skipped.
+
+## 0.59.0 — Practice Library Expansion & Journey Trend Chart
+
+- Added two Practices — `direction` (purpose domain) and `decisive-action` (agency domain) — closing the two domains that previously had an Advisor voice but no matching content.
+- Wired both into all six Advisors' scoring, `judgementText()`, and `intention()`; verified by exhaustive grid search (2,592 contexts) that both can actually win a judgement, not just score.
+- Added Journey's first visual trend chart: an inline SVG sparkline of recent sleep and energy, descriptive only, zero automatic judgement influence.
+- Decoupled a belief-adjustment test from the live CODEX ranking so future scoring changes can't silently invalidate its precondition.
+- See ADR-025.
+
 ## 0.47.6 — Check-in Interaction & Symmetry Repair
 
 - Native inline choice handling independent of delegated audio/haptic listeners.

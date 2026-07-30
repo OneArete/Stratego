@@ -3531,3 +3531,84 @@ body #app .tabbar button{
 @media(prefers-reduced-motion:reduce){
   .living-graph.ambient .graph-link.dominant-link{filter:none}
 }
+
+/* v0.59.0 — Journey trend chart */
+.trend-chart-card{
+  border:1px solid var(--line);
+  border-radius:var(--radius-card,18px);
+  background:linear-gradient(145deg,var(--panel2),var(--panel));
+  padding:20px;
+  margin-top:18px;
+}
+.trend-sparkline-svg{
+  display:block;
+  width:100%;
+  height:auto;
+  margin:14px 0 8px;
+}
+.trend-line{
+  fill:none;
+  stroke-width:2;
+  stroke-linecap:round;
+  stroke-linejoin:round;
+}
+.trend-line-sleep{stroke:var(--bronze)}
+.trend-line-energy{stroke:#7fa88f}
+.trend-dot-sleep{fill:var(--bronze)}
+.trend-dot-energy{fill:#7fa88f}
+.trend-legend{display:flex;gap:16px;margin:0 0 10px}
+.trend-legend-item{display:flex;align-items:center;gap:6px;font-size:11px;color:var(--muted)}
+.trend-legend-item i{width:8px;height:8px;border-radius:50%;display:inline-block}
+.trend-legend-item.sleep i{background:var(--bronze)}
+.trend-legend-item.energy i{background:#7fa88f}
+
+/* v0.60.0 — Organism as emotional hook: day-close reveal */
+.organism-field.settling{
+  animation:settleReveal 1.7s cubic-bezier(.22,.8,.26,1) both;
+}
+@keyframes settleReveal{
+  0%{opacity:.32;transform:scale(.86)}
+  55%{opacity:.85;transform:scale(.99)}
+  100%{opacity:.78;transform:scale(.96)}
+}
+.moment-reveal{
+  color:var(--muted);
+  font-size:14px;
+  line-height:1.55;
+  margin:10px 0 4px;
+  max-width:300px;
+}
+@media(prefers-reduced-motion:reduce){
+  .organism-field.settling{animation:none}
+}
+
+/* v0.60.0 — Check-in friction reduction: repeat previous signals in one tap */
+.checkin-repeat-previous{
+  display:block;
+  margin:16px auto 0;
+  border:1px solid var(--line);
+  border-radius:999px;
+  background:rgba(184,148,88,.08);
+  color:#e0bd82;
+  padding:11px 18px;
+  font-size:12px;
+  letter-spacing:.02em;
+}
+.checkin-repeat-previous:active{background:rgba(184,148,88,.16)}
+
+/* v0.60.0 — Visible continuity: streak badge on Today */
+.continuity-streak{
+  position:absolute;
+  top:2px;
+  left:2px;
+  z-index:2;
+  border:1px solid var(--line);
+  border-radius:999px;
+  padding:6px 12px;
+  font-size:10px;
+  letter-spacing:.1em;
+  text-transform:uppercase;
+  color:#dcb97e;
+  background:rgba(17,17,15,.72);
+  backdrop-filter:blur(6px);
+}
