@@ -102,6 +102,46 @@ export const CODEX = [
       ['Connect', 600, 'Call, listen, play, or be fully present.', ['Put the phone away unless it is the means of contact.', 'Ask one genuine question.', 'Listen without preparing the next reply.']],
       ['Close', 30, 'End without rushing to the next thing.', ['Acknowledge the person directly.', 'Notice how the interaction changed your state.']]
     ]
+  },
+  {
+    id: 'direction',
+    domain: 'purpose',
+    goals: ['clarity','meaning','alignment'],
+    intensity: 'cognitive-light',
+    levels: ['foundation','standard'],
+    equipment: ['writing-surface'],
+    contraindications: ['clear-distress-worsening'],
+    evidenceStatus: 'foundational',
+    contentVersion: 1,
+    name: 'Direction',
+    durationOptions: [5, 15, 30],
+    virtue: 'Integrity',
+    baseDelta: { body: 0, mind: 0.14, relationships: 0.06, purpose: 0.6, recovery: 0.02, agency: 0.24 },
+    phases: [
+      ['Name', 60, 'Name what today\u2019s biggest task is actually for.', ['Write the task in one line.', 'Write, underneath it, the reason it matters \u2014 to you, not to anyone else.', 'If no reason comes, write that honestly instead of inventing one.']],
+      ['Examine', 300, 'Check whether today\u2019s effort matches that reason.', ['Ask: does how I plan to spend today actually serve what I just wrote?', 'Notice any gap without judging it \u2014 a gap is information, not a failing.', 'If there is a gap, write the smallest adjustment that would close it.']],
+      ['Declare', 60, 'Write one sentence you can return to today.', ['State the direction plainly: what you are choosing to prioritise and why.', 'Keep it short enough to remember without looking at it again.']]
+    ]
+  },
+  {
+    id: 'decisive-action',
+    domain: 'agency',
+    goals: ['self-efficacy','follow-through','momentum'],
+    intensity: 'low',
+    levels: ['foundation','standard'],
+    equipment: ['task-material'],
+    contraindications: ['clear-distress-worsening'],
+    evidenceStatus: 'foundational',
+    contentVersion: 1,
+    name: 'Decisive Action',
+    durationOptions: [5, 15, 30],
+    virtue: 'Courage',
+    baseDelta: { body: 0.06, mind: 0.1, relationships: 0, purpose: 0.16, recovery: 0, agency: 0.68 },
+    phases: [
+      ['Choose', 60, 'Choose the smallest action you have been avoiding.', ['Pick something concrete and specific, not a category of things.', 'Choose the smallest version of it \u2014 the part you could start in the next minute.', 'Do not choose something that requires anyone else\u2019s input first.']],
+      ['Act', 480, 'Do it now, without over-preparing.', ['Begin before you feel fully ready \u2014 readiness is not the requirement.', 'If you notice yourself planning instead of acting, that is the signal to start.', 'Stop planning for perfection; a rough first attempt still counts.']],
+      ['Close', 60, 'Notice what acting changed.', ['Name what shifted \u2014 in the task, or simply in how you feel.', 'If the action is incomplete, write the exact next small step.']]
+    ]
   }
 ];
 
