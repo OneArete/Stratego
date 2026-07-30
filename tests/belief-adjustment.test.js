@@ -83,12 +83,23 @@ test('conveneAgora with no confirmed beliefs produces no adjustments',()=>{
 });
 
 test('confirmed beliefs on both sides can shift the winner when their combined swing exceeds the margin',()=>{
+  // Deliberately does not assume the live top-2 margin: as CODEX grows and advisor
+  // scoring is tuned, which practice sits in 2nd place (and by how much) shifts.
+  // Instead, search every practice paired against the winner for one whose margin
+  // sits strictly between one belief's max swing and two beliefs' combined max swing —
+  // that is the only margin range where "a single belief is not enough, but two
+  // opposing ones are" is actually true, which is what this test claims to prove.
   const unadjusted=conveneAgora(base,buildUnderstanding(base),[],{});
-  const runnerUpId=Object.entries(unadjusted.scores).filter(([id])=>id!==unadjusted.practice.id).sort((a,b)=>b[1]-a[1])[0][0];
-  const margin=unadjusted.scores[unadjusted.practice.id]-unadjusted.scores[runnerUpId];
-  assert.ok(margin>CONFIRMED_BELIEF_MAX_ADJUSTMENT,'fixture assumption: a single belief bound should not already exceed the margin');
+  const winnerId=unadjusted.practice.id;
+  const candidates=Object.entries(unadjusted.scores)
+    .filter(([id])=>id!==winnerId)
+    .map(([id,score])=>({id,margin:unadjusted.scores[winnerId]-score}))
+    .filter(c=>c.margin>CONFIRMED_BELIEF_MAX_ADJUSTMENT&&c.margin<CONFIRMED_BELIEF_MAX_ADJUSTMENT*2)
+    .sort((a,b)=>a.margin-b.margin);
+  assert.ok(candidates.length>0,'fixture assumption: at least one practice must have a margin that a single max belief cannot close but two opposing max beliefs can');
+  const runnerUpId=candidates[0].id;
   const beliefs=[
-    confirmedBelief(unadjusted.practice.id,unadjusted.practice.id,0,1),
+    confirmedBelief(winnerId,winnerId,0,1),
     confirmedBelief(runnerUpId,runnerUpId,1,1)
   ];
   const adjusted=conveneAgora(base,buildUnderstanding(base),[],{},null,null,beliefs);
