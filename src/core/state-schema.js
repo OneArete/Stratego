@@ -46,7 +46,9 @@ export function createInitialState(){
     agencyIntegrity:{lastReconciledAt:null,lastReport:null},
     followThroughIntegrity:{lastReconciledAt:null,lastReport:null},
     longitudinalAccountability:{lastReconciledAt:null,lastReport:null},
-    settings:{sound:true,voice:'minimal',haptics:true,keepAwake:true}
+    settings:{sound:true,voice:'minimal',haptics:true,keepAwake:true},
+    lastSeenVersion:null,
+    installGuidanceDismissed:false
   };
 }
 
