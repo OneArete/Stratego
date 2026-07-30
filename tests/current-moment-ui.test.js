@@ -16,3 +16,10 @@ test('Today is organism + one sentence + one action — no Why details, no greet
   assert.doesNotMatch(app,/moment-why/,'Why details removed — architecture invisible to user');
   assert.doesNotMatch(app,/moment-continuity/,'continuity text removed — one action only');
 });
+
+test('v0.60.0: the closed-day organism gets a one-time settle reveal, driven by the same graph data it renders',()=>{
+  assert.match(app,/describeGraphHighlight\(graph\)/,'highlight is derived from the same graph object the organism renders, not invented separately');
+  assert.match(app,/model\.settled\?' settling':''/,'the settle animation class is conditional on the model, not always-on');
+  assert.match(app,/class="moment-reveal"/);
+  assert.match(app,/model\.mode===['"]complete['"]&&model\.reasons\?\.length/,'the reveal paragraph only renders for the completed-day moment');
+});
