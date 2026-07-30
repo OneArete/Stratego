@@ -28,7 +28,7 @@ test('caution does not exclude a Practice',()=>{
 
 test('eligibility trace covers every Practice',()=>{
   const decision=conveneAgora(base,understanding,[],{},null,null);
-  assert.equal(decision.agora.eligibilityTrace.length,5);
+  assert.equal(decision.agora.eligibilityTrace.length,7);
 });
 
 test('governance distinguishes block from caution',()=>{

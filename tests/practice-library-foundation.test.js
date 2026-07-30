@@ -39,9 +39,9 @@ test('catalog exposes stable transparency fields',()=>{
 
 test('summary reports the current library shape',()=>{
   const summary=practiceLibrarySummary(practiceLibraryCatalog(CODEX));
-  assert.equal(summary.practices,5);
-  assert.ok(summary.domains>=4);
-  assert.match(summary.statement,/5 Practices/);
+  assert.equal(summary.practices,7);
+  assert.ok(summary.domains>=6);
+  assert.match(summary.statement,/7 Practices/);
 });
 
 test('library contract version is explicit',()=>{
