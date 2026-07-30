@@ -193,6 +193,29 @@ export function projectHumanReturn(graph, delta = {}) {
   };
 }
 
+// The organism carries real per-domain energy and momentum on every render,
+// but nothing ever named what it showed in words — a person could look at the
+// shape and feel nothing specific. This turns the same data already driving
+// the SVG into one honest, specific sentence: which domain currently stands
+// out, and whether it is rising, easing, or steady. Used at day-close so the
+// moment of closing the day names something real instead of just going quiet.
+export function describeGraphHighlight(graph) {
+  const nodes = graph?.nodes || [];
+  if (!nodes.length) return null;
+  const allNeutral = nodes.every(node =>
+    Math.abs(Number(node.energy || 0) - 0.5) < 0.02 &&
+    Math.abs(Number(node.momentum || 0)) < 0.02
+  );
+  if (allNeutral) return null;
+  const scored = nodes.map(node => ({
+    ...node,
+    score: Number(node.energy || 0) * 0.7 + Math.max(0, Number(node.momentum || 0)) * 0.3
+  }));
+  const top = [...scored].sort((a, b) => b.score - a.score)[0];
+  const trend = top.momentum > 0.05 ? 'growing' : top.momentum < -0.05 ? 'easing' : 'holding steady';
+  return { label: top.label, trend, statement: `${top.label} is ${trend} today.` };
+}
+
 function graphState(nodes) {
   const momentum = average(nodes.map(node => node.momentum));
   const energy = average(nodes.map(node => node.energy));

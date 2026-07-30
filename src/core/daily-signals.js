@@ -36,6 +36,17 @@ export function dailyCheckInForDay(checkIns=[],day){
   return (checkIns||[]).find(item=>item?.day===day)||null;
 }
 
+// Six taps is still six taps every single day, even at one question per screen.
+// When a person's most recent other day is fully recorded, offer it back to them
+// as one explicit, visible choice — never applied silently. Choosing it copies
+// yesterday's actual answers; it does not invent anything Strategos was not told.
+export function mostRecentCompleteCheckIn(checkIns=[],excludeDay=null){
+  const sorted=(checkIns||[])
+    .filter(item=>item?.day&&item?.signals&&item.day!==excludeDay)
+    .sort((a,b)=>String(b.day).localeCompare(String(a.day)));
+  return sorted[0]||null;
+}
+
 export function dailyCheckInSummary(record){
   if(!record)return 'Today’s signals have not been saved yet.';
   const s=normaliseDailySignals(record.signals);

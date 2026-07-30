@@ -1,18 +1,28 @@
 import { resolveCurrentMoment,CURRENT_MOMENTS } from './current-moment.js?v=0476p1';
 const completeContext=context=>['sleep','energy','time','challenge','soreness','emotionalLoad'].every(key=>context?.[key]!==undefined&&context?.[key]!==null&&context?.[key]!=='');
 
-export function buildLivingCompanion({name='',context={},contextEvidence=null,judgement=null,story={},hasContinuity=false}={}){
+const REFLECTION_PHRASES={better:'It went better than expected.',yes:'It went better than expected.',right:'It went as expected.',worse:'It did not go as hoped.'};
+
+export function buildLivingCompanion({name='',context={},contextEvidence=null,judgement=null,story={},hasContinuity=false,highlight=null}={}){
   const complete=contextEvidence?Boolean(contextEvidence.sufficient):completeContext(context);
   const stage=story?.stage||'opened';
   const completed=stage==='complete';
   const practiceComplete=['reflection','complete'].includes(stage);
   const greeting=`${timeGreeting()}${name?`, ${name}`:''}.`;
 
-  if(completed)return {
-    mode:'complete',greeting,judgement:'Today is closed.',
-    reasons:['The day has been deliberately closed.'],confidence:'Continuity preserved.',
-    action:null,actionLabel:null,continuity:'There is continuity.'
-  };
+  if(completed){
+    const practiceName=story?.practice?.name||null;
+    const reflectionPhrase=REFLECTION_PHRASES[story?.practice?.reflection]||null;
+    const reasons=[];
+    if(practiceName)reasons.push(`You completed ${practiceName} today.${reflectionPhrase?` ${reflectionPhrase}`:''}`);
+    if(highlight?.statement)reasons.push(highlight.statement);
+    if(!reasons.length)reasons.push('The day has been deliberately closed.');
+    return {
+      mode:'complete',greeting,judgement:'Today is closed.',
+      reasons,confidence:'Continuity preserved.',
+      action:null,actionLabel:null,continuity:'There is continuity.',settled:true
+    };
+  }
   if(practiceComplete)return {
     mode:'reflection',greeting,judgement:'What mattered today?',
     reasons:['A brief reflection can preserve what mattered without scoring the day.'],confidence:'Writing remains optional.',

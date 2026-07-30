@@ -2,7 +2,7 @@ const ADVISORS=['Body','Recovery','Mind','Agency','Purpose','Relationships'];
 const clamp=(n,min=0,max=1)=>Math.min(max,Math.max(min,n));
 const DAY=86400000;
 const MEMORY_HALF_LIFE_DAYS=90;
-const CANDIDATE_INFLUENCE=.45;
+export const CANDIDATE_INFLUENCE=.45;
 const blank=name=>({name,experience:0,confidence:38,coverage:18,notes:[],weights:{},updatedAt:null});
 
 function normalizeWeight(value){
