@@ -3612,3 +3612,118 @@ body #app .tabbar button{
   background:rgba(17,17,15,.72);
   backdrop-filter:blur(6px);
 }
+
+/* v0.61.0 — Tabbar consolidation.
+   Root cause of the recurring "broken-looking" bottom navigation: this file had
+   accumulated roughly fifteen separate .tabbar re-declarations across versions
+   (v0.14 through v0.53), each one a reaction to the previous not looking right,
+   each using a different CSS custom property name for the same concept
+   (--footer-height, then --strategos-nav-height, then --strategos-fixed-footer-height),
+   and escalating in z-index up to 2147483646 (one below the 32-bit signed max) in
+   an attempt to force a win that specificity math already guaranteed. None of the
+   prior blocks were removed, so the file still contains all of them; this one is
+   the ONLY rule that now determines what actually renders, verified by selector
+   specificity (#app id + two class references beats every previous selector,
+   including the previous highest, `body #app .tabbar`) combined with !important
+   and final source position. If the tabbar ever needs to change again, EDIT THIS
+   BLOCK — do not add a sixteenth generation on top of it. */
+#app .tabbar.tabbar{
+  position:fixed !important;
+  inset:auto 0 0 0 !important;
+  left:0 !important;
+  right:0 !important;
+  bottom:0 !important;
+  top:auto !important;
+  transform:none !important;
+  margin:0 !important;
+  width:100% !important;
+  max-width:100% !important;
+  min-width:0 !important;
+  height:calc(var(--strategos-fixed-footer-height,72px) + env(safe-area-inset-bottom)) !important;
+  min-height:calc(var(--strategos-fixed-footer-height,72px) + env(safe-area-inset-bottom)) !important;
+  padding:0 max(10px,env(safe-area-inset-right)) env(safe-area-inset-bottom) max(10px,env(safe-area-inset-left)) !important;
+  box-sizing:border-box !important;
+  display:grid !important;
+  grid-template-columns:repeat(4,minmax(0,1fr)) !important;
+  align-items:stretch !important;
+  overflow:visible !important;
+  border:0 !important;
+  border-top:1px solid rgba(184,148,88,.18) !important;
+  border-radius:0 !important;
+  background:rgba(6,6,5,.98) !important;
+  backdrop-filter:blur(18px) !important;
+  -webkit-backdrop-filter:blur(18px) !important;
+  box-shadow:0 -8px 22px rgba(0,0,0,.28) !important;
+  z-index:1000 !important;
+  isolation:isolate;
+}
+#app .tabbar.tabbar button{
+  display:flex !important;
+  flex-direction:column !important;
+  align-items:center !important;
+  justify-content:center !important;
+  gap:4px !important;
+  width:100% !important;
+  min-width:0 !important;
+  height:100% !important;
+  margin:0 !important;
+  padding:6px 2px !important;
+  border:0 !important;
+  border-radius:0 !important;
+  background:transparent !important;
+  color:rgba(222,215,203,.6) !important;
+  font-size:9px !important;
+  line-height:1 !important;
+  letter-spacing:.01em !important;
+  overflow:hidden !important;
+}
+#app .tabbar.tabbar button.active{
+  color:#ddb974 !important;
+}
+#app .tabbar.tabbar .tab-icon{
+  display:block !important;
+  font-size:15px !important;
+  line-height:1 !important;
+  opacity:.85 !important;
+}
+#app .tabbar.tabbar button span:last-child{
+  display:block !important;
+  max-width:100% !important;
+  overflow:hidden !important;
+  text-overflow:ellipsis !important;
+  white-space:nowrap !important;
+  text-align:center !important;
+}
+
+/* v0.62.0 — one-time disclosure overlays: What's New + install guidance */
+.whats-new-overlay{
+  position:fixed;inset:0;z-index:1200;
+  display:flex;align-items:center;justify-content:center;
+  padding:24px;
+  background:rgba(4,4,3,.72);
+  backdrop-filter:blur(4px);-webkit-backdrop-filter:blur(4px);
+}
+.whats-new-card{
+  width:100%;max-width:380px;
+  border:1px solid var(--line);border-radius:20px;
+  background:linear-gradient(145deg,var(--panel2),var(--panel));
+  padding:24px;text-align:left;
+}
+.whats-new-card h3{font-family:Georgia,serif;font-weight:400;font-size:22px;line-height:1.3;margin:10px 0 14px}
+.whats-new-card ul{margin:0 0 18px;padding-left:18px;color:#d6cec0;font-size:13px;line-height:1.55}
+.whats-new-card li+li{margin-top:8px}
+.whats-new-card .action{margin-top:0}
+
+.install-guidance-banner{
+  position:fixed;z-index:950;
+  left:max(14px,env(safe-area-inset-left));right:max(14px,env(safe-area-inset-right));
+  bottom:calc(var(--strategos-fixed-footer-height,72px) + env(safe-area-inset-bottom) + 12px);
+  max-width:492px;margin:0 auto;
+  border:1px solid var(--line);border-radius:16px;
+  background:rgba(17,17,15,.96);backdrop-filter:blur(12px);-webkit-backdrop-filter:blur(12px);
+  padding:14px 16px;box-shadow:0 10px 26px rgba(0,0,0,.32);
+}
+.install-guidance-banner p{margin:0 0 6px;color:#d6cec0;font-size:12px;line-height:1.45}
+.install-guidance-banner p:first-child{color:#f1d9b0;font-size:13px}
+.install-guidance-banner .text-btn{padding:0;color:var(--bronze);font-size:11px;letter-spacing:.08em;text-transform:uppercase}
+@media(prefers-reduced-motion:reduce){.whats-new-overlay{backdrop-filter:none}}
