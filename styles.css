@@ -3818,23 +3818,31 @@ body #app .tabbar button{
 @keyframes practice-complete-breathe{0%,100%{transform:scale(.96);opacity:.48}50%{transform:scale(1.04);opacity:.9}}
 @media(max-width:560px){.practice-immersive{min-height:calc(100dvh - 154px)}.practice-focus{padding:.7rem 0 .25rem}.practice-focus .clock{font-size:4.35rem}.practice-guidance-card{padding:.7rem}.practice-controls.immersive{bottom:max(8px,env(safe-area-inset-bottom))}}
 
+/* Practice Focus — v0.70.0 */
+.practice-guidance-disclosure{width:min(480px,100%);margin:0 auto;border:0;text-align:center}
+.practice-guidance-disclosure>summary{display:inline-flex;align-items:center;justify-content:center;min-height:38px;padding:0 15px;border:1px solid rgba(255,255,255,.08);border-radius:999px;color:#b9ae9f;background:rgba(255,255,255,.018);font-size:.68rem;letter-spacing:.06em;cursor:pointer;list-style:none}
+.practice-guidance-disclosure>summary::-webkit-details-marker{display:none}
+.practice-guidance-disclosure[open]>summary{color:#e2d6c5;border-color:rgba(198,158,94,.28);background:rgba(198,158,94,.06)}
+.practice-guidance-disclosure .practice-guidance-card{text-align:left;margin-top:.65rem}
+.practice-guidance-disclosure .guidance-recommendation strong{display:none}
+.practice-guidance-disclosure .guidance-recommendation{padding-bottom:.55rem}
+@media(max-width:560px){.practice-guidance-disclosure{width:100%}.practice-guidance-disclosure>summary{min-height:36px}}
 
-/* v0.68.0 — Reflection as a short human conversation */
-.reflection-conversation{max-width:560px;margin:0 auto;gap:22px;padding-bottom:calc(120px + env(safe-area-inset-bottom))}
-.reflection-opening{display:grid;gap:8px;padding-top:18px}
-.reflection-opening h2{margin:0;font-family:Georgia,serif;font-size:clamp(2.4rem,10vw,3.65rem);font-weight:400;line-height:1.02;letter-spacing:-.04em}
-.reflection-opening .muted{max-width:28rem;margin:0;line-height:1.55}
-.reflection-effect-options{display:grid;grid-template-columns:repeat(3,1fr);gap:10px}
-.reflection-effect-option{min-height:88px;padding:16px 10px;border:1px solid rgba(255,255,255,.09);border-radius:22px;background:rgba(255,255,255,.025);color:var(--text);font:600 .82rem/1.2 inherit;letter-spacing:.01em;transition:transform .18s ease,border-color .18s ease,background .18s ease}
-.reflection-effect-option:active{transform:scale(.98)}
-.reflection-effect-option.selected{border-color:rgba(212,176,111,.62);background:rgba(184,148,88,.12);box-shadow:0 0 0 1px rgba(212,176,111,.08) inset}
-.reflection-context-card,.reflection-detail{border:1px solid rgba(255,255,255,.08);border-radius:20px;background:rgba(255,255,255,.018);padding:0 16px}
-.reflection-context-card summary,.reflection-detail summary{padding:16px 0;cursor:pointer}
-.reflection-context-card strong,.reflection-context-card small{display:block;margin:0 0 12px}
-.reflection-context-card small{color:var(--muted);line-height:1.5}
-.reflection-detail>summary{display:grid;gap:3px}
-.reflection-detail>summary small{color:var(--muted);font-size:.72rem;font-weight:400;line-height:1.4}
-.reflection-detail .reflection-essential,.reflection-detail .structured-reflection{padding:0 0 18px}
-.reflection-conversation .action.primary{width:100%;margin-top:2px}
-.reflection-save-note{text-align:center;color:var(--muted);font-size:.7rem}
-@media(max-width:420px){.reflection-effect-options{gap:8px}.reflection-effect-option{min-height:78px;padding:12px 6px;font-size:.74rem}}
+
+/* Practice Closure — v0.71.0 */
+.practice-exit-actions{display:grid;gap:12px}
+.practice-end-action{justify-self:center;min-height:44px;color:#cfc5b7}
+.practice-discard-disclosure{margin-top:4px;text-align:center}
+.practice-discard-disclosure>summary{cursor:pointer;color:var(--muted);font-size:10px;letter-spacing:.04em;list-style:none;padding:10px}
+.practice-discard-disclosure>summary::-webkit-details-marker{display:none}
+.practice-discard-disclosure>p{margin:4px auto 10px;max-width:28rem;color:var(--muted);font-size:10px;line-height:1.5}
+.practice-discard-disclosure .danger-btn{min-height:44px}
+
+
+/* Practice Return — v0.72.0 */
+.practice-return-screen{width:min(440px,100%);margin:0 auto;min-height:calc(100dvh - 120px);justify-content:center}
+.practice-return-screen>h2{font-family:Georgia,serif;font-size:clamp(2rem,8vw,3rem);font-weight:400;margin:.15rem 0}
+.practice-return-screen>.muted{max-width:26rem;margin:0 auto;line-height:1.55}
+.practice-return-actions{display:grid;gap:12px;width:min(320px,100%);margin:14px auto 0}
+.practice-return-actions .action{width:100%}
+.practice-return-actions .practice-discard-disclosure{margin-top:0}

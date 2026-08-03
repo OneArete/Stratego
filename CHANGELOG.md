@@ -1,5 +1,13 @@
 # Changelog
 
+## v0.72.0 — Practice Return
+- Simplified the interrupted-session return into one clear decision.
+- Made `Resume Practice` the only dominant action.
+- Kept early ending available as a quiet secondary action.
+- Protected permanent discard behind progressive disclosure.
+- Preserved session progress, next phase, wake lock, voice, sound, haptics and safety behaviour.
+- Advanced runtime and Service Worker release integrity to v0.72.0.
+
 ## v0.65.0 — Today Commitment Refinement
 - Collapsed the accepted judgement state into one executable commitment.
 - Removed decision controls, runner-up reasoning and advisor summaries after acceptance.
@@ -588,3 +596,9 @@ Official stabilization baseline.
 - Made the product understandable before asking for daily evidence.
 - Preserved the premium visual system and all v0.65.0 commitment behavior.
 - Advanced the runtime token to `0660f1` and the Service Worker cache to v0.66.0.
+
+## 0.71.0 — Practice Closure
+- Made Continue Practice the only dominant action on the Practice exit surface.
+- Protected permanent discard behind progressive disclosure.
+- Repaired early Practice termination so it closes reliably without Reflection-only variables.
+- Advanced the runtime token to `0710p1` and the Service Worker cache to v0.71.0.
