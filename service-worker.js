@@ -1,4 +1,4 @@
-const CACHE_NAME = 'strategos-shell-v0.64.0-kernel-foundation';
+const CACHE_NAME = 'strategos-shell-v0.67.0-practice-experience';
 const STATIC_ASSETS = [
   './manifest.webmanifest',
   './icons/delta-180.png',

@@ -1,5 +1,14 @@
 # Changelog
 
+## v0.65.0 — Today Commitment Refinement
+- Collapsed the accepted judgement state into one executable commitment.
+- Removed decision controls, runner-up reasoning and advisor summaries after acceptance.
+- Made `BEGIN PRACTICE` the single dominant action after commitment.
+- Integrated safety acknowledgement into the start action without hiding or disabling the path to Practice.
+- Kept reflection and friction planning outside the pre-Practice commitment state.
+- Added regression tests for the accepted human path and touch-sized CTA.
+- Aligned package, VERSION, runtime token, Service Worker cache and in-app release disclosure to v0.65.0.
+
 ## v0.64.0 — Strategos Kernel Foundation
 - Added the canonical Strategos Kernel.
 - Centralised Current Moment projection and deliberation authorisation.
@@ -573,3 +582,9 @@ Official stabilization baseline.
 - Repaired the inert Today check-in action.
 - Made the evidence-free organism harmonious and symmetric.
 - Preserved evidence-driven organic variation after explicit context exists.
+
+## 0.66.0 — First Experience
+- Replaced feature-led onboarding with a purpose-led four-moment introduction.
+- Made the product understandable before asking for daily evidence.
+- Preserved the premium visual system and all v0.65.0 commitment behavior.
+- Advanced the runtime token to `0660f1` and the Service Worker cache to v0.66.0.

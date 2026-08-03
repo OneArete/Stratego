@@ -3,12 +3,12 @@
 Current company release:
 
 ```text
-Strategos v0.64.0 — Decision Commitment Flow
+Strategos v0.65.0 — Today Commitment Refinement
 ```
 
 Strategos is the first OneArete Human Decision Operating System. Today renders the Current Moment as a living organism, one honest sentence and one legitimate next action. No recommendation exists without current-day evidence.
 
-In v0.64.0, accepting the Current Judgement means accepting the Practice for the day. The artificial 30-minute start window and later-scheduling branch were removed. The accepted Practice can begin at any point before the day closes; if it is not started, Strategos records that factual outcome without penalty or moral judgement.
+In v0.65.0, the interface stops deliberating after the person has accepted the Current Judgement. Decision controls collapse into one day-long commitment and one dominant action: `BEGIN PRACTICE`. Safety acknowledgement, when required, is completed by that same explicit action rather than by a separate dead-end step.
 
 ## Run locally
 
