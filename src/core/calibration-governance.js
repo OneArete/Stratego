@@ -1,5 +1,5 @@
-import { predictionCalibrationSummary,confidenceCorrection } from './prediction-calibration.js?v=0630r1';
-import { selectCalibrationCohort,contextCalibrationCorrection,calibrationCohortSummary } from './calibration-context.js?v=0630r1';
+import { predictionCalibrationSummary,confidenceCorrection } from './prediction-calibration.js?v=0631r1';
+import { selectCalibrationCohort,contextCalibrationCorrection,calibrationCohortSummary } from './calibration-context.js?v=0631r1';
 
 export function buildCalibrationEvidence(forecasts=[]){
   const summary=predictionCalibrationSummary(forecasts);

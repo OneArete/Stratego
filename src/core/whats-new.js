@@ -15,12 +15,12 @@
 
 export const WHATS_NEW_ENTRIES = [
   {
-    version: '0.63.0',
-    headline: 'Accept means accepted for today',
+    version: '0.63.1',
+    headline: 'Begin Practice restored',
     points: [
-      'The artificial 30-minute start window and later scheduling choice have been removed.',
-      'Accepting today’s judgement now creates one commitment for the day and reveals Begin Practice directly.',
-      'If the accepted Practice is not started, Strategos records that fact when the day closes, without penalty or moral judgement.'
+      'The primary Practice button is visible again immediately after accepting today’s judgement.',
+      'When a safety boundary applies, the same explicit button acknowledges it and begins the Practice in one deliberate action.',
+      'Pre-Practice reflection and friction questions no longer interrupt the path from commitment to action.'
     ]
   },
   {

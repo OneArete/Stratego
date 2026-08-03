@@ -1,5 +1,5 @@
-import { expireStaleLearnings,normalizeAdvisorMemories,buildMonthlyCouncil } from './advisor-memory.js?v=0630r1';
-import { assessJudgementValidity,JUDGEMENT_VALIDITY } from './judgement-stability.js?v=0630r1';
+import { expireStaleLearnings,normalizeAdvisorMemories,buildMonthlyCouncil } from './advisor-memory.js?v=0631r1';
+import { assessJudgementValidity,JUDGEMENT_VALIDITY } from './judgement-stability.js?v=0631r1';
 
 const CLOSED_JUDGEMENT_STATUSES=new Set(['reviewed','abandoned']);
 const CLOSED_VALIDITY_STATUSES=new Set([
