@@ -1,4 +1,4 @@
-import { localDayKey,dailyCheckInForDay } from './daily-signals.js?v=0631r1';
+import { localDayKey,dailyCheckInForDay } from './daily-signals.js?v=0640k1';
 
 export function resolveStartupDestination(state){
   if(!state?.profile||!state?.onboardingVersion){

@@ -15,12 +15,12 @@
 
 export const WHATS_NEW_ENTRIES = [
   {
-    version: '0.63.1',
-    headline: 'Begin Practice restored',
+    version: '0.64.0',
+    headline: 'The Strategos Kernel is now active',
     points: [
-      'The primary Practice button is visible again immediately after accepting today’s judgement.',
-      'When a safety boundary applies, the same explicit button acknowledges it and begins the Practice in one deliberate action.',
-      'Pre-Practice reflection and friction questions no longer interrupt the path from commitment to action.'
+      'Today now receives one canonical state and one next action from the Strategos Kernel.',
+      'The Kernel blocks deliberation until current-day evidence is sufficient.',
+      'Every new recommendation is preserved as an explicit Current Judgement with reason, confidence, unknowns, risk and validity.'
     ]
   },
   {
