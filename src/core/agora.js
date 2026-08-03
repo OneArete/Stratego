@@ -1,12 +1,12 @@
-import { applyAdvisorMemory } from './advisor-memory.js?v=0631r1';
-import * as PracticeLibrary from '../data/codex.js?v=0631r1';
+import { applyAdvisorMemory } from './advisor-memory.js?v=0640k1';
+import * as PracticeLibrary from '../data/codex.js?v=0640k1';
 const CODEX=PracticeLibrary.CODEX||[];
 const assessPracticeEligibility=PracticeLibrary.assessPracticeEligibility||((practice,context={})=>{const blocked=practice?.id==='strength'&&context.soreness==='significant';return {practiceId:practice?.id||'unknown',status:blocked?'blocked':'eligible',reasons:[blocked?'Significant soreness makes strength loading inappropriate until reassessment.':'No declared contextual conflict is visible.'],matchedContraindications:blocked?['significant-soreness']:[],selectionInfluence:0};});
-import { evidenceItem, assessEvidenceDiversity, detectContradictions } from './evidence-integrity.js?v=0631r1';
-import { buildDeliberationTrace,buildMinorityReports,summarizeMinorityReports } from './deliberation-trace.js?v=0631r1';
-import { applyLongitudinalAdjustments,longitudinalConfidenceAdjustment,verifyLongitudinalEvidence } from './longitudinal-evidence.js?v=0631r1';
-import { applyConfirmedBeliefAdjustments } from './belief-system.js?v=0631r1';
-import { applyCalibrationToConfidence,verifyCalibrationEvidence } from './calibration-governance.js?v=0631r1';
+import { evidenceItem, assessEvidenceDiversity, detectContradictions } from './evidence-integrity.js?v=0640k1';
+import { buildDeliberationTrace,buildMinorityReports,summarizeMinorityReports } from './deliberation-trace.js?v=0640k1';
+import { applyLongitudinalAdjustments,longitudinalConfidenceAdjustment,verifyLongitudinalEvidence } from './longitudinal-evidence.js?v=0640k1';
+import { applyConfirmedBeliefAdjustments } from './belief-system.js?v=0640k1';
+import { applyCalibrationToConfidence,verifyCalibrationEvidence } from './calibration-governance.js?v=0640k1';
 const clamp=(n,min=0,max=1)=>Math.min(max,Math.max(min,n));
 
 export function conveneAgora(context, understanding, history=[], advisorMemories={}, longitudinalEvidence=null, calibrationEvidence=null, confirmedBeliefs=[]){
