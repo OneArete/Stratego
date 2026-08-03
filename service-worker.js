@@ -1,4 +1,4 @@
-const CACHE_NAME = 'strategos-shell-v0.63.0-decision-commitment-flow';
+const CACHE_NAME = 'strategos-shell-v0.63.1-decision-commitment-flow';
 const STATIC_ASSETS = [
   './manifest.webmanifest',
   './icons/delta-180.png',
