@@ -1,24 +1,24 @@
-import { todaySignals,upsertDailyCheckIn,localDayKey,dailyCheckInForDay,dailyCheckInSummary,mostRecentCompleteCheckIn,normaliseDailySignals } from './core/daily-signals.js?v=0670p1';
-import { buildDailyOrientation,recentCheckInTrajectory } from './core/daily-orientation.js?v=0670p1';
-import { buildTrendSeries,renderTrendSparkline,trendSummary } from './core/trend-chart.js?v=0670p1';
-import { upsertDailyStory,deriveDailyStory,dailyStorySummary,dailyStoryTimeline,dayNumber } from './core/daily-story.js?v=0670p1';
-import { buildMorningExperience } from './core/morning-experience.js?v=0670p1';
-import { buildLivingCompanion } from './core/living-companion.js?v=0670p1';
-import { evidenceGate } from './core/evidence-gate.js?v=0670p1';
-import { nextMissingSignal } from './core/current-moment.js?v=0670p1';
-import { resolveKernelProjection,prepareKernelDeliberation,createCurrentJudgement } from './core/strategos-kernel.js?v=0670p1';
-import { buildPracticeExperience } from './core/practice-experience.js?v=0670p1';
-import { buildEveningExperience,closeDailyStory } from './core/evening-experience.js?v=0670p1';
-import { buildWeeklyReview,preserveWeeklyReview,weeklyReviewForWindow } from './core/weekly-review.js?v=0670p1';
-import { WEEKLY_INTENTION_OPTIONS,createWeeklyIntention,upsertWeeklyIntention,weeklyIntentionForWeek,clearWeeklyIntention } from './core/weekly-intention.js?v=0670p1';
-import { normaliseProfile, profileCompleteness, profileSummary } from './core/profile.js?v=0670p1';
-import { createOutcomeLedgerEntry,outcomeLedgerResultFromReflection,upsertOutcomeLedger,outcomeLedgerAudit,outcomeLedgerLabel } from './core/outcome-ledger.js?v=0670p1';
-import { personalEvidenceOverview } from './core/personal-evidence.js?v=0670p1';
-import { reconcileBeliefs,reviewBelief,beliefAudit,CONFIRMED_BELIEF_MAX_ADJUSTMENT } from './core/belief-system.js?v=0670p1';
-import { createEmotionalJournalEntry,updateEmotionalJournalEntry,deleteEmotionalJournalEntry,upsertEmotionalJournalEntry,emotionalJournalEntries,emotionalJournalToday,emotionalJournalAudit,emotionalJournalPreview,EMOTIONAL_JOURNAL_THEMES,toggleEmotionalJournalTheme,emotionalJournalEvolution,emotionalJournalThemeLabel,EMOTIONAL_JOURNAL_FOLLOW_UPS,applyEmotionalJournalFollowUp,reopenEmotionalJournalFollowUp,emotionalJournalFollowUpAudit,emotionalJournalFollowUpLabel } from './core/emotional-journal.js?v=0670p1';
-import { buildSafetyEnvelope,safetyEnvelopeAudit,safetyEnvelopeSummary,safetyAcknowledgementRequirement,createSafetyAcknowledgement,safetyStartGate,createSafetyInterruption,resolveSafetyInterruption,activeSafetyInterruption,safetyRuntimeGate,safetyInterruptionAudit } from './core/safety-architecture.js?v=0670p1';
-import { createHumanModel,updateHumanModel,normaliseHumanModel,humanModelSnapshot,humanModelAudit,humanModelSummary,humanModelDimensionSummary,applyHumanModelEvidenceReview,reconcileHumanModelReviews,humanModelReviewAudit,humanModelEvidenceSummary,buildHumanModelDeliberationSnapshot,humanModelDeliberationEvidence,humanModelDeliberationSnapshotAudit,humanModelDeliberationSnapshotSummary,humanModelFactCandidates,applyHumanModelFactPromotion,reconcileHumanModelFactPromotions,humanModelFactPromotionAudit,humanModelFactCandidateSummary } from './core/human-model.js?v=0670p1';
-import * as PracticeLibrary from './data/codex.js?v=0670p1';
+import { todaySignals,upsertDailyCheckIn,localDayKey,dailyCheckInForDay,dailyCheckInSummary,mostRecentCompleteCheckIn,normaliseDailySignals } from './core/daily-signals.js?v=0680r1';
+import { buildDailyOrientation,recentCheckInTrajectory } from './core/daily-orientation.js?v=0680r1';
+import { buildTrendSeries,renderTrendSparkline,trendSummary } from './core/trend-chart.js?v=0680r1';
+import { upsertDailyStory,deriveDailyStory,dailyStorySummary,dailyStoryTimeline,dayNumber } from './core/daily-story.js?v=0680r1';
+import { buildMorningExperience } from './core/morning-experience.js?v=0680r1';
+import { buildLivingCompanion } from './core/living-companion.js?v=0680r1';
+import { evidenceGate } from './core/evidence-gate.js?v=0680r1';
+import { nextMissingSignal } from './core/current-moment.js?v=0680r1';
+import { resolveKernelProjection,prepareKernelDeliberation,createCurrentJudgement } from './core/strategos-kernel.js?v=0680r1';
+import { buildPracticeExperience } from './core/practice-experience.js?v=0680r1';
+import { buildEveningExperience,closeDailyStory } from './core/evening-experience.js?v=0680r1';
+import { buildWeeklyReview,preserveWeeklyReview,weeklyReviewForWindow } from './core/weekly-review.js?v=0680r1';
+import { WEEKLY_INTENTION_OPTIONS,createWeeklyIntention,upsertWeeklyIntention,weeklyIntentionForWeek,clearWeeklyIntention } from './core/weekly-intention.js?v=0680r1';
+import { normaliseProfile, profileCompleteness, profileSummary } from './core/profile.js?v=0680r1';
+import { createOutcomeLedgerEntry,outcomeLedgerResultFromReflection,upsertOutcomeLedger,outcomeLedgerAudit,outcomeLedgerLabel } from './core/outcome-ledger.js?v=0680r1';
+import { personalEvidenceOverview } from './core/personal-evidence.js?v=0680r1';
+import { reconcileBeliefs,reviewBelief,beliefAudit,CONFIRMED_BELIEF_MAX_ADJUSTMENT } from './core/belief-system.js?v=0680r1';
+import { createEmotionalJournalEntry,updateEmotionalJournalEntry,deleteEmotionalJournalEntry,upsertEmotionalJournalEntry,emotionalJournalEntries,emotionalJournalToday,emotionalJournalAudit,emotionalJournalPreview,EMOTIONAL_JOURNAL_THEMES,toggleEmotionalJournalTheme,emotionalJournalEvolution,emotionalJournalThemeLabel,EMOTIONAL_JOURNAL_FOLLOW_UPS,applyEmotionalJournalFollowUp,reopenEmotionalJournalFollowUp,emotionalJournalFollowUpAudit,emotionalJournalFollowUpLabel } from './core/emotional-journal.js?v=0680r1';
+import { buildSafetyEnvelope,safetyEnvelopeAudit,safetyEnvelopeSummary,safetyAcknowledgementRequirement,createSafetyAcknowledgement,safetyStartGate,createSafetyInterruption,resolveSafetyInterruption,activeSafetyInterruption,safetyRuntimeGate,safetyInterruptionAudit } from './core/safety-architecture.js?v=0680r1';
+import { createHumanModel,updateHumanModel,normaliseHumanModel,humanModelSnapshot,humanModelAudit,humanModelSummary,humanModelDimensionSummary,applyHumanModelEvidenceReview,reconcileHumanModelReviews,humanModelReviewAudit,humanModelEvidenceSummary,buildHumanModelDeliberationSnapshot,humanModelDeliberationEvidence,humanModelDeliberationSnapshotAudit,humanModelDeliberationSnapshotSummary,humanModelFactCandidates,applyHumanModelFactPromotion,reconcileHumanModelFactPromotions,humanModelFactPromotionAudit,humanModelFactCandidateSummary } from './core/human-model.js?v=0680r1';
+import * as PracticeLibrary from './data/codex.js?v=0680r1';
 const CODEX=PracticeLibrary.CODEX||[];
 const validatePracticeLibrary=PracticeLibrary.validatePracticeLibrary||((items=CODEX)=>({valid:items.length,invalid:0,items:[]}));
 const practiceLibraryCatalog=PracticeLibrary.practiceLibraryCatalog||((items=CODEX)=>items);
@@ -30,54 +30,54 @@ const snapshotPracticeContent=PracticeLibrary.snapshotPracticeContent||((practic
 const assessPracticeContentProvenance=PracticeLibrary.assessPracticeContentProvenance||((snapshot)=>snapshot?{status:'current',currentVersion:snapshot.contentVersion,historicalVersion:snapshot.contentVersion,statement:'This session content snapshot is preserved.'}:{status:'missing',statement:'No Practice content snapshot was preserved for this session.'});
 const practiceContentSnapshotSummary=PracticeLibrary.practiceContentSnapshotSummary||((snapshot,assessment=assessPracticeContentProvenance(snapshot))=>snapshot?`${snapshot.practiceName} · content v${snapshot.contentVersion} · ${assessment.status}`:'Practice content provenance unavailable.');
 const practiceContentProvenanceAudit=PracticeLibrary.practiceContentProvenanceAudit||((history=[])=>({records:history.filter(x=>x?.practiceContentSnapshot).map(x=>({snapshot:x.practiceContentSnapshot,assessment:assessPracticeContentProvenance(x.practiceContentSnapshot)})),total:history.filter(x=>x?.practiceContentSnapshot).length,current:history.filter(x=>x?.practiceContentSnapshot).length,historical:0,retired:0,missing:history.filter(x=>!x?.practiceContentSnapshot).length,statement:'Compatibility provenance audit active.'}));
-import { loadState,saveState,resetState,createLocalBackup,ONBOARDING_VERSION } from './core/storage.js?v=0670p1';
-import { serializeStateExport,validateStateImport,createImportPreview,exportFilename } from './core/state-transfer.js?v=0670p1';
-import { buildUnderstanding } from './core/understanding.js?v=0670p1';
-import { conveneAgora } from './core/agora.js?v=0670p1';
-import { buildHumanGraph,buildCheckinGraph,projectHumanReturn,describeGraphHighlight } from './core/human-graph.js?v=0670p1';
-import { describeProactiveInsight } from './core/proactive-insight.js?v=0670p1';
-import { computeCheckInStreak,describeStreak } from './core/streak.js?v=0670p1';
-import { pendingWhatsNewEntry } from './core/whats-new.js?v=0670p1';
-import { describeInstallGuidance,detectPlatform } from './core/install-guidance.js?v=0670p1';
-import { renderLivingGraph } from './components/living-graph.js?v=0670p1';
-import { unlockAudio,playTone,speak,stopVoice,previewVoice } from './core/audio.js?v=0670p1';
-import { buildExplanation,buildExplainRecord,explainRecordAudit,explainRecordSummary,validateExplainRecord,applyExplainRecordReview,explainRecordReviewAudit,explainRecordReviewSummary } from './core/explain.js?v=0670p1';
-import { normalizeAdvisorMemories,learnFromReflection,advisorCoverage,buildMonthlyCouncil,learningReviewItems,updateLearningStatus,expireStaleLearnings,CANDIDATE_INFLUENCE } from './core/advisor-memory.js?v=0670p1';
-import { createExecutionState,remainingSeconds,pauseExecution,resumeExecution,startPhase,closeExecution,isResumable,EXECUTION_STATUS } from './core/execution-state.js?v=0670p1';
-import { buildPracticeSessionSnapshot,describePracticeResume,practiceSessionSummary,sessionCompletionRatio,canMovePhase,buildPracticeContract,practiceContractSummary,snapshotPracticeContract,resolvePracticeContract,practiceContractOutcomeStatement,practiceContractCalibrationCandidates,practiceContractCalibrationSummary,practiceContractCalibrationAudit,applyPracticeContractCalibrationReview,mergePracticeContractCalibrationReviews,reconcilePracticeContractCalibrationReviews,practiceContractCalibrationReviewSummary,practiceContractCalibrationReviewAudit,buildPracticeContractRevisionProposals,applyPracticeContractRevisionDecision,reconcilePracticeContractRevisionDecisions,effectivePracticeContractRevision,practiceContractRevisionSummary,practiceDoseEvidenceCandidates,practiceDoseEvidenceSummary,practiceDoseEvidenceAudit,applyPracticeDoseEvidenceReview,mergePracticeDoseEvidenceReviews,reconcilePracticeDoseEvidenceReviews,practiceDoseEvidenceReviewSummary,practiceDoseEvidenceReviewAudit,buildPracticeDoseRevisionProposals,applyPracticeDoseRevisionDecision,reconcilePracticeDoseRevisionDecisions,effectivePracticeDoseRevision,applyPracticeDoseRevisionToJudgement,practiceDoseRevisionSummary,recordPracticeDoseRevisionUse,resolvePracticeDoseRevisionUse,assessPracticeDoseRevisionHealth,effectivePracticeDoseRevisionWithHealth,practiceDoseRevisionHealthSummary } from './core/practice-session.js?v=0670p1';
-import { buildPracticeExitModel,canResumePractice,normalisePracticeExitReason } from './core/practice-exit.js?v=0670p1';
-import { buildPhaseGuidance,buildGuidanceDecision,shouldShowSafetyPanel } from './core/practice-guidance.js?v=0670p1';
-import { availableAdaptationLevels,resolveAdaptationChoice,setPhaseAdaptationChoice,getPhaseAdaptationChoice,adaptationChoiceSummary } from './core/practice-adaptation-choice.js?v=0670p1';
-import { buildAdaptationAccountability,hasAppliedAdaptations,adaptationReflectionPrompt,adaptationAccountabilitySummary } from './core/practice-adaptation-accountability.js?v=0670p1';
-import { adaptationPatternCandidates,adaptationPatternSummary,adaptationPatternAudit,applyAdaptationPatternReview,mergeAdaptationPatternReviews,adaptationPatternReviewAudit,adaptationPatternReviewSummary,reconcileAdaptationPatternReviews,resolveConfirmedAdaptationDefault,confirmedAdaptationDefaultSummary,recordConfirmedAdaptationDefault,attachConfirmedDefaultHealth,confirmedDefaultHealthSummary,confirmedDefaultRecentOutcomes,buildAdaptationAuditTrace,adaptationAuditTraceSummary,attachAdaptationReconfirmation,canConfirmAdaptationPattern } from './core/adaptation-patterns.js?v=0670p1';
-import { attachValidity,assessCandidateStability,assessJudgementValidity,markJudgementsForReview,supersedeJudgement,JUDGEMENT_VALIDITY } from './core/judgement-stability.js?v=0670p1';
-import { reconcileLongitudinalState,upsertMonthlyCouncilReport,journeyRecords } from './core/longitudinal-integrity.js?v=0670p1';
-import { buildDecisionBoundaries } from './core/decision-boundaries.js?v=0670p1';
-import { createCorrectionEvent,determineCorrectionImpact,applyCorrectionImpact,correctionAuditSummary,reconcileCorrectionAudit } from './core/correction-audit.js?v=0670p1';
-import { CHOICE_ACTIONS,createChoiceRecord,applyChoiceToJudgement,summarizeChoice,reconcileChoiceLog } from './core/person-choice.js?v=0670p1';
-import { createPreferenceCandidate,upsertPreferenceCandidate,applyPreferenceCorrection,expirePreferences,preferenceAudit } from './core/preference-governance.js?v=0670p1';
-import { createOutcomeRecord,markOutcomeStarted,markOutcomeCompleted,markOutcomeAbandoned,attachOutcomeReflection,learningEligibility,reconcileOutcomeRecords,outcomeSummary } from './core/choice-outcome.js?v=0670p1';
-import { reconcileAgencyState,agencyConsistencySnapshot,learningSourceSummary } from './core/agency-integrity.js?v=0670p1';
-import { createCommitment,commitmentAvailability,markCommitmentStarted,markCommitmentCompleted,markCommitmentNotCompleted,cancelCommitment,reconcileCommitments,commitmentSummary } from './core/commitment-integrity.js?v=0670p1';
-import { createFrictionPlan,markFrictionEncountered,frictionReadiness,suggestedResponse,canBeginWithFriction,reconcileFrictionPlans,frictionSummary } from './core/friction-plan.js?v=0670p1';
-import { createFallbackPlan,acceptFallback,declineFallback,startFallback,completeFallback,abandonFallback,fallbackOutcomeRecord,fallbackLearningEligibility,reconcileFallbackPlans,fallbackSummary } from './core/adaptive-fallback.js?v=0670p1';
-import { reconcileFollowThroughState,followThroughSnapshot,followThroughSummary } from './core/follow-through-integrity.js?v=0670p1';
-import { createStructuredReflection,reflectionLearningSignal,reflectionContradiction,reflectionCompleteness,reconcileStructuredReflections,reflectionSummary } from './core/reflection-integrity.js?v=0670p1';
-import { createOutcomeAttribution,calibrateLearningWithAttribution,attributionContradiction,reconcileOutcomeAttributions,attributionSummary } from './core/outcome-attribution.js?v=0670p1';
-import { createOutcomeEpisode,upsertOutcomePattern,rejectOutcomePattern,reconcileOutcomePatterns,outcomePatternSummary } from './core/outcome-patterns.js?v=0670p1';
-import { assessPatternTransfer,createTransferRecord,rejectTransferRecord,reconcilePatternTransfers,transferSummary } from './core/pattern-transfer.js?v=0670p1';
-import { buildLongitudinalEvidence,longitudinalEvidenceSummary } from './core/longitudinal-evidence.js?v=0670p1';
-import { reconcileJudgementLongitudinalIntegrity,buildLongitudinalAuditEntry,longitudinalAccountabilitySummary } from './core/longitudinal-accountability.js?v=0670p1';
-import { createJudgementForecast,resolveJudgementForecast,predictionCalibrationSummary,confidenceCorrection,reconcileJudgementForecasts,forecastSummary } from './core/prediction-calibration.js?v=0670p1';
-import { buildContextCalibrationEvidence } from './core/calibration-governance.js?v=0670p1';
-import { detectCalibrationDrift,calibrationDriftCorrection,buildCalibrationAccountability,reconcileCalibrationAccountability,calibrationAccountabilitySummary } from './core/calibration-drift.js?v=0670p1';
-import { createReflectionDraft,updateReflectionDraft,restoreReflectionDraft,clearReflectionDraft,reconcileDailyContinuity } from './core/daily-continuity.js?v=0670p1';
-import { resolveStartupDestination,resolveContinuityDestination,buildContinuityNotice,shouldShowContinuityCard } from './core/startup-continuity.js?v=0670p1';
+import { loadState,saveState,resetState,createLocalBackup,ONBOARDING_VERSION } from './core/storage.js?v=0680r1';
+import { serializeStateExport,validateStateImport,createImportPreview,exportFilename } from './core/state-transfer.js?v=0680r1';
+import { buildUnderstanding } from './core/understanding.js?v=0680r1';
+import { conveneAgora } from './core/agora.js?v=0680r1';
+import { buildHumanGraph,buildCheckinGraph,projectHumanReturn,describeGraphHighlight } from './core/human-graph.js?v=0680r1';
+import { describeProactiveInsight } from './core/proactive-insight.js?v=0680r1';
+import { computeCheckInStreak,describeStreak } from './core/streak.js?v=0680r1';
+import { pendingWhatsNewEntry } from './core/whats-new.js?v=0680r1';
+import { describeInstallGuidance,detectPlatform } from './core/install-guidance.js?v=0680r1';
+import { renderLivingGraph } from './components/living-graph.js?v=0680r1';
+import { unlockAudio,playTone,speak,stopVoice,previewVoice } from './core/audio.js?v=0680r1';
+import { buildExplanation,buildExplainRecord,explainRecordAudit,explainRecordSummary,validateExplainRecord,applyExplainRecordReview,explainRecordReviewAudit,explainRecordReviewSummary } from './core/explain.js?v=0680r1';
+import { normalizeAdvisorMemories,learnFromReflection,advisorCoverage,buildMonthlyCouncil,learningReviewItems,updateLearningStatus,expireStaleLearnings,CANDIDATE_INFLUENCE } from './core/advisor-memory.js?v=0680r1';
+import { createExecutionState,remainingSeconds,pauseExecution,resumeExecution,startPhase,closeExecution,isResumable,EXECUTION_STATUS } from './core/execution-state.js?v=0680r1';
+import { buildPracticeSessionSnapshot,describePracticeResume,practiceSessionSummary,sessionCompletionRatio,canMovePhase,buildPracticeContract,practiceContractSummary,snapshotPracticeContract,resolvePracticeContract,practiceContractOutcomeStatement,practiceContractCalibrationCandidates,practiceContractCalibrationSummary,practiceContractCalibrationAudit,applyPracticeContractCalibrationReview,mergePracticeContractCalibrationReviews,reconcilePracticeContractCalibrationReviews,practiceContractCalibrationReviewSummary,practiceContractCalibrationReviewAudit,buildPracticeContractRevisionProposals,applyPracticeContractRevisionDecision,reconcilePracticeContractRevisionDecisions,effectivePracticeContractRevision,practiceContractRevisionSummary,practiceDoseEvidenceCandidates,practiceDoseEvidenceSummary,practiceDoseEvidenceAudit,applyPracticeDoseEvidenceReview,mergePracticeDoseEvidenceReviews,reconcilePracticeDoseEvidenceReviews,practiceDoseEvidenceReviewSummary,practiceDoseEvidenceReviewAudit,buildPracticeDoseRevisionProposals,applyPracticeDoseRevisionDecision,reconcilePracticeDoseRevisionDecisions,effectivePracticeDoseRevision,applyPracticeDoseRevisionToJudgement,practiceDoseRevisionSummary,recordPracticeDoseRevisionUse,resolvePracticeDoseRevisionUse,assessPracticeDoseRevisionHealth,effectivePracticeDoseRevisionWithHealth,practiceDoseRevisionHealthSummary } from './core/practice-session.js?v=0680r1';
+import { buildPracticeExitModel,canResumePractice,normalisePracticeExitReason } from './core/practice-exit.js?v=0680r1';
+import { buildPhaseGuidance,buildGuidanceDecision,shouldShowSafetyPanel } from './core/practice-guidance.js?v=0680r1';
+import { availableAdaptationLevels,resolveAdaptationChoice,setPhaseAdaptationChoice,getPhaseAdaptationChoice,adaptationChoiceSummary } from './core/practice-adaptation-choice.js?v=0680r1';
+import { buildAdaptationAccountability,hasAppliedAdaptations,adaptationReflectionPrompt,adaptationAccountabilitySummary } from './core/practice-adaptation-accountability.js?v=0680r1';
+import { adaptationPatternCandidates,adaptationPatternSummary,adaptationPatternAudit,applyAdaptationPatternReview,mergeAdaptationPatternReviews,adaptationPatternReviewAudit,adaptationPatternReviewSummary,reconcileAdaptationPatternReviews,resolveConfirmedAdaptationDefault,confirmedAdaptationDefaultSummary,recordConfirmedAdaptationDefault,attachConfirmedDefaultHealth,confirmedDefaultHealthSummary,confirmedDefaultRecentOutcomes,buildAdaptationAuditTrace,adaptationAuditTraceSummary,attachAdaptationReconfirmation,canConfirmAdaptationPattern } from './core/adaptation-patterns.js?v=0680r1';
+import { attachValidity,assessCandidateStability,assessJudgementValidity,markJudgementsForReview,supersedeJudgement,JUDGEMENT_VALIDITY } from './core/judgement-stability.js?v=0680r1';
+import { reconcileLongitudinalState,upsertMonthlyCouncilReport,journeyRecords } from './core/longitudinal-integrity.js?v=0680r1';
+import { buildDecisionBoundaries } from './core/decision-boundaries.js?v=0680r1';
+import { createCorrectionEvent,determineCorrectionImpact,applyCorrectionImpact,correctionAuditSummary,reconcileCorrectionAudit } from './core/correction-audit.js?v=0680r1';
+import { CHOICE_ACTIONS,createChoiceRecord,applyChoiceToJudgement,summarizeChoice,reconcileChoiceLog } from './core/person-choice.js?v=0680r1';
+import { createPreferenceCandidate,upsertPreferenceCandidate,applyPreferenceCorrection,expirePreferences,preferenceAudit } from './core/preference-governance.js?v=0680r1';
+import { createOutcomeRecord,markOutcomeStarted,markOutcomeCompleted,markOutcomeAbandoned,attachOutcomeReflection,learningEligibility,reconcileOutcomeRecords,outcomeSummary } from './core/choice-outcome.js?v=0680r1';
+import { reconcileAgencyState,agencyConsistencySnapshot,learningSourceSummary } from './core/agency-integrity.js?v=0680r1';
+import { createCommitment,commitmentAvailability,markCommitmentStarted,markCommitmentCompleted,markCommitmentNotCompleted,cancelCommitment,reconcileCommitments,commitmentSummary } from './core/commitment-integrity.js?v=0680r1';
+import { createFrictionPlan,markFrictionEncountered,frictionReadiness,suggestedResponse,canBeginWithFriction,reconcileFrictionPlans,frictionSummary } from './core/friction-plan.js?v=0680r1';
+import { createFallbackPlan,acceptFallback,declineFallback,startFallback,completeFallback,abandonFallback,fallbackOutcomeRecord,fallbackLearningEligibility,reconcileFallbackPlans,fallbackSummary } from './core/adaptive-fallback.js?v=0680r1';
+import { reconcileFollowThroughState,followThroughSnapshot,followThroughSummary } from './core/follow-through-integrity.js?v=0680r1';
+import { createStructuredReflection,reflectionLearningSignal,reflectionContradiction,reflectionCompleteness,reconcileStructuredReflections,reflectionSummary } from './core/reflection-integrity.js?v=0680r1';
+import { createOutcomeAttribution,calibrateLearningWithAttribution,attributionContradiction,reconcileOutcomeAttributions,attributionSummary } from './core/outcome-attribution.js?v=0680r1';
+import { createOutcomeEpisode,upsertOutcomePattern,rejectOutcomePattern,reconcileOutcomePatterns,outcomePatternSummary } from './core/outcome-patterns.js?v=0680r1';
+import { assessPatternTransfer,createTransferRecord,rejectTransferRecord,reconcilePatternTransfers,transferSummary } from './core/pattern-transfer.js?v=0680r1';
+import { buildLongitudinalEvidence,longitudinalEvidenceSummary } from './core/longitudinal-evidence.js?v=0680r1';
+import { reconcileJudgementLongitudinalIntegrity,buildLongitudinalAuditEntry,longitudinalAccountabilitySummary } from './core/longitudinal-accountability.js?v=0680r1';
+import { createJudgementForecast,resolveJudgementForecast,predictionCalibrationSummary,confidenceCorrection,reconcileJudgementForecasts,forecastSummary } from './core/prediction-calibration.js?v=0680r1';
+import { buildContextCalibrationEvidence } from './core/calibration-governance.js?v=0680r1';
+import { detectCalibrationDrift,calibrationDriftCorrection,buildCalibrationAccountability,reconcileCalibrationAccountability,calibrationAccountabilitySummary } from './core/calibration-drift.js?v=0680r1';
+import { createReflectionDraft,updateReflectionDraft,restoreReflectionDraft,clearReflectionDraft,reconcileDailyContinuity } from './core/daily-continuity.js?v=0680r1';
+import { resolveStartupDestination,resolveContinuityDestination,buildContinuityNotice,shouldShowContinuityCard } from './core/startup-continuity.js?v=0680r1';
 const app=document.querySelector('#app');window.__strategosStarted=true;
 const a11yStatus=document.querySelector('#a11y-status');
 const announceStatus=message=>{if(!a11yStatus)return;a11yStatus.textContent='';requestAnimationFrame(()=>{a11yStatus.textContent=message||''})};
 const focusCurrentScreen=()=>requestAnimationFrame(()=>{const target=app.querySelector('main.screen');if(target&&!target.matches(':focus'))target.focus({preventScroll:true})});
-async function registerServiceWorker(){if(!('serviceWorker' in navigator)||!/^https?:$/.test(location.protocol))return;try{await navigator.serviceWorker.register('./service-worker.js?v=0670p1',{scope:'./'})}catch(error){console.warn('Strategos offline support unavailable.',error)}}
+async function registerServiceWorker(){if(!('serviceWorker' in navigator)||!/^https?:$/.test(location.protocol))return;try{await navigator.serviceWorker.register('./service-worker.js?v=0680r1',{scope:'./'})}catch(error){console.warn('Strategos offline support unavailable.',error)}}
 registerServiceWorker();
 function reconcileAcceptedButUnstartedOutcomes(input){
   const next=typeof structuredClone==='function'?structuredClone(input||{}):JSON.parse(JSON.stringify(input||{}));
@@ -685,15 +685,16 @@ function reflect(){
   const friction=state.frictionPlans.find(item=>item.id===state.current?.frictionPlanId&&item.status==='active');
   const adaptationPrompt=adaptationReflectionPrompt(state.current,state.current?.adjusted||[]);
   const practiceContract=state.current?.practiceContract||null;
-  shell(`${header('REFLECTION')}<section class="stack reflection-screen"><div><p class="eyebrow">LOOKING BACK</p><h2>What actually happened?</h2><p class="muted">Three answers are enough. Add detail only when it helps.</p></div>${practiceContract?`<section class="reflection-contract"><p class="eyebrow">PRE-ACTION CONTRACT</p><strong>${esc(practiceContract.review)}</strong><small>${esc(practiceContract.expectedEffect)}</small></section>`:''}
-    <div class="reflection-essential">
-      <label>Effect<select id="reflection-effect" data-reflection-draft="effect"><option value="better" ${values.effect==='better'?'selected':''}>Better than expected</option><option value="right" ${values.effect==='right'?'selected':''}>About right</option><option value="worse" ${values.effect==='worse'?'selected':''}>Worse than expected</option></select></label>
-      <label>Goal fit<select id="reflection-goal" data-reflection-draft="goalFit"><option value="strong" ${values.goalFit==='strong'?'selected':''}>Strong</option><option value="partial" ${values.goalFit==='partial'?'selected':''}>Partial</option><option value="poor" ${values.goalFit==='poor'?'selected':''}>Poor</option><option value="unknown" ${values.goalFit==='unknown'?'selected':''}>Unknown</option></select></label>
-      <label>Burden<select id="reflection-burden" data-reflection-draft="burden"><option value="low" ${values.burden==='low'?'selected':''}>Low</option><option value="moderate" ${values.burden==='moderate'?'selected':''}>Moderate</option><option value="high" ${values.burden==='high'?'selected':''}>High</option><option value="unknown" ${values.burden==='unknown'?'selected':''}>Unknown</option></select></label>
+  const effectOptions=[['better','Better'],['right','About the same'],['worse','Worse']];
+  shell(`${header('TODAY')}<section class="stack reflection-screen reflection-conversation"><div class="reflection-opening"><p class="eyebrow">AFTER THE PRACTICE</p><h2>How did it go?</h2><p class="muted">This is not a score. It helps Strategos learn what served you today.</p></div>
+    <div class="reflection-effect-options" role="group" aria-label="How did it go?">${effectOptions.map(([value,label])=>`<button type="button" class="reflection-effect-option ${values.effect===value?'selected':''}" data-reflection-effect="${value}" aria-pressed="${values.effect===value?'true':'false'}"><span>${label}</span></button>`).join('')}</div>
+    ${practiceContract?`<details class="reflection-context-card"><summary>What we expected</summary><p class="eyebrow">PRE-ACTION CONTRACT</p><strong>${esc(practiceContract.review)}</strong><small>${esc(practiceContract.expectedEffect)}</small></details>`:''}
+    <details class="reflection-detail"><summary><span>Add context</span><small>Optional. Use this only when it helps Strategos learn what changed.</small></summary><div class="reflection-essential">
+      <label>Did this fit what you needed?<select id="reflection-goal" data-reflection-draft="goalFit"><option value="strong" ${values.goalFit==='strong'?'selected':''}>Yes, strongly</option><option value="partial" ${values.goalFit==='partial'?'selected':''}>Partly</option><option value="poor" ${values.goalFit==='poor'?'selected':''}>No</option><option value="unknown" ${values.goalFit==='unknown'?'selected':''}>Not sure</option></select></label>
+      <label>How burdensome was it?<select id="reflection-burden" data-reflection-draft="burden"><option value="low" ${values.burden==='low'?'selected':''}>Light</option><option value="moderate" ${values.burden==='moderate'?'selected':''}>Manageable</option><option value="high" ${values.burden==='high'?'selected':''}>Too much</option><option value="unknown" ${values.burden==='unknown'?'selected':''}>Not sure</option></select></label>
       ${friction?`<label>Did the anticipated friction appear?<select id="reflection-friction" data-reflection-draft="frictionOutcome"><option value="managed" ${values.frictionOutcome==='managed'?'selected':''}>Yes, and I managed it</option><option value="partly-managed" ${values.frictionOutcome==='partly-managed'?'selected':''}>Yes, partly managed</option><option value="blocked" ${values.frictionOutcome==='blocked'?'selected':''}>Yes, it blocked me</option><option value="not-relevant" ${values.frictionOutcome==='not-relevant'?'selected':''}>It did not appear</option></select></label>`:''}
       ${adaptationPrompt?`<label>${esc(adaptationPrompt.title)}<select id="reflection-adaptation-fit" data-reflection-draft="adaptationFit"><option value="right" ${values.adaptationFit==='right'?'selected':''}>About right</option><option value="better" ${values.adaptationFit==='better'?'selected':''}>Better than suggested</option><option value="worse" ${values.adaptationFit==='worse'?'selected':''}>Worse than suggested</option><option value="unknown" ${values.adaptationFit==='unknown'?'selected':''}>Not sure</option></select><small class="field-note">${esc(adaptationPrompt.description)}</small></label>`:''}
-    </div>
-    <details class="reflection-detail"><summary><span>Add more context</span><small>Optional. Use this only when it helps explain why the result happened.</small></summary><div class="structured-reflection">
+    </div><div class="structured-reflection">
       <div class="reflection-detail-intro">
         <strong>Help Strategos separate the effect of the Practice from coincidence or outside events.</strong>
         <p>There are no correct answers. Choose the closest option, or leave this section closed.</p>
@@ -723,8 +724,8 @@ function reflect(){
         <textarea id="reflection-note" rows="3" data-reflection-draft="note" placeholder="Optional note">${esc(values.note)}</textarea>
       </label>
     </div></details>
-    <button class="action primary" data-structured-reflection="save">SAVE REFLECTION</button>
-    <p class="reflection-save-note">Your answers are saved automatically on this device.</p>
+    <button class="action primary" data-structured-reflection="save">SAVE</button>
+    <p class="reflection-save-note">Saved privately on this device.</p>
   </section>`)
 }
 function saveReflection(value){
@@ -1140,6 +1141,7 @@ async function importStateFile(file){
 const settingToggle=(t,c,k,v,{disabled=false,status=''}={})=>`<div class="setting-row ${disabled?'setting-disabled':''}"><div><h3>${t}</h3><p>${c}</p>${status?`<small class="setting-status">${status}</small>`:''}</div><button class="switch ${v&&!disabled?'on':''}" type="button" role="switch" aria-label="${t}" aria-checked="${v&&!disabled}" data-setting-toggle="${k}" ${disabled?'disabled aria-disabled="true"':''}><span aria-hidden="true"></span></button></div>`;
 const settingChoice=(t,c,k,o,v)=>`<div class="setting-block"><h3>${t}</h3><p>${c}</p><div class="segmented">${o.map(([x,l])=>`<button class="${v===x?'selected':''}" aria-pressed="${v===x}" data-setting-choice="${k}" data-value="${x}">${l}</button>`).join('')}</div></div>`;
 const confidenceLabel=value=>value>=82?'Relatively Strong':value>=66?'Moderate':'Limited';const formatTime=s=>`${String(Math.floor(Math.max(0,s)/60)).padStart(2,'0')}:${String(Math.max(0,s)%60).padStart(2,'0')}`;const greeting=()=>new Date().getHours()<12?'Good morning':new Date().getHours()<18?'Good afternoon':'Good evening';
+app.addEventListener('click',e=>{const target=e.target.closest('[data-reflection-effect]');if(!target||!state.current?.decision)return;const value=target.dataset.reflectionEffect;const currentDraft=restoreReflectionDraft(state,state.current)||createReflectionDraft({current:state.current});state.reflectionDraft=updateReflectionDraft(currentDraft,{effect:value});persist();app.querySelectorAll('[data-reflection-effect]').forEach(button=>{const selected=button.dataset.reflectionEffect===value;button.classList.toggle('selected',selected);button.setAttribute('aria-pressed',String(selected))});announceStatus(`Reflection saved: ${target.textContent.trim()}.`)});
 app.addEventListener('input',e=>{const target=e.target.closest('[data-reflection-draft]');if(!target||!state.current?.decision)return;const key=target.dataset.reflectionDraft;const currentDraft=restoreReflectionDraft(state,state.current)||createReflectionDraft({current:state.current});state.reflectionDraft=updateReflectionDraft(currentDraft,{[key]:target.value});persist()});
 app.addEventListener('change',e=>{const target=e.target.closest('[data-reflection-draft]');if(!target||!state.current?.decision)return;const key=target.dataset.reflectionDraft;const currentDraft=restoreReflectionDraft(state,state.current)||createReflectionDraft({current:state.current});state.reflectionDraft=updateReflectionDraft(currentDraft,{[key]:target.value});persist();announceStatus(`${target.closest('label')?.firstChild?.textContent?.trim()||'Reflection'} saved.`)});
 app.addEventListener('click',e=>{const navigation=e.target.closest('button[data-action="understanding"],button[data-action="today"],button[data-action="journey"],button[data-action="settings"]');if(!navigation)return;const destination=navigation.dataset.action;if(!['today','understanding','journey','settings'].includes(destination))return;e.preventDefault();e.stopImmediatePropagation();route(destination)});
