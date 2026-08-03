@@ -3817,3 +3817,24 @@ body #app .tabbar button{
 .practice-complete-organism span:nth-child(1){inset:4px}.practice-complete-organism span:nth-child(2){inset:18px;animation-delay:-1.4s}.practice-complete-organism span:nth-child(3){inset:32px;animation-delay:-2.8s}
 @keyframes practice-complete-breathe{0%,100%{transform:scale(.96);opacity:.48}50%{transform:scale(1.04);opacity:.9}}
 @media(max-width:560px){.practice-immersive{min-height:calc(100dvh - 154px)}.practice-focus{padding:.7rem 0 .25rem}.practice-focus .clock{font-size:4.35rem}.practice-guidance-card{padding:.7rem}.practice-controls.immersive{bottom:max(8px,env(safe-area-inset-bottom))}}
+
+
+/* v0.68.0 — Reflection as a short human conversation */
+.reflection-conversation{max-width:560px;margin:0 auto;gap:22px;padding-bottom:calc(120px + env(safe-area-inset-bottom))}
+.reflection-opening{display:grid;gap:8px;padding-top:18px}
+.reflection-opening h2{margin:0;font-family:Georgia,serif;font-size:clamp(2.4rem,10vw,3.65rem);font-weight:400;line-height:1.02;letter-spacing:-.04em}
+.reflection-opening .muted{max-width:28rem;margin:0;line-height:1.55}
+.reflection-effect-options{display:grid;grid-template-columns:repeat(3,1fr);gap:10px}
+.reflection-effect-option{min-height:88px;padding:16px 10px;border:1px solid rgba(255,255,255,.09);border-radius:22px;background:rgba(255,255,255,.025);color:var(--text);font:600 .82rem/1.2 inherit;letter-spacing:.01em;transition:transform .18s ease,border-color .18s ease,background .18s ease}
+.reflection-effect-option:active{transform:scale(.98)}
+.reflection-effect-option.selected{border-color:rgba(212,176,111,.62);background:rgba(184,148,88,.12);box-shadow:0 0 0 1px rgba(212,176,111,.08) inset}
+.reflection-context-card,.reflection-detail{border:1px solid rgba(255,255,255,.08);border-radius:20px;background:rgba(255,255,255,.018);padding:0 16px}
+.reflection-context-card summary,.reflection-detail summary{padding:16px 0;cursor:pointer}
+.reflection-context-card strong,.reflection-context-card small{display:block;margin:0 0 12px}
+.reflection-context-card small{color:var(--muted);line-height:1.5}
+.reflection-detail>summary{display:grid;gap:3px}
+.reflection-detail>summary small{color:var(--muted);font-size:.72rem;font-weight:400;line-height:1.4}
+.reflection-detail .reflection-essential,.reflection-detail .structured-reflection{padding:0 0 18px}
+.reflection-conversation .action.primary{width:100%;margin-top:2px}
+.reflection-save-note{text-align:center;color:var(--muted);font-size:.7rem}
+@media(max-width:420px){.reflection-effect-options{gap:8px}.reflection-effect-option{min-height:78px;padding:12px 6px;font-size:.74rem}}
