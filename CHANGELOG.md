@@ -1,6 +1,14 @@
+# Changelog
+
+## v0.64.0 — Strategos Kernel Foundation
+- Added the canonical Strategos Kernel.
+- Centralised Current Moment projection and deliberation authorisation.
+- Made Current Judgement an explicit, auditable entity.
+- Preserved all existing user-visible flows while moving decision authority out of the interface.
+
 # Strategos Changelog
 
-## 0.63.1 — Begin Practice Regression Repair
+## 0.64.0 — Begin Practice Regression Repair
 
 - Restored the primary `BEGIN PRACTICE` CTA after a judgement is accepted.
 - A constrained safety envelope no longer makes the CTA disappear; the explicit label becomes `I UNDERSTAND — BEGIN PRACTICE` and records the required acknowledgement before starting.
@@ -8,7 +16,7 @@
 - Removed the pre-Practice reflection question and the automatic “What could get in the way?” branch from the accepted commitment state.
 - Preserved the day-long commitment and factual `accepted-not-started` closure introduced in v0.63.0.
 - Added regression tests for the complete human path: Accept → visible CTA → safety acknowledgement when required → Practice.
-- Aligned package, VERSION, runtime import token, Service Worker cache and in-app release disclosure to v0.63.1.
+- Aligned package, VERSION, runtime import token, Service Worker cache and in-app release disclosure to v0.64.0.
 
 ## 0.60.0 — User-Lens Retention Improvements
 
