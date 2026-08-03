@@ -12,11 +12,12 @@ export function buildPracticeExperience({phase=[],guidance=null,snapshot=null,pa
     name,
     cue,
     summary,
-    phaseLabel:snapshot?`${Number(snapshot.phaseIndex||0)+1} of ${Number(snapshot.totalPhases||1)}`:'Practice',
+    phaseLabel:snapshot?`Phase ${Number(snapshot.phaseIndex||0)+1} of ${Number(snapshot.totalPhases||1)}`:'Practice',
+    progressLabel:snapshot?`${Math.round(Number(snapshot.progressRatio||0)*100)}%`:'',
     nextLabel:nextName?`Next: ${nextName}`:'Final phase',
     showTechnique:technique.length>1,
     technique,
-    statement:safetyPaused?'Practice is paused until you explicitly reassess.':paused?'Take the time you need. Resume when ready.':'One cue. One phase. Stay present.'
+    statement:safetyPaused?'Pause. Reassess before continuing.':paused?'Take the time you need. Resume when ready.':'Stay with one cue at a time.'
   };
 }
 
