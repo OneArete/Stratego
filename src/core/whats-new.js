@@ -15,6 +15,51 @@
 
 export const WHATS_NEW_ENTRIES = [
   {
+    version: '0.72.0',
+    headline: 'Returning to Practice is now one clear decision',
+    points: [
+      'Resume Practice is the single dominant action after an interruption.',
+      'Ending early remains available without competing with resuming.',
+      'Permanent discard is protected behind a deliberate disclosure.'
+    ]
+  },
+  {
+    version: '0.71.0',
+    headline: 'Ending a Practice is now calm and reliable',
+    points: [
+      'Continue remains the only dominant action when leaving an active Practice.',
+      'Ending early records the moment without breaking the session flow.',
+      'Permanent discard is now protected behind a deliberate disclosure.'
+    ]
+  },
+  {
+    version: '0.67.0',
+    headline: 'Practice now feels like one continuous moment',
+    points: [
+      'The active Practice surface is quieter, more focused and dominated by one cue.',
+      'Progress and the next phase remain visible without competing with the action.',
+      'Completion now pauses before Reflection so the person can notice the result first.'
+    ]
+  },
+  {
+    version: '0.66.0',
+    headline: 'A new person can now understand Strategos before using it',
+    points: [
+      'The first experience now explains the human problem before any product mechanics.',
+      'Strategos is introduced as one clear direction for the reality of today — never as a dashboard or a coach.',
+      'The final step moves directly into understanding today with only a name required.'
+    ]
+  },
+  {
+    version: '0.65.0',
+    headline: 'Today now gets out of the way after you decide',
+    points: [
+      'After acceptance, the decision controls disappear and Today becomes one executable commitment.',
+      'Begin Practice is now the single dominant action, including when a safety boundary needs acknowledgement.',
+      'Reflection and obstacle planning remain outside the pre-Practice commitment state.'
+    ]
+  },
+  {
     version: '0.64.0',
     headline: 'The Strategos Kernel is now active',
     points: [

@@ -1,5 +1,5 @@
-import { evidenceGate } from './evidence-gate.js?v=0640k1';
-import { resolveCurrentMoment } from './current-moment.js?v=0640k1';
+import { evidenceGate } from './evidence-gate.js?v=0720p1';
+import { resolveCurrentMoment } from './current-moment.js?v=0720p1';
 
 export const STRATEGOS_KERNEL_VERSION='1.0.0';
 

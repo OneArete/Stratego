@@ -1,4 +1,4 @@
-import { dailyStoryTimeline } from './daily-story.js?v=0640k1';
+import { dailyStoryTimeline } from './daily-story.js?v=0720p1';
 
 export const WEEKLY_REVIEW_MINIMUM_DAYS = 3;
 

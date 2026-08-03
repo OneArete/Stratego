@@ -1,4 +1,4 @@
-import { localDayKey } from './daily-signals.js?v=0640k1';
+import { localDayKey } from './daily-signals.js?v=0720p1';
 
 // Continuity is currently only visible by opening Journey's trend chart or
 // scrolling its daily story timeline — nothing on Today itself communicates
