@@ -15,6 +15,15 @@
 
 export const WHATS_NEW_ENTRIES = [
   {
+    version: '0.63.0',
+    headline: 'Accept means accepted for today',
+    points: [
+      'The artificial 30-minute start window and later scheduling choice have been removed.',
+      'Accepting today’s judgement now creates one commitment for the day and reveals Begin Practice directly.',
+      'If the accepted Practice is not started, Strategos records that fact when the day closes, without penalty or moral judgement.'
+    ]
+  },
+  {
     version: '0.62.0',
     headline: 'A few things changed since you last looked',
     points: [

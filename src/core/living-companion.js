@@ -1,4 +1,4 @@
-import { resolveCurrentMoment,CURRENT_MOMENTS } from './current-moment.js?v=0476p1';
+import { resolveCurrentMoment,CURRENT_MOMENTS } from './current-moment.js?v=0630r1';
 const completeContext=context=>['sleep','energy','time','challenge','soreness','emotionalLoad'].every(key=>context?.[key]!==undefined&&context?.[key]!==null&&context?.[key]!=='');
 
 const REFLECTION_PHRASES={better:'It went better than expected.',yes:'It went better than expected.',right:'It went as expected.',worse:'It did not go as hoped.'};

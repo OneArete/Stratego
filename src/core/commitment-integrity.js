@@ -3,14 +3,13 @@ export const COMMITMENT_STATUS={
   STARTED:'started',
   COMPLETED:'completed',
   CANCELLED:'cancelled',
-  EXPIRED:'expired'
+  EXPIRED:'expired',
+  NOT_COMPLETED:'not-completed'
 };
 
 export function createCommitment({
   judgement,
   choice,
-  startMode='now',
-  startAfterMinutes=0,
   reason='',
   at=new Date().toISOString()
 }={}){
@@ -18,33 +17,28 @@ export function createCommitment({
   if(!choice?.id)throw new Error('An active person choice is required.');
   if(!['accept','choose-alternative'].includes(choice.action))
     throw new Error('Only an active choice can create a commitment.');
-  if(!['now','later'].includes(startMode))
-    throw new Error('Unsupported commitment start mode.');
 
   const createdAt=new Date(at);
-  const delay=startMode==='later'
-    ?Math.max(1,Math.min(1440,Number(startAfterMinutes)||30))
-    :0;
-  const notBeforeAt=new Date(createdAt.getTime()+delay*60000);
-  const expiresAt=new Date(notBeforeAt.getTime()+(startMode==='later'?180:30)*60000);
+  const dayEndsAt=endOfLocalDay(createdAt);
 
   return {
     id:makeId('commitment'),
     judgementId:judgement.id,
     choiceId:choice.id,
     practiceId:choice.selectedPracticeId||judgement.practice?.id||null,
-    startMode,
-    startAfterMinutes:delay,
+    startMode:'today',
+    startAfterMinutes:0,
     reason:String(reason||'').trim(),
     createdAt:createdAt.toISOString(),
-    notBeforeAt:notBeforeAt.toISOString(),
-    expiresAt:expiresAt.toISOString(),
+    notBeforeAt:createdAt.toISOString(),
+    expiresAt:dayEndsAt.toISOString(),
     status:COMMITMENT_STATUS.ACTIVE,
     startedAt:null,
     completedAt:null,
     cancelledAt:null,
     cancelReason:null,
-    consentVersion:1
+    notCompletedAt:null,
+    consentVersion:2
   };
 }
 
@@ -54,9 +48,10 @@ export function commitmentAvailability(commitment,now=Date.now()){
     return {canStart:false,status:commitment.status,reason:`Commitment is ${commitment.status}.`};
 
   const current=Number(now);
-  const notBefore=new Date(commitment.notBeforeAt).getTime();
+  const notBefore=new Date(commitment.notBeforeAt||commitment.createdAt).getTime();
   const expires=new Date(commitment.expiresAt).getTime();
 
+  // Backward compatibility for commitments created by releases that used scheduled windows.
   if(current<notBefore)return {
     canStart:false,
     status:'scheduled',
@@ -64,30 +59,48 @@ export function commitmentAvailability(commitment,now=Date.now()){
     reason:'The chosen start window has not opened yet.'
   };
 
-  if(current>expires)return {
-    canStart:false,
-    status:COMMITMENT_STATUS.EXPIRED,
-    reason:'The commitment window expired and requires fresh consent.'
-  };
+  if(current>expires){
+    const daily=commitment.startMode==='today'||Number(commitment.consentVersion||0)>=2;
+    return {
+      canStart:false,
+      status:daily?COMMITMENT_STATUS.NOT_COMPLETED:COMMITMENT_STATUS.EXPIRED,
+      reason:daily
+        ?'The accepted Practice was not started before the day closed.'
+        :'The commitment window expired and requires fresh consent.'
+    };
+  }
 
   return {
     canStart:true,
     status:COMMITMENT_STATUS.ACTIVE,
     remainingMs:expires-current,
-    reason:'Commitment is active and may begin.'
+    reason:'The accepted Practice may begin.'
   };
 }
 
 export function refreshExpiredCommitments(commitments=[],now=Date.now()){
   return (commitments||[]).map(item=>{
     const availability=commitmentAvailability(item,now);
-    if(availability.status!==COMMITMENT_STATUS.EXPIRED)return item;
-    return {
-      ...item,
-      status:COMMITMENT_STATUS.EXPIRED,
-      expiredAt:new Date(now).toISOString()
-    };
+    if(![COMMITMENT_STATUS.EXPIRED,COMMITMENT_STATUS.NOT_COMPLETED].includes(availability.status))return item;
+    const at=new Date(now).toISOString();
+    return availability.status===COMMITMENT_STATUS.NOT_COMPLETED
+      ?{...item,status:COMMITMENT_STATUS.NOT_COMPLETED,notCompletedAt:at,closureReason:'accepted-not-started'}
+      :{...item,status:COMMITMENT_STATUS.EXPIRED,expiredAt:at};
   });
+}
+
+export function markCommitmentNotCompleted(commitment,{
+  reason='accepted-not-started',
+  at=new Date().toISOString()
+}={}){
+  if(!commitment)throw new Error('A commitment is required.');
+  if(commitment.status!==COMMITMENT_STATUS.ACTIVE)return commitment;
+  return {
+    ...commitment,
+    status:COMMITMENT_STATUS.NOT_COMPLETED,
+    notCompletedAt:at,
+    closureReason:reason
+  };
 }
 
 export function markCommitmentStarted(commitment,at=new Date().toISOString()){
@@ -138,7 +151,7 @@ export function reconcileCommitments(state,now=Date.now()){
 
   if(next.current?.commitmentId){
     const current=next.commitments.find(item=>item.id===next.current.commitmentId);
-    if(!current||[COMMITMENT_STATUS.CANCELLED,COMMITMENT_STATUS.EXPIRED,COMMITMENT_STATUS.COMPLETED].includes(current.status)){
+    if(!current||[COMMITMENT_STATUS.CANCELLED,COMMITMENT_STATUS.EXPIRED,COMMITMENT_STATUS.NOT_COMPLETED,COMMITMENT_STATUS.COMPLETED].includes(current.status)){
       delete next.current.commitmentId;
     }
   }
@@ -153,8 +166,15 @@ export function commitmentSummary(commitment,now=Date.now()){
   if(commitment.status===COMMITMENT_STATUS.COMPLETED)return 'Commitment completed.';
   if(commitment.status===COMMITMENT_STATUS.STARTED)return 'Commitment started.';
   if(availability.status==='scheduled')return `Scheduled to open in ${Math.ceil(availability.waitMs/60000)} minutes.`;
-  if(availability.status===COMMITMENT_STATUS.EXPIRED)return 'Commitment expired and requires fresh consent.';
-  return `Active for approximately ${Math.ceil(availability.remainingMs/60000)} more minutes.`;
+  if(availability.status===COMMITMENT_STATUS.NOT_COMPLETED)return 'Accepted, but not started before the day closed.';
+  if(availability.status===COMMITMENT_STATUS.EXPIRED)return 'Legacy commitment expired and requires fresh consent.';
+  return 'Accepted for today.';
+}
+
+function endOfLocalDay(value){
+  const end=new Date(value);
+  end.setHours(23,59,59,999);
+  return end;
 }
 
 function clone(value){return typeof structuredClone==='function'?structuredClone(value):JSON.parse(JSON.stringify(value))}

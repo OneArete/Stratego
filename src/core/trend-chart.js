@@ -1,4 +1,4 @@
-import { normaliseDailySignals } from './daily-signals.js?v=0476p1';
+import { normaliseDailySignals } from './daily-signals.js?v=0630r1';
 
 // A real user opening a self-tracking app repeatedly wants an at-a-glance
 // answer to "is this getting better?" without reading paragraphs. Every

@@ -1,4 +1,4 @@
-const TERMINAL_COMMITMENTS=new Set(['completed','cancelled','expired']);
+const TERMINAL_COMMITMENTS=new Set(['completed','cancelled','expired','not-completed']);
 const TERMINAL_FALLBACKS=new Set(['completed','abandoned','declined']);
 
 export function reconcileFollowThroughState(state,now=Date.now()){
