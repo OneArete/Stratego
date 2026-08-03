@@ -1,3 +1,14 @@
+# Strategos Changelog
+
+## 0.63.0 — Decision Commitment Flow
+
+- Removed “Begin within 30 minutes” and “Schedule for later”.
+- Accepting a Current Judgement now creates a single commitment valid for the rest of the day.
+- Begin Practice is exposed immediately after acceptance, subject only to safety and friction gates.
+- An accepted Practice that is not started is recorded as `not-completed` when the day closes or on next launch after the day boundary.
+- The linked outcome is closed factually as `accepted-not-started`; no learning signal or moral penalty is created.
+- Aligned package, VERSION, runtime import token, Service Worker cache and in-app release disclosure to v0.63.0.
+
 ## 0.60.0 — User-Lens Retention Improvements
 
 - The closed-day organism now names something real: the practice completed, its reflection, and which domain stood out — instead of rendering as a silent shape with no caption.

@@ -1,4 +1,4 @@
-const CACHE_NAME = 'strategos-shell-v0.47.6-checkin-interaction-and-symmetry-repair';
+const CACHE_NAME = 'strategos-shell-v0.63.0-decision-commitment-flow';
 const STATIC_ASSETS = [
   './manifest.webmanifest',
   './icons/delta-180.png',

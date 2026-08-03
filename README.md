@@ -3,10 +3,12 @@
 Current company release:
 
 ```text
-Strategos v0.46.2 — Invisible Organism, Phase 1
+Strategos v0.63.0 — Decision Commitment Flow
 ```
 
-Today is now a Current Moment rather than a dashboard: a living organism, one sentence and at most one next action. The daily check-in is a full-screen encounter with six explicit context seeds. The Evidence Gate remains mandatory; silence never creates evidence and no recommendation exists without current-day context.
+Strategos is the first OneArete Human Decision Operating System. Today renders the Current Moment as a living organism, one honest sentence and one legitimate next action. No recommendation exists without current-day evidence.
+
+In v0.63.0, accepting the Current Judgement means accepting the Practice for the day. The artificial 30-minute start window and later-scheduling branch were removed. The accepted Practice can begin at any point before the day closes; if it is not started, Strategos records that factual outcome without penalty or moral judgement.
 
 ## Run locally
 
